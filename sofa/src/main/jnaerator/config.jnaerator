@@ -1,0 +1,9 @@
+
+-library sofa src/main/cpp/sofa/src/sofam.h
+
+-runtime BridJ
+-reification
+-nocpp
+-root be.angelcorp
+-o src/main/java
+-v

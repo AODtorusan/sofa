@@ -1,6 +1,5 @@
-*.class
+target
+_jnaerator.*
 
-# Package Files #
-*.jar
-*.war
-*.ear
+.idea
+*.iml

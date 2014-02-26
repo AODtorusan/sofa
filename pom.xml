@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>be.angelcorp</groupId>
+	<artifactId>sofa-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Sofa parent</name>
+	
+	<modules>
+		<module>sofa</module>
+		<module>sofa-platform</module>
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
+	<licenses>
+	    <license>
+			<name>BSD License</name>
+			<url>http://angelcorp.be/data/BSD_license.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>simon</id>
+			<name>Simon Billemont</name>
+			<url>http://angelcorp.be</url>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<repository>
+			<id>angelcorp releases</id>
+			<url>http://jetty.angelcorp.be/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>angelcorp snapshots</id>
+			<url>http://jetty.angelcorp.be/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- REMOTE ARTIFACT REPOSITORIES -->
+	<repositories>
+		<repository>
+			<id>angelcorp</id>
+			<name>AngelCorp Repository</name>
+			<url>http://repository.angelcorp.be</url>
+		</repository>
+        <repository>
+			<id>sonatype</id>
+			<name>Sonatype OSS Snapshots Repository</name>
+			<url>http://oss.sonatype.org/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>angelcorp</id>
+			<name>AngelCorp Repository</name>
+			<url>http://repository.angelcorp.be</url>
+		</pluginRepository>
+        <pluginRepository>
+			<id>sonatype</id>
+			<name>Sonatype OSS Snapshots Repository</name>
+			<url>http://oss.sonatype.org/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
