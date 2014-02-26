@@ -2,7 +2,9 @@
 
 This project provides a set of Java bindings for the International Astronomical Union's SOFA library. 
 
-This library only provides a thin wrapper layer via BridJ and JNI the C-implementation of the SOFA library, and thus contains no actual code.
+This library only provides a thin wrapper layer via BridJ and JNI the C-implementation of the SOFA library, and thus contains no actual code. For more information on the SOFA library and the available functions, see:
+
+> http://www.iausofa.org
 
 ## Basic usage
 
