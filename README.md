@@ -13,7 +13,7 @@ Using this library in a maven project requires the following dependency:
 ```
 <dependency>
 	<groupId>be.angelcorp</groupId>
-	<artifactId>sofaj-platform</artifactId>
+	<artifactId>sofa</artifactId>
     <version>1.0</version>
 </dependency>
 ```
