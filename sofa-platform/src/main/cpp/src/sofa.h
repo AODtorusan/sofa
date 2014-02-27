@@ -23,7 +23,7 @@
 
 #ifdef _WIN32
 #    define SOFAExport __declspec(dllexport)
-#elseif
+#else
 #    define SOFAExport
 #endif
 
