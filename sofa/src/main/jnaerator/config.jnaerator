@@ -1,5 +1,5 @@
 
--library sofa $(DIR)/../../../../sofa-platform/src/main/cpp/src/sofa.h
+-library sofa "$(DIR)/../../../../sofa-platform/src/main/cpp/src/sofa.h"
 
 -runtime BridJ
 -reification
