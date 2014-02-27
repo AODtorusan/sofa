@@ -21,7 +21,11 @@
 #include "sofam.h"
 #include "math.h"
 
-#define SOFAExport  __declspec( dllexport ) 
+#ifdef _WIN32
+#    define SOFAExport __declspec(dllexport)
+#elseif
+#    define SOFAExport
+#endif
 
 #ifdef __cplusplus
 extern "C" {
