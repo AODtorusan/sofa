@@ -111,6 +111,43 @@ public class TestSofa {
         assertEquals(ihmsf.get(3), 6484);
     }
 
+
+    /*
+    **  - - - - -
+    **   t _ a b
+    **  - - - - -
+    **
+    **  Test iauAb function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAb, assertEquals
+    **
+    **  This revision:  2013 October 1
+    */
+    @Test public void t_ab() {
+        Pointer<Double> pnat = Pointer.allocateDoubles(3);
+        Pointer<Double> v    = Pointer.allocateDoubles(3);
+        Pointer<Double> ppr  = Pointer.allocateDoubles(3);
+
+
+        pnat.set(0, -0.76321968546737951);
+        pnat.set(1, -0.60869453983060384);
+        pnat.set(2, -0.21676408580639883);
+        v.set(0,  2.1044018893653786e-5);
+        v.set(1, -8.9108923304429319e-5);
+        v.set(2, -3.8633714797716569e-5);
+        double s = 0.99980921395708788;
+        double bm1 = 0.99999999506209258;
+
+        iauAb(pnat, v, s, bm1, ppr);
+
+        assertEquals(ppr.get(0), -0.7631631094219556269, 1e-12);
+        assertEquals(ppr.get(1), -0.6087553082505590832, 1e-12);
+        assertEquals(ppr.get(2), -0.2167926269368471279, 1e-12);
+   }
+
     /*
     **  - - - - - - -
     **   t _ a f 2 a
@@ -168,6 +205,1192 @@ public class TestSofa {
     */
     @Test public void t_anpm() {
         assertEquals(iauAnpm(-4.0), 2.283185307179586477, 1e-12);
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p c g
+    **  - - - - - - -
+    **
+    **  Test iauApcg function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApcg, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apcg() {
+        Pointer<Pointer<Double>> ebpv = Pointer.allocateDoubles(2, 3);
+        Pointer<Double> ehp = Pointer.allocateDoubles(3);
+
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        ebpv.get(0).set(0,  0.901310875);
+        ebpv.get(0).set(1, -0.417402664);
+        ebpv.get(0).set(2, -0.180982288);
+        ebpv.get(1).set(0,  0.00742727954);
+        ebpv.get(1).set(1,  0.0140507459);
+        ebpv.get(1).set(2,  0.00609045792);
+        ehp.set(0,  0.903358544);
+        ehp.set(1, -0.415395237);
+        ehp.set(2, -0.180084014);
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate( iauASTROM.class );
+        iauApcg(date1, date2, ebpv.get(), ehp, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 12.65133794027378508, 1e-11);
+        assertEquals(astrom.eb().get(0),  0.901310875, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.417402664, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.180982288, 1e-12);
+        assertEquals(astrom.eh().get(0),  0.8940025429324143045, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.4110930268679817955, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.1782189004872870264, 1e-12);
+        assertEquals(astrom.em(), 1.010465295811013146, 1e-12);
+        assertEquals(astrom.v().get(0), 0.4289638897813379954e-4, 1e-16);
+        assertEquals(astrom.v().get(1), 0.8115034021720941898e-4, 1e-16);
+        assertEquals(astrom.v().get(2), 0.3517555123437237778e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999951686013336, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 1.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 1.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 1.0, 0.0);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p c g 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauApcg13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApcg13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apcg13() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApcg13(date1, date2, astrom_p);
+        iauASTROM astrom = astrom_p.get(); 
+
+        assertEquals(astrom.pmt(), 12.65133794027378508, 1e-11);
+        assertEquals(astrom.eb().get(0), 0.9013108747340644755, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.4174026640406119957, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.1809822877867817771, 1e-12);
+        assertEquals(astrom.eh().get(0), 0.8940025429255499549, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.4110930268331896318, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.1782189006019749850, 1e-12);
+        assertEquals(astrom.em(), 1.010465295964664178, 1e-12);
+        assertEquals(astrom.v().get(0), 0.4289638897157027528e-4, 1e-16);
+        assertEquals(astrom.v().get(1), 0.8115034002544663526e-4, 1e-16);
+        assertEquals(astrom.v().get(2), 0.3517555122593144633e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999951686013498, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 1.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 1.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.0, 0.0);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 1.0, 0.0);
+
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p c i
+    **  - - - - - - -
+    **
+    **  Test iauApci function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apci() {
+        Pointer<Pointer<Double>> ebpv = Pointer.allocateDoubles(2,3);
+        Pointer<Double>          ehp  = Pointer.allocateDoubles(3);
+
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        ebpv.get(0).set(0,  0.901310875);
+        ebpv.get(0).set(1, -0.417402664);
+        ebpv.get(0).set(2, -0.180982288);
+        ebpv.get(1).set(0,  0.00742727954);
+        ebpv.get(1).set(1,  0.0140507459);
+        ebpv.get(1).set(2,  0.00609045792);
+        ehp.set(0,  0.903358544);
+        ehp.set(1, -0.415395237);
+        ehp.set(2, -0.180084014);
+        double x =  0.0013122272;
+        double y = -2.92808623e-5;
+        double s =  3.05749468e-8;
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApci(date1, date2, ebpv.get(), ehp, x, y, s, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 12.65133794027378508, 1e-11);
+        assertEquals(astrom.eb().get(0), 0.901310875, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.417402664, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.180982288, 1e-12);
+        assertEquals(astrom.eh().get(0), 0.8940025429324143045, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.4110930268679817955, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.1782189004872870264, 1e-12);
+        assertEquals(astrom.em(), 1.010465295811013146, 1e-12);
+        assertEquals(astrom.v().get(0), 0.4289638897813379954e-4, 1e-16);
+        assertEquals(astrom.v().get(1), 0.8115034021720941898e-4, 1e-16);
+        assertEquals(astrom.v().get(2), 0.3517555123437237778e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999951686013336, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 0.9999991390295159156, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.4978650072505016932e-7, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.1312227200000000000e-2, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), -0.1136336653771609630e-7, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 0.9999999995713154868, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), -0.2928086230000000000e-4, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), -0.1312227200895260194e-2, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.2928082217872315680e-4, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 0.9999991386008323373, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p c i 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauApci13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apci13() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApci13(date1, date2, astrom_p, eo);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 12.65133794027378508, 1e-11);
+        assertEquals(astrom.eb().get(0), 0.9013108747340644755, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.4174026640406119957, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.1809822877867817771, 1e-12);
+        assertEquals(astrom.eh().get(0), 0.8940025429255499549, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.4110930268331896318, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.1782189006019749850, 1e-12);
+        assertEquals(astrom.em(), 1.010465295964664178, 1e-12);
+        assertEquals(astrom.v().get(0), 0.4289638897157027528e-4, 1e-16);
+        assertEquals(astrom.v().get(1), 0.8115034002544663526e-4, 1e-16);
+        assertEquals(astrom.v().get(2), 0.3517555122593144633e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999951686013498, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 0.9999992060376761710, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.4124244860106037157e-7, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.1260128571051709670e-2, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), -0.1282291987222130690e-7, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 0.9999999997456835325, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), -0.2255288829420524935e-4, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), -0.1260128571661374559e-2, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.2255285422953395494e-4, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 0.9999992057833604343, 1e-12);
+        assertEquals(eo, -0.2900618712657375647e-2, 1e-12);
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p c o
+    **  - - - - - - -
+    **
+    **  Test iauApco function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApco, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apco() {
+        double date1 = 2456384.5;
+        double date2 = 0.970031644;
+        Pointer<Pointer<Double>> ebpv = Pointer.allocateDoubles(2,3);
+        ebpv.get(0).set(0, -0.974170438);
+        ebpv.get(0).set(1, -0.211520082);
+        ebpv.get(0).set(2, -0.0917583024);
+        ebpv.get(1).set(0, 0.00364365824);
+        ebpv.get(1).set(1, -0.0154287319);
+        ebpv.get(1).set(2, -0.00668922024);
+        Pointer<Double> ehp = Pointer.allocateDoubles(3);
+        ehp.set(0, -0.973458265);
+        ehp.set(1, -0.209215307);
+        ehp.set(2, -0.0906996477);
+        double x = 0.0013122272;
+        double y = -2.92808623e-5;
+        double s = 3.05749468e-8;
+        double theta = 3.14540971;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double sp = -3.01974337e-11;
+        double refa = 0.000201418779;
+        double refb = -2.36140831e-7;
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApco(date1, date2, ebpv.get(), ehp, x, y, s, theta, elong, phi, hm, xp, yp, sp, refa, refb, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 13.25248468622587269, 1e-11);
+        assertEquals(astrom.eb().get(0), -0.9741827110630897003, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.2115130190135014340, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.09179840186968295686, 1e-12);
+        assertEquals(astrom.eh().get(0), -0.9736425571689670428, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.2092452125848862201, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.09075578152261439954, 1e-12);
+        assertEquals(astrom.em(), 0.9998233241710617934, 1e-12);
+        assertEquals(astrom.v().get(0), 0.2078704985147609823e-4, 1e-16);
+        assertEquals(astrom.v().get(1), -0.8955360074407552709e-4, 1e-16);
+        assertEquals(astrom.v().get(2), -0.3863338980073114703e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999950277561600, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 0.9999991390295159156, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.4978650072505016932e-7, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.1312227200000000000e-2, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), -0.1136336653771609630e-7, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 0.9999999995713154868, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), -0.2928086230000000000e-4, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), -0.1312227200895260194e-2, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.2928082217872315680e-4, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 0.9999991386008323373, 1e-12);
+        assertEquals(astrom.along(), -0.5278008060301974337, 1e-12);
+        assertEquals(astrom.xpl(), 0.1133427418174939329e-5, 1e-17);
+        assertEquals(astrom.ypl(), 0.1453347595745898629e-5, 1e-17);
+        assertEquals(astrom.sphi(), -0.9440115679003211329, 1e-12);
+        assertEquals(astrom.cphi(), 0.3299123514971474711, 1e-12);
+        assertEquals(astrom.diurab(), 0, 0);
+        assertEquals(astrom.eral(), 2.617608903969802566, 1e-12);
+        assertEquals(astrom.refa(), 0.2014187790000000000e-3, 1e-15);
+        assertEquals(astrom.refb(), -0.2361408310000000000e-6, 1e-18);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p c o 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauApco13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApco13, assertEquals, viv
+    **
+    **  This revision:  2013 October 4
+    */
+    @Test public void t_apco13() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+        Pointer<Double> eo = Pointer.allocateDouble();
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        int j = iauApco13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, astrom_p, eo);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 13.25248468622475727, 1e-11);
+        assertEquals(astrom.eb().get(0), -0.9741827107321449445, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.2115130190489386190, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.09179840189515518726, 1e-12);
+        assertEquals(astrom.eh().get(0), -0.9736425572586866640, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.2092452121602867431, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.09075578153903832650, 1e-12);
+        assertEquals(astrom.em(), 0.9998233240914558422, 1e-12);
+        assertEquals(astrom.v().get(0), 0.2078704986751370303e-4, 1e-16);
+        assertEquals(astrom.v().get(1), -0.8955360100494469232e-4, 1e-16);
+        assertEquals(astrom.v().get(2), -0.3863338978840051024e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999950277561368, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 0.9999991390295147999, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0.4978650075315529277e-7, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0.001312227200850293372, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), -0.1136336652812486604e-7, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 0.9999999995713154865, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), -0.2928086230975367296e-4, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), -0.001312227201745553566, 1e-12);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0.2928082218847679162e-4, 1e-12);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 0.9999991386008312212, 1e-12);
+        assertEquals(astrom.along(), -0.5278008060301974337, 1e-12);
+        assertEquals(astrom.xpl(), 0.1133427418174939329e-5, 1e-17);
+        assertEquals(astrom.ypl(), 0.1453347595745898629e-5, 1e-17);
+        assertEquals(astrom.sphi(), -0.9440115679003211329, 1e-12);
+        assertEquals(astrom.cphi(), 0.3299123514971474711, 1e-12);
+        assertEquals(astrom.diurab(), 0, 0);
+        assertEquals(astrom.eral(), 2.617608909189066140, 1e-12);
+        assertEquals(astrom.refa(), 0.2014187785940396921e-3, 1e-15);
+        assertEquals(astrom.refb(), -0.2361408314943696227e-6, 1e-18);
+        assertEquals(eo, -0.003020548354802412839, 1e-14);
+        assertEquals(j, 0);
+
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p c s
+    **  - - - - - - -
+    **
+    **  Test iauApcs function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApcs, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apcs() {
+        double date1 = 2456384.5;
+        double date2 = 0.970031644;
+        Pointer<Pointer<Double>> pv = Pointer.allocateDoubles(2,3);
+        pv.get(0).set(0, -1836024.09);
+        pv.get(0).set(1, 1056607.72);
+        pv.get(0).set(2, -5998795.26);
+        pv.get(1).set(0, -77.0361767);
+        pv.get(1).set(1, -133.310856);
+        pv.get(1).set(2, 0.0971855934);
+        Pointer<Pointer<Double>> ebpv = Pointer.allocateDoubles(2,3);
+        ebpv.get(0).set(0, -0.974170438);
+        ebpv.get(0).set(1, -0.211520082);
+        ebpv.get(0).set(2, -0.0917583024);
+        ebpv.get(1).set(0,  0.00364365824);
+        ebpv.get(1).set(1, -0.0154287319);
+        ebpv.get(1).set(2, -0.00668922024);
+        Pointer<Double> ehp = Pointer.allocateDoubles(3);
+        ehp.set(0, -0.973458265);
+        ehp.set(1, -0.209215307);
+        ehp.set(2, -0.0906996477);
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApcs(date1, date2, pv.get(), ebpv.get(), ehp, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 13.25248468622587269, 1e-11);
+        assertEquals(astrom.eb().get(0), -0.9741827110630456169, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.2115130190136085494, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.09179840186973175487, 1e-12);
+        assertEquals(astrom.eh().get(0), -0.9736425571689386099, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.2092452125849967195, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.09075578152266466572, 1e-12);
+        assertEquals(astrom.em(), 0.9998233241710457140, 1e-12);
+        assertEquals(astrom.v().get(0), 0.2078704985513566571e-4, 1e-16);
+        assertEquals(astrom.v().get(1), -0.8955360074245006073e-4, 1e-16);
+        assertEquals(astrom.v().get(2), -0.3863338980073572719e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999950277561601, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 1, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0, 0);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), 0, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 1, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), 0, 0);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), 0, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 1, 0);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p c s 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauApcs13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApcs13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apcs13() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Pointer<Double>> pv = Pointer.allocateDoubles(2, 3);
+        pv.get(0).set(0, -6241497.16);
+        pv.get(0).set(1, 401346.896);
+        pv.get(0).set(2, -1251136.04);
+        pv.get(1).set(0, -29.264597);
+        pv.get(1).set(1, -455.021831);
+        pv.get(1).set(2, 0.0266151194);
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApcs13(date1, date2, pv.get(), astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.pmt(), 12.65133794027378508, 1e-11);
+        assertEquals(astrom.eb().get(0), 0.9012691529023298391, 1e-12);
+        assertEquals(astrom.eb().get(1), -0.4173999812023068781, 1e-12);
+        assertEquals(astrom.eb().get(2), -0.1809906511146821008, 1e-12);
+        assertEquals(astrom.eh().get(0), 0.8939939101759726824, 1e-12);
+        assertEquals(astrom.eh().get(1), -0.4111053891734599955, 1e-12);
+        assertEquals(astrom.eh().get(2), -0.1782336880637689334, 1e-12);
+        assertEquals(astrom.em(), 1.010428384373318379, 1e-12);
+        assertEquals(astrom.v().get(0), 0.4279877278327626511e-4, 1e-16);
+        assertEquals(astrom.v().get(1), 0.7963255057040027770e-4, 1e-16);
+        assertEquals(astrom.v().get(2), 0.3517564000441374759e-4, 1e-16);
+        assertEquals(astrom.bm1(), 0.9999999952947981330, 1e-12);
+        assertEquals(astrom.bpn().get(0 * 3 + 0), 1, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 0), 0, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 0), 0, 0);
+        assertEquals(astrom.bpn().get(0 * 3 + 1), 0, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 1), 1, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 1), 0, 0);
+        assertEquals(astrom.bpn().get(0 * 3 + 2), 0, 0);
+        assertEquals(astrom.bpn().get(1 * 3 + 2), 0, 0);
+        assertEquals(astrom.bpn().get(2 * 3 + 2), 1, 0);
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p e r
+    **  - - - - - - -
+    *
+    **  Test iauAper function.
+    *
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    *
+    **  Called:  iauAper, assertEquals
+    *
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_aper() {
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        astrom_p.get().along( 1.234 );
+        double theta = 5.678;
+
+        iauAper(theta, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom_p.get().eral(), 6.912000000000000000, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p e r 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAper13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAper13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_aper13() {
+        Pointer<iauASTROM> astrom = Pointer.allocate(iauASTROM.class);
+        astrom.get().along(1.234);
+        double ut11 = 2456165.5;
+        double ut12 = 0.401182685;
+
+        iauAper13(ut11, ut12, astrom);
+
+        assertEquals(astrom.get().eral(), 3.316236661789694933, 1e-12);
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ a p i o
+    **  - - - - - - -
+    **
+    **  Test iauApio function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApio, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_apio() {
+        double sp = -3.01974337e-11;
+        double theta = 3.14540971;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double refa = 0.000201418779;
+        double refb = -2.36140831e-7;
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApio(sp, theta, elong, phi, hm, xp, yp, refa, refb, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.along(), -0.5278008060301974337, 1e-12);
+        assertEquals(astrom.xpl(), 0.1133427418174939329e-5, 1e-17);
+        assertEquals(astrom.ypl(), 0.1453347595745898629e-5, 1e-17);
+        assertEquals(astrom.sphi(), -0.9440115679003211329, 1e-12);
+        assertEquals(astrom.cphi(), 0.3299123514971474711, 1e-12);
+        assertEquals(astrom.diurab(), 0.5135843661699913529e-6, 1e-12);
+        assertEquals(astrom.eral(), 2.617608903969802566, 1e-12);
+        assertEquals(astrom.refa(), 0.2014187790000000000e-3, 1e-15);
+        assertEquals(astrom.refb(), -0.2361408310000000000e-6, 1e-18);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a p i o 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauApio13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApio13, assertEquals, viv
+    **
+    **  This revision:  2013 October 4
+    */
+    @Test public void t_apio13() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        int j = iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, astrom_p);
+        iauASTROM astrom = astrom_p.get();
+
+        assertEquals(astrom.along(), -0.5278008060301974337, 1e-12);
+        assertEquals(astrom.xpl(), 0.1133427418174939329e-5, 1e-17);
+        assertEquals(astrom.ypl(), 0.1453347595745898629e-5, 1e-17);
+        assertEquals(astrom.sphi(), -0.9440115679003211329, 1e-12);
+        assertEquals(astrom.cphi(), 0.3299123514971474711, 1e-12);
+        assertEquals(astrom.diurab(), 0.5135843661699913529e-6, 1e-12);
+        assertEquals(astrom.eral(), 2.617608909189066140, 1e-12);
+        assertEquals(astrom.refa(), 0.2014187785940396921e-3, 1e-15);
+        assertEquals(astrom.refb(), -0.2361408314943696227e-6, 1e-18);
+        assertEquals(j, 0);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t c i 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtci13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtci13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atci13() {
+        double rc = 2.71;
+        double dc = 0.174;
+        double pr = 1e-5;
+        double pd = 5e-6;
+        double px = 0.1;
+        double rv = 55.0;
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+        Pointer<Double> eo = Pointer.allocateDouble();
+        iauAtci13(rc, dc, pr, pd, px, rv, date1, date2, ri, di, eo);
+
+        assertEquals(ri, 2.710121572969038991, 1e-12);
+        assertEquals(di, 0.1729371367218230438, 1e-12);
+        assertEquals(eo, -0.002900618712657375647, 1e-14);
+    }
+
+    /*
+    **  - - - - - - - -
+    **   t _ a t c i q
+    **  - - - - - - - -
+    **
+    **  Test iauAtciq function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, iauAtciq, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atciq() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApci13(date1, date2, astrom_p, eo);
+
+        double rc = 2.71;
+        double dc = 0.174;
+        double pr = 1e-5;
+        double pd = 5e-6;
+        double px = 0.1;
+        double rv = 55.0;
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+        iauAtciq(rc, dc, pr, pd, px, rv, astrom_p, ri, di);
+
+        assertEquals(ri, 2.710121572969038991, 1e-12);
+        assertEquals(di, 0.1729371367218230438, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t c i q n
+    **  - - - - - - - - -
+    **
+    **  Test iauAtciqn function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, iauAtciqn, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atciqn() {
+        Pointer<iauLDBODY> b = Pointer.allocateArray(iauLDBODY.class, 3);
+
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+        Pointer<iauASTROM> astrom_p = Pointer.allocate(iauASTROM.class);
+        iauApci13(date1, date2, astrom_p, eo);
+
+        double rc = 2.71;
+        double dc = 0.174;
+        double pr = 1e-5;
+        double pd = 5e-6;
+        double px = 0.1;
+        double rv = 55.0;
+        b.get(0).bm( 0.00028574 );
+        b.get(0).dl( 3e-10 );
+        b.get(0).pv().set(0 * 3 + 0, -7.81014427);
+        b.get(0).pv().set(0 * 3 + 1, -5.60956681);
+        b.get(0).pv().set(0 * 3 + 2, -1.98079819);
+        b.get(0).pv().set(1 * 3 + 0, 0.0030723249);
+        b.get(0).pv().set(1 * 3 + 1, -0.00406995477);
+        b.get(0).pv().set(1 * 3 + 2, -0.00181335842);
+        b.get(1).bm( 0.00095435 );
+        b.get(1).dl( 3e-9 );
+        b.get(1).pv().set(0 * 3 + 0,  0.738098796);
+        b.get(1).pv().set(0 * 3 + 1,  4.63658692);
+        b.get(1).pv().set(0 * 3 + 2,  1.9693136);
+        b.get(1).pv().set(1 * 3 + 0, -0.00755816922);
+        b.get(1).pv().set(1 * 3 + 1,  0.00126913722);
+        b.get(1).pv().set(1 * 3 + 2,  0.000727999001);
+        b.get(2).bm(1.0);
+        b.get(2).dl(6e-6);
+        b.get(2).pv().set(0 * 3 + 0, -0.000712174377);
+        b.get(2).pv().set(0 * 3 + 1, -0.00230478303);
+        b.get(2).pv().set(0 * 3 + 2, -0.00105865966);
+        b.get(2).pv().set(1 * 3 + 0,  6.29235213e-6);
+        b.get(2).pv().set(1 * 3 + 1, -3.30888387e-7);
+        b.get(2).pv().set(1 * 3 + 2, -2.96486623e-7);
+
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+        iauAtciqn ( rc, dc, pr, pd, px, rv, astrom_p, 3, b, ri, di);
+
+        assertEquals(ri, 2.710122008105325582, 1e-12);
+        assertEquals(di, 0.1729371916491459122, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t c i q z
+    **  - - - - - - - - -
+    **
+    **  Test iauAtciqz function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, iauAtciqz, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atciqz() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+        Pointer<iauASTROM> astrom = Pointer.allocate( iauASTROM.class );
+        iauApci13(date1, date2, astrom, eo);
+
+        double rc = 2.71;
+        double dc = 0.174;
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+        iauAtciqz(rc, dc, astrom, ri, di);
+
+        assertEquals(ri, 2.709994899247599271, 1e-12);
+        assertEquals(di, 0.1728740720983623469, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t c o 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtco13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtco13, assertEquals, viv
+    **
+    **  This revision:  2013 October 4
+    */
+    @Test public void t_atco13() {
+        double rc = 2.71;
+        double dc = 0.174;
+        double pr = 1e-5;
+        double pd = 5e-6;
+        double px = 0.1;
+        double rv = 55.0;
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        Pointer<Double> aob = Pointer.allocateDouble();
+        Pointer<Double> zob = Pointer.allocateDouble();
+        Pointer<Double> hob = Pointer.allocateDouble();
+        Pointer<Double> dob = Pointer.allocateDouble();
+        Pointer<Double> rob = Pointer.allocateDouble();
+        Pointer<Double> eo  = Pointer.allocateDouble();
+        int j = iauAtco13(rc, dc, pr, pd, px, rv, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, aob, zob, hob, dob, rob, eo);
+
+        assertEquals(aob, 0.09251774485358230653, 1e-12);
+        assertEquals(zob, 1.407661405256767021, 1e-12);
+        assertEquals(hob, -0.09265154431403157925, 1e-12);
+        assertEquals(dob, 0.1716626560075591655, 1e-12);
+        assertEquals(rob, 2.710260453503097719, 1e-12);
+        assertEquals(eo, -0.003020548354802412839, 1e-14);
+        assertEquals(j, 0);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t i c 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtic13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtic13, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atic13() {
+        double ri = 2.710121572969038991;
+        double di = 0.1729371367218230438;
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+
+        Pointer<Double> rc = Pointer.allocateDouble();
+        Pointer<Double> dc = Pointer.allocateDouble();
+        Pointer<Double> eo = Pointer.allocateDouble();
+        iauAtic13(ri, di, date1, date2, rc, dc, eo);
+
+        assertEquals(rc, 2.710126504531374930, 1e-12);
+        assertEquals(dc, 0.1740632537628342320, 1e-12);
+        assertEquals(eo, -0.002900618712657375647, 1e-14);
+    }
+
+    /*
+    **  - - - - - - - -
+    **   t _ a t i c q
+    **  - - - - - - - -
+    **
+    **  Test iauAticq function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, iauAticq, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_aticq() {
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+        Pointer<iauASTROM> astrom = Pointer.allocate(iauASTROM.class);
+        iauApci13(date1, date2, astrom, eo);
+
+        double ri = 2.710121572969038991;
+        double di = 0.1729371367218230438;
+        Pointer<Double> rc = Pointer.allocateDouble();
+        Pointer<Double> dc = Pointer.allocateDouble();
+        iauAticq(ri, di, astrom, rc, dc);
+
+        assertEquals(rc, 2.710126504531374930, 1e-12);
+        assertEquals(dc, 0.1740632537628342320, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t i c q n
+    **  - - - - - - - - -
+    **
+    **  Test iauAticqn function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApci13, iauAticqn, assertEquals
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_aticqn() {
+        Pointer<iauLDBODY> b = Pointer.allocateArray(iauLDBODY.class, 3);
+        Pointer<iauASTROM> astrom = Pointer.allocate(iauASTROM.class);
+
+        double date1 = 2456165.5;
+        double date2 = 0.401182685;
+        Pointer<Double> eo = Pointer.allocateDouble();
+        iauApci13(date1, date2, astrom, eo);
+
+        double ri = 2.709994899247599271;
+        double di = 0.1728740720983623469;
+        b.get(0).bm( 0.00028574 );
+        b.get(0).dl( 3e-10 );
+        b.get(0).pv().set(0 * 3 + 0, -7.81014427);
+        b.get(0).pv().set(0 * 3 + 1, -5.60956681);
+        b.get(0).pv().set(0 * 3 + 2, -1.98079819);
+        b.get(0).pv().set(1 * 3 + 0, 0.0030723249);
+        b.get(0).pv().set(1 * 3 + 1, -0.00406995477);
+        b.get(0).pv().set(1 * 3 + 2, -0.00181335842);
+        b.get(1).bm( 0.00095435 );
+        b.get(1).dl( 3e-9 );
+        b.get(1).pv().set(0 * 3 + 0,  0.738098796);
+        b.get(1).pv().set(0 * 3 + 1,  4.63658692);
+        b.get(1).pv().set(0 * 3 + 2,  1.9693136);
+        b.get(1).pv().set(1 * 3 + 0, -0.00755816922);
+        b.get(1).pv().set(1 * 3 + 1,  0.00126913722);
+        b.get(1).pv().set(1 * 3 + 2,  0.000727999001);
+        b.get(2).bm( 1.0 );
+        b.get(2).dl( 6e-6 );
+        b.get(2).pv().set(0 * 3 + 0, -0.000712174377);
+        b.get(2).pv().set(0 * 3 + 1, -0.00230478303);
+        b.get(2).pv().set(0 * 3 + 2, -0.00105865966);
+        b.get(2).pv().set(1 * 3 + 0,  6.29235213e-6);
+        b.get(2).pv().set(1 * 3 + 1, -3.30888387e-7);
+        b.get(2).pv().set(1 * 3 + 2, -2.96486623e-7);
+
+        Pointer<Double> rc = Pointer.allocateDouble();
+        Pointer<Double> dc = Pointer.allocateDouble();
+        iauAticqn(ri, di, astrom, 3, b, rc, dc);
+
+        assertEquals(rc, 2.709999575032685412, 1e-12);
+        assertEquals(dc, 0.1739999656317778034, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t i o 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtio13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtio13, assertEquals, viv
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atio13() {
+        double ri = 2.710121572969038991;
+        double di = 0.1729371367218230438;
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        Pointer<Double> aob = Pointer.allocateDouble();
+        Pointer<Double> zob = Pointer.allocateDouble();
+        Pointer<Double> hob = Pointer.allocateDouble();
+        Pointer<Double> dob = Pointer.allocateDouble();
+        Pointer<Double> rob = Pointer.allocateDouble();
+        int j = iauAtio13(ri, di, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, aob, zob, hob, dob, rob);
+
+        assertEquals(aob, 0.09233952224794989993, 1e-12);
+        assertEquals(zob, 1.407758704513722461, 1e-12);
+        assertEquals(hob, -0.09247619879782006106, 1e-12);
+        assertEquals(dob, 0.1717653435758265198, 1e-12);
+        assertEquals(rob, 2.710085107986886201, 1e-12);
+        assertEquals(j, 0);
+    }
+
+    /*
+    **  - - - - - - - -
+    **   t _ a t i o q
+    **  - - - - - - - -
+    **
+    **  Test iauAtioq function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauApio13, iauAtioq, assertEquals, viv
+    **
+    **  This revision:  2013 October 4
+    */
+    @Test public void t_atioq() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+        Pointer<iauASTROM> astrom = Pointer.allocate(iauASTROM.class);
+        iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, astrom);
+
+        double ri = 2.710121572969038991;
+        double di = 0.1729371367218230438;
+        Pointer<Double> aob = Pointer.allocateDouble();
+        Pointer<Double> zob = Pointer.allocateDouble();
+        Pointer<Double> hob = Pointer.allocateDouble();
+        Pointer<Double> dob = Pointer.allocateDouble();
+        Pointer<Double> rob = Pointer.allocateDouble();
+        iauAtioq(ri, di, astrom, aob, zob, hob, dob, rob);
+
+        assertEquals(aob, 0.09233952224794989993, 1e-12);
+        assertEquals(zob, 1.407758704513722461, 1e-12);
+        assertEquals(hob, -0.09247619879782006106, 1e-12);
+        assertEquals(dob, 0.1717653435758265198, 1e-12);
+        assertEquals(rob, 2.710085107986886201, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t o c 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtoc13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtoc13, assertEquals, viv
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atoc13() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        double ob1 = 2.710085107986886201;
+        double ob2 = 0.1717653435758265198;
+
+        Pointer<Double> rc = Pointer.allocateDouble();
+        Pointer<Double> dc = Pointer.allocateDouble();
+        int j = iauAtoc13 ( Pointer.pointerToCString("R"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, rc, dc);
+        assertEquals(rc, 2.709956744661000609, 1e-12);
+        assertEquals(dc, 0.1741696500895398562, 1e-12);
+        assertEquals(j, 0);
+
+        ob1 = -0.09247619879782006106;
+        ob2 = 0.1717653435758265198;
+        j = iauAtoc13 ( Pointer.pointerToCString("H"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, rc, dc);
+        assertEquals(rc, 2.709956744661000609, 1e-12);
+        assertEquals(dc, 0.1741696500895398562, 1e-12);
+        assertEquals(j, 0);
+
+        ob1 = 0.09233952224794989993;
+        ob2 = 1.407758704513722461;
+        j = iauAtoc13 ( Pointer.pointerToCString("A"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, rc, dc);
+        assertEquals(rc, 2.709956744661000609, 1e-12);
+        assertEquals(dc, 0.1741696500895398565, 1e-12);
+        assertEquals(j, 0);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ a t o i 1 3
+    **  - - - - - - - - -
+    **
+    **  Test iauAtoi13 function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauAtoi13, assertEquals, viv
+    **
+    **  This revision:  2013 October 3
+    */
+    @Test public void t_atoi13() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        double ob1 = 2.710085107986886201;
+        double ob2 = 0.1717653435758265198;
+
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+        int j = iauAtoi13 ( Pointer.pointerToCString("R"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567725, 1e-12);
+        assertEquals(j, 0);
+
+        ob1 = -0.09247619879782006106;
+        ob2 = 0.1717653435758265198;
+        j = iauAtoi13 ( Pointer.pointerToCString("H"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567725, 1e-12);
+        assertEquals(j, 0);
+
+        ob1 = 0.09233952224794989993;
+        ob2 = 1.407758704513722461;
+        j = iauAtoi13 ( Pointer.pointerToCString("A"), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567728, 1e-12);
+        assertEquals(j, 0);
+    }
+
+    /*
+    **  - - - - - - - -
+    **   t _ a t o i q
+    **  - - - - - - - -
+    *
+    **  Test iauAtoiq function.
+    *
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    *
+    **  Called:  iauApio13, iauAtoiq, assertEquals
+    *
+    **  This revision:  2013 October 4
+    */
+    @Test public void t_atoiq() {
+        double utc1 = 2456384.5;
+        double utc2 = 0.969254051;
+        double dut1 = 0.1550675;
+        double elong = -0.527800806;
+        double phi = -1.2345856;
+        double hm = 2738.0;
+        double xp = 2.47230737e-7;
+        double yp = 1.82640464e-6;
+        double phpa = 731.0;
+        double tc = 12.8;
+        double rh = 0.59;
+        double wl = 0.55;
+
+        Pointer<iauASTROM> astrom = Pointer.allocate(iauASTROM.class);
+        iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, astrom);
+
+        Pointer<Double> ri = Pointer.allocateDouble();
+        Pointer<Double> di = Pointer.allocateDouble();
+
+        double ob1 = 2.710085107986886201;
+        double ob2 = 0.1717653435758265198;
+        iauAtoiq(Pointer.pointerToCString("R"), ob1, ob2, astrom, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567725, 1e-12);
+
+        ob1 = -0.09247619879782006106;
+        ob2 = 0.1717653435758265198;
+        iauAtoiq(Pointer.pointerToCString("H"), ob1, ob2, astrom, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567725, 1e-12);
+
+        ob1 = 0.09233952224794989993;
+        ob2 = 1.407758704513722461;
+        iauAtoiq(Pointer.pointerToCString("A"), ob1, ob2, astrom, ri, di);
+        assertEquals(ri, 2.710121574449135955, 1e-12);
+        assertEquals(di, 0.1729371839114567728, 1e-12);
     }
 
     /*
@@ -2448,6 +3671,137 @@ public class TestSofa {
     }
 
     /*
+    **  - - - - -
+    **   t _ l d
+    **  - - - - -
+    **
+    **  Test iauLd function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauLd, vvd
+    *
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_ld() {
+        double bm = 0.00028574;
+        Pointer<Double> p = Pointer.allocateDoubles(3);
+        p.set(0, -0.763276255);
+        p.set(1, -0.608633767);
+        p.set(2, -0.216735543);
+        Pointer<Double> q = Pointer.allocateDoubles(3);
+        q.set(0, -0.763276255);
+        q.set(1, -0.608633767);
+        q.set(2, -0.216735543);
+        Pointer<Double> e = Pointer.allocateDoubles(3);
+        e.set(0, 0.76700421);
+        e.set(1, 0.605629598);
+        e.set(2, 0.211937094);
+        double em = 8.91276983;
+        double dlim = 3e-10;
+
+        Pointer<Double> p1 = Pointer.allocateDoubles(3);
+        iauLd(bm, p, q, e, em, dlim, p1);
+
+        assertEquals(p1.get(0), -0.7632762548968159627, 1e-12);
+        assertEquals(p1.get(1), -0.6086337670823762701, 1e-12);
+        assertEquals(p1.get(2), -0.2167355431320546947, 1e-12);
+    }
+
+    /*
+    **  - - - - - -
+    **   t _ l d n
+    **  - - - - - -
+    **
+    **  Test iauLdn function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauLdn, vvd
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_ldn() {
+        Pointer<iauLDBODY> b = Pointer.allocateArray(iauLDBODY.class, 3);
+        
+        int n = 3;
+        b.get(0).bm( 0.00028574 );
+        b.get(0).dl( 3e-10 );
+        b.get(0).pv().set(0 * 3 + 0, -7.81014427);
+        b.get(0).pv().set(0 * 3 + 1, -5.60956681);
+        b.get(0).pv().set(0 * 3 + 2, -1.98079819);
+        b.get(0).pv().set(1 * 3 + 0,  0.0030723249);
+        b.get(0).pv().set(1 * 3 + 1, -0.00406995477);
+        b.get(0).pv().set(1 * 3 + 2, -0.00181335842);
+        b.get(1).bm( 0.00095435 );
+        b.get(1).dl( 3e-9 );
+        b.get(1).pv().set(0 * 3 + 0,  0.738098796);
+        b.get(1).pv().set(0 * 3 + 1,  4.63658692);
+        b.get(1).pv().set(0 * 3 + 2,  1.9693136);
+        b.get(1).pv().set(1 * 3 + 0, -0.00755816922);
+        b.get(1).pv().set(1 * 3 + 1,  0.00126913722);
+        b.get(1).pv().set(1 * 3 + 2,  0.000727999001);
+        b.get(2).bm( 1.0 );
+        b.get(2).dl( 6e-6 );
+        b.get(2).pv().set(0 * 3 + 0, -0.000712174377);
+        b.get(2).pv().set(0 * 3 + 1, -0.00230478303);
+        b.get(2).pv().set(0 * 3 + 2, -0.00105865966);
+        b.get(2).pv().set(1 * 3 + 0,  6.29235213e-6);
+        b.get(2).pv().set(1 * 3 + 1, -3.30888387e-7);
+        b.get(2).pv().set(1 * 3 + 2, -2.96486623e-7);
+        Pointer<Double> ob = Pointer.allocateDoubles(3);
+        ob.set(0, -0.974170437);
+        ob.set(1, -0.2115201);
+        ob.set(2, -0.0917583114);
+        Pointer<Double> sc = Pointer.allocateDoubles(3);
+        sc.set(0, -0.763276255);
+        sc.set(1, -0.608633767);
+        sc.set(2, -0.216735543);
+
+        Pointer<Double> sn = Pointer.allocateDoubles(3);
+        iauLdn(n, b, ob, sc, sn);
+
+        assertEquals(sn.get(0), -0.7632762579693333866, 1e-12);
+        assertEquals(sn.get(1), -0.6086337636093002660, 1e-12);
+        assertEquals(sn.get(2), -0.2167355420646328159, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - -
+    **   t _ l d s u n
+    **  - - - - - - - -
+    **
+    **  Test iauLdsun function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauLdsun, vvd
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_ldsun() {
+        Pointer<Double> p = Pointer.allocateDoubles(3);
+        p.set(0, -0.763276255);
+        p.set(1, -0.608633767);
+        p.set(2, -0.216735543);
+        Pointer<Double> e = Pointer.allocateDoubles(3);
+        e.set(0, -0.973644023);
+        e.set(1, -0.20925523);
+        e.set(2, -0.0907169552);
+        double em = 0.999809214;
+
+        Pointer<Double> p1 = Pointer.allocateDoubles(3);
+        iauLdsun(p, e, em, p1);
+
+        assertEquals(p1.get(0), -0.7632762580731413169, 1e-12);
+        assertEquals(p1.get(1), -0.6086337635262647900, 1e-12);
+        assertEquals(p1.get(2), -0.2167355419322321302, 1e-12);
+    }
+
+    /*
     **  - - - - - - - - -
     **   t _ n u m 0 0 a
     **  - - - - - - - - -
@@ -3209,6 +4563,85 @@ public class TestSofa {
         assertEquals(amb.get(0),  1.0, 1e-12);
         assertEquals(amb.get(1), -1.0, 1e-12);
         assertEquals(amb.get(2), -1.0, 1e-12);
+    }
+
+    /*
+    **  - - - - - - -
+    **   t _ p m p x
+    **  - - - - - - -
+    **
+    **  Test iauPmpx function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauPmpx, vvd
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_pmpx() {
+        Pointer<Double> pob = Pointer.allocateDoubles(3);
+        Pointer<Double> pco = Pointer.allocateDoubles(3);
+
+        double rc = 1.234;
+        double dc = 0.789;
+        double pr = 1e-5;
+        double pd = -2e-5;
+        double px = 1e-2;
+        double rv = 10.0;
+        double pmt = 8.75;
+        pob.set(0, 0.9);
+        pob.set(1, 0.4);
+        pob.set(2, 0.1);
+
+        iauPmpx(rc, dc, pr, pd, px, rv, pmt, pob, pco);
+
+        assertEquals(pco.get(0), 0.2328137623960308440, 1e-12);
+        assertEquals(pco.get(1), 0.6651097085397855317, 1e-12);
+        assertEquals(pco.get(2), 0.7095257765896359847, 1e-12);
+    }
+
+    /*
+    **  - - - - - - - - -
+    **   t _ p m s a f e
+    **  - - - - - - - - -
+    **
+    **  Test iauPmsafe function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauPmsafe, vvd, viv
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_pmsafe() {
+        double ra1 = 1.234;
+        double dec1 = 0.789;
+        double pmr1 = 1e-5;
+        double pmd1 = -2e-5;
+        double px1 = 1e-2;
+        double rv1 = 10.0;
+        double ep1a = 2400000.5;
+        double ep1b = 48348.5625;
+        double ep2a = 2400000.5;
+        double ep2b = 51544.5;
+
+        Pointer<Double> ra2  = Pointer.allocateDouble();
+        Pointer<Double> dec2 = Pointer.allocateDouble();
+        Pointer<Double> pmr2 = Pointer.allocateDouble();
+        Pointer<Double> pmd2 = Pointer.allocateDouble();
+        Pointer<Double> px2  = Pointer.allocateDouble();
+        Pointer<Double> rv2  = Pointer.allocateDouble();
+        int j = iauPmsafe(ra1, dec1, pmr1, pmd1, px1, rv1, ep1a, ep1b, ep2a, ep2b, ra2, dec2, pmr2, pmd2, px2, rv2);
+
+        assertEquals(ra2, 1.234087484501017061, 1e-12);
+        assertEquals(dec2, 0.7888249982450468574, 1e-12);
+        assertEquals(pmr2, 0.9996457663586073988e-5, 1e-12);
+        assertEquals(pmd2, -0.2000040085106737816e-4, 1e-16);
+        assertEquals(px2, 0.9999997295356765185e-2, 1e-12);
+        assertEquals(rv2, 10.38468380113917014, 1e-10);
+        assertEquals(j, 0);
     }
 
     /*
@@ -4267,6 +5700,41 @@ public class TestSofa {
         assertEquals(j, 0);
     }
 
+
+    /*
+    **  - - - - - - - -
+    **   t _ p v t o b
+    **  - - - - - - - -
+    **
+    **  Test iauPvtob function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauPvtob, vvd
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_pvtob() {
+        double elong = 2.0;
+        double phi = 0.5;
+        double hm = 3000.0;
+        double xp = 1e-6;
+        double yp = -0.5e-6;
+        double sp = 1e-8;
+        double theta = 5.0;
+
+        Pointer<Pointer<Double>> pv = Pointer.allocateDoubles(2, 3);
+        iauPvtob(elong, phi, hm, xp, yp, sp, theta, pv.get());
+
+        assertEquals(pv.get(0).get(0), 4225081.367071159207, 1e-5);
+        assertEquals(pv.get(0).get(1), 3681943.215856198144, 1e-5);
+        assertEquals(pv.get(0).get(2), 3041149.399241260785, 1e-5);
+        assertEquals(pv.get(1).get(0), -268.4915389365998787, 1e-9);
+        assertEquals(pv.get(1).get(1), 308.0977983288903123, 1e-9);
+        assertEquals(pv.get(1).get(2), 0, 0);
+    }
+
     /*
     **  - - - - - -
     **   t _ p v u
@@ -4415,6 +5883,35 @@ public class TestSofa {
         assertEquals(axb.get(0), -1.0, 1e-12);
         assertEquals(axb.get(1), -5.0, 1e-12);
         assertEquals(axb.get(2),  4.0, 1e-12);
+    }
+
+
+    /*
+    **  - - - - - - - -
+    **   t _ r e f c o
+    **  - - - - - - - -
+    **
+    **  Test iauRefco function.
+    **
+    **  Returned:
+    **     status    int         FALSE = success, TRUE = fail
+    **
+    **  Called:  iauRefco, vvd
+    **
+    **  This revision:  2013 October 2
+    */
+    @Test public void t_refco() {
+        double phpa = 800.0;
+        double tc = 10.0;
+        double rh = 0.9;
+        double wl = 0.4;
+
+        Pointer<Double> refa = Pointer.allocateDouble();
+        Pointer<Double> refb = Pointer.allocateDouble();
+        iauRefco(phpa, tc, rh, wl, refa, refb);
+
+        assertEquals(refa, 0.2264949956241415009e-3, 1e-15);
+        assertEquals(refb, -0.2598658261729343970e-6, 1e-18);
     }
 
     /*

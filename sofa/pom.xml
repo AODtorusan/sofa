@@ -23,22 +23,6 @@
 			<groupId>be.angelcorp</groupId>
 			<artifactId>sofa-platform</artifactId>
 			<version>1.0</version>
-			<classifier>natives-windows</classifier>
-            <optional>true</optional>
-		</dependency>
-        <dependency>
-            <groupId>be.angelcorp</groupId>
-            <artifactId>sofa-platform</artifactId>
-            <version>1.0</version>
-			<classifier>natives-linux</classifier>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-            <groupId>be.angelcorp</groupId>
-            <artifactId>sofa-platform</artifactId>
-            <version>1.0</version>
-			<classifier>natives-freebsd</classifier>
-			<optional>true</optional>
 		</dependency>
 
         <dependency>
