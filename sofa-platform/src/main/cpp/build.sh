@@ -30,9 +30,11 @@ fi
 
 function buildLibrary() {
 # Arg1: Architecture
+# ArgN: CMake args
 
     arch="$1"
-    cmake_args=()
+    shift
+    cmake_args=($@)
     if [[ $IS_WIN ]]; then
         # Windows/cygwin
         # For windows, generate a ".bat" script that does the actual building, and call that script
@@ -86,14 +88,22 @@ EOF
     fi
 }
 
-# Build the X86 version of the library
-mkdir -p x86
-cd x86
-buildLibrary x86
-cd ..
+if [[ $platform == "macos" ]]; then
+    # Build the universal version of the library
+    mkdir -p universal
+    cd universal
+    buildLibrary universal "-DCMAKE_OSX_ARCHITECTURES=x86_64;i386"
+    cd ..
+else
+    # Build the X86 version of the library
+    mkdir -p x86
+    cd x86
+    buildLibrary x86
+    cd ..
 
-# Build the X64 version of the library
-mkdir -p  x64
-cd x64
-buildLibrary x64
-cd ..
+    # Build the X64 version of the library
+    mkdir -p  x64
+    cd x64
+    buildLibrary x64
+    cd ..
+fi
