@@ -73,7 +73,7 @@ public class TestSofa {
         Pointer<Integer> idmsf = Pointer.allocateInts(4);
         Pointer<Byte>    s     = Pointer.allocateByte();
 
-        SofaLibrary.iauA2af(4, 2.345, s, idmsf);
+        iauA2af(4, 2.345, s, idmsf);
 
         assertEquals(s, '+' );
 

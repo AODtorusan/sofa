@@ -79,946 +79,8470 @@ public class SofaLibrary {
 	/// <i>native declaration : sofa-platform\src\main\cpp\src\sofam.h</i>
 	public static final double DJC = (double)(36525.0);
 	/**
-	 * Astronomy/Calendars<br>
+	 * - - - - - - - - - -<br>
+	 *   i a u C a l 2 j d<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Gregorian Calendar to Julian Date.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     iy,im,id  int     year, month, day in Gregorian calendar (Note 1)<br>
+	 * *  Returned:<br>
+	 *     djm0      double  MJD zero-point: always 2400000.5<br>
+	 *     djm       double  Modified Julian Date for 0 hrs<br>
+	 * *  Returned (function value):<br>
+	 *               int     status:<br>
+	 *                           0 = OK<br>
+	 *                          -1 = bad year   (Note 3: JD not computed)<br>
+	 *                          -2 = bad month  (JD not computed)<br>
+	 *                          -3 = bad day    (JD computed)<br>
+	 * *  Notes:<br>
+	 * *  1) The algorithm used is valid from -4800 March 1, but this<br>
+	 *     implementation rejects dates before -4799 January 1.<br>
+	 * *  2) The Julian Date is returned in two pieces, in the usual SOFA<br>
+	 *     manner, which is designed to preserve time resolution.  The<br>
+	 *     Julian Date is available as a single number by adding djm0 and<br>
+	 *     djm.<br>
+	 * *  3) In early eras the conversion is from the "Proleptic Gregorian<br>
+	 *     Calendar";  no account is taken of the date(s) of adoption of<br>
+	 *     the Gregorian Calendar, nor is the AD/BC numbering convention<br>
+	 *     observed.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 12.92 (p604).<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauCal2jd(int, int, int, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:30</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:65</i>
 	 */
 	public static int iauCal2jd(int iy, int im, int id, Pointer<Double > djm0, Pointer<Double > djm) {
 		return iauCal2jd(iy, im, id, Pointer.getPeer(djm0), Pointer.getPeer(djm));
 	}
 	protected native static int iauCal2jd(int iy, int im, int id, @Ptr long djm0, @Ptr long djm);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u E p b<br>
+	 *  - - - - - - -<br>
+	 * *  Julian Date to Besselian Epoch.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     dj1,dj2    double     Julian Date (see note)<br>
+	 * *  Returned (function value):<br>
+	 *                double     Besselian Epoch.<br>
+	 * *  Note:<br>
+	 * *     The Julian Date is supplied in two pieces, in the usual SOFA<br>
+	 *     manner, which is designed to preserve time resolution.  The<br>
+	 *     Julian Date is available as a single number by adding dj1 and<br>
+	 *     dj2.  The maximum resolution is achieved if dj1 is 2451545.0<br>
+	 *     (J2000.0).<br>
+	 * *  Reference:<br>
+	 * *     Lieske, J.H., 1979. Astron.Astrophys., 73, 282.<br>
+	 * *  This revision:  2013 August 21<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEpb(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:32</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:91</i>
 	 */
 	native public static double iauEpb(double dj1, double dj2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u E p b 2 j d<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Besselian Epoch to Julian Date.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     epb      double    Besselian Epoch (e.g. 1957.3)<br>
+	 * *  Returned:<br>
+	 *     djm0     double    MJD zero-point: always 2400000.5<br>
+	 *     djm      double    Modified Julian Date<br>
+	 * *  Note:<br>
+	 * *     The Julian Date is returned in two pieces, in the usual SOFA<br>
+	 *     manner, which is designed to preserve time resolution.  The<br>
+	 *     Julian Date is available as a single number by adding djm0 and<br>
+	 *     djm.<br>
+	 * *  Reference:<br>
+	 * *     Lieske, J.H., 1979, Astron.Astrophys. 73, 282.<br>
+	 * *  This revision:  2013 August 13<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauEpb2jd(double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:34</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:117</i>
 	 */
 	public static void iauEpb2jd(double epb, Pointer<Double > djm0, Pointer<Double > djm) {
 		iauEpb2jd(epb, Pointer.getPeer(djm0), Pointer.getPeer(djm));
 	}
 	protected native static void iauEpb2jd(double epb, @Ptr long djm0, @Ptr long djm);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u E p j<br>
+	 *  - - - - - - -<br>
+	 * *  Julian Date to Julian Epoch.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     dj1,dj2    double     Julian Date (see note)<br>
+	 * *  Returned (function value):<br>
+	 *                double     Julian Epoch<br>
+	 * *  Note:<br>
+	 * *     The Julian Date is supplied in two pieces, in the usual SOFA<br>
+	 *     manner, which is designed to preserve time resolution.  The<br>
+	 *     Julian Date is available as a single number by adding dj1 and<br>
+	 *     dj2.  The maximum resolution is achieved if dj1 is 2451545.0<br>
+	 *     (J2000.0).<br>
+	 * *  Reference:<br>
+	 * *     Lieske, J.H., 1979, Astron.Astrophys. 73, 282.<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEpj(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:36</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:143</i>
 	 */
 	native public static double iauEpj(double dj1, double dj2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u E p j 2 j d<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Julian Epoch to Julian Date.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     epj      double    Julian Epoch (e.g. 1996.8)<br>
+	 * *  Returned:<br>
+	 *     djm0     double    MJD zero-point: always 2400000.5<br>
+	 *     djm      double    Modified Julian Date<br>
+	 * *  Note:<br>
+	 * *     The Julian Date is returned in two pieces, in the usual SOFA<br>
+	 *     manner, which is designed to preserve time resolution.  The<br>
+	 *     Julian Date is available as a single number by adding djm0 and<br>
+	 *     djm.<br>
+	 * *  Reference:<br>
+	 * *     Lieske, J.H., 1979, Astron.Astrophys. 73, 282.<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauEpj2jd(double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:38</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:169</i>
 	 */
 	public static void iauEpj2jd(double epj, Pointer<Double > djm0, Pointer<Double > djm) {
 		iauEpj2jd(epj, Pointer.getPeer(djm0), Pointer.getPeer(djm));
 	}
 	protected native static void iauEpj2jd(double epj, @Ptr long djm0, @Ptr long djm);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u J d 2 c a l<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Julian Date to Gregorian year, month, day, and fraction of a day.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     dj1,dj2   double   Julian Date (Notes 1, 2)<br>
+	 * *  Returned (arguments):<br>
+	 *     iy        int      year<br>
+	 *     im        int      month<br>
+	 *     id        int      day<br>
+	 *     fd        double   fraction of day<br>
+	 * *  Returned (function value):<br>
+	 *               int      status:<br>
+	 *                           0 = OK<br>
+	 *                          -1 = unacceptable date (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The earliest valid date is -68569.5 (-4900 March 1).  The<br>
+	 *     largest value accepted is 1e9.<br>
+	 * *  2) The Julian Date is apportioned in any convenient way between<br>
+	 *     the arguments dj1 and dj2.  For example, JD=2450123.7 could<br>
+	 *     be expressed in any of these ways, among others:<br>
+	 * *            dj1             dj2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *  3) In early eras the conversion is from the "proleptic Gregorian<br>
+	 *     calendar";  no account is taken of the date(s) of adoption of<br>
+	 *     the Gregorian calendar, nor is the AD/BC numbering convention<br>
+	 *     observed.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 12.92 (p604).<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauJd2cal(double, double, int*, int*, int*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:40</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:213</i>
 	 */
 	public static int iauJd2cal(double dj1, double dj2, Pointer<Integer > iy, Pointer<Integer > im, Pointer<Integer > id, Pointer<Double > fd) {
 		return iauJd2cal(dj1, dj2, Pointer.getPeer(iy), Pointer.getPeer(im), Pointer.getPeer(id), Pointer.getPeer(fd));
 	}
 	protected native static int iauJd2cal(double dj1, double dj2, @Ptr long iy, @Ptr long im, @Ptr long id, @Ptr long fd);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u J d c a l f<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Julian Date to Gregorian Calendar, expressed in a form convenient<br>
+	 *  for formatting messages:  rounded to a specified precision.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ndp       int      number of decimal places of days in fraction<br>
+	 *     dj1,dj2   double   dj1+dj2 = Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     iymdf     int[4]   year, month, day, fraction in Gregorian<br>
+	 *                        calendar<br>
+	 * *  Returned (function value):<br>
+	 *               int      status:<br>
+	 *                          -1 = date out of range<br>
+	 *                           0 = OK<br>
+	 *                          +1 = NDP not 0-9 (interpreted as 0)<br>
+	 * *  Notes:<br>
+	 * *  1) The Julian Date is apportioned in any convenient way between<br>
+	 *     the arguments dj1 and dj2.  For example, JD=2450123.7 could<br>
+	 *     be expressed in any of these ways, among others:<br>
+	 * *             dj1            dj2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *  2) In early eras the conversion is from the "Proleptic Gregorian<br>
+	 *     Calendar";  no account is taken of the date(s) of adoption of<br>
+	 *     the Gregorian Calendar, nor is the AD/BC numbering convention<br>
+	 *     observed.<br>
+	 * *  3) Refer to the function iauJd2cal.<br>
+	 * *  4) NDP should be 4 or less if internal overflows are to be<br>
+	 *     avoided on machines which use 16-bit integers.<br>
+	 * *  Called:<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 12.92 (p604).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauJdcalf(int, double, double, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:42</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:261</i>
 	 */
 	public static int iauJdcalf(int ndp, double dj1, double dj2, Pointer<Integer > iymdf) {
 		return iauJdcalf(ndp, dj1, dj2, Pointer.getPeer(iymdf));
 	}
 	protected native static int iauJdcalf(int ndp, double dj1, double dj2, @Ptr long iymdf);
 	/**
-	 * Astronomy/Astrometry<br>
+	 * - - - - - -<br>
+	 *   i a u A b<br>
+	 *  - - - - - -<br>
+	 * *  Apply aberration to transform natural direction into proper<br>
+	 *  direction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *    pnat    double[3]   natural direction to the source (unit vector)<br>
+	 *    v       double[3]   observer barycentric velocity in units of c<br>
+	 *    s       double      distance between the Sun and the observer (au)<br>
+	 *    bm1     double      sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 * *  Returned:<br>
+	 *    ppr     double[3]   proper direction to source (unit vector)<br>
+	 * *  Notes:<br>
+	 * *  1) The algorithm is based on Expr. (7.40) in the Explanatory<br>
+	 *     Supplement (Urban & Seidelmann 2013), but with the following<br>
+	 *     changes:<br>
+	 * *     o  Rigorous rather than approximate normalization is applied.<br>
+	 * *     o  The gravitational potential term from Expr. (7) in<br>
+	 *        Klioner (2003) is added, taking into account only the Sun's<br>
+	 *        contribution.  This has a maximum effect of about<br>
+	 *        0.4 microarcsecond.<br>
+	 * *  2) In almost all cases, the maximum accuracy will be limited by the<br>
+	 *     supplied velocity.  For example, if the SOFA iauEpv00 function is<br>
+	 *     used, errors of up to 5 microarcseconds could occur.<br>
+	 * *  References:<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013).<br>
+	 * *     Klioner, Sergei A., "A practical relativistic model for micro-<br>
+	 *     arcsecond astrometry in space", Astr. J. 125, 1580-1597 (2003).<br>
+	 * *  Called:<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAb(double[3], double[3], double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:47</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:303</i>
 	 */
 	public static void iauAb(Pointer<Double > pnat, Pointer<Double > v, double s, double bm1, Pointer<Double > ppr) {
 		iauAb(Pointer.getPeer(pnat), Pointer.getPeer(v), s, bm1, Pointer.getPeer(ppr));
 	}
 	protected native static void iauAb(@Ptr long pnat, @Ptr long v, double s, double bm1, @Ptr long ppr);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p c g<br>
+	 *  - - - - - - - -<br>
+	 * *  For a geocentric observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and GCRS coordinates.<br>
+	 *  The Earth ephemeris is supplied by the caller.<br>
+	 * *  The parameters produced by this function are required in the<br>
+	 *  parallax, light deflection and aberration parts of the astrometric<br>
+	 *  transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB as a 2-part...<br>
+	 *     date2  double       ...Julian Date (Note 1)<br>
+	 *     ebpv   double[2][3] Earth barycentric pos/vel (au, au/day)<br>
+	 *     ehp    double[3]    Earth heliocentric position (au)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  4) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauApcs      astrometry parameters, ICRS-GCRS, space observer<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcg(double, double, double[2][3], double[3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:49</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:391</i>
 	 */
 	public static void iauApcg(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, Pointer<iauASTROM > astrom) {
 		iauApcg(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), Pointer.getPeer(astrom));
 	}
 	protected native static void iauApcg(double date1, double date2, @Ptr long ebpv, @Ptr long ehp, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p c g 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a geocentric observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and GCRS coordinates.<br>
+	 *  The caller supplies the date, and SOFA models are used to predict<br>
+	 *  the Earth ephemeris.<br>
+	 * *  The parameters produced by this function are required in the<br>
+	 *  parallax, light deflection and aberration parts of the astrometric<br>
+	 *  transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double     TDB as a 2-part...<br>
+	 *     date2  double     ...Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) In cases where the caller wishes to supply his own Earth<br>
+	 *     ephemeris, the function iauApcg can be used instead of the present<br>
+	 *     function.<br>
+	 * *  4) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  5) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauEpv00     Earth position and velocity<br>
+	 *     iauApcg      astrometry parameters, ICRS-GCRS, geocenter<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcg13(double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:51</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:482</i>
 	 */
 	public static void iauApcg13(double date1, double date2, Pointer<iauASTROM > astrom) {
 		iauApcg13(date1, date2, Pointer.getPeer(astrom));
 	}
 	protected native static void iauApcg13(double date1, double date2, @Ptr long astrom);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p c i<br>
+	 *  - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and geocentric CIRS<br>
+	 *  coordinates.  The Earth ephemeris and CIP/CIO are supplied by the<br>
+	 *  caller.<br>
+	 * *  The parameters produced by this function are required in the<br>
+	 *  parallax, light deflection, aberration, and bias-precession-nutation<br>
+	 *  parts of the astrometric transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB as a 2-part...<br>
+	 *     date2  double       ...Julian Date (Note 1)<br>
+	 *     ebpv   double[2][3] Earth barycentric position/velocity (au, au/day)<br>
+	 *     ehp    double[3]    Earth heliocentric position (au)<br>
+	 *     x,y    double       CIP X,Y (components of unit vector)<br>
+	 *     s      double       the CIO locator s (radians)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) In cases where the caller does not wish to provide the Earth<br>
+	 *     ephemeris and CIP/CIO, the function iauApci13 can be used instead<br>
+	 *     of the present function.  This computes the required quantities<br>
+	 *     using other SOFA functions.<br>
+	 * *  4) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  5) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauApcg      astrometry parameters, ICRS-GCRS, geocenter<br>
+	 *     iauC2ixys    celestial-to-intermediate matrix, given X,Y and s<br>
+	 * *  This revision:   2013 September 25<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApci(double, double, double[2][3], double[3], double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:53</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:578</i>
 	 */
 	public static void iauApci(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, double x, double y, double s, Pointer<iauASTROM > astrom) {
 		iauApci(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), x, y, s, Pointer.getPeer(astrom));
 	}
 	protected native static void iauApci(double date1, double date2, @Ptr long ebpv, @Ptr long ehp, double x, double y, double s, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p c i 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and geocentric CIRS<br>
+	 *  coordinates.  The caller supplies the date, and SOFA models are used<br>
+	 *  to predict the Earth ephemeris and CIP/CIO.<br>
+	 * *  The parameters produced by this function are required in the<br>
+	 *  parallax, light deflection, aberration, and bias-precession-nutation<br>
+	 *  parts of the astrometric transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double      TDB as a 2-part...<br>
+	 *     date2  double      ...Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 *     eo     double*     equation of the origins (ERA-GST)<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) In cases where the caller wishes to supply his own Earth<br>
+	 *     ephemeris and CIP/CIO, the function iauApci can be used instead<br>
+	 *     of the present function.<br>
+	 * *  4) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  5) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauEpv00     Earth position and velocity<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 *     iauApci      astrometry parameters, ICRS-CIRS<br>
+	 *     iauEors      equation of the origins, given NPB matrix and s<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApci13(double, double, iauASTROM*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:55</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:674</i>
 	 */
 	public static void iauApci13(double date1, double date2, Pointer<iauASTROM > astrom, Pointer<Double > eo) {
 		iauApci13(date1, date2, Pointer.getPeer(astrom), Pointer.getPeer(eo));
 	}
 	protected native static void iauApci13(double date1, double date2, @Ptr long astrom, @Ptr long eo);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p c o<br>
+	 *  - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and observed<br>
+	 *  coordinates.  The caller supplies the Earth ephemeris, the Earth<br>
+	 *  rotation information and the refraction constants as well as the<br>
+	 *  site coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB as a 2-part...<br>
+	 *     date2  double       ...Julian Date (Note 1)<br>
+	 *     ebpv   double[2][3] Earth barycentric PV (au, au/day, Note 2)<br>
+	 *     ehp    double[3]    Earth heliocentric P (au, Note 2)<br>
+	 *     x,y    double       CIP X,Y (components of unit vector)<br>
+	 *     s      double       the CIO locator s (radians)<br>
+	 *     theta  double       Earth rotation angle (radians)<br>
+	 *     elong  double       longitude (radians, east +ve, Note 3)<br>
+	 *     phi    double       latitude (geodetic, radians, Note 3)<br>
+	 *     hm     double       height above ellipsoid (m, geodetic, Note 3)<br>
+	 *     xp,yp  double       polar motion coordinates (radians, Note 4)<br>
+	 *     sp     double       the TIO locator s' (radians, Note 4)<br>
+	 *     refa   double       refraction constant A (radians, Note 5)<br>
+	 *     refb   double       refraction constant B (radians, Note 5)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) The vectors eb, eh, and all the astrom vectors, are with respect<br>
+	 *     to BCRS axes.<br>
+	 * *  3) The geographical coordinates are with respect to the WGS84<br>
+	 *     reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN<br>
+	 *     CONVENTION:  the longitude required by the present function is<br>
+	 *     right-handed, i.e. east-positive, in accordance with geographical<br>
+	 *     convention.<br>
+	 * *  4) xp and yp are the coordinates (in radians) of the Celestial<br>
+	 *     Intermediate Pole with respect to the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions), measured along the<br>
+	 *     meridians 0 and 90 deg west respectively.  sp is the TIO locator<br>
+	 *     s', in radians, which positions the Terrestrial Intermediate<br>
+	 *     Origin on the equator.  For many applications, xp, yp and<br>
+	 *     (especially) sp can be set to zero.<br>
+	 * *     Internally, the polar motion is stored in a form rotated onto the<br>
+	 *     local meridian.<br>
+	 * *  5) The refraction constants refa and refb are for use in a<br>
+	 *     dZ = A*tan(Z)+B*tan^3(Z) model, where Z is the observed<br>
+	 *     (i.e. refracted) zenith distance and dZ is the amount of<br>
+	 *     refraction.<br>
+	 * *  6) It is advisable to take great care with units, as even unlikely<br>
+	 *     values of the input parameters are accepted and processed in<br>
+	 *     accordance with the models used.<br>
+	 * *  7) In cases where the caller does not wish to provide the Earth<br>
+	 *     Ephemeris, the Earth rotation information and refraction<br>
+	 *     constants, the function iauApco13 can be used instead of the<br>
+	 *     present function.  This starts from UTC and weather readings etc.<br>
+	 *     and computes suitable values using other SOFA functions.<br>
+	 * *  8) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  9) The context structure astrom produced by this function is used by<br>
+	 *     iauAtioq, iauAtoiq, iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauAper      astrometry parameters: update ERA<br>
+	 *     iauC2ixys    celestial-to-intermediate matrix, given X,Y and s<br>
+	 *     iauPvtob     position/velocity of terrestrial station<br>
+	 *     iauTrxpv     product of transpose of r-matrix and pv-vector<br>
+	 *     iauApcs      astrometry parameters, ICRS-GCRS, space observer<br>
+	 *     iauCr        copy r-matrix<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApco(double, double, double[2][3], double[3], double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:57</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:803</i>
 	 */
 	public static void iauApco(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, double x, double y, double s, double theta, double elong, double phi, double hm, double xp, double yp, double sp, double refa, double refb, Pointer<iauASTROM > astrom) {
 		iauApco(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), x, y, s, theta, elong, phi, hm, xp, yp, sp, refa, refb, Pointer.getPeer(astrom));
 	}
 	protected native static void iauApco(double date1, double date2, @Ptr long ebpv, @Ptr long ehp, double x, double y, double s, double theta, double elong, double phi, double hm, double xp, double yp, double sp, double refa, double refb, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p c o 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between ICRS and observed<br>
+	 *  coordinates.  The caller supplies UTC, site coordinates, ambient air<br>
+	 *  conditions and observing wavelength, and SOFA models are used to<br>
+	 *  obtain the Earth ephemeris, CIP/CIO and refraction constants.<br>
+	 * *  The parameters produced by this function are required in the<br>
+	 *  parallax, light deflection, aberration, and bias-precession-nutation<br>
+	 *  parts of the ICRS/CIRS transformations.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     utc1   double     UTC as a 2-part...<br>
+	 *     utc2   double     ...quasi Julian Date (Notes 1,2)<br>
+	 *     dut1   double     UT1-UTC (seconds, Note 3)<br>
+	 *     elong  double     longitude (radians, east +ve, Note 4)<br>
+	 *     phi    double     latitude (geodetic, radians, Note 4)<br>
+	 *     hm     double     height above ellipsoid (m, geodetic, Notes 4,6)<br>
+	 *     xp,yp  double     polar motion coordinates (radians, Note 5)<br>
+	 *     phpa   double     pressure at the observer (hPa = mB, Note 6)<br>
+	 *     tc     double     ambient temperature at the observer (deg C)<br>
+	 *     rh     double     relative humidity at the observer (range 0-1)<br>
+	 *     wl     double     wavelength (micrometers, Note 7)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 *     eo     double*    equation of the origins (ERA-GST)<br>
+	 * *  Returned (function value):<br>
+	 *            int        status: +1 = dubious year (Note 2)<br>
+	 *                                0 = OK<br>
+	 *                               -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  2)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the<br>
+	 *      future to be trusted.  See iauDat for further details.<br>
+	 * *  3)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  4)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  5)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many<br>
+	 *      applications, xp and yp can be set to zero.<br>
+	 * *      Internally, the polar motion is stored in a form rotated onto<br>
+	 *      the local meridian.<br>
+	 * *  6)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB), is<br>
+	 *      available, an adequate estimate of hm can be obtained from the<br>
+	 *      expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to<br>
+	 *      the pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  7)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  8)  It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  9)  In cases where the caller wishes to supply his own Earth<br>
+	 *      ephemeris, Earth rotation information and refraction constants,<br>
+	 *      the function iauApco can be used instead of the present function.<br>
+	 * *  10) This is one of several functions that inserts into the astrom<br>
+	 *      structure star-independent parameters needed for the chain of<br>
+	 *      astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *      The various functions support different classes of observer and<br>
+	 *      portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *      Those with names ending in "13" use contemporary SOFA models to<br>
+	 *      compute the various ephemerides.  The others accept ephemerides<br>
+	 *      supplied by the caller.<br>
+	 * *      The transformation from ICRS to GCRS covers space motion,<br>
+	 *      parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *      comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *      observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *      aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *      transformation), and atmospheric refraction.<br>
+	 * *  11) The context structure astrom produced by this function is used<br>
+	 *      by iauAtioq, iauAtoiq, iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauUtctai    UTC to TAI<br>
+	 *     iauTaitt     TAI to TT<br>
+	 *     iauUtcut1    UTC to UT1<br>
+	 *     iauEpv00     Earth position and velocity<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauRefco     refraction constants for given ambient conditions<br>
+	 *     iauApco      astrometry parameters, ICRS-observed<br>
+	 *     iauEors      equation of the origins, given NPB matrix and s<br>
+	 * *  This revision:   2013 December 5<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauApco13(double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:59</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:950</i>
 	 */
-	public static int iauApco13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<iauASTROM > astrom, Pointer<Double > eo) {
-		return iauApco13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(astrom), Pointer.getPeer(eo));
+	public static int iauApco13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<iauASTROM > astrom, Pointer<Double > eo) {
+		return iauApco13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(astrom), Pointer.getPeer(eo));
 	}
-	protected native static int iauApco13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long astrom, @Ptr long eo);
+	protected native static int iauApco13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long astrom, @Ptr long eo);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p c s<br>
+	 *  - - - - - - - -<br>
+	 * *  For an observer whose geocentric position and velocity are known,<br>
+	 *  prepare star-independent astrometry parameters for transformations<br>
+	 *  between ICRS and GCRS.  The Earth ephemeris is supplied by the<br>
+	 *  caller.<br>
+	 * *  The parameters produced by this function are required in the space<br>
+	 *  motion, parallax, light deflection and aberration parts of the<br>
+	 *  astrometric transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB as a 2-part...<br>
+	 *     date2  double       ...Julian Date (Note 1)<br>
+	 *     pv     double[2][3] observer's geocentric pos/vel (m, m/s)<br>
+	 *     ebpv   double[2][3] Earth barycentric PV (au, au/day)<br>
+	 *     ehp    double[3]    Earth heliocentric P (au)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) Providing separate arguments for (i) the observer's geocentric<br>
+	 *     position and velocity and (ii) the Earth ephemeris is done for<br>
+	 *     convenience in the geocentric, terrestrial and Earth orbit cases.<br>
+	 *     For deep space applications it maybe more convenient to specify<br>
+	 *     zero geocentric position and velocity and to supply the<br>
+	 *     observer's position and velocity information directly instead of<br>
+	 *     with respect to the Earth.  However, note the different units:<br>
+	 *     m and m/s for the geocentric vectors, au and au/day for the<br>
+	 *     heliocentric and barycentric vectors.<br>
+	 * *  4) In cases where the caller does not wish to provide the Earth<br>
+	 *     ephemeris, the function iauApcs13 can be used instead of the<br>
+	 *     present function.  This computes the Earth ephemeris using the<br>
+	 *     SOFA function iauEpv00.<br>
+	 * *  5) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  6) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcs(double, double, double[2][3], double[2][3], double[3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:61</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1056</i>
 	 */
 	public static void iauApcs(double date1, double date2, Pointer<Double > pv, Pointer<Double > ebpv, Pointer<Double > ehp, Pointer<iauASTROM > astrom) {
 		iauApcs(date1, date2, Pointer.getPeer(pv), Pointer.getPeer(ebpv), Pointer.getPeer(ehp), Pointer.getPeer(astrom));
 	}
 	protected native static void iauApcs(double date1, double date2, @Ptr long pv, @Ptr long ebpv, @Ptr long ehp, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p c s 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For an observer whose geocentric position and velocity are known,<br>
+	 *  prepare star-independent astrometry parameters for transformations<br>
+	 *  between ICRS and GCRS.  The Earth ephemeris is from SOFA models.<br>
+	 * *  The parameters produced by this function are required in the space<br>
+	 *  motion, parallax, light deflection and aberration parts of the<br>
+	 *  astrometric transformation chain.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB as a 2-part...<br>
+	 *     date2  double       ...Julian Date (Note 1)<br>
+	 *     pv     double[2][3] observer's geocentric pos/vel (Note 3)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       unchanged<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) All the vectors are with respect to BCRS axes.<br>
+	 * *  3) The observer's position and velocity pv are geocentric but with<br>
+	 *     respect to BCRS axes, and in units of m and m/s.  No assumptions<br>
+	 *     are made about proximity to the Earth, and the function can be<br>
+	 *     used for deep space applications as well as Earth orbit and<br>
+	 *     terrestrial.<br>
+	 * *  4) In cases where the caller wishes to supply his own Earth<br>
+	 *     ephemeris, the function iauApcs can be used instead of the present<br>
+	 *     function.<br>
+	 * *  5) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  6) The context structure astrom produced by this function is used by<br>
+	 *     iauAtciq* and iauAticq*.<br>
+	 * *  Called:<br>
+	 *     iauEpv00     Earth position and velocity<br>
+	 *     iauApcs      astrometry parameters, ICRS-GCRS, space observer<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcs13(double, double, double[2][3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:63</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1152</i>
 	 */
 	public static void iauApcs13(double date1, double date2, Pointer<Double > pv, Pointer<iauASTROM > astrom) {
 		iauApcs13(date1, date2, Pointer.getPeer(pv), Pointer.getPeer(astrom));
 	}
 	protected native static void iauApcs13(double date1, double date2, @Ptr long pv, @Ptr long astrom);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p e r<br>
+	 *  - - - - - - - -<br>
+	 * *  In the star-independent astrometry parameters, update only the<br>
+	 *  Earth rotation angle, supplied by the caller explicitly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     theta   double      Earth rotation angle (radians, Note 2)<br>
+	 *     astrom  iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       not used<br>
+	 *      eb     double[3]    not used<br>
+	 *      eh     double[3]    not used<br>
+	 *      em     double       not used<br>
+	 *      v      double[3]    not used<br>
+	 *      bm1    double       not used<br>
+	 *      bpn    double[3][3] not used<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       not used<br>
+	 *      ypl    double       not used<br>
+	 *      sphi   double       not used<br>
+	 *      cphi   double       not used<br>
+	 *      diurab double       not used<br>
+	 *      eral   double       not used<br>
+	 *      refa   double       not used<br>
+	 *      refb   double       not used<br>
+	 * *  Returned:<br>
+	 *     astrom  iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       unchanged<br>
+	 *      eb     double[3]    unchanged<br>
+	 *      eh     double[3]    unchanged<br>
+	 *      em     double       unchanged<br>
+	 *      v      double[3]    unchanged<br>
+	 *      bm1    double       unchanged<br>
+	 *      bpn    double[3][3] unchanged<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) This function exists to enable sidereal-tracking applications to<br>
+	 *     avoid wasteful recomputation of the bulk of the astrometry<br>
+	 *     parameters:  only the Earth rotation is updated.<br>
+	 * *  2) For targets expressed as equinox based positions, such as<br>
+	 *     classical geocentric apparent (RA,Dec), the supplied theta can be<br>
+	 *     Greenwich apparent sidereal time rather than Earth rotation<br>
+	 *     angle.<br>
+	 * *  3) The function iauAper13 can be used instead of the present<br>
+	 *     function, and starts from UT1 rather than ERA itself.<br>
+	 * *  4) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  This revision:   2013 September 25<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAper(double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:65</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1235</i>
 	 */
 	public static void iauAper(double theta, Pointer<iauASTROM > astrom) {
 		iauAper(theta, Pointer.getPeer(astrom));
 	}
 	protected native static void iauAper(double theta, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p e r 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  In the star-independent astrometry parameters, update only the<br>
+	 *  Earth rotation angle.  The caller provides UT1, (n.b. not UTC).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ut11    double      UT1 as a 2-part...<br>
+	 *     ut12    double      ...Julian Date (Note 1)<br>
+	 *     astrom  iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       not used<br>
+	 *      eb     double[3]    not used<br>
+	 *      eh     double[3]    not used<br>
+	 *      em     double       not used<br>
+	 *      v      double[3]    not used<br>
+	 *      bm1    double       not used<br>
+	 *      bpn    double[3][3] not used<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       not used<br>
+	 *      ypl    double       not used<br>
+	 *      sphi   double       not used<br>
+	 *      cphi   double       not used<br>
+	 *      diurab double       not used<br>
+	 *      eral   double       not used<br>
+	 *      refa   double       not used<br>
+	 *      refb   double       not used<br>
+	 * *  Returned:<br>
+	 *     astrom  iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       unchanged<br>
+	 *      eb     double[3]    unchanged<br>
+	 *      eh     double[3]    unchanged<br>
+	 *      em     double       unchanged<br>
+	 *      v      double[3]    unchanged<br>
+	 *      bm1    double       unchanged<br>
+	 *      bpn    double[3][3] unchanged<br>
+	 *      along  double       unchanged<br>
+	 *      xpl    double       unchanged<br>
+	 *      ypl    double       unchanged<br>
+	 *      sphi   double       unchanged<br>
+	 *      cphi   double       unchanged<br>
+	 *      diurab double       unchanged<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       unchanged<br>
+	 *      refb   double       unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 date (n.b. not UTC) ut11+ut12 is a Julian Date,<br>
+	 *     apportioned in any convenient way between the arguments ut11 and<br>
+	 *     ut12.  For example, JD(UT1)=2450123.7 could be expressed in any<br>
+	 *     of these ways, among others:<br>
+	 * *            ut11           ut12<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  The date & time method is<br>
+	 *     best matched to the algorithm used:  maximum precision is<br>
+	 *     delivered when the ut11 argument is for 0hrs UT1 on the day in<br>
+	 *     question and the ut12 argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) If the caller wishes to provide the Earth rotation angle itself,<br>
+	 *     the function iauAper can be used instead.  One use of this<br>
+	 *     technique is to substitute Greenwich apparent sidereal time and<br>
+	 *     thereby to support equinox based transformations directly.<br>
+	 * *  3) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  Called:<br>
+	 *     iauAper      astrometry parameters: update ERA<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 * *  This revision:   2013 September 25<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAper13(double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:67</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1334</i>
 	 */
 	public static void iauAper13(double ut11, double ut12, Pointer<iauASTROM > astrom) {
 		iauAper13(ut11, ut12, Pointer.getPeer(astrom));
 	}
 	protected native static void iauAper13(double ut11, double ut12, @Ptr long astrom);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A p i o<br>
+	 *  - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between CIRS and observed<br>
+	 *  coordinates.  The caller supplies the Earth orientation information<br>
+	 *  and the refraction constants as well as the site coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     sp     double      the TIO locator s' (radians, Note 1)<br>
+	 *     theta  double      Earth rotation angle (radians)<br>
+	 *     elong  double      longitude (radians, east +ve, Note 2)<br>
+	 *     phi    double      geodetic latitude (radians, Note 2)<br>
+	 *     hm     double      height above ellipsoid (m, geodetic Note 2)<br>
+	 *     xp,yp  double      polar motion coordinates (radians, Note 3)<br>
+	 *     refa   double      refraction constant A (radians, Note 4)<br>
+	 *     refb   double      refraction constant B (radians, Note 4)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       unchanged<br>
+	 *      eb     double[3]    unchanged<br>
+	 *      eh     double[3]    unchanged<br>
+	 *      em     double       unchanged<br>
+	 *      v      double[3]    unchanged<br>
+	 *      bm1    double       unchanged<br>
+	 *      bpn    double[3][3] unchanged<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) sp, the TIO locator s', is a tiny quantity needed only by the<br>
+	 *     most precise applications.  It can either be set to zero or<br>
+	 *     predicted using the SOFA function iauSp00.<br>
+	 * *  2) The geographical coordinates are with respect to the WGS84<br>
+	 *     reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *     longitude required by the present function is east-positive<br>
+	 *     (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  3) The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *     values are the coordinates (in radians) of the Celestial<br>
+	 *     Intermediate Pole with respect to the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), measured along the<br>
+	 *     meridians 0 and 90 deg west respectively.  For many applications,<br>
+	 *     xp and yp can be set to zero.<br>
+	 * *     Internally, the polar motion is stored in a form rotated onto the<br>
+	 *     local meridian.<br>
+	 * *  4) The refraction constants refa and refb are for use in a<br>
+	 *     dZ = A*tan(Z)+B*tan^3(Z) model, where Z is the observed<br>
+	 *     (i.e. refracted) zenith distance and dZ is the amount of<br>
+	 *     refraction.<br>
+	 * *  5) It is advisable to take great care with units, as even unlikely<br>
+	 *     values of the input parameters are accepted and processed in<br>
+	 *     accordance with the models used.<br>
+	 * *  6) In cases where the caller does not wish to provide the Earth<br>
+	 *     rotation information and refraction constants, the function<br>
+	 *     iauApio13 can be used instead of the present function.  This<br>
+	 *     starts from UTC and weather readings etc. and computes suitable<br>
+	 *     values using other SOFA functions.<br>
+	 * *  7) This is one of several functions that inserts into the astrom<br>
+	 *     structure star-independent parameters needed for the chain of<br>
+	 *     astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *     The various functions support different classes of observer and<br>
+	 *     portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *     Those with names ending in "13" use contemporary SOFA models to<br>
+	 *     compute the various ephemerides.  The others accept ephemerides<br>
+	 *     supplied by the caller.<br>
+	 * *     The transformation from ICRS to GCRS covers space motion,<br>
+	 *     parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *     comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *     observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *     aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *     transformation), and atmospheric refraction.<br>
+	 * *  8) The context structure astrom produced by this function is used by<br>
+	 *     iauAtioq and iauAtoiq.<br>
+	 * *  Called:<br>
+	 *     iauPvtob     position/velocity of terrestrial station<br>
+	 *     iauAper      astrometry parameters: update ERA<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApio(double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:69</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1432</i>
 	 */
 	public static void iauApio(double sp, double theta, double elong, double phi, double hm, double xp, double yp, double refa, double refb, Pointer<iauASTROM > astrom) {
 		iauApio(sp, theta, elong, phi, hm, xp, yp, refa, refb, Pointer.getPeer(astrom));
 	}
 	protected native static void iauApio(double sp, double theta, double elong, double phi, double hm, double xp, double yp, double refa, double refb, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A p i o 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a terrestrial observer, prepare star-independent astrometry<br>
+	 *  parameters for transformations between CIRS and observed<br>
+	 *  coordinates.  The caller supplies UTC, site coordinates, ambient air<br>
+	 *  conditions and observing wavelength.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     utc1   double      UTC as a 2-part...<br>
+	 *     utc2   double      ...quasi Julian Date (Notes 1,2)<br>
+	 *     dut1   double      UT1-UTC (seconds)<br>
+	 *     elong  double      longitude (radians, east +ve, Note 3)<br>
+	 *     phi    double      geodetic latitude (radians, Note 3)<br>
+	 *     hm     double      height above ellipsoid (m, geodetic Notes 4,6)<br>
+	 *     xp,yp  double      polar motion coordinates (radians, Note 5)<br>
+	 *     phpa   double      pressure at the observer (hPa = mB, Note 6)<br>
+	 *     tc     double      ambient temperature at the observer (deg C)<br>
+	 *     rh     double      relative humidity at the observer (range 0-1)<br>
+	 *     wl     double      wavelength (micrometers, Note 7)<br>
+	 * *  Returned:<br>
+	 *     astrom iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       unchanged<br>
+	 *      eb     double[3]    unchanged<br>
+	 *      eh     double[3]    unchanged<br>
+	 *      em     double       unchanged<br>
+	 *      v      double[3]    unchanged<br>
+	 *      bm1    double       unchanged<br>
+	 *      bpn    double[3][3] unchanged<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned (function value):<br>
+	 *            int         status: +1 = dubious year (Note 2)<br>
+	 *                                 0 = OK<br>
+	 *                                -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  2)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the future<br>
+	 *      to be trusted.  See iauDat for further details.<br>
+	 * *  3)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  4)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  5)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many applications,<br>
+	 *      xp and yp can be set to zero.<br>
+	 * *      Internally, the polar motion is stored in a form rotated onto<br>
+	 *      the local meridian.<br>
+	 * *  6)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB), is<br>
+	 *      available, an adequate estimate of hm can be obtained from the<br>
+	 *      expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to the<br>
+	 *      pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  7)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  8)  It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  9)  In cases where the caller wishes to supply his own Earth<br>
+	 *      rotation information and refraction constants, the function<br>
+	 *      iauApc can be used instead of the present function.<br>
+	 * *  10) This is one of several functions that inserts into the astrom<br>
+	 *      structure star-independent parameters needed for the chain of<br>
+	 *      astrometric transformations ICRS <-> GCRS <-> CIRS <-> observed.<br>
+	 * *      The various functions support different classes of observer and<br>
+	 *      portions of the transformation chain:<br>
+	 * *          functions         observer        transformation<br>
+	 * *       iauApcg iauApcg13    geocentric      ICRS <-> GCRS<br>
+	 *       iauApci iauApci13    terrestrial     ICRS <-> CIRS<br>
+	 *       iauApco iauApco13    terrestrial     ICRS <-> observed<br>
+	 *       iauApcs iauApcs13    space           ICRS <-> GCRS<br>
+	 *       iauAper iauAper13    terrestrial     update Earth rotation<br>
+	 *       iauApio iauApio13    terrestrial     CIRS <-> observed<br>
+	 * *      Those with names ending in "13" use contemporary SOFA models to<br>
+	 *      compute the various ephemerides.  The others accept ephemerides<br>
+	 *      supplied by the caller.<br>
+	 * *      The transformation from ICRS to GCRS covers space motion,<br>
+	 *      parallax, light deflection, and aberration.  From GCRS to CIRS<br>
+	 *      comprises frame bias and precession-nutation.  From CIRS to<br>
+	 *      observed takes account of Earth rotation, polar motion, diurnal<br>
+	 *      aberration and parallax (unless subsumed into the ICRS <-> GCRS<br>
+	 *      transformation), and atmospheric refraction.<br>
+	 * *  11) The context structure astrom produced by this function is used<br>
+	 *      by iauAtioq and iauAtoiq.<br>
+	 * *  Called:<br>
+	 *     iauUtctai    UTC to TAI<br>
+	 *     iauTaitt     TAI to TT<br>
+	 *     iauUtcut1    UTC to UT1<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauRefco     refraction constants for given ambient conditions<br>
+	 *     iauApio      astrometry parameters, CIRS-observed<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauApio13(double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:71</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1569</i>
 	 */
-	public static int iauApio13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<iauASTROM > astrom) {
-		return iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(astrom));
+	public static int iauApio13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<iauASTROM > astrom) {
+		return iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(astrom));
 	}
-	protected native static int iauApio13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long astrom);
+	protected native static int iauApio13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long astrom);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t c i 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Transform ICRS star data, epoch J2000.0, to CIRS.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc     double   ICRS right ascension at J2000.0 (radians, Note 1)<br>
+	 *     dc     double   ICRS declination at J2000.0 (radians, Note 1)<br>
+	 *     pr     double   RA proper motion (radians/year; Note 2)<br>
+	 *     pd     double   Dec proper motion (radians/year)<br>
+	 *     px     double   parallax (arcsec)<br>
+	 *     rv     double   radial velocity (km/s, +ve if receding)<br>
+	 *     date1  double   TDB as a 2-part...<br>
+	 *     date2  double   ...Julian Date (Note 3)<br>
+	 * *  Returned:<br>
+	 *     ri,di  double*  CIRS geocentric RA,Dec (radians)<br>
+	 *     eo     double*  equation of the origins (ERA-GST, Note 5)<br>
+	 * *  Notes:<br>
+	 * *  1) Star data for an epoch other than J2000.0 (for example from the<br>
+	 *     Hipparcos catalog, which has an epoch of J1991.25) will require a<br>
+	 *     preliminary call to iauPmsafe before use.<br>
+	 * *  2) The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  3) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.8g could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.8g           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  4) The available accuracy is better than 1 milliarcsecond, limited<br>
+	 *     mainly by the precession-nutation model that is used, namely<br>
+	 *     IAU 2000A/2006.  Very close to solar system bodies, additional<br>
+	 *     errors of up to several milliarcseconds can occur because of<br>
+	 *     unmodeled light deflection;  however, the Sun's contribution is<br>
+	 *     taken into account, to first order.  The accuracy limitations of<br>
+	 *     the SOFA function iauEpv00 (used to compute Earth position and<br>
+	 *     velocity) can contribute aberration errors of up to<br>
+	 *     5 microarcseconds.  Light deflection at the Sun's limb is<br>
+	 *     uncertain at the 0.4 mas level.<br>
+	 * *  5) Should the transformation to (equinox based) apparent place be<br>
+	 *     required rather than (CIO based) intermediate place, subtract the<br>
+	 *     equation of the origins from the returned right ascension:<br>
+	 *     RA = RI - EO. (The iauAnp function can then be applied, as<br>
+	 *     required, to keep the result in the conventional 0-2pi range.)<br>
+	 * *  Called:<br>
+	 *     iauApci13    astrometry parameters, ICRS-CIRS, 2013<br>
+	 *     iauAtciq     quick ICRS to CIRS<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtci13(double, double, double, double, double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:73</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1637</i>
 	 */
 	public static void iauAtci13(double rc, double dc, double pr, double pd, double px, double rv, double date1, double date2, Pointer<Double > ri, Pointer<Double > di, Pointer<Double > eo) {
 		iauAtci13(rc, dc, pr, pd, px, rv, date1, date2, Pointer.getPeer(ri), Pointer.getPeer(di), Pointer.getPeer(eo));
 	}
 	protected native static void iauAtci13(double rc, double dc, double pr, double pd, double px, double rv, double date1, double date2, @Ptr long ri, @Ptr long di, @Ptr long eo);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u A t c i q<br>
+	 *  - - - - - - - - -<br>
+	 * *  Quick ICRS, epoch J2000.0, to CIRS transformation, given precomputed<br>
+	 *  star-independent astrometry parameters.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are to be transformed for one date.  The<br>
+	 *  star-independent parameters can be obtained by calling one of the<br>
+	 *  functions iauApci[13], iauApcg[13], iauApco[13] or iauApcs[13].<br>
+	 * *  If the parallax and proper motions are zero the iauAtciqz function<br>
+	 *  can be used instead.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc,dc  double     ICRS RA,Dec at J2000.0 (radians)<br>
+	 *     pr     double     RA proper motion (radians/year; Note 3)<br>
+	 *     pd     double     Dec proper motion (radians/year)<br>
+	 *     px     double     parallax (arcsec)<br>
+	 *     rv     double     radial velocity (km/s, +ve if receding)<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned:<br>
+	 *     ri,di   double    CIRS RA,Dec (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) All the vectors are with respect to BCRS axes.<br>
+	 * *  2) Star data for an epoch other than J2000.0 (for example from the<br>
+	 *     Hipparcos catalog, which has an epoch of J1991.25) will require a<br>
+	 *     preliminary call to iauPmsafe before use.<br>
+	 * *  3) The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  Called:<br>
+	 *     iauPmpx      proper motion and parallax<br>
+	 *     iauLdsun     light deflection by the Sun<br>
+	 *     iauAb        stellar aberration<br>
+	 *     iauRxp       product of r-matrix and pv-vector<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciq(double, double, double, double, double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:75</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1696</i>
 	 */
 	public static void iauAtciq(double rc, double dc, double pr, double pd, double px, double rv, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciq(rc, dc, pr, pd, px, rv, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
 	}
 	protected native static void iauAtciq(double rc, double dc, double pr, double pd, double px, double rv, @Ptr long astrom, @Ptr long ri, @Ptr long di);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t c i q n<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Quick ICRS, epoch J2000.0, to CIRS transformation, given precomputed<br>
+	 *  star-independent astrometry parameters plus a list of light-<br>
+	 *  deflecting bodies.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are to be transformed for one date.  The<br>
+	 *  star-independent parameters can be obtained by calling one of the<br>
+	 *  functions iauApci[13], iauApcg[13], iauApco[13] or iauApcs[13].<br>
+	 * *<br>
+	 *  If the only light-deflecting body to be taken into account is the<br>
+	 *  Sun, the iauAtciq function can be used instead.  If in addition the<br>
+	 *  parallax and proper motions are zero, the iauAtciqz function can be<br>
+	 *  used.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc,dc  double       ICRS RA,Dec at J2000.0 (radians)<br>
+	 *     pr     double       RA proper motion (radians/year; Note 3)<br>
+	 *     pd     double       Dec proper motion (radians/year)<br>
+	 *     px     double       parallax (arcsec)<br>
+	 *     rv     double       radial velocity (km/s, +ve if receding)<br>
+	 *     astrom iauASTROM*   star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 *      n     int           number of bodies (Note 3)<br>
+	 *      b     iauLDBODY[n] data for each of the n bodies (Notes 3,4):<br>
+	 *       bm    double        mass of the body (solar masses, Note 5)<br>
+	 *       dl    double        deflection limiter (Note 6)<br>
+	 *       pv    [2][3]        barycentric PV of the body (au, au/day)<br>
+	 * *  Returned:<br>
+	 *     ri,di   double    CIRS RA,Dec (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) Star data for an epoch other than J2000.0 (for example from the<br>
+	 *     Hipparcos catalog, which has an epoch of J1991.25) will require a<br>
+	 *     preliminary call to iauPmsafe before use.<br>
+	 * *  2) The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  3) The struct b contains n entries, one for each body to be<br>
+	 *     considered.  If n = 0, no gravitational light deflection will be<br>
+	 *     applied, not even for the Sun.<br>
+	 * *  4) The struct b should include an entry for the Sun as well as for<br>
+	 *     any planet or other body to be taken into account.  The entries<br>
+	 *     should be in the order in which the light passes the body.<br>
+	 * *  5) In the entry in the b struct for body i, the mass parameter<br>
+	 *     b[i].bm can, as required, be adjusted in order to allow for such<br>
+	 *     effects as quadrupole field.<br>
+	 * *  6) The deflection limiter parameter b[i].dl is phi^2/2, where phi is<br>
+	 *     the angular separation (in radians) between star and body at<br>
+	 *     which limiting is applied.  As phi shrinks below the chosen<br>
+	 *     threshold, the deflection is artificially reduced, reaching zero<br>
+	 *     for phi = 0.   Example values suitable for a terrestrial<br>
+	 *     observer, together with masses, are as follows:<br>
+	 * *        body i     b[i].bm        b[i].dl<br>
+	 * *        Sun        1.0            6e-6<br>
+	 *        Jupiter    0.00095435     3e-9<br>
+	 *        Saturn     0.00028574     3e-10<br>
+	 * *  7) For efficiency, validation of the contents of the b array is<br>
+	 *     omitted.  The supplied masses must be greater than zero, the<br>
+	 *     position and velocity vectors must be right, and the deflection<br>
+	 *     limiter greater than zero.<br>
+	 * *  Called:<br>
+	 *     iauPmpx      proper motion and parallax<br>
+	 *     iauLdn       light deflection by n bodies<br>
+	 *     iauAb        stellar aberration<br>
+	 *     iauRxp       product of r-matrix and pv-vector<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciqn(double, double, double, double, double, double, iauASTROM*, int, iauLDBODY[], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:77</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1786</i>
 	 */
 	public static void iauAtciqn(double rc, double dc, double pr, double pd, double px, double rv, Pointer<iauASTROM > astrom, int n, Pointer<iauLDBODY > b, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciqn(rc, dc, pr, pd, px, rv, Pointer.getPeer(astrom), n, Pointer.getPeer(b), Pointer.getPeer(ri), Pointer.getPeer(di));
 	}
 	protected native static void iauAtciqn(double rc, double dc, double pr, double pd, double px, double rv, @Ptr long astrom, int n, @Ptr long b, @Ptr long ri, @Ptr long di);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t c i q z<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Quick ICRS to CIRS transformation, given precomputed star-<br>
+	 *  independent astrometry parameters, and assuming zero parallax and<br>
+	 *  proper motion.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are to be transformed for one date.  The<br>
+	 *  star-independent parameters can be obtained by calling one of the<br>
+	 *  functions iauApci[13], iauApcg[13], iauApco[13] or iauApcs[13].<br>
+	 * *  The corresponding function for the case of non-zero parallax and<br>
+	 *  proper motion is iauAtciq.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc,dc  double     ICRS astrometric RA,Dec (radians)<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned:<br>
+	 *     ri,di  double     CIRS RA,Dec (radians)<br>
+	 * *  Note:<br>
+	 * *     All the vectors are with respect to BCRS axes.<br>
+	 * *  References:<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013).<br>
+	 * *     Klioner, Sergei A., "A practical relativistic model for micro-<br>
+	 *     arcsecond astrometry in space", Astr. J. 125, 1580-1597 (2003).<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauLdsun     light deflection due to Sun<br>
+	 *     iauAb        stellar aberration<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range +/- pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciqz(double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:79</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1844</i>
 	 */
 	public static void iauAtciqz(double rc, double dc, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciqz(rc, dc, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
 	}
 	protected native static void iauAtciqz(double rc, double dc, @Ptr long astrom, @Ptr long ri, @Ptr long di);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t c o 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  ICRS RA,Dec to observed place.  The caller supplies UTC, site<br>
+	 *  coordinates, ambient air conditions and observing wavelength.<br>
+	 * *  SOFA models are used for the Earth ephemeris, bias-precession-<br>
+	 *  nutation, Earth orientation and refraction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc,dc  double   ICRS right ascension at J2000.0 (radians, Note 1)<br>
+	 *     pr     double   RA proper motion (radians/year; Note 2)<br>
+	 *     pd     double   Dec proper motion (radians/year)<br>
+	 *     px     double   parallax (arcsec)<br>
+	 *     rv     double   radial velocity (km/s, +ve if receding)<br>
+	 *     utc1   double   UTC as a 2-part...<br>
+	 *     utc2   double   ...quasi Julian Date (Notes 3-4)<br>
+	 *     dut1   double   UT1-UTC (seconds, Note 5)<br>
+	 *     elong  double   longitude (radians, east +ve, Note 6)<br>
+	 *     phi    double   latitude (geodetic, radians, Note 6)<br>
+	 *     hm     double   height above ellipsoid (m, geodetic, Notes 6,8)<br>
+	 *     xp,yp  double   polar motion coordinates (radians, Note 7)<br>
+	 *     phpa   double   pressure at the observer (hPa = mB, Note 8)<br>
+	 *     tc     double   ambient temperature at the observer (deg C)<br>
+	 *     rh     double   relative humidity at the observer (range 0-1)<br>
+	 *     wl     double   wavelength (micrometers, Note 9)<br>
+	 * *  Returned:<br>
+	 *     aob    double*  observed azimuth (radians: N=0,E=90)<br>
+	 *     zob    double*  observed zenith distance (radians)<br>
+	 *     hob    double*  observed hour angle (radians)<br>
+	 *     dob    double*  observed declination (radians)<br>
+	 *     rob    double*  observed right ascension (CIO-based, radians)<br>
+	 *     eo     double*  equation of the origins (ERA-GST)<br>
+	 * *  Returned (function value):<br>
+	 *            int      status: +1 = dubious year (Note 4)<br>
+	 *                              0 = OK<br>
+	 *                             -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  Star data for an epoch other than J2000.0 (for example from the<br>
+	 *      Hipparcos catalog, which has an epoch of J1991.25) will require<br>
+	 *      a preliminary call to iauPmsafe before use.<br>
+	 * *  2)  The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  3)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  4)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the<br>
+	 *      future to be trusted.  See iauDat for further details.<br>
+	 * *  5)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  6)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  7)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many<br>
+	 *      applications, xp and yp can be set to zero.<br>
+	 * *  8)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB),<br>
+	 *      is available, an adequate estimate of hm can be obtained from<br>
+	 *      the expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to<br>
+	 *      the pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  9)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  10) The accuracy of the result is limited by the corrections for<br>
+	 *      refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *      Providing the meteorological parameters are known accurately and<br>
+	 *      there are no gross local effects, the predicted observed<br>
+	 *      coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *      (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *      than 30 arcsec (optical or radio) at 85 degrees and better<br>
+	 *      than 20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *      Without refraction, the complementary functions iauAtco13 and<br>
+	 *      iauAtoc13 are self-consistent to better than 1 microarcsecond<br>
+	 *      all over the celestial sphere.  With refraction included,<br>
+	 *      consistency falls off at high zenith distances, but is still<br>
+	 *      better than 0.05 arcsec at 85 degrees.<br>
+	 * *  11) "Observed" Az,ZD means the position that would be seen by a<br>
+	 *      perfect geodetically aligned theodolite.  (Zenith distance is<br>
+	 *      used rather than altitude in order to reflect the fact that no<br>
+	 *      allowance is made for depression of the horizon.)  This is<br>
+	 *      related to the observed HA,Dec via the standard rotation, using<br>
+	 *      the geodetic latitude (corrected for polar motion), while the<br>
+	 *      observed HA and RA are related simply through the Earth rotation<br>
+	 *      angle and the site longitude.  "Observed" RA,Dec or HA,Dec thus<br>
+	 *      means the position that would be seen by a perfect equatorial<br>
+	 *      with its polar axis aligned to the Earth's axis of rotation.<br>
+	 * *  12) It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  Called:<br>
+	 *     iauApco13    astrometry parameters, ICRS-observed, 2013<br>
+	 *     iauAtciq     quick ICRS to CIRS<br>
+	 *     iauAtioq     quick ICRS to observed<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtco13(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:81</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1970</i>
 	 */
-	public static int iauAtco13(double rc, double dc, double pr, double pd, double px, double rv, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob, Pointer<Double > eo) {
-		return iauAtco13(rc, dc, pr, pd, px, rv, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob), Pointer.getPeer(eo));
+	public static int iauAtco13(double rc, double dc, double pr, double pd, double px, double rv, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob, Pointer<Double > eo) {
+		return iauAtco13(rc, dc, pr, pd, px, rv, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob), Pointer.getPeer(eo));
 	}
-	protected native static int iauAtco13(double rc, double dc, double pr, double pd, double px, double rv, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long aob, @Ptr long zob, @Ptr long hob, @Ptr long dob, @Ptr long rob, @Ptr long eo);
+	protected native static int iauAtco13(double rc, double dc, double pr, double pd, double px, double rv, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long aob, @Ptr long zob, @Ptr long hob, @Ptr long dob, @Ptr long rob, @Ptr long eo);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t i c 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Transform star RA,Dec from geocentric CIRS to ICRS astrometric.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ri,di  double  CIRS geocentric RA,Dec (radians)<br>
+	 *     date1  double  TDB as a 2-part...<br>
+	 *     date2  double  ...Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rc,dc  double  ICRS astrometric RA,Dec (radians)<br>
+	 *     eo     double  equation of the origins (ERA-GST, Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  For most<br>
+	 *     applications of this function the choice will not be at all<br>
+	 *     critical.<br>
+	 * *     TT can be used instead of TDB without any significant impact on<br>
+	 *     accuracy.<br>
+	 * *  2) Iterative techniques are used for the aberration and light<br>
+	 *     deflection corrections so that the functions iauAtic13 (or<br>
+	 *     iauAticq) and iauAtci13 (or iauAtciq) are accurate inverses;<br>
+	 *     even at the edge of the Sun's disk the discrepancy is only about<br>
+	 *     1 nanoarcsecond.<br>
+	 * *  3) The available accuracy is better than 1 milliarcsecond, limited<br>
+	 *     mainly by the precession-nutation model that is used, namely<br>
+	 *     IAU 2000A/2006.  Very close to solar system bodies, additional<br>
+	 *     errors of up to several milliarcseconds can occur because of<br>
+	 *     unmodeled light deflection;  however, the Sun's contribution is<br>
+	 *     taken into account, to first order.  The accuracy limitations of<br>
+	 *     the SOFA function iauEpv00 (used to compute Earth position and<br>
+	 *     velocity) can contribute aberration errors of up to<br>
+	 *     5 microarcseconds.  Light deflection at the Sun's limb is<br>
+	 *     uncertain at the 0.4 mas level.<br>
+	 * *  4) Should the transformation to (equinox based) J2000.0 mean place<br>
+	 *     be required rather than (CIO based) ICRS coordinates, subtract the<br>
+	 *     equation of the origins from the returned right ascension:<br>
+	 *     RA = RI - EO.  (The iauAnp function can then be applied, as<br>
+	 *     required, to keep the result in the conventional 0-2pi range.)<br>
+	 * *  Called:<br>
+	 *     iauApci13    astrometry parameters, ICRS-CIRS, 2013<br>
+	 *     iauAticq     quick CIRS to ICRS astrometric<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtic13(double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:83</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2034</i>
 	 */
 	public static void iauAtic13(double ri, double di, double date1, double date2, Pointer<Double > rc, Pointer<Double > dc, Pointer<Double > eo) {
 		iauAtic13(ri, di, date1, date2, Pointer.getPeer(rc), Pointer.getPeer(dc), Pointer.getPeer(eo));
 	}
 	protected native static void iauAtic13(double ri, double di, double date1, double date2, @Ptr long rc, @Ptr long dc, @Ptr long eo);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u A t i c q<br>
+	 *  - - - - - - - - -<br>
+	 * *  Quick CIRS RA,Dec to ICRS astrometric place, given the star-<br>
+	 *  independent astrometry parameters.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are all to be transformed for one date.<br>
+	 *  The star-independent astrometry parameters can be obtained by<br>
+	 *  calling one of the functions iauApci[13], iauApcg[13], iauApco[13]<br>
+	 *  or iauApcs[13].<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ri,di  double     CIRS RA,Dec (radians)<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned:<br>
+	 *     rc,dc  double     ICRS astrometric RA,Dec (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) Only the Sun is taken into account in the light deflection<br>
+	 *     correction.<br>
+	 * *  2) Iterative techniques are used for the aberration and light<br>
+	 *     deflection corrections so that the functions iauAtic13 (or<br>
+	 *     iauAticq) and iauAtci13 (or iauAtciq) are accurate inverses;<br>
+	 *     even at the edge of the Sun's disk the discrepancy is only about<br>
+	 *     1 nanoarcsecond.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 *     iauZp        zero p-vector<br>
+	 *     iauAb        stellar aberration<br>
+	 *     iauLdsun     light deflection by the Sun<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range +/- pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAticq(double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:85</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2091</i>
 	 */
 	public static void iauAticq(double ri, double di, Pointer<iauASTROM > astrom, Pointer<Double > rc, Pointer<Double > dc) {
 		iauAticq(ri, di, Pointer.getPeer(astrom), Pointer.getPeer(rc), Pointer.getPeer(dc));
 	}
 	protected native static void iauAticq(double ri, double di, @Ptr long astrom, @Ptr long rc, @Ptr long dc);
 	/**
-	 * Original signature : <code>void iauAticqn(double, double, iauASTROM*, __attribute__((dllexport)) int, iauLDBODY[], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:87</i>
+	 * - - - - - - - - -<br>
+	 *   i a u A t i c q n<br>
+	 *  - - - - - - - - -<br>
+	 * *  Quick CIRS to ICRS astrometric place transformation, given the star-<br>
+	 *  independent astrometry parameters plus a list of light-deflecting<br>
+	 *  bodies.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are all to be transformed for one date.<br>
+	 *  The star-independent astrometry parameters can be obtained by<br>
+	 *  calling one of the functions iauApci[13], iauApcg[13], iauApco[13]<br>
+	 *  or iauApcs[13].<br>
+	 * *  If the only light-deflecting body to be taken into account is the<br>
+	 *  Sun, the iauAticq function can be used instead.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ri,di  double      CIRS RA,Dec (radians)<br>
+	 *     astrom iauASTROM*  star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 *      n     int           number of bodies (Note 3)<br>
+	 *      b     iauLDBODY[n] data for each of the n bodies (Notes 3,4):<br>
+	 *       bm    double       mass of the body (solar masses, Note 5)<br>
+	 *       dl    double       deflection limiter (Note 6)<br>
+	 *       pv    [2][3]       barycentric PV of the body (au, au/day)<br>
+	 * *  Returned:<br>
+	 *     rc,dc  double     ICRS astrometric RA,Dec (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) Iterative techniques are used for the aberration and light<br>
+	 *     deflection corrections so that the functions iauAticqn and<br>
+	 *     iauAtciqn are accurate inverses; even at the edge of the Sun's<br>
+	 *     disk the discrepancy is only about 1 nanoarcsecond.<br>
+	 * *  2) If the only light-deflecting body to be taken into account is the<br>
+	 *     Sun, the iauAticq function can be used instead.<br>
+	 * *  3) The struct b contains n entries, one for each body to be<br>
+	 *     considered.  If n = 0, no gravitational light deflection will be<br>
+	 *     applied, not even for the Sun.<br>
+	 * *  4) The struct b should include an entry for the Sun as well as for<br>
+	 *     any planet or other body to be taken into account.  The entries<br>
+	 *     should be in the order in which the light passes the body.<br>
+	 * *  5) In the entry in the b struct for body i, the mass parameter<br>
+	 *     b[i].bm can, as required, be adjusted in order to allow for such<br>
+	 *     effects as quadrupole field.<br>
+	 * *  6) The deflection limiter parameter b[i].dl is phi^2/2, where phi is<br>
+	 *     the angular separation (in radians) between star and body at<br>
+	 *     which limiting is applied.  As phi shrinks below the chosen<br>
+	 *     threshold, the deflection is artificially reduced, reaching zero<br>
+	 *     for phi = 0.   Example values suitable for a terrestrial<br>
+	 *     observer, together with masses, are as follows:<br>
+	 * *        body i     b[i].bm        b[i].dl<br>
+	 * *        Sun        1.0            6e-6<br>
+	 *        Jupiter    0.00095435     3e-9<br>
+	 *        Saturn     0.00028574     3e-10<br>
+	 * *  7) For efficiency, validation of the contents of the b array is<br>
+	 *     omitted.  The supplied masses must be greater than zero, the<br>
+	 *     position and velocity vectors must be right, and the deflection<br>
+	 *     limiter greater than zero.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 *     iauZp        zero p-vector<br>
+	 *     iauAb        stellar aberration<br>
+	 *     iauLdn       light deflection by n bodies<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range +/- pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
+	 * Original signature : <code>void iauAticqn(double, double, iauASTROM*, int, iauLDBODY[], double*, double*)</code><br>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2178</i>
 	 */
 	public static void iauAticqn(double ri, double di, Pointer<iauASTROM > astrom, int n, Pointer<iauLDBODY > b, Pointer<Double > rc, Pointer<Double > dc) {
 		iauAticqn(ri, di, Pointer.getPeer(astrom), n, Pointer.getPeer(b), Pointer.getPeer(rc), Pointer.getPeer(dc));
 	}
 	protected native static void iauAticqn(double ri, double di, @Ptr long astrom, int n, @Ptr long b, @Ptr long rc, @Ptr long dc);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t i o 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  CIRS RA,Dec to observed place.  The caller supplies UTC, site<br>
+	 *  coordinates, ambient air conditions and observing wavelength.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ri     double   CIRS right ascension (CIO-based, radians)<br>
+	 *     di     double   CIRS declination (radians)<br>
+	 *     utc1   double   UTC as a 2-part...<br>
+	 *     utc2   double   ...quasi Julian Date (Notes 1,2)<br>
+	 *     dut1   double   UT1-UTC (seconds, Note 3)<br>
+	 *     elong  double   longitude (radians, east +ve, Note 4)<br>
+	 *     phi    double   geodetic latitude (radians, Note 4)<br>
+	 *     hm     double   height above ellipsoid (m, geodetic Notes 4,6)<br>
+	 *     xp,yp  double   polar motion coordinates (radians, Note 5)<br>
+	 *     phpa   double   pressure at the observer (hPa = mB, Note 6)<br>
+	 *     tc     double   ambient temperature at the observer (deg C)<br>
+	 *     rh     double   relative humidity at the observer (range 0-1)<br>
+	 *     wl     double   wavelength (micrometers, Note 7)<br>
+	 * *  Returned:<br>
+	 *     aob    double*  observed azimuth (radians: N=0,E=90)<br>
+	 *     zob    double*  observed zenith distance (radians)<br>
+	 *     hob    double*  observed hour angle (radians)<br>
+	 *     dob    double*  observed declination (radians)<br>
+	 *     rob    double*  observed right ascension (CIO-based, radians)<br>
+	 * *  Returned (function value):<br>
+	 *            int      status: +1 = dubious year (Note 2)<br>
+	 *                              0 = OK<br>
+	 *                             -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  2)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the<br>
+	 *      future to be trusted.  See iauDat for further details.<br>
+	 * *  3)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  4)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  5)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many<br>
+	 *      applications, xp and yp can be set to zero.<br>
+	 * *  6)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB), is<br>
+	 *      available, an adequate estimate of hm can be obtained from the<br>
+	 *      expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to<br>
+	 *      the pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  7)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  8)  "Observed" Az,ZD means the position that would be seen by a<br>
+	 *      perfect geodetically aligned theodolite.  (Zenith distance is<br>
+	 *      used rather than altitude in order to reflect the fact that no<br>
+	 *      allowance is made for depression of the horizon.)  This is<br>
+	 *      related to the observed HA,Dec via the standard rotation, using<br>
+	 *      the geodetic latitude (corrected for polar motion), while the<br>
+	 *      observed HA and RA are related simply through the Earth rotation<br>
+	 *      angle and the site longitude.  "Observed" RA,Dec or HA,Dec thus<br>
+	 *      means the position that would be seen by a perfect equatorial<br>
+	 *      with its polar axis aligned to the Earth's axis of rotation.<br>
+	 * *  9)  The accuracy of the result is limited by the corrections for<br>
+	 *      refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *      Providing the meteorological parameters are known accurately and<br>
+	 *      there are no gross local effects, the predicted astrometric<br>
+	 *      coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *      (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *      than 30 arcsec (optical or radio) at 85 degrees and better<br>
+	 *      than 20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *  10) The complementary functions iauAtio13 and iauAtoi13 are self-<br>
+	 *      consistent to better than 1 microarcsecond all over the<br>
+	 *      celestial sphere.<br>
+	 * *  11) It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  Called:<br>
+	 *     iauApio13    astrometry parameters, CIRS-observed, 2013<br>
+	 *     iauAtioq     quick ICRS to observed<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtio13(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:89</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2291</i>
 	 */
-	public static int iauAtio13(double ri, double di, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob) {
-		return iauAtio13(ri, di, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob));
+	public static int iauAtio13(double ri, double di, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob) {
+		return iauAtio13(ri, di, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob));
 	}
-	protected native static int iauAtio13(double ri, double di, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long aob, @Ptr long zob, @Ptr long hob, @Ptr long dob, @Ptr long rob);
+	protected native static int iauAtio13(double ri, double di, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long aob, @Ptr long zob, @Ptr long hob, @Ptr long dob, @Ptr long rob);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u A t i o q<br>
+	 *  - - - - - - - - -<br>
+	 * *  Quick CIRS to observed place transformation.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are all to be transformed for one date.<br>
+	 *  The star-independent astrometry parameters can be obtained by<br>
+	 *  calling iauApio[13] or iauApco[13].<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ri     double     CIRS right ascension<br>
+	 *     di     double     CIRS declination<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned:<br>
+	 *     aob    double*    observed azimuth (radians: N=0,E=90)<br>
+	 *     zob    double*    observed zenith distance (radians)<br>
+	 *     hob    double*    observed hour angle (radians)<br>
+	 *     dob    double*    observed declination (radians)<br>
+	 *     rob    double*    observed right ascension (CIO-based, radians)<br>
+	 * *  Notes:<br>
+	 * *  1) This function returns zenith distance rather than altitude in<br>
+	 *     order to reflect the fact that no allowance is made for<br>
+	 *     depression of the horizon.<br>
+	 * *  2) The accuracy of the result is limited by the corrections for<br>
+	 *     refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *     Providing the meteorological parameters are known accurately and<br>
+	 *     there are no gross local effects, the predicted observed<br>
+	 *     coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *     (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *     than 30 arcsec (optical or radio) at 85 degrees and better<br>
+	 *     than 20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *     Without refraction, the complementary functions iauAtioq and<br>
+	 *     iauAtoiq are self-consistent to better than 1 microarcsecond all<br>
+	 *     over the celestial sphere.  With refraction included, consistency<br>
+	 *     falls off at high zenith distances, but is still better than<br>
+	 *     0.05 arcsec at 85 degrees.<br>
+	 * *  3) It is advisable to take great care with units, as even unlikely<br>
+	 *     values of the input parameters are accepted and processed in<br>
+	 *     accordance with the models used.<br>
+	 * *  4) The CIRS RA,Dec is obtained from a star catalog mean place by<br>
+	 *     allowing for space motion, parallax, the Sun's gravitational lens<br>
+	 *     effect, annual aberration and precession-nutation.  For star<br>
+	 *     positions in the ICRS, these effects can be applied by means of<br>
+	 *     the iauAtci13 (etc.) functions.  Starting from classical "mean<br>
+	 *     place" systems, additional transformations will be needed first.<br>
+	 * *  5) "Observed" Az,El means the position that would be seen by a<br>
+	 *     perfect geodetically aligned theodolite.  This is obtained from<br>
+	 *     the CIRS RA,Dec by allowing for Earth orientation and diurnal<br>
+	 *     aberration, rotating from equator to horizon coordinates, and<br>
+	 *     then adjusting for refraction.  The HA,Dec is obtained by<br>
+	 *     rotating back into equatorial coordinates, and is the position<br>
+	 *     that would be seen by a perfect equatorial with its polar axis<br>
+	 *     aligned to the Earth's axis of rotation.  Finally, the RA is<br>
+	 *     obtained by subtracting the HA from the local ERA.<br>
+	 * *  6) The star-independent CIRS-to-observed-place parameters in ASTROM<br>
+	 *     may be computed with iauApio[13] or iauApco[13].  If nothing has<br>
+	 *     changed significantly except the time, iauAper[13] may be used to<br>
+	 *     perform the requisite adjustment to the astrom structure.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  This revision:   2013 December 5<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtioq(double, double, iauASTROM*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:91</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2378</i>
 	 */
 	public static void iauAtioq(double ri, double di, Pointer<iauASTROM > astrom, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob) {
 		iauAtioq(ri, di, Pointer.getPeer(astrom), Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob));
 	}
 	protected native static void iauAtioq(double ri, double di, @Ptr long astrom, @Ptr long aob, @Ptr long zob, @Ptr long hob, @Ptr long dob, @Ptr long rob);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t o c 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Observed place at a groundbased site to to ICRS astrometric RA,Dec.<br>
+	 *  The caller supplies UTC, site coordinates, ambient air conditions<br>
+	 *  and observing wavelength.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     type   char[]   type of coordinates - "R", "H" or "A" (Notes 1,2)<br>
+	 *     ob1    double   observed Az, HA or RA (radians; Az is N=0,E=90)<br>
+	 *     ob2    double   observed ZD or Dec (radians)<br>
+	 *     utc1   double   UTC as a 2-part...<br>
+	 *     utc2   double   ...quasi Julian Date (Notes 3,4)<br>
+	 *     dut1   double   UT1-UTC (seconds, Note 5)<br>
+	 *     elong  double   longitude (radians, east +ve, Note 6)<br>
+	 *     phi    double   geodetic latitude (radians, Note 6)<br>
+	 *     hm     double   height above ellipsoid (m, geodetic Notes 6,8)<br>
+	 *     xp,yp  double   polar motion coordinates (radians, Note 7)<br>
+	 *     phpa   double   pressure at the observer (hPa = mB, Note 8)<br>
+	 *     tc     double   ambient temperature at the observer (deg C)<br>
+	 *     rh     double   relative humidity at the observer (range 0-1)<br>
+	 *     wl     double   wavelength (micrometers, Note 9)<br>
+	 * *  Returned:<br>
+	 *     rc,dc  double   ICRS astrometric RA,Dec (radians)<br>
+	 * *  Returned (function value):<br>
+	 *            int      status: +1 = dubious year (Note 4)<br>
+	 *                              0 = OK<br>
+	 *                             -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  "Observed" Az,ZD means the position that would be seen by a<br>
+	 *      perfect geodetically aligned theodolite.  (Zenith distance is<br>
+	 *      used rather than altitude in order to reflect the fact that no<br>
+	 *      allowance is made for depression of the horizon.)  This is<br>
+	 *      related to the observed HA,Dec via the standard rotation, using<br>
+	 *      the geodetic latitude (corrected for polar motion), while the<br>
+	 *      observed HA and RA are related simply through the Earth rotation<br>
+	 *      angle and the site longitude.  "Observed" RA,Dec or HA,Dec thus<br>
+	 *      means the position that would be seen by a perfect equatorial<br>
+	 *      with its polar axis aligned to the Earth's axis of rotation.<br>
+	 * *  2)  Only the first character of the type argument is significant.<br>
+	 *      "R" or "r" indicates that ob1 and ob2 are the observed right<br>
+	 *      ascension and declination;  "H" or "h" indicates that they are<br>
+	 *      hour angle (west +ve) and declination;  anything else ("A" or<br>
+	 *      "a" is recommended) indicates that ob1 and ob2 are azimuth<br>
+	 *      (north zero, east 90 deg) and zenith distance.<br>
+	 * *  3)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  4)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the<br>
+	 *      future to be trusted.  See iauDat for further details.<br>
+	 * *  5)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  6)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  7)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many<br>
+	 *      applications, xp and yp can be set to zero.<br>
+	 * *  8)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB), is<br>
+	 *      available, an adequate estimate of hm can be obtained from the<br>
+	 *      expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to<br>
+	 *      the pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  9)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  10) The accuracy of the result is limited by the corrections for<br>
+	 *      refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *      Providing the meteorological parameters are known accurately and<br>
+	 *      there are no gross local effects, the predicted astrometric<br>
+	 *      coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *      (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *      than 30 arcsec (optical or radio) at 85 degrees and better<br>
+	 *      than 20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *      Without refraction, the complementary functions iauAtco13 and<br>
+	 *      iauAtoc13 are self-consistent to better than 1 microarcsecond<br>
+	 *      all over the celestial sphere.  With refraction included,<br>
+	 *      consistency falls off at high zenith distances, but is still<br>
+	 *      better than 0.05 arcsec at 85 degrees.<br>
+	 * *  11) It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  Called:<br>
+	 *     iauApco13    astrometry parameters, ICRS-observed<br>
+	 *     iauAtoiq     quick observed to CIRS<br>
+	 *     iauAticq     quick CIRS to ICRS<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtoc13(const char*, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:93</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2498</i>
 	 */
-	public static int iauAtoc13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<Double > rc, Pointer<Double > dc) {
-		return iauAtoc13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(rc), Pointer.getPeer(dc));
+	public static int iauAtoc13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > rc, Pointer<Double > dc) {
+		return iauAtoc13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(rc), Pointer.getPeer(dc));
 	}
-	protected native static int iauAtoc13(@Ptr long type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long rc, @Ptr long dc);
+	protected native static int iauAtoc13(@Ptr long type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long rc, @Ptr long dc);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u A t o i 1 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Observed place to CIRS.  The caller supplies UTC, site coordinates,<br>
+	 *  ambient air conditions and observing wavelength.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     type   char[]   type of coordinates - "R", "H" or "A" (Notes 1,2)<br>
+	 *     ob1    double   observed Az, HA or RA (radians; Az is N=0,E=90)<br>
+	 *     ob2    double   observed ZD or Dec (radians)<br>
+	 *     utc1   double   UTC as a 2-part...<br>
+	 *     utc2   double   ...quasi Julian Date (Notes 3,4)<br>
+	 *     dut1   double   UT1-UTC (seconds, Note 5)<br>
+	 *     elong  double   longitude (radians, east +ve, Note 6)<br>
+	 *     phi    double   geodetic latitude (radians, Note 6)<br>
+	 *     hm     double   height above the ellipsoid (meters, Notes 6,8)<br>
+	 *     xp,yp  double   polar motion coordinates (radians, Note 7)<br>
+	 *     phpa   double   pressure at the observer (hPa = mB, Note 8)<br>
+	 *     tc     double   ambient temperature at the observer (deg C)<br>
+	 *     rh     double   relative humidity at the observer (range 0-1)<br>
+	 *     wl     double   wavelength (micrometers, Note 9)<br>
+	 * *  Returned:<br>
+	 *     ri     double*  CIRS right ascension (CIO-based, radians)<br>
+	 *     di     double*  CIRS declination (radians)<br>
+	 * *  Returned (function value):<br>
+	 *            int      status: +1 = dubious year (Note 2)<br>
+	 *                              0 = OK<br>
+	 *                             -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1)  "Observed" Az,ZD means the position that would be seen by a<br>
+	 *      perfect geodetically aligned theodolite.  (Zenith distance is<br>
+	 *      used rather than altitude in order to reflect the fact that no<br>
+	 *      allowance is made for depression of the horizon.)  This is<br>
+	 *      related to the observed HA,Dec via the standard rotation, using<br>
+	 *      the geodetic latitude (corrected for polar motion), while the<br>
+	 *      observed HA and RA are related simply through the Earth rotation<br>
+	 *      angle and the site longitude.  "Observed" RA,Dec or HA,Dec thus<br>
+	 *      means the position that would be seen by a perfect equatorial<br>
+	 *      with its polar axis aligned to the Earth's axis of rotation.<br>
+	 * *  2)  Only the first character of the type argument is significant.<br>
+	 *      "R" or "r" indicates that ob1 and ob2 are the observed right<br>
+	 *      ascension and declination;  "H" or "h" indicates that they are<br>
+	 *      hour angle (west +ve) and declination;  anything else ("A" or<br>
+	 *      "a" is recommended) indicates that ob1 and ob2 are azimuth<br>
+	 *      (north zero, east 90 deg) and zenith distance.<br>
+	 * *  3)  utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *      convenient way between the two arguments, for example where utc1<br>
+	 *      is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *      However, JD cannot unambiguously represent UTC during a leap<br>
+	 *      second unless special measures are taken.  The convention in the<br>
+	 *      present function is that the JD day represents UTC days whether<br>
+	 *      the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *      Applications should use the function iauDtf2d to convert from<br>
+	 *      calendar date and time of day into 2-part quasi Julian Date, as<br>
+	 *      it implements the leap-second-ambiguity convention just<br>
+	 *      described.<br>
+	 * *  4)  The warning status "dubious year" flags UTCs that predate the<br>
+	 *      introduction of the time scale or that are too far in the<br>
+	 *      future to be trusted.  See iauDat for further details.<br>
+	 * *  5)  UT1-UTC is tabulated in IERS bulletins.  It increases by exactly<br>
+	 *      one second at the end of each positive UTC leap second,<br>
+	 *      introduced in order to keep UT1-UTC within +/- 0.9s.  n.b. This<br>
+	 *      practice is under review, and in the future UT1-UTC may grow<br>
+	 *      essentially without limit.<br>
+	 * *  6)  The geographical coordinates are with respect to the WGS84<br>
+	 *      reference ellipsoid.  TAKE CARE WITH THE LONGITUDE SIGN:  the<br>
+	 *      longitude required by the present function is east-positive<br>
+	 *      (i.e. right-handed), in accordance with geographical convention.<br>
+	 * *  7)  The polar motion xp,yp can be obtained from IERS bulletins.  The<br>
+	 *      values are the coordinates (in radians) of the Celestial<br>
+	 *      Intermediate Pole with respect to the International Terrestrial<br>
+	 *      Reference System (see IERS Conventions 2003), measured along the<br>
+	 *      meridians 0 and 90 deg west respectively.  For many<br>
+	 *      applications, xp and yp can be set to zero.<br>
+	 * *  8)  If hm, the height above the ellipsoid of the observing station<br>
+	 *      in meters, is not known but phpa, the pressure in hPa (=mB), is<br>
+	 *      available, an adequate estimate of hm can be obtained from the<br>
+	 *      expression<br>
+	 * *            hm = -29.3 * tsl * log ( phpa / 1013.25 );<br>
+	 * *      where tsl is the approximate sea-level air temperature in K<br>
+	 *      (See Astrophysical Quantities, C.W.Allen, 3rd edition, section<br>
+	 *      52).  Similarly, if the pressure phpa is not known, it can be<br>
+	 *      estimated from the height of the observing station, hm, as<br>
+	 *      follows:<br>
+	 * *            phpa = 1013.25 * exp ( -hm / ( 29.3 * tsl ) );<br>
+	 * *      Note, however, that the refraction is nearly proportional to<br>
+	 *      the pressure and that an accurate phpa value is important for<br>
+	 *      precise work.<br>
+	 * *  9)  The argument wl specifies the observing wavelength in<br>
+	 *      micrometers.  The transition from optical to radio is assumed to<br>
+	 *      occur at 100 micrometers (about 3000 GHz).<br>
+	 * *  10) The accuracy of the result is limited by the corrections for<br>
+	 *      refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *      Providing the meteorological parameters are known accurately and<br>
+	 *      there are no gross local effects, the predicted astrometric<br>
+	 *      coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *      (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *      than 30 arcsec (optical or radio) at 85 degrees and better<br>
+	 *      than 20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *      Without refraction, the complementary functions iauAtio13 and<br>
+	 *      iauAtoi13 are self-consistent to better than 1 microarcsecond<br>
+	 *      all over the celestial sphere.  With refraction included,<br>
+	 *      consistency falls off at high zenith distances, but is still<br>
+	 *      better than 0.05 arcsec at 85 degrees.<br>
+	 * *  12) It is advisable to take great care with units, as even unlikely<br>
+	 *      values of the input parameters are accepted and processed in<br>
+	 *      accordance with the models used.<br>
+	 * *  Called:<br>
+	 *     iauApio13    astrometry parameters, CIRS-observed, 2013<br>
+	 *     iauAtoiq     quick observed to CIRS<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtoi13(const char*, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:95</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2617</i>
 	 */
-	public static int iauAtoi13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, Pointer<Double > ri, Pointer<Double > di) {
-		return iauAtoi13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tk, rh, wl, Pointer.getPeer(ri), Pointer.getPeer(di));
+	public static int iauAtoi13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > ri, Pointer<Double > di) {
+		return iauAtoi13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(ri), Pointer.getPeer(di));
 	}
-	protected native static int iauAtoi13(@Ptr long type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tk, double rh, double wl, @Ptr long ri, @Ptr long di);
+	protected native static int iauAtoi13(@Ptr long type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, @Ptr long ri, @Ptr long di);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u A t o i q<br>
+	 *  - - - - - - - - -<br>
+	 * *  Quick observed place to CIRS, given the star-independent astrometry<br>
+	 *  parameters.<br>
+	 * *  Use of this function is appropriate when efficiency is important and<br>
+	 *  where many star positions are all to be transformed for one date.<br>
+	 *  The star-independent astrometry parameters can be obtained by<br>
+	 *  calling iauApio[13] or iauApco[13].<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     type   char[]     type of coordinates: "R", "H" or "A" (Note 1)<br>
+	 *     ob1    double     observed Az, HA or RA (radians; Az is N=0,E=90)<br>
+	 *     ob2    double     observed ZD or Dec (radians)<br>
+	 *     astrom iauASTROM* star-independent astrometry parameters:<br>
+	 *      pmt    double       PM time interval (SSB, Julian years)<br>
+	 *      eb     double[3]    SSB to observer (vector, au)<br>
+	 *      eh     double[3]    Sun to observer (unit vector)<br>
+	 *      em     double       distance from Sun to observer (au)<br>
+	 *      v      double[3]    barycentric observer velocity (vector, c)<br>
+	 *      bm1    double       sqrt(1-|v|^2): reciprocal of Lorenz factor<br>
+	 *      bpn    double[3][3] bias-precession-nutation matrix<br>
+	 *      along  double       longitude + s' (radians)<br>
+	 *      xpl    double       polar motion xp wrt local meridian (radians)<br>
+	 *      ypl    double       polar motion yp wrt local meridian (radians)<br>
+	 *      sphi   double       sine of geodetic latitude<br>
+	 *      cphi   double       cosine of geodetic latitude<br>
+	 *      diurab double       magnitude of diurnal aberration vector<br>
+	 *      eral   double       "local" Earth rotation angle (radians)<br>
+	 *      refa   double       refraction constant A (radians)<br>
+	 *      refb   double       refraction constant B (radians)<br>
+	 * *  Returned:<br>
+	 *     ri     double*    CIRS right ascension (CIO-based, radians)<br>
+	 *     di     double*    CIRS declination (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) "Observed" Az,El means the position that would be seen by a<br>
+	 *     perfect geodetically aligned theodolite.  This is related to<br>
+	 *     the observed HA,Dec via the standard rotation, using the geodetic<br>
+	 *     latitude (corrected for polar motion), while the observed HA and<br>
+	 *     RA are related simply through the Earth rotation angle and the<br>
+	 *     site longitude.  "Observed" RA,Dec or HA,Dec thus means the<br>
+	 *     position that would be seen by a perfect equatorial with its<br>
+	 *     polar axis aligned to the Earth's axis of rotation.  By removing<br>
+	 *     from the observed place the effects of atmospheric refraction and<br>
+	 *     diurnal aberration, the CIRS RA,Dec is obtained.<br>
+	 * *  2) Only the first character of the type argument is significant.<br>
+	 *     "R" or "r" indicates that ob1 and ob2 are the observed right<br>
+	 *     ascension and declination;  "H" or "h" indicates that they are<br>
+	 *     hour angle (west +ve) and declination;  anything else ("A" or<br>
+	 *     "a" is recommended) indicates that ob1 and ob2 are azimuth (north<br>
+	 *     zero, east 90 deg) and zenith distance.  (Zenith distance is used<br>
+	 *     rather than altitude in order to reflect the fact that no<br>
+	 *     allowance is made for depression of the horizon.)<br>
+	 * *  3) The accuracy of the result is limited by the corrections for<br>
+	 *     refraction, which use a simple A*tan(z) + B*tan^3(z) model.<br>
+	 *     Providing the meteorological parameters are known accurately and<br>
+	 *     there are no gross local effects, the predicted observed<br>
+	 *     coordinates should be within 0.05 arcsec (optical) or 1 arcsec<br>
+	 *     (radio) for a zenith distance of less than 70 degrees, better<br>
+	 *     than 30 arcsec (optical or radio) at 85 degrees and better than<br>
+	 *     20 arcmin (optical) or 30 arcmin (radio) at the horizon.<br>
+	 * *     Without refraction, the complementary functions iauAtioq and<br>
+	 *     iauAtoiq are self-consistent to better than 1 microarcsecond all<br>
+	 *     over the celestial sphere.  With refraction included, consistency<br>
+	 *     falls off at high zenith distances, but is still better than<br>
+	 *     0.05 arcsec at 85 degrees.<br>
+	 * *  4) It is advisable to take great care with units, as even unlikely<br>
+	 *     values of the input parameters are accepted and processed in<br>
+	 *     accordance with the models used.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtoiq(const char*, double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:97</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2697</i>
 	 */
 	public static void iauAtoiq(Pointer<Byte > type, double ob1, double ob2, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtoiq(Pointer.getPeer(type), ob1, ob2, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
 	}
 	protected native static void iauAtoiq(@Ptr long type, double ob1, double ob2, @Ptr long astrom, @Ptr long ri, @Ptr long di);
 	/**
+	 * - - - - - -<br>
+	 *   i a u L d<br>
+	 *  - - - - - -<br>
+	 * *  Apply light deflection by a solar-system body, as part of<br>
+	 *  transforming coordinate direction into natural direction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     bm     double     mass of the gravitating body (solar masses)<br>
+	 *     p      double[3]  direction from observer to source (unit vector)<br>
+	 *     q      double[3]  direction from body to source (unit vector)<br>
+	 *     e      double[3]  direction from body to observer (unit vector)<br>
+	 *     em     double     distance from body to observer (au)<br>
+	 *     dlim   double     deflection limiter (Note 4)<br>
+	 * *  Returned:<br>
+	 *     p1     double[3]  observer to deflected source (unit vector)<br>
+	 * *  Notes:<br>
+	 * *  1) The algorithm is based on Expr. (70) in Klioner (2003) and<br>
+	 *     Expr. (7.63) in the Explanatory Supplement (Urban & Seidelmann<br>
+	 *     2013), with some rearrangement to minimize the effects of machine<br>
+	 *     precision.<br>
+	 * *  2) The mass parameter bm can, as required, be adjusted in order to<br>
+	 *     allow for such effects as quadrupole field.<br>
+	 * *  3) The barycentric position of the deflecting body should ideally<br>
+	 *     correspond to the time of closest approach of the light ray to<br>
+	 *     the body.<br>
+	 * *  4) The deflection limiter parameter dlim is phi^2/2, where phi is<br>
+	 *     the angular separation (in radians) between source and body at<br>
+	 *     which limiting is applied.  As phi shrinks below the chosen<br>
+	 *     threshold, the deflection is artificially reduced, reaching zero<br>
+	 *     for phi = 0.<br>
+	 * *  5) The returned vector p1 is not normalized, but the consequential<br>
+	 *     departure from unit magnitude is always negligible.<br>
+	 * *  6) The arguments p and p1 can be the same array.<br>
+	 * *  7) To accumulate total light deflection taking into account the<br>
+	 *     contributions from several bodies, call the present function for<br>
+	 *     each body in succession, in decreasing order of distance from the<br>
+	 *     observer.<br>
+	 * *  8) For efficiency, validation is omitted.  The supplied vectors must<br>
+	 *     be of unit magnitude, and the deflection limiter non-zero and<br>
+	 *     positive.<br>
+	 * *  References:<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013).<br>
+	 * *     Klioner, Sergei A., "A practical relativistic model for micro-<br>
+	 *     arcsecond astrometry in space", Astr. J. 125, 1580-1597 (2003).<br>
+	 * *  Called:<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLd(double, double[3], double[3], double[3], double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:99</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2755</i>
 	 */
 	public static void iauLd(double bm, Pointer<Double > p, Pointer<Double > q, Pointer<Double > e, double em, double dlim, Pointer<Double > p1) {
 		iauLd(bm, Pointer.getPeer(p), Pointer.getPeer(q), Pointer.getPeer(e), em, dlim, Pointer.getPeer(p1));
 	}
 	protected native static void iauLd(double bm, @Ptr long p, @Ptr long q, @Ptr long e, double em, double dlim, @Ptr long p1);
 	/**
+	 * +<br>
+	 *  - - - - - - -<br>
+	 *   i a u L d n<br>
+	 *  - - - - - - -<br>
+	 * *  For a star, apply light deflection by multiple solar-system bodies,<br>
+	 *  as part of transforming coordinate direction into natural direction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     n    int           number of bodies (note 1)<br>
+	 *     b    iauLDBODY[n]  data for each of the n bodies (Notes 1,2):<br>
+	 *      bm   double         mass of the body (solar masses, Note 3)<br>
+	 *      dl   double         deflection limiter (Note 4)<br>
+	 *      pv   [2][3]         barycentric PV of the body (au, au/day)<br>
+	 *     ob   double[3]     barycentric position of the observer (au)<br>
+	 *     sc   double[3]     observer to star coord direction (unit vector)<br>
+	 * *  Returned:<br>
+	 *     sn    double[3]      observer to deflected star (unit vector)<br>
+	 * *  1) The array b contains n entries, one for each body to be<br>
+	 *     considered.  If n = 0, no gravitational light deflection will be<br>
+	 *     applied, not even for the Sun.<br>
+	 * *  2) The array b should include an entry for the Sun as well as for<br>
+	 *     any planet or other body to be taken into account.  The entries<br>
+	 *     should be in the order in which the light passes the body.<br>
+	 * *  3) In the entry in the b array for body i, the mass parameter<br>
+	 *     b[i].bm can, as required, be adjusted in order to allow for such<br>
+	 *     effects as quadrupole field.<br>
+	 * *  4) The deflection limiter parameter b[i].dl is phi^2/2, where phi is<br>
+	 *     the angular separation (in radians) between star and body at<br>
+	 *     which limiting is applied.  As phi shrinks below the chosen<br>
+	 *     threshold, the deflection is artificially reduced, reaching zero<br>
+	 *     for phi = 0.   Example values suitable for a terrestrial<br>
+	 *     observer, together with masses, are as follows:<br>
+	 * *        body i     b[i].bm        b[i].dl<br>
+	 * *        Sun        1.0            6e-6<br>
+	 *        Jupiter    0.00095435     3e-9<br>
+	 *        Saturn     0.00028574     3e-10<br>
+	 * *  5) For cases where the starlight passes the body before reaching the<br>
+	 *     observer, the body is placed back along its barycentric track by<br>
+	 *     the light time from that point to the observer.  For cases where<br>
+	 *     the body is "behind" the observer no such shift is applied.  If<br>
+	 *     a different treatment is preferred, the user has the option of<br>
+	 *     instead using the iauLd function.  Similarly, iauLd can be used<br>
+	 *     for cases where the source is nearby, not a star.<br>
+	 * *  6) The returned vector sn is not normalized, but the consequential<br>
+	 *     departure from unit magnitude is always negligible.<br>
+	 * *  7) The arguments sc and sn can be the same array.<br>
+	 * *  8) For efficiency, validation is omitted.  The supplied masses must<br>
+	 *     be greater than zero, the position and velocity vectors must be<br>
+	 *     right, and the deflection limiter greater than zero.<br>
+	 * *  Reference:<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013), Section 7.2.4.<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 *     iauPpsp      p-vector plus scaled p-vector<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 *     iauLd        light deflection by a solar-system body<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLdn(int, iauLDBODY[], double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:101</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2824</i>
 	 */
 	public static void iauLdn(int n, Pointer<iauLDBODY > b, Pointer<Double > ob, Pointer<Double > sc, Pointer<Double > sn) {
 		iauLdn(n, Pointer.getPeer(b), Pointer.getPeer(ob), Pointer.getPeer(sc), Pointer.getPeer(sn));
 	}
 	protected native static void iauLdn(int n, @Ptr long b, @Ptr long ob, @Ptr long sc, @Ptr long sn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u L d s u n<br>
+	 *  - - - - - - - - -<br>
+	 * *  Light deflection by the Sun.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     p      double[3]  direction from observer to source (unit vector)<br>
+	 *     e      double[3]  direction from Sun to observer (unit vector)<br>
+	 *     em     double     distance from Sun to observer (au)<br>
+	 * *  Returned:<br>
+	 *     p1     double[3]  observer to deflected source (unit vector)<br>
+	 * *  Notes:<br>
+	 * *  1) The source is presumed to be sufficiently distant that its<br>
+	 *     directions seen from the Sun and the observer are essentially<br>
+	 *     the same.<br>
+	 * *  2) The deflection is restrained when the angle between the star and<br>
+	 *     the center of the Sun is less than about 9 arcsec, falling to<br>
+	 *     zero for zero separation. (The chosen threshold is within the<br>
+	 *     solar limb for all solar-system applications.)<br>
+	 * *  3) The arguments p and p1 can be the same array.<br>
+	 * *  Called:<br>
+	 *     iauLd        light deflection by a solar-system body<br>
+	 * *  This revision:   2013 August 30<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLdsun(double[3], double[3], double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:103</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2855</i>
 	 */
 	public static void iauLdsun(Pointer<Double > p, Pointer<Double > e, double em, Pointer<Double > p1) {
 		iauLdsun(Pointer.getPeer(p), Pointer.getPeer(e), em, Pointer.getPeer(p1));
 	}
 	protected native static void iauLdsun(@Ptr long p, @Ptr long e, double em, @Ptr long p1);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P m p x<br>
+	 *  - - - - - - - -<br>
+	 * *  Proper motion and parallax.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc,dc  double     ICRS RA,Dec at catalog epoch (radians)<br>
+	 *     pr     double     RA proper motion (radians/year; Note 1)<br>
+	 *     pd     double     Dec proper motion (radians/year)<br>
+	 *     px     double     parallax (arcsec)<br>
+	 *     rv     double     radial velocity (km/s, +ve if receding)<br>
+	 *     pmt    double     proper motion time interval (SSB, Julian years)<br>
+	 *     pob    double[3]  SSB to observer vector (au)<br>
+	 * *  Returned:<br>
+	 *     pco    double[3]  coordinate direction (BCRS unit vector)<br>
+	 * *  Notes:<br>
+	 * *  1) The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  2) The proper motion time interval is for when the starlight<br>
+	 *     reaches the solar system barycenter.<br>
+	 * *  3) To avoid the need for iteration, the Roemer effect (i.e. the<br>
+	 *     small annual modulation of the proper motion coming from the<br>
+	 *     changing light time) is applied approximately, using the<br>
+	 *     direction of the star at the catalog epoch.<br>
+	 * *  References:<br>
+	 * *     1984 Astronomical Almanac, pp B39-B41.<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013), Section 7.2.<br>
+	 * *  Called:<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmpx(double, double, double, double, double, double, double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:105</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2895</i>
 	 */
-	public static void iauPmpx(double rc, double dc, double pr, double pd, double px, double rv, double pmt, Pointer<Double > vob, Pointer<Double > pco) {
-		iauPmpx(rc, dc, pr, pd, px, rv, pmt, Pointer.getPeer(vob), Pointer.getPeer(pco));
+	public static void iauPmpx(double rc, double dc, double pr, double pd, double px, double rv, double pmt, Pointer<Double > pob, Pointer<Double > pco) {
+		iauPmpx(rc, dc, pr, pd, px, rv, pmt, Pointer.getPeer(pob), Pointer.getPeer(pco));
 	}
-	protected native static void iauPmpx(double rc, double dc, double pr, double pd, double px, double rv, double pmt, @Ptr long vob, @Ptr long pco);
+	protected native static void iauPmpx(double rc, double dc, double pr, double pd, double px, double rv, double pmt, @Ptr long pob, @Ptr long pco);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P m s a f e<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Star proper motion:  update star catalog data for space motion, with<br>
+	 *  special handling to handle the zero parallax case.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ra1    double      right ascension (radians), before<br>
+	 *     dec1   double      declination (radians), before<br>
+	 *     pmr1   double      RA proper motion (radians/year), before<br>
+	 *     pmd1   double      Dec proper motion (radians/year), before<br>
+	 *     px1    double      parallax (arcseconds), before<br>
+	 *     rv1    double      radial velocity (km/s, +ve = receding), before<br>
+	 *     ep1a   double      "before" epoch, part A (Note 1)<br>
+	 *     ep1b   double      "before" epoch, part B (Note 1)<br>
+	 *     ep2a   double      "after" epoch, part A (Note 1)<br>
+	 *     ep2b   double      "after" epoch, part B (Note 1)<br>
+	 * *  Returned:<br>
+	 *     ra2    double      right ascension (radians), after<br>
+	 *     dec2   double      declination (radians), after<br>
+	 *     pmr2   double      RA proper motion (radians/year), after<br>
+	 *     pmd2   double      Dec proper motion (radians/year), after<br>
+	 *     px2    double      parallax (arcseconds), after<br>
+	 *     rv2    double      radial velocity (km/s, +ve = receding), after<br>
+	 * *  Returned (function value):<br>
+	 *            int         status:<br>
+	 *                         -1 = system error (should not occur)<br>
+	 *                          0 = no warnings or errors<br>
+	 *                          1 = distance overridden (Note 6)<br>
+	 *                          2 = excessive velocity (Note 7)<br>
+	 *                          4 = solution didn't converge (Note 8)<br>
+	 *                       else = binary logical OR of the above warnings<br>
+	 * *  Notes:<br>
+	 * *  1) The starting and ending TDB epochs ep1a+ep1b and ep2a+ep2b are<br>
+	 *     Julian Dates, apportioned in any convenient way between the two<br>
+	 *     parts (A and B).  For example, JD(TDB)=2450123.7 could be<br>
+	 *     expressed in any of these ways, among others:<br>
+	 * *            epNa            epNb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.<br>
+	 * *  2) In accordance with normal star-catalog conventions, the object's<br>
+	 *     right ascension and declination are freed from the effects of<br>
+	 *     secular aberration.  The frame, which is aligned to the catalog<br>
+	 *     equator and equinox, is Lorentzian and centered on the SSB.<br>
+	 * *     The proper motions are the rate of change of the right ascension<br>
+	 *     and declination at the catalog epoch and are in radians per TDB<br>
+	 *     Julian year.<br>
+	 * *     The parallax and radial velocity are in the same frame.<br>
+	 * *  3) Care is needed with units.  The star coordinates are in radians<br>
+	 *     and the proper motions in radians per Julian year, but the<br>
+	 *     parallax is in arcseconds.<br>
+	 * *  4) The RA proper motion is in terms of coordinate angle, not true<br>
+	 *     angle.  If the catalog uses arcseconds for both RA and Dec proper<br>
+	 *     motions, the RA proper motion will need to be divided by cos(Dec)<br>
+	 *     before use.<br>
+	 * *  5) Straight-line motion at constant speed, in the inertial frame, is<br>
+	 *     assumed.<br>
+	 * *  6) An extremely small (or zero or negative) parallax is overridden<br>
+	 *     to ensure that the object is at a finite but very large distance,<br>
+	 *     but not so large that the proper motion is equivalent to a large<br>
+	 *     but safe speed (about 0.1c using the chosen constant).  A warning<br>
+	 *     status of 1 is added to the status if this action has been taken.<br>
+	 * *  7) If the space velocity is a significant fraction of c (see the<br>
+	 *     constant VMAX in the function iauStarpv), it is arbitrarily set<br>
+	 *     to zero.  When this action occurs, 2 is added to the status.<br>
+	 * *  8) The relativistic adjustment carried out in the iauStarpv function<br>
+	 *     involves an iterative calculation.  If the process fails to<br>
+	 *     converge within a set number of iterations, 4 is added to the<br>
+	 *     status.<br>
+	 * *  Called:<br>
+	 *     iauSeps      angle between two points<br>
+	 *     iauStarpm    update star catalog data for space motion<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPmsafe(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:107</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2984</i>
 	 */
 	public static int iauPmsafe(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
 		return iauPmsafe(ra1, dec1, pmr1, pmd1, px1, rv1, ep1a, ep1b, ep2a, ep2b, Pointer.getPeer(ra2), Pointer.getPeer(dec2), Pointer.getPeer(pmr2), Pointer.getPeer(pmd2), Pointer.getPeer(px2), Pointer.getPeer(rv2));
 	}
 	protected native static int iauPmsafe(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, @Ptr long ra2, @Ptr long dec2, @Ptr long pmr2, @Ptr long pmd2, @Ptr long px2, @Ptr long rv2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v t o b<br>
+	 *  - - - - - - - - -<br>
+	 * *  Position and velocity of a terrestrial observing station.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     elong   double       longitude (radians, east +ve, Note 1)<br>
+	 *     phi     double       latitude (geodetic, radians, Note 1)<br>
+	 *     hm      double       height above ref. ellipsoid (geodetic, m)<br>
+	 *     xp,yp   double       coordinates of the pole (radians, Note 2)<br>
+	 *     sp      double       the TIO locator s' (radians, Note 2)<br>
+	 *     theta   double       Earth rotation angle (radians, Note 3)<br>
+	 * *  Returned:<br>
+	 *     pv      double[2][3] position/velocity vector (m, m/s, CIRS)<br>
+	 * *  Notes:<br>
+	 * *  1) The terrestrial coordinates are with respect to the WGS84<br>
+	 *     reference ellipsoid.<br>
+	 * *  2) xp and yp are the coordinates (in radians) of the Celestial<br>
+	 *     Intermediate Pole with respect to the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions), measured along the<br>
+	 *     meridians 0 and 90 deg west respectively.  sp is the TIO locator<br>
+	 *     s', in radians, which positions the Terrestrial Intermediate<br>
+	 *     Origin on the equator.  For many applications, xp, yp and<br>
+	 *     (especially) sp can be set to zero.<br>
+	 * *  3) If theta is Greenwich apparent sidereal time instead of Earth<br>
+	 *     rotation angle, the result is with respect to the true equator<br>
+	 *     and equinox of date, i.e. with the x-axis at the equinox rather<br>
+	 *     than the celestial intermediate origin.<br>
+	 * *  4) The velocity units are meters per UT1 second, not per SI second.<br>
+	 *     This is unlikely to have any practical consequences in the modern<br>
+	 *     era.<br>
+	 * *  5) No validation is performed on the arguments.  Error cases that<br>
+	 *     could lead to arithmetic exceptions are trapped by the iauGd2gc<br>
+	 *     function, and the result set to zeros.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013), Section 7.4.3.3.<br>
+	 * *  Called:<br>
+	 *     iauGd2gc     geodetic to geocentric transformation<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvtob(double, double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:109</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3037</i>
 	 */
 	public static void iauPvtob(double elong, double phi, double hm, double xp, double yp, double sp, double theta, Pointer<Double > pv) {
 		iauPvtob(elong, phi, hm, xp, yp, sp, theta, Pointer.getPeer(pv));
 	}
 	protected native static void iauPvtob(double elong, double phi, double hm, double xp, double yp, double sp, double theta, @Ptr long pv);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u R e f c o<br>
+	 *  - - - - - - - - -<br>
+	 * *  Determine the constants A and B in the atmospheric refraction model<br>
+	 *  dZ = A tan Z + B tan^3 Z.<br>
+	 * *  Z is the "observed" zenith distance (i.e. affected by refraction)<br>
+	 *  and dZ is what to add to Z to give the "topocentric" (i.e. in vacuo)<br>
+	 *  zenith distance.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *    phpa   double    pressure at the observer (hPa = millibar)<br>
+	 *    tc     double    ambient temperature at the observer (deg C)<br>
+	 *    rh     double    relative humidity at the observer (range 0-1)<br>
+	 *    wl     double    wavelength (micrometers)<br>
+	 * *  Returned:<br>
+	 *    refa   double*   tan Z coefficient (radians)<br>
+	 *    refb   double*   tan^3 Z coefficient (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The model balances speed and accuracy to give good results in<br>
+	 *     applications where performance at low altitudes is not paramount.<br>
+	 *     Performance is maintained across a range of conditions, and<br>
+	 *     applies to both optical/IR and radio.<br>
+	 * *  2) The model omits the effects of (i) height above sea level (apart<br>
+	 *     from the reduced pressure itself), (ii) latitude (i.e. the<br>
+	 *     flattening of the Earth), (iii) variations in tropospheric lapse<br>
+	 *     rate and (iv) dispersive effects in the radio.<br>
+	 * *     The model was tested using the following range of conditions:<br>
+	 * *       lapse rates 0.0055, 0.0065, 0.0075 deg/meter<br>
+	 *       latitudes 0, 25, 50, 75 degrees<br>
+	 *       heights 0, 2500, 5000 meters ASL<br>
+	 *       pressures mean for height -10% to +5% in steps of 5%<br>
+	 *       temperatures -10 deg to +20 deg with respect to 280 deg at SL<br>
+	 *       relative humidity 0, 0.5, 1<br>
+	 *       wavelengths 0.4, 0.6, ... 2 micron, + radio<br>
+	 *       zenith distances 15, 45, 75 degrees<br>
+	 * *     The accuracy with respect to raytracing through a model<br>
+	 *     atmosphere was as follows:<br>
+	 * *                            worst         RMS<br>
+	 * *       optical/IR           62 mas       8 mas<br>
+	 *       radio               319 mas      49 mas<br>
+	 * *     For this particular set of conditions:<br>
+	 * *       lapse rate 0.0065 K/meter<br>
+	 *       latitude 50 degrees<br>
+	 *       sea level<br>
+	 *       pressure 1005 mb<br>
+	 *       temperature 280.15 K<br>
+	 *       humidity 80%<br>
+	 *       wavelength 5740 Angstroms<br>
+	 * *     the results were as follows:<br>
+	 * *       ZD       raytrace     iauRefco   Saastamoinen<br>
+	 * *       10         10.27        10.27        10.27<br>
+	 *       20         21.19        21.20        21.19<br>
+	 *       30         33.61        33.61        33.60<br>
+	 *       40         48.82        48.83        48.81<br>
+	 *       45         58.16        58.18        58.16<br>
+	 *       50         69.28        69.30        69.27<br>
+	 *       55         82.97        82.99        82.95<br>
+	 *       60        100.51       100.54       100.50<br>
+	 *       65        124.23       124.26       124.20<br>
+	 *       70        158.63       158.68       158.61<br>
+	 *       72        177.32       177.37       177.31<br>
+	 *       74        200.35       200.38       200.32<br>
+	 *       76        229.45       229.43       229.42<br>
+	 *       78        267.44       267.29       267.41<br>
+	 *       80        319.13       318.55       319.10<br>
+	 * *      deg        arcsec       arcsec       arcsec<br>
+	 * *     The values for Saastamoinen's formula (which includes terms<br>
+	 *     up to tan^5) are taken from Hohenkerk and Sinclair (1985).<br>
+	 * *  3) A wl value in the range 0-100 selects the optical/IR case and is<br>
+	 *     wavelength in micrometers.  Any value outside this range selects<br>
+	 *     the radio case.<br>
+	 * *  4) Outlandish input parameters are silently limited to<br>
+	 *     mathematically safe values.  Zero pressure is permissible, and<br>
+	 *     causes zeroes to be returned.<br>
+	 * *  5) The algorithm draws on several sources, as follows:<br>
+	 * *     a) The formula for the saturation vapour pressure of water as<br>
+	 *        a function of temperature and temperature is taken from<br>
+	 *        Equations (A4.5-A4.7) of Gill (1982).<br>
+	 * *     b) The formula for the water vapour pressure, given the<br>
+	 *        saturation pressure and the relative humidity, is from<br>
+	 *        Crane (1976), Equation (2.5.5).<br>
+	 * *     c) The refractivity of air is a function of temperature,<br>
+	 *        total pressure, water-vapour pressure and, in the case<br>
+	 *        of optical/IR, wavelength.  The formulae for the two cases are<br>
+	 *        developed from Hohenkerk & Sinclair (1985) and Rueger (2002).<br>
+	 * *     d) The formula for beta, the ratio of the scale height of the<br>
+	 *        atmosphere to the geocentric distance of the observer, is<br>
+	 *        an adaption of Equation (9) from Stone (1996).  The<br>
+	 *        adaptations, arrived at empirically, consist of (i) a small<br>
+	 *        adjustment to the coefficient and (ii) a humidity term for the<br>
+	 *        radio case only.<br>
+	 * *     e) The formulae for the refraction constants as a function of<br>
+	 *        n-1 and beta are from Green (1987), Equation (4.31).<br>
+	 * *  References:<br>
+	 * *     Crane, R.K., Meeks, M.L. (ed), "Refraction Effects in the Neutral<br>
+	 *     Atmosphere", Methods of Experimental Physics: Astrophysics 12B,<br>
+	 *     Academic Press, 1976.<br>
+	 * *     Gill, Adrian E., "Atmosphere-Ocean Dynamics", Academic Press,<br>
+	 *     1982.<br>
+	 * *     Green, R.M., "Spherical Astronomy", Cambridge University Press,<br>
+	 *     1987.<br>
+	 * *     Hohenkerk, C.Y., & Sinclair, A.T., NAO Technical Note No. 63,<br>
+	 *     1985.<br>
+	 * *     Rueger, J.M., "Refractive Index Formulae for Electronic Distance<br>
+	 *     Measurement with Radio and Millimetre Waves", in Unisurv Report<br>
+	 *     S-68, School of Surveying and Spatial Information Systems,<br>
+	 *     University of New South Wales, Sydney, Australia, 2002.<br>
+	 * *     Stone, Ronald C., P.A.S.P. 108, 1051-1058, 1996.<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRefco(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:111</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3154</i>
 	 */
-	public static void iauRefco(double phpa, double tk, double rh, double wl, Pointer<Double > refa, Pointer<Double > refb) {
-		iauRefco(phpa, tk, rh, wl, Pointer.getPeer(refa), Pointer.getPeer(refb));
+	public static void iauRefco(double phpa, double tc, double rh, double wl, Pointer<Double > refa, Pointer<Double > refb) {
+		iauRefco(phpa, tc, rh, wl, Pointer.getPeer(refa), Pointer.getPeer(refb));
 	}
-	protected native static void iauRefco(double phpa, double tk, double rh, double wl, @Ptr long refa, @Ptr long refb);
+	protected native static void iauRefco(double phpa, double tc, double rh, double wl, @Ptr long refa, @Ptr long refb);
 	/**
-	 * Astronomy/Ephemerides<br>
+	 * - - - - - - - - -<br>
+	 *   i a u E p v 0 0<br>
+	 *  - - - - - - - - -<br>
+	 * *  Earth position and velocity, heliocentric and barycentric, with<br>
+	 *  respect to the Barycentric Celestial Reference System.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double        TDB date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     pvh          double[2][3]  heliocentric Earth position/velocity<br>
+	 *     pvb          double[2][3]  barycentric Earth position/velocity<br>
+	 * *  Returned (function value):<br>
+	 *                  int           status: 0 = OK<br>
+	 *                                       +1 = warning: date outside<br>
+	 *                                            the range 1900-2100 AD<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  However,<br>
+	 *     the accuracy of the result is more likely to be limited by the<br>
+	 *     algorithm itself than the way the date has been expressed.<br>
+	 * *     n.b. TT can be used instead of TDB in most applications.<br>
+	 * *  2) On return, the arrays pvh and pvb contain the following:<br>
+	 * *        pvh[0][0]  x       }<br>
+	 *        pvh[0][1]  y       } heliocentric position, AU<br>
+	 *        pvh[0][2]  z       }<br>
+	 * *        pvh[1][0]  xdot    }<br>
+	 *        pvh[1][1]  ydot    } heliocentric velocity, AU/d<br>
+	 *        pvh[1][2]  zdot    }<br>
+	 * *        pvb[0][0]  x       }<br>
+	 *        pvb[0][1]  y       } barycentric position, AU<br>
+	 *        pvb[0][2]  z       }<br>
+	 * *        pvb[1][0]  xdot    }<br>
+	 *        pvb[1][1]  ydot    } barycentric velocity, AU/d<br>
+	 *        pvb[1][2]  zdot    }<br>
+	 * *     The vectors are with respect to the Barycentric Celestial<br>
+	 *     Reference System.  The time unit is one day in TDB.<br>
+	 * *  3) The function is a SIMPLIFIED SOLUTION from the planetary theory<br>
+	 *     VSOP2000 (X. Moisson, P. Bretagnon, 2001, Celes. Mechanics &<br>
+	 *     Dyn. Astron., 80, 3/4, 205-213) and is an adaptation of original<br>
+	 *     Fortran code supplied by P. Bretagnon (private comm., 2000).<br>
+	 * *  4) Comparisons over the time span 1900-2100 with this simplified<br>
+	 *     solution and the JPL DE405 ephemeris give the following results:<br>
+	 * *                                RMS    max<br>
+	 *           Heliocentric:<br>
+	 *              position error    3.7   11.2   km<br>
+	 *              velocity error    1.4    5.0   mm/s<br>
+	 * *           Barycentric:<br>
+	 *              position error    4.6   13.4   km<br>
+	 *              velocity error    1.4    4.9   mm/s<br>
+	 * *     Comparisons with the JPL DE406 ephemeris show that by 1800 and<br>
+	 *     2200 the position errors are approximately double their 1900-2100<br>
+	 *     size.  By 1500 and 2500 the deterioration is a factor of 10 and<br>
+	 *     by 1000 and 3000 a factor of 60.  The velocity accuracy falls off<br>
+	 *     at about half that rate.<br>
+	 * *  5) It is permissible to use the same array for pvh and pvb, which<br>
+	 *     will receive the barycentric values.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauEpv00(double, double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:116</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3232</i>
 	 */
 	public static int iauEpv00(double date1, double date2, Pointer<Double > pvh, Pointer<Double > pvb) {
 		return iauEpv00(date1, date2, Pointer.getPeer(pvh), Pointer.getPeer(pvb));
 	}
 	protected native static int iauEpv00(double date1, double date2, @Ptr long pvh, @Ptr long pvb);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P l a n 9 4<br>
+	 *  - - - - - - - - - -<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Approximate heliocentric position and velocity of a nominated major<br>
+	 *  planet:  Mercury, Venus, EMB, Mars, Jupiter, Saturn, Uranus or<br>
+	 *  Neptune (but not the Earth itself).<br>
+	 * *  Given:<br>
+	 *     date1  double       TDB date part A (Note 1)<br>
+	 *     date2  double       TDB date part B (Note 1)<br>
+	 *     np     int          planet (1=Mercury, 2=Venus, 3=EMB, 4=Mars,<br>
+	 *                             5=Jupiter, 6=Saturn, 7=Uranus, 8=Neptune)<br>
+	 * *  Returned (argument):<br>
+	 *     pv     double[2][3] planet p,v (heliocentric, J2000.0, AU,AU/d)<br>
+	 * *  Returned (function value):<br>
+	 *            int          status: -1 = illegal NP (outside 1-8)<br>
+	 *                                  0 = OK<br>
+	 *                                 +1 = warning: year outside 1000-3000<br>
+	 *                                 +2 = warning: failed to converge<br>
+	 * *  Notes:<br>
+	 * *  1) The date date1+date2 is in the TDB time scale (in practice TT can<br>
+	 *     be used) and is a Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments.  For example, JD(TDB)=2450123.7 could<br>
+	 *     be expressed in any of these ways, among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.  The limited<br>
+	 *     accuracy of the present algorithm is such that any of the methods<br>
+	 *     is satisfactory.<br>
+	 * *  2) If an np value outside the range 1-8 is supplied, an error status<br>
+	 *     (function value -1) is returned and the pv vector set to zeroes.<br>
+	 * *  3) For np=3 the result is for the Earth-Moon Barycenter.  To obtain<br>
+	 *     the heliocentric position and velocity of the Earth, use instead<br>
+	 *     the SOFA function iauEpv00.<br>
+	 * *  4) On successful return, the array pv contains the following:<br>
+	 * *        pv[0][0]   x      }<br>
+	 *        pv[0][1]   y      } heliocentric position, AU<br>
+	 *        pv[0][2]   z      }<br>
+	 * *        pv[1][0]   xdot   }<br>
+	 *        pv[1][1]   ydot   } heliocentric velocity, AU/d<br>
+	 *        pv[1][2]   zdot   }<br>
+	 * *     The reference frame is equatorial and is with respect to the<br>
+	 *     mean equator and equinox of epoch J2000.0.<br>
+	 * *  5) The algorithm is due to J.L. Simon, P. Bretagnon, J. Chapront,<br>
+	 *     M. Chapront-Touze, G. Francou and J. Laskar (Bureau des<br>
+	 *     Longitudes, Paris, France).  From comparisons with JPL<br>
+	 *     ephemeris DE102, they quote the following maximum errors<br>
+	 *     over the interval 1800-2050:<br>
+	 * *                     L (arcsec)    B (arcsec)      R (km)<br>
+	 * *        Mercury          4             1             300<br>
+	 *        Venus            5             1             800<br>
+	 *        EMB              6             1            1000<br>
+	 *        Mars            17             1            7700<br>
+	 *        Jupiter         71             5           76000<br>
+	 *        Saturn          81            13          267000<br>
+	 *        Uranus          86             7          712000<br>
+	 *        Neptune         11             1          253000<br>
+	 * *     Over the interval 1000-3000, they report that the accuracy is no<br>
+	 *     worse than 1.5 times that over 1800-2050.  Outside 1000-3000 the<br>
+	 *     accuracy declines.<br>
+	 * *     Comparisons of the present function with the JPL DE200 ephemeris<br>
+	 *     give the following RMS errors over the interval 1960-2025:<br>
+	 * *                      position (km)     velocity (m/s)<br>
+	 * *        Mercury            334               0.437<br>
+	 *        Venus             1060               0.855<br>
+	 *        EMB               2010               0.815<br>
+	 *        Mars              7690               1.98<br>
+	 *        Jupiter          71700               7.70<br>
+	 *        Saturn          199000              19.4<br>
+	 *        Uranus          564000              16.4<br>
+	 *        Neptune         158000              14.4<br>
+	 * *     Comparisons against DE200 over the interval 1800-2100 gave the<br>
+	 *     following maximum absolute differences.  (The results using<br>
+	 *     DE406 were essentially the same.)<br>
+	 * *                   L (arcsec)   B (arcsec)     R (km)   Rdot (m/s)<br>
+	 * *        Mercury        7            1            500       0.7<br>
+	 *        Venus          7            1           1100       0.9<br>
+	 *        EMB            9            1           1300       1.0<br>
+	 *        Mars          26            1           9000       2.5<br>
+	 *        Jupiter       78            6          82000       8.2<br>
+	 *        Saturn        87           14         263000      24.6<br>
+	 *        Uranus        86            7         661000      27.4<br>
+	 *        Neptune       11            2         248000      21.4<br>
+	 * *  6) The present SOFA re-implementation of the original Simon et al.<br>
+	 *     Fortran code differs from the original in the following respects:<br>
+	 * *       *  C instead of Fortran.<br>
+	 * *       *  The date is supplied in two parts.<br>
+	 * *       *  The result is returned only in equatorial Cartesian form;<br>
+	 *          the ecliptic longitude, latitude and radius vector are not<br>
+	 *          returned.<br>
+	 * *       *  The result is in the J2000.0 equatorial frame, not ecliptic.<br>
+	 * *       *  More is done in-line: there are fewer calls to subroutines.<br>
+	 * *       *  Different error/warning status values are used.<br>
+	 * *       *  A different Kepler's-equation-solver is used (avoiding<br>
+	 *          use of double precision complex).<br>
+	 * *       *  Polynomials in t are nested to minimize rounding errors.<br>
+	 * *       *  Explicit double constants are used to avoid mixed-mode<br>
+	 *          expressions.<br>
+	 * *     None of the above changes affects the result significantly.<br>
+	 * *  7) The returned status indicates the most serious condition<br>
+	 *     encountered during execution of the function.  Illegal np is<br>
+	 *     considered the most serious, overriding failure to converge,<br>
+	 *     which in turn takes precedence over the remote date warning.<br>
+	 * *  Called:<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  Reference:  Simon, J.L, Bretagnon, P., Chapront, J.,<br>
+	 *              Chapront-Touze, M., Francou, G., and Laskar, J.,<br>
+	 *              Astron. Astrophys. 282, 663 (1994).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPlan94(double, double, int, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:118</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3357</i>
 	 */
 	public static int iauPlan94(double date1, double date2, int np, Pointer<Double > pv) {
 		return iauPlan94(date1, date2, np, Pointer.getPeer(pv));
 	}
 	protected native static int iauPlan94(double date1, double date2, int np, @Ptr long pv);
 	/**
-	 * Astronomy/FundamentalArgs<br>
+	 * - - - - - - - - -<br>
+	 *   i a u F a d 0 3<br>
+	 *  - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean elongation of the Moon from the Sun.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    D, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFad03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:123</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3386</i>
 	 */
 	native public static double iauFad03(double t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u F a e 0 3<br>
+	 *  - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Earth.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Earth, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFae03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:125</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3417</i>
 	 */
 	native public static double iauFae03(double t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u F a f 0 3<br>
+	 *  - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of the Moon minus mean longitude of the ascending<br>
+	 *  node.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    F, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaf03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:127</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3447</i>
 	 */
 	native public static double iauFaf03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a j u 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Jupiter.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Jupiter, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaju03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:129</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3478</i>
 	 */
 	native public static double iauFaju03(double t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u F a l 0 3<br>
+	 *  - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean anomaly of the Moon.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    l, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFal03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:131</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3507</i>
 	 */
 	native public static double iauFal03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a l p 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean anomaly of the Sun.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    l', radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFalp03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:133</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3536</i>
 	 */
 	native public static double iauFalp03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a m a 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Mars.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Mars, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFama03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:135</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3567</i>
 	 */
 	native public static double iauFama03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a m e 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Mercury.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Mercury, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFame03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:137</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3598</i>
 	 */
 	native public static double iauFame03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a n e 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Neptune.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Neptune, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is adapted from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFane03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:139</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3627</i>
 	 */
 	native public static double iauFane03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a o m 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of the Moon's ascending node.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    Omega, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaom03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:141</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3656</i>
 	 */
 	native public static double iauFaom03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a p a 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  general accumulated precession in longitude.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    general precession in longitude, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003).  It<br>
+	 *     is taken from Kinoshita & Souchay (1990) and comes originally<br>
+	 *     from Lieske et al. (1977).<br>
+	 * *  References:<br>
+	 * *     Kinoshita, H. and Souchay J. 1990, Celest.Mech. and Dyn.Astron.<br>
+	 *     48, 187<br>
+	 * *     Lieske, J.H., Lederle, T., Fricke, W. & Morando, B. 1977,<br>
+	 *     Astron.Astrophys. 58, 1-16<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFapa03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:143</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3688</i>
 	 */
 	native public static double iauFapa03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a s a 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Saturn.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Saturn, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFasa03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:145</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3719</i>
 	 */
 	native public static double iauFasa03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a u r 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Uranus.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned  (function value):<br>
+	 *           double    mean longitude of Uranus, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     is adapted from Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaur03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:147</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3748</i>
 	 */
 	native public static double iauFaur03(double t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F a v e 0 3<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Fundamental argument, IERS Conventions (2003):<br>
+	 *  mean longitude of Venus.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     t     double    TDB, Julian centuries since J2000.0 (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *           double    mean longitude of Venus, radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) Though t is strictly TDB, it is usually more convenient to use<br>
+	 *     TT, which makes no significant difference.<br>
+	 * *  2) The expression used is as adopted in IERS Conventions (2003) and<br>
+	 *     comes from Souchay et al. (1999) after Simon et al. (1994).<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFave03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:149</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3779</i>
 	 */
 	native public static double iauFave03(double t);
 	/**
-	 * Astronomy/PrecNutPolar<br>
+	 * - - - - - - - -<br>
+	 *   i a u B i 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  Frame bias components of IAU 2000 precession-nutation models (part<br>
+	 *  of MHB2000 with additions).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Returned:<br>
+	 *     dpsibi,depsbi  double  longitude and obliquity corrections<br>
+	 *     dra            double  the ICRS RA of the J2000.0 mean equinox<br>
+	 * *  Notes:<br>
+	 * *  1) The frame bias corrections in longitude and obliquity (radians)<br>
+	 *     are required in order to correct for the offset between the GCRS<br>
+	 *     pole and the mean J2000.0 pole.  They define, with respect to the<br>
+	 *     GCRS frame, a J2000.0 mean pole that is consistent with the rest<br>
+	 *     of the IAU 2000A precession-nutation model.<br>
+	 * *  2) In addition to the displacement of the pole, the complete<br>
+	 *     description of the frame bias requires also an offset in right<br>
+	 *     ascension.  This is not part of the IAU 2000A model, and is from<br>
+	 *     Chapront et al. (2002).  It is returned in radians.<br>
+	 * *  3) This is a supplemented implementation of one aspect of the IAU<br>
+	 *     2000A nutation model, formally adopted by the IAU General<br>
+	 *     Assembly in 2000, namely MHB2000 (Mathews et al. 2002).<br>
+	 * *  References:<br>
+	 * *     Chapront, J., Chapront-Touze, M. & Francou, G., Astron.<br>
+	 *     Astrophys., 387, 700, 2002.<br>
+	 * *     Mathews, P.M., Herring, T.A., Buffet, B.A., "Modeling of nutation<br>
+	 *     and precession   New nutation series for nonrigid Earth and<br>
+	 *     insights into the Earth's interior", J.Geophys.Res., 107, B4,<br>
+	 *     2002.  The MHB2000 code itself was obtained on 9th September 2002<br>
+	 *     from ftp://maia.usno.navy.mil/conv2000/chapter5/IAU2000A.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBi00(double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:154</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3818</i>
 	 */
 	public static void iauBi00(Pointer<Double > dpsibi, Pointer<Double > depsbi, Pointer<Double > dra) {
 		iauBi00(Pointer.getPeer(dpsibi), Pointer.getPeer(depsbi), Pointer.getPeer(dra));
 	}
 	protected native static void iauBi00(@Ptr long dpsibi, @Ptr long depsbi, @Ptr long dra);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u B p 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  Frame bias and precession, IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double         TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rb           double[3][3]   frame bias matrix (Note 2)<br>
+	 *     rp           double[3][3]   precession matrix (Note 3)<br>
+	 *     rbp          double[3][3]   bias-precession matrix (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *             date1         date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rb transforms vectors from GCRS to mean J2000.0 by<br>
+	 *     applying frame bias.<br>
+	 * *  3) The matrix rp transforms vectors from J2000.0 mean equator and<br>
+	 *     equinox to mean equator and equinox of date by applying<br>
+	 *     precession.<br>
+	 * *  4) The matrix rbp transforms vectors from GCRS to mean equator and<br>
+	 *     equinox of date by applying frame bias then precession.  It is<br>
+	 *     the product rp x rb.<br>
+	 * *  5) It is permissible to re-use the same array in the returned<br>
+	 *     arguments.  The arrays are filled in the order given.<br>
+	 * *  Called:<br>
+	 *     iauBi00      frame bias components, IAU 2000<br>
+	 *     iauPr00      IAU 2000 precession adjustments<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRx        rotate around X-axis<br>
+	 *     iauRy        rotate around Y-axis<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauCr        copy r-matrix<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  Reference:<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *  This revision:  2013 August 21<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBp00(double, double, double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:156</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3879</i>
 	 */
 	public static void iauBp00(double date1, double date2, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp) {
 		iauBp00(date1, date2, Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp));
 	}
 	protected native static void iauBp00(double date1, double date2, @Ptr long rb, @Ptr long rp, @Ptr long rbp);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u B p 0 6<br>
+	 *  - - - - - - - -<br>
+	 * *  Frame bias and precession, IAU 2006.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double         TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rb           double[3][3]   frame bias matrix (Note 2)<br>
+	 *     rp           double[3][3]   precession matrix (Note 3)<br>
+	 *     rbp          double[3][3]   bias-precession matrix (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *             date1         date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rb transforms vectors from GCRS to mean J2000.0 by<br>
+	 *     applying frame bias.<br>
+	 * *  3) The matrix rp transforms vectors from mean J2000.0 to mean of<br>
+	 *     date by applying precession.<br>
+	 * *  4) The matrix rbp transforms vectors from GCRS to mean of date by<br>
+	 *     applying frame bias then precession.  It is the product rp x rb.<br>
+	 * *  5) It is permissible to re-use the same array in the returned<br>
+	 *     arguments.  The arrays are filled in the order given.<br>
+	 * *  Called:<br>
+	 *     iauPfw06     bias-precession F-W angles, IAU 2006<br>
+	 *     iauFw2m      F-W angles to r-matrix<br>
+	 *     iauPmat06    PB matrix, IAU 2006<br>
+	 *     iauTr        transpose r-matrix<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 *     iauCr        copy r-matrix<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 August 21<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBp06(double, double, double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:158</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3933</i>
 	 */
 	public static void iauBp06(double date1, double date2, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp) {
 		iauBp06(date1, date2, Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp));
 	}
 	protected native static void iauBp06(double date1, double date2, @Ptr long rb, @Ptr long rp, @Ptr long rbp);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u B p n 2 x y<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Extract from the bias-precession-nutation matrix the X,Y coordinates<br>
+	 *  of the Celestial Intermediate Pole.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rbpn      double[3][3]  celestial-to-true matrix (Note 1)<br>
+	 * *  Returned:<br>
+	 *     x,y       double        Celestial Intermediate Pole (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The matrix rbpn transforms vectors from GCRS to true equator (and<br>
+	 *     CIO or equinox) of date, and therefore the Celestial Intermediate<br>
+	 *     Pole unit vector is the bottom row of the matrix.<br>
+	 * *  2) The arguments x,y are components of the Celestial Intermediate<br>
+	 *     Pole unit vector in the Geocentric Celestial Reference System.<br>
+	 * *  Reference:<br>
+	 * *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154<br>
+	 *     (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBpn2xy(double[3][3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:160</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3965</i>
 	 */
 	public static void iauBpn2xy(Pointer<Double > rbpn, Pointer<Double > x, Pointer<Double > y) {
 		iauBpn2xy(Pointer.getPeer(rbpn), Pointer.getPeer(x), Pointer.getPeer(y));
 	}
 	protected native static void iauBpn2xy(@Ptr long rbpn, @Ptr long x, @Ptr long y);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 i 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial-to-intermediate matrix for a given date using the<br>
+	 *  IAU 2000A precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rc2i        double[3][3] celestial-to-intermediate matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS]  =  RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *               =  rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  3) A faster, but slightly less accurate result (about 1 mas), can be<br>
+	 *     obtained by using instead the iauC2i00b function.<br>
+	 * *  Called:<br>
+	 *     iauPnm00a    classical NPB matrix, IAU 2000A<br>
+	 *     iauC2ibpn    celestial-to-intermediate matrix, given NPB matrix<br>
+	 * *  References:<br>
+	 * *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154<br>
+	 *     (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:162</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4022</i>
 	 */
 	public static void iauC2i00a(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i00a(date1, date2, Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2i00a(double date1, double date2, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 i 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial-to-intermediate matrix for a given date using the<br>
+	 *  IAU 2000B precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rc2i        double[3][3] celestial-to-intermediate matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS]  =  RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *               =  rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  3) The present function is faster, but slightly less accurate (about<br>
+	 *     1 mas), than the iauC2i00a function.<br>
+	 * *  Called:<br>
+	 *     iauPnm00b    classical NPB matrix, IAU 2000B<br>
+	 *     iauC2ibpn    celestial-to-intermediate matrix, given NPB matrix<br>
+	 * *  References:<br>
+	 * *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154<br>
+	 *     (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:164</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4079</i>
 	 */
 	public static void iauC2i00b(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i00b(date1, date2, Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2i00b(double date1, double date2, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 i 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial-to-intermediate matrix for a given date using the<br>
+	 *  IAU 2006 precession and IAU 2000A nutation models.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rc2i        double[3][3] celestial-to-intermediate matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS]  =  RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *               =  RC2T * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  Called:<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 *     iauC2ixys    celestial-to-intermediate matrix, given X,Y and s<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:166</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4130</i>
 	 */
 	public static void iauC2i06a(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i06a(date1, date2, Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2i06a(double date1, double date2, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 i b p n<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial-to-intermediate matrix for a given date given<br>
+	 *  the bias-precession-nutation matrix.  IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 *     rbpn        double[3][3] celestial-to-true matrix (Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2i        double[3][3] celestial-to-intermediate matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix rbpn transforms vectors from GCRS to true equator (and<br>
+	 *     CIO or equinox) of date.  Only the CIP (bottom row) is used.<br>
+	 * *  3) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *              = RC2T * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  4) Although its name does not include "00", This function is in fact<br>
+	 *     specific to the IAU 2000 models.<br>
+	 * *  Called:<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauC2ixy     celestial-to-intermediate matrix, given X,Y<br>
+	 * *  References:<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ibpn(double, double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:168</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4189</i>
 	 */
 	public static void iauC2ibpn(double date1, double date2, Pointer<Double > rbpn, Pointer<Double > rc2i) {
 		iauC2ibpn(date1, date2, Pointer.getPeer(rbpn), Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2ibpn(double date1, double date2, @Ptr long rbpn, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u C 2 i x y<br>
+	 *  - - - - - - - - -<br>
+	 * *  Form the celestial to intermediate-frame-of-date matrix for a given<br>
+	 *  date when the CIP X,Y coordinates are known.  IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 *     x,y         double       Celestial Intermediate Pole (Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2i        double[3][3] celestial-to-intermediate matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The Celestial Intermediate Pole coordinates are the x,y components<br>
+	 *     of the unit vector in the Geocentric Celestial Reference System.<br>
+	 * *  3) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *              = RC2T * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  4) Although its name does not include "00", This function is in fact<br>
+	 *     specific to the IAU 2000 models.<br>
+	 * *  Called:<br>
+	 *     iauC2ixys    celestial-to-intermediate matrix, given X,Y and s<br>
+	 *     iauS00       the CIO locator s, given X,Y, IAU 2000A<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ixy(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:170</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4243</i>
 	 */
 	public static void iauC2ixy(double date1, double date2, double x, double y, Pointer<Double > rc2i) {
 		iauC2ixy(date1, date2, x, y, Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2ixy(double date1, double date2, double x, double y, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 i x y s<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial to intermediate-frame-of-date matrix given the CIP<br>
+	 *  X,Y and the CIO locator s.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     x,y      double         Celestial Intermediate Pole (Note 1)<br>
+	 *     s        double         the CIO locator s (Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2i     double[3][3]   celestial-to-intermediate matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The Celestial Intermediate Pole coordinates are the x,y<br>
+	 *     components of the unit vector in the Geocentric Celestial<br>
+	 *     Reference System.<br>
+	 * *  2) The CIO locator s (in radians) positions the Celestial<br>
+	 *     Intermediate Origin on the equator of the CIP.<br>
+	 * *  3) The matrix rc2i is the first stage in the transformation from<br>
+	 *     celestial to terrestrial coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *              = RC2T * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  Called:<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRy        rotate around Y-axis<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2008 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ixys(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:172</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4284</i>
 	 */
 	public static void iauC2ixys(double x, double y, double s, Pointer<Double > rc2i) {
 		iauC2ixys(x, y, s, Pointer.getPeer(rc2i));
 	}
 	protected native static void iauC2ixys(double x, double y, double s, @Ptr long rc2i);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 t 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial to terrestrial matrix given the date, the UT1 and<br>
+	 *  the polar motion, using the IAU 2000A nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     tta,ttb  double         TT as a 2-part Julian Date (Note 1)<br>
+	 *     uta,utb  double         UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     xp,yp    double         coordinates of the pole (radians, Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2t     double[3][3]   celestial-to-terrestrial matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT and UT1 dates tta+ttb and uta+utb are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments uta and<br>
+	 *     utb.  For example, JD(UT1)=2450123.7 could be expressed in any of<br>
+	 *     these ways, among others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  In the case of uta,utb, the<br>
+	 *     date & time method is best matched to the Earth rotation angle<br>
+	 *     algorithm used:  maximum precision is delivered when the uta<br>
+	 *     argument is for 0hrs UT1 on the day in question and the utb<br>
+	 *     argument lies in the range 0 to 1, or vice versa.<br>
+	 * *  2) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  3) The matrix rc2t transforms from celestial to terrestrial<br>
+	 *     coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * RC2I * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), RC2I is the<br>
+	 *     celestial-to-intermediate matrix, ERA is the Earth rotation<br>
+	 *     angle and RPOM is the polar motion matrix.<br>
+	 * *  4) A faster, but slightly less accurate result (about 1 mas), can<br>
+	 *     be obtained by using instead the iauC2t00b function.<br>
+	 * *  Called:<br>
+	 *     iauC2i00a    celestial-to-intermediate matrix, IAU 2000A<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauC2tcio    form CIO-based celestial-to-terrestrial matrix<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t00a(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:174</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4347</i>
 	 */
 	public static void iauC2t00a(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t00a(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2t00a(double tta, double ttb, double uta, double utb, double xp, double yp, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 t 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial to terrestrial matrix given the date, the UT1 and<br>
+	 *  the polar motion, using the IAU 2000B nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     tta,ttb  double         TT as a 2-part Julian Date (Note 1)<br>
+	 *     uta,utb  double         UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     xp,yp    double         coordinates of the pole (radians, Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2t     double[3][3]   celestial-to-terrestrial matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT and UT1 dates tta+ttb and uta+utb are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments uta and<br>
+	 *     utb.  For example, JD(UT1)=2450123.7 could be expressed in any of<br>
+	 *     these ways, among others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  In the case of uta,utb, the<br>
+	 *     date & time method is best matched to the Earth rotation angle<br>
+	 *     algorithm used:  maximum precision is delivered when the uta<br>
+	 *     argument is for 0hrs UT1 on the day in question and the utb<br>
+	 *     argument lies in the range 0 to 1, or vice versa.<br>
+	 * *  2) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  3) The matrix rc2t transforms from celestial to terrestrial<br>
+	 *     coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * RC2I * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), RC2I is the<br>
+	 *     celestial-to-intermediate matrix, ERA is the Earth rotation<br>
+	 *     angle and RPOM is the polar motion matrix.<br>
+	 * *  4) The present function is faster, but slightly less accurate (about<br>
+	 *     1 mas), than the iauC2t00a function.<br>
+	 * *  Called:<br>
+	 *     iauC2i00b    celestial-to-intermediate matrix, IAU 2000B<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauC2tcio    form CIO-based celestial-to-terrestrial matrix<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t00b(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:176</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4409</i>
 	 */
 	public static void iauC2t00b(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t00b(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2t00b(double tta, double ttb, double uta, double utb, double xp, double yp, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 t 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the celestial to terrestrial matrix given the date, the UT1 and<br>
+	 *  the polar motion, using the IAU 2006 precession and IAU 2000A<br>
+	 *  nutation models.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     tta,ttb  double         TT as a 2-part Julian Date (Note 1)<br>
+	 *     uta,utb  double         UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     xp,yp    double         coordinates of the pole (radians, Note 2)<br>
+	 * *  Returned:<br>
+	 *     rc2t     double[3][3]   celestial-to-terrestrial matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT and UT1 dates tta+ttb and uta+utb are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments uta and<br>
+	 *     utb.  For example, JD(UT1)=2450123.7 could be expressed in any of<br>
+	 *     these ways, among others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  In the case of uta,utb, the<br>
+	 *     date & time method is best matched to the Earth rotation angle<br>
+	 *     algorithm used:  maximum precision is delivered when the uta<br>
+	 *     argument is for 0hrs UT1 on the day in question and the utb<br>
+	 *     argument lies in the range 0 to 1, or vice versa.<br>
+	 * *  2) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  3) The matrix rc2t transforms from celestial to terrestrial<br>
+	 *     coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * RC2I * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), RC2I is the<br>
+	 *     celestial-to-intermediate matrix, ERA is the Earth rotation<br>
+	 *     angle and RPOM is the polar motion matrix.<br>
+	 * *  Called:<br>
+	 *     iauC2i06a    celestial-to-intermediate matrix, IAU 2006/2000A<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauC2tcio    form CIO-based celestial-to-terrestrial matrix<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t06a(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:178</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4471</i>
 	 */
 	public static void iauC2t06a(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t06a(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2t06a(double tta, double ttb, double uta, double utb, double xp, double yp, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 t c i o<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Assemble the celestial to terrestrial matrix from CIO-based<br>
+	 *  components (the celestial-to-intermediate matrix, the Earth Rotation<br>
+	 *  Angle and the polar motion matrix).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rc2i     double[3][3]    celestial-to-intermediate matrix<br>
+	 *     era      double          Earth rotation angle (radians)<br>
+	 *     rpom     double[3][3]    polar-motion matrix<br>
+	 * *  Returned:<br>
+	 *     rc2t     double[3][3]    celestial-to-terrestrial matrix<br>
+	 * *  Notes:<br>
+	 * *  1) This function constructs the rotation matrix that transforms<br>
+	 *     vectors in the celestial system into vectors in the terrestrial<br>
+	 *     system.  It does so starting from precomputed components, namely<br>
+	 *     the matrix which rotates from celestial coordinates to the<br>
+	 *     intermediate frame, the Earth rotation angle and the polar motion<br>
+	 *     matrix.  One use of the present function is when generating a<br>
+	 *     series of celestial-to-terrestrial matrices where only the Earth<br>
+	 *     Rotation Angle changes, avoiding the considerable overhead of<br>
+	 *     recomputing the precession-nutation more often than necessary to<br>
+	 *     achieve given accuracy objectives.<br>
+	 * *  2) The relationship between the arguments is as follows:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * rc2i * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003).<br>
+	 * *  Called:<br>
+	 *     iauCr        copy r-matrix<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *  This revision:  2013 August 24<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2tcio(double[3][3], double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:180</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4517</i>
 	 */
 	public static void iauC2tcio(Pointer<Double > rc2i, double era, Pointer<Double > rpom, Pointer<Double > rc2t) {
 		iauC2tcio(Pointer.getPeer(rc2i), era, Pointer.getPeer(rpom), Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2tcio(@Ptr long rc2i, double era, @Ptr long rpom, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u C 2 t e q x<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Assemble the celestial to terrestrial matrix from equinox-based<br>
+	 *  components (the celestial-to-true matrix, the Greenwich Apparent<br>
+	 *  Sidereal Time and the polar motion matrix).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rbpn   double[3][3]  celestial-to-true matrix<br>
+	 *     gst    double        Greenwich (apparent) Sidereal Time (radians)<br>
+	 *     rpom   double[3][3]  polar-motion matrix<br>
+	 * *  Returned:<br>
+	 *     rc2t   double[3][3]  celestial-to-terrestrial matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) This function constructs the rotation matrix that transforms<br>
+	 *     vectors in the celestial system into vectors in the terrestrial<br>
+	 *     system.  It does so starting from precomputed components, namely<br>
+	 *     the matrix which rotates from celestial coordinates to the<br>
+	 *     true equator and equinox of date, the Greenwich Apparent Sidereal<br>
+	 *     Time and the polar motion matrix.  One use of the present function<br>
+	 *     is when generating a series of celestial-to-terrestrial matrices<br>
+	 *     where only the Sidereal Time changes, avoiding the considerable<br>
+	 *     overhead of recomputing the precession-nutation more often than<br>
+	 *     necessary to achieve given accuracy objectives.<br>
+	 * *  2) The relationship between the arguments is as follows:<br>
+	 * *        [TRS] = rpom * R_3(gst) * rbpn * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003).<br>
+	 * *  Called:<br>
+	 *     iauCr        copy r-matrix<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 August 24<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2teqx(double[3][3], double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:182</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4563</i>
 	 */
 	public static void iauC2teqx(Pointer<Double > rbpn, double gst, Pointer<Double > rpom, Pointer<Double > rc2t) {
 		iauC2teqx(Pointer.getPeer(rbpn), gst, Pointer.getPeer(rpom), Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2teqx(@Ptr long rbpn, double gst, @Ptr long rpom, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u C 2 t p e<br>
+	 *  - - - - - - - - -<br>
+	 * *  Form the celestial to terrestrial matrix given the date, the UT1,<br>
+	 *  the nutation and the polar motion.  IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     tta,ttb    double        TT as a 2-part Julian Date (Note 1)<br>
+	 *     uta,utb    double        UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     dpsi,deps  double        nutation (Note 2)<br>
+	 *     xp,yp      double        coordinates of the pole (radians, Note 3)<br>
+	 * *  Returned:<br>
+	 *     rc2t       double[3][3]  celestial-to-terrestrial matrix (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT and UT1 dates tta+ttb and uta+utb are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments uta and<br>
+	 *     utb.  For example, JD(UT1)=2450123.7 could be expressed in any of<br>
+	 *     these ways, among others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  In the case of uta,utb, the<br>
+	 *     date & time method is best matched to the Earth rotation angle<br>
+	 *     algorithm used:  maximum precision is delivered when the uta<br>
+	 *     argument is for 0hrs UT1 on the day in question and the utb<br>
+	 *     argument lies in the range 0 to 1, or vice versa.<br>
+	 * *  2) The caller is responsible for providing the nutation components;<br>
+	 *     they are in longitude and obliquity, in radians and are with<br>
+	 *     respect to the equinox and ecliptic of date.  For high-accuracy<br>
+	 *     applications, free core nutation should be included as well as<br>
+	 *     any other relevant corrections to the position of the CIP.<br>
+	 * *  3) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  4) The matrix rc2t transforms from celestial to terrestrial<br>
+	 *     coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(GST) * RBPN * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), RBPN is the<br>
+	 *     bias-precession-nutation matrix, GST is the Greenwich (apparent)<br>
+	 *     Sidereal Time and RPOM is the polar motion matrix.<br>
+	 * *  5) Although its name does not include "00", This function is in fact<br>
+	 *     specific to the IAU 2000 models.<br>
+	 * *  Called:<br>
+	 *     iauPn00      bias/precession/nutation results, IAU 2000<br>
+	 *     iauGmst00    Greenwich mean sidereal time, IAU 2000<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauEe00      equation of the equinoxes, IAU 2000<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauC2teqx    form equinox-based celestial-to-terrestrial matrix<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2tpe(double, double, double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:184</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4633</i>
 	 */
 	public static void iauC2tpe(double tta, double ttb, double uta, double utb, double dpsi, double deps, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2tpe(tta, ttb, uta, utb, dpsi, deps, xp, yp, Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2tpe(double tta, double ttb, double uta, double utb, double dpsi, double deps, double xp, double yp, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u C 2 t x y<br>
+	 *  - - - - - - - - -<br>
+	 * *  Form the celestial to terrestrial matrix given the date, the UT1,<br>
+	 *  the CIP coordinates and the polar motion.  IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     tta,ttb  double         TT as a 2-part Julian Date (Note 1)<br>
+	 *     uta,utb  double         UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     x,y      double         Celestial Intermediate Pole (Note 2)<br>
+	 *     xp,yp    double         coordinates of the pole (radians, Note 3)<br>
+	 * *  Returned:<br>
+	 *     rc2t     double[3][3]   celestial-to-terrestrial matrix (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT and UT1 dates tta+ttb and uta+utb are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments uta and<br>
+	 *     utb.  For example, JD(UT1)=2450123.7 could be expressed in any o<br>
+	 *     these ways, among others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  In the case of uta,utb, the<br>
+	 *     date & time method is best matched to the Earth rotation angle<br>
+	 *     algorithm used:  maximum precision is delivered when the uta<br>
+	 *     argument is for 0hrs UT1 on the day in question and the utb<br>
+	 *     argument lies in the range 0 to 1, or vice versa.<br>
+	 * *  2) The Celestial Intermediate Pole coordinates are the x,y<br>
+	 *     components of the unit vector in the Geocentric Celestial<br>
+	 *     Reference System.<br>
+	 * *  3) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  4) The matrix rc2t transforms from celestial to terrestrial<br>
+	 *     coordinates:<br>
+	 * *        [TRS] = RPOM * R_3(ERA) * RC2I * [CRS]<br>
+	 * *              = rc2t * [CRS]<br>
+	 * *     where [CRS] is a vector in the Geocentric Celestial Reference<br>
+	 *     System and [TRS] is a vector in the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions 2003), ERA is the Earth<br>
+	 *     Rotation Angle and RPOM is the polar motion matrix.<br>
+	 * *  5) Although its name does not include "00", This function is in fact<br>
+	 *     specific to the IAU 2000 models.<br>
+	 * *  Called:<br>
+	 *     iauC2ixy     celestial-to-intermediate matrix, given X,Y<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauSp00      the TIO locator s', IERS 2000<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauC2tcio    form CIO-based celestial-to-terrestrial matrix<br>
+	 * * Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2txy(double, double, double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:186</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4699</i>
 	 */
 	public static void iauC2txy(double tta, double ttb, double uta, double utb, double x, double y, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2txy(tta, ttb, uta, utb, x, y, xp, yp, Pointer.getPeer(rc2t));
 	}
 	protected native static void iauC2txy(double tta, double ttb, double uta, double utb, double x, double y, double xp, double yp, @Ptr long rc2t);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u E o 0 6 a<br>
+	 *  - - - - - - - - -<br>
+	 * *  Equation of the origins, IAU 2006 precession and IAU 2000A nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    equation of the origins in radians<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The equation of the origins is the distance between the true<br>
+	 *     equinox and the celestial intermediate origin and, equivalently,<br>
+	 *     the difference between Earth rotation angle and Greenwich<br>
+	 *     apparent sidereal time (ERA-GST).  It comprises the precession<br>
+	 *     (since J2000.0) in right ascension plus the equation of the<br>
+	 *     equinoxes (including the small correction terms).<br>
+	 * *  Called:<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 *     iauEors      equation of the origins, given NPB matrix and s<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEo06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:188</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4747</i>
 	 */
 	native public static double iauEo06a(double date1, double date2);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u E o r s<br>
+	 *  - - - - - - - -<br>
+	 * *  Equation of the origins, given the classical NPB matrix and the<br>
+	 *  quantity s.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rnpb  double[3][3]  classical nutation x precession x bias matrix<br>
+	 *     s     double        the quantity s (the CIO locator)<br>
+	 * *  Returned (function value):<br>
+	 *           double        the equation of the origins in radians.<br>
+	 * *  Notes:<br>
+	 * *  1)  The equation of the origins is the distance between the true<br>
+	 *      equinox and the celestial intermediate origin and, equivalently,<br>
+	 *      the difference between Earth rotation angle and Greenwich<br>
+	 *      apparent sidereal time (ERA-GST).  It comprises the precession<br>
+	 *      (since J2000.0) in right ascension plus the equation of the<br>
+	 *      equinoxes (including the small correction terms).<br>
+	 * *  2)  The algorithm is from Wallace & Capitaine (2006).<br>
+	 * * References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEors(double[3][3], double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:190</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4778</i>
 	 */
 	public static double iauEors(Pointer<Double > rnpb, double s) {
 		return iauEors(Pointer.getPeer(rnpb), s);
 	}
 	protected native static double iauEors(@Ptr long rnpb, double s);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u F w 2 m<br>
+	 *  - - - - - - - -<br>
+	 * *  Form rotation matrix given the Fukushima-Williams angles.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     gamb     double         F-W angle gamma_bar (radians)<br>
+	 *     phib     double         F-W angle phi_bar (radians)<br>
+	 *     psi      double         F-W angle psi (radians)<br>
+	 *     eps      double         F-W angle epsilon (radians)<br>
+	 * *  Returned:<br>
+	 *     r        double[3][3]   rotation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) Naming the following points:<br>
+	 * *           e = J2000.0 ecliptic pole,<br>
+	 *           p = GCRS pole,<br>
+	 *           E = ecliptic pole of date,<br>
+	 *     and   P = CIP,<br>
+	 * *     the four Fukushima-Williams angles are as follows:<br>
+	 * *        gamb = gamma = epE<br>
+	 *        phib = phi = pE<br>
+	 *        psi = psi = pEP<br>
+	 *        eps = epsilon = EP<br>
+	 * *  2) The matrix representing the combined effects of frame bias,<br>
+	 *     precession and nutation is:<br>
+	 * *        NxPxB = R_1(-eps).R_3(-psi).R_1(phib).R_3(gamb)<br>
+	 * *  3) Three different matrices can be constructed, depending on the<br>
+	 *     supplied angles:<br>
+	 * *     o  To obtain the nutation x precession x frame bias matrix,<br>
+	 *        generate the four precession angles, generate the nutation<br>
+	 *        components and add them to the psi_bar and epsilon_A angles,<br>
+	 *        and call the present function.<br>
+	 * *     o  To obtain the precession x frame bias matrix, generate the<br>
+	 *        four precession angles and call the present function.<br>
+	 * *     o  To obtain the frame bias matrix, generate the four precession<br>
+	 *        angles for date J2000.0 and call the present function.<br>
+	 * *     The nutation-only and precession-only matrices can if necessary<br>
+	 *     be obtained by combining these three appropriately.<br>
+	 * *  Called:<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRx        rotate around X-axis<br>
+	 * *  Reference:<br>
+	 * *     Hilton, J. et al., 2006, Celest.Mech.Dyn.Astron. 94, 351<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFw2m(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:192</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4831</i>
 	 */
 	public static void iauFw2m(double gamb, double phib, double psi, double eps, Pointer<Double > r) {
 		iauFw2m(gamb, phib, psi, eps, Pointer.getPeer(r));
 	}
 	protected native static void iauFw2m(double gamb, double phib, double psi, double eps, @Ptr long r);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u F w 2 x y<br>
+	 *  - - - - - - - - -<br>
+	 * *  CIP X,Y given Fukushima-Williams bias-precession-nutation angles.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     gamb     double    F-W angle gamma_bar (radians)<br>
+	 *     phib     double    F-W angle phi_bar (radians)<br>
+	 *     psi      double    F-W angle psi (radians)<br>
+	 *     eps      double    F-W angle epsilon (radians)<br>
+	 * *  Returned:<br>
+	 *     x,y      double    CIP unit vector X,Y<br>
+	 * *  Notes:<br>
+	 * *  1) Naming the following points:<br>
+	 * *           e = J2000.0 ecliptic pole,<br>
+	 *           p = GCRS pole<br>
+	 *           E = ecliptic pole of date,<br>
+	 *     and   P = CIP,<br>
+	 * *     the four Fukushima-Williams angles are as follows:<br>
+	 * *        gamb = gamma = epE<br>
+	 *        phib = phi = pE<br>
+	 *        psi = psi = pEP<br>
+	 *        eps = epsilon = EP<br>
+	 * *  2) The matrix representing the combined effects of frame bias,<br>
+	 *     precession and nutation is:<br>
+	 * *        NxPxB = R_1(-epsA).R_3(-psi).R_1(phib).R_3(gamb)<br>
+	 * *     The returned values x,y are elements [2][0] and [2][1] of the<br>
+	 *     matrix.  Near J2000.0, they are essentially angles in radians.<br>
+	 * *  Called:<br>
+	 *     iauFw2m      F-W angles to r-matrix<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 * *  Reference:<br>
+	 * *     Hilton, J. et al., 2006, Celest.Mech.Dyn.Astron. 94, 351<br>
+	 * *  This revision:  2013 September 2<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFw2xy(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:194</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4873</i>
 	 */
 	public static void iauFw2xy(double gamb, double phib, double psi, double eps, Pointer<Double > x, Pointer<Double > y) {
 		iauFw2xy(gamb, phib, psi, eps, Pointer.getPeer(x), Pointer.getPeer(y));
 	}
 	protected native static void iauFw2xy(double gamb, double phib, double psi, double eps, @Ptr long x, @Ptr long y);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u m 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of nutation for a given date, IAU 2000A model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatn        double[3][3]    nutation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(true) = rmatn * V(mean), where<br>
+	 *     the p-vector V(true) is with respect to the true equatorial triad<br>
+	 *     of date and the p-vector V(mean) is with respect to the mean<br>
+	 *     equatorial triad of date.<br>
+	 * *  3) A faster, but slightly less accurate result (about 1 mas), can be<br>
+	 *     obtained by using instead the iauNum00b function.<br>
+	 * *  Called:<br>
+	 *     iauPn00a     bias/precession/nutation, IAU 2000A<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.222-3 (p114).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:196</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4919</i>
 	 */
 	public static void iauNum00a(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum00a(date1, date2, Pointer.getPeer(rmatn));
 	}
 	protected native static void iauNum00a(double date1, double date2, @Ptr long rmatn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u m 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of nutation for a given date, IAU 2000B model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double         TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatn        double[3][3]   nutation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(true) = rmatn * V(mean), where<br>
+	 *     the p-vector V(true) is with respect to the true equatorial triad<br>
+	 *     of date and the p-vector V(mean) is with respect to the mean<br>
+	 *     equatorial triad of date.<br>
+	 * *  3) The present function is faster, but slightly less accurate (about<br>
+	 *     1 mas), than the iauNum00a function.<br>
+	 * *  Called:<br>
+	 *     iauPn00b     bias/precession/nutation, IAU 2000B<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.222-3 (p114).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:198</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4965</i>
 	 */
 	public static void iauNum00b(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum00b(date1, date2, Pointer.getPeer(rmatn));
 	}
 	protected native static void iauNum00b(double date1, double date2, @Ptr long rmatn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u m 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of nutation for a given date, IAU 2006/2000A model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatn         double[3][3]    nutation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(true) = rmatn * V(mean), where<br>
+	 *     the p-vector V(true) is with respect to the true equatorial triad<br>
+	 *     of date and the p-vector V(mean) is with respect to the mean<br>
+	 *     equatorial triad of date.<br>
+	 * *  Called:<br>
+	 *     iauObl06     mean obliquity, IAU 2006<br>
+	 *     iauNut06a    nutation, IAU 2006/2000A<br>
+	 *     iauNumat     form nutation matrix<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.222-3 (p114).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:200</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5011</i>
 	 */
 	public static void iauNum06a(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum06a(date1, date2, Pointer.getPeer(rmatn));
 	}
 	protected native static void iauNum06a(double date1, double date2, @Ptr long rmatn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u N u m a t<br>
+	 *  - - - - - - - - -<br>
+	 * *  Form the matrix of nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     epsa        double         mean obliquity of date (Note 1)<br>
+	 *     dpsi,deps   double         nutation (Note 2)<br>
+	 * *  Returned:<br>
+	 *     rmatn       double[3][3]   nutation matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *<br>
+	 *  1) The supplied mean obliquity epsa, must be consistent with the<br>
+	 *     precession-nutation models from which dpsi and deps were obtained.<br>
+	 * *  2) The caller is responsible for providing the nutation components;<br>
+	 *     they are in longitude and obliquity, in radians and are with<br>
+	 *     respect to the equinox and ecliptic of date.<br>
+	 * *  3) The matrix operates in the sense V(true) = rmatn * V(mean),<br>
+	 *     where the p-vector V(true) is with respect to the true<br>
+	 *     equatorial triad of date and the p-vector V(mean) is with<br>
+	 *     respect to the mean equatorial triad of date.<br>
+	 * *  Called:<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRx        rotate around X-axis<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.222-3 (p114).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNumat(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:202</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5049</i>
 	 */
 	public static void iauNumat(double epsa, double dpsi, double deps, Pointer<Double > rmatn) {
 		iauNumat(epsa, dpsi, deps, Pointer.getPeer(rmatn));
 	}
 	protected native static void iauNumat(double epsa, double dpsi, double deps, @Ptr long rmatn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u t 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Nutation, IAU 2000A model (MHB2000 luni-solar and planetary nutation<br>
+	 *  with free core nutation omitted).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps     double   nutation, luni-solar + planetary (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The nutation components in longitude and obliquity are in radians<br>
+	 *     and with respect to the equinox and ecliptic of date.  The<br>
+	 *     obliquity at J2000.0 is assumed to be the Lieske et al. (1977)<br>
+	 *     value of 84381.448 arcsec.<br>
+	 * *     Both the luni-solar and planetary nutations are included.  The<br>
+	 *     latter are due to direct planetary nutations and the<br>
+	 *     perturbations of the lunar and terrestrial orbits.<br>
+	 * *  3) The function computes the MHB2000 nutation series with the<br>
+	 *     associated corrections for planetary nutations.  It is an<br>
+	 *     implementation of the nutation part of the IAU 2000A precession-<br>
+	 *     nutation model, formally adopted by the IAU General Assembly in<br>
+	 *     2000, namely MHB2000 (Mathews et al. 2002), but with the free<br>
+	 *     core nutation (FCN - see Note 4) omitted.<br>
+	 * *  4) The full MHB2000 model also contains contributions to the<br>
+	 *     nutations in longitude and obliquity due to the free-excitation<br>
+	 *     of the free-core-nutation during the period 1979-2000.  These FCN<br>
+	 *     terms, which are time-dependent and unpredictable, are NOT<br>
+	 *     included in the present function and, if required, must be<br>
+	 *     independently computed.  With the FCN corrections included, the<br>
+	 *     present function delivers a pole which is at current epochs<br>
+	 *     accurate to a few hundred microarcseconds.  The omission of FCN<br>
+	 *     introduces further errors of about that size.<br>
+	 * *  5) The present function provides classical nutation.  The MHB2000<br>
+	 *     algorithm, from which it is adapted, deals also with (i) the<br>
+	 *     offsets between the GCRS and mean poles and (ii) the adjustments<br>
+	 *     in longitude and obliquity due to the changed precession rates.<br>
+	 *     These additional functions, namely frame bias and precession<br>
+	 *     adjustments, are supported by the SOFA functions iauBi00  and<br>
+	 *     iauPr00.<br>
+	 * *  6) The MHB2000 algorithm also provides "total" nutations, comprising<br>
+	 *     the arithmetic sum of the frame bias, precession adjustments,<br>
+	 *     luni-solar nutation and planetary nutation.  These total<br>
+	 *     nutations can be used in combination with an existing IAU 1976<br>
+	 *     precession implementation, such as iauPmat76,  to deliver GCRS-<br>
+	 *     to-true predictions of sub-mas accuracy at current dates.<br>
+	 *     However, there are three shortcomings in the MHB2000 model that<br>
+	 *     must be taken into account if more accurate or definitive results<br>
+	 *     are required (see Wallace 2002):<br>
+	 * *       (i) The MHB2000 total nutations are simply arithmetic sums,<br>
+	 *           yet in reality the various components are successive Euler<br>
+	 *           rotations.  This slight lack of rigor leads to cross terms<br>
+	 *           that exceed 1 mas after a century.  The rigorous procedure<br>
+	 *           is to form the GCRS-to-true rotation matrix by applying the<br>
+	 *           bias, precession and nutation in that order.<br>
+	 * *      (ii) Although the precession adjustments are stated to be with<br>
+	 *           respect to Lieske et al. (1977), the MHB2000 model does<br>
+	 *           not specify which set of Euler angles are to be used and<br>
+	 *           how the adjustments are to be applied.  The most literal<br>
+	 *           and straightforward procedure is to adopt the 4-rotation<br>
+	 *           epsilon_0, psi_A, omega_A, xi_A option, and to add DPSIPR<br>
+	 *           to psi_A and DEPSPR to both omega_A and eps_A.<br>
+	 * *     (iii) The MHB2000 model predates the determination by Chapront<br>
+	 *           et al. (2002) of a 14.6 mas displacement between the<br>
+	 *           J2000.0 mean equinox and the origin of the ICRS frame.  It<br>
+	 *           should, however, be noted that neglecting this displacement<br>
+	 *           when calculating star coordinates does not lead to a<br>
+	 *           14.6 mas change in right ascension, only a small second-<br>
+	 *           order distortion in the pattern of the precession-nutation<br>
+	 *           effect.<br>
+	 * *     For these reasons, the SOFA functions do not generate the "total<br>
+	 *     nutations" directly, though they can of course easily be<br>
+	 *     generated by calling iauBi00, iauPr00 and the present function<br>
+	 *     and adding the results.<br>
+	 * *  7) The MHB2000 model contains 41 instances where the same frequency<br>
+	 *     appears multiple times, of which 38 are duplicates and three are<br>
+	 *     triplicates.  To keep the present code close to the original MHB<br>
+	 *     algorithm, this small inefficiency has not been corrected.<br>
+	 * *  Called:<br>
+	 *     iauFal03     mean anomaly of the Moon<br>
+	 *     iauFaf03     mean argument of the latitude of the Moon<br>
+	 *     iauFaom03    mean longitude of the Moon's ascending node<br>
+	 *     iauFame03    mean longitude of Mercury<br>
+	 *     iauFave03    mean longitude of Venus<br>
+	 *     iauFae03     mean longitude of Earth<br>
+	 *     iauFama03    mean longitude of Mars<br>
+	 *     iauFaju03    mean longitude of Jupiter<br>
+	 *     iauFasa03    mean longitude of Saturn<br>
+	 *     iauFaur03    mean longitude of Uranus<br>
+	 *     iauFapa03    general accumulated precession in longitude<br>
+	 * *  References:<br>
+	 * *     Chapront, J., Chapront-Touze, M. & Francou, G. 2002,<br>
+	 *     Astron.Astrophys. 387, 700<br>
+	 * *     Lieske, J.H., Lederle, T., Fricke, W. & Morando, B. 1977,<br>
+	 *     Astron.Astrophys. 58, 1-16<br>
+	 * *     Mathews, P.M., Herring, T.A., Buffet, B.A. 2002, J.Geophys.Res.<br>
+	 *     107, B4.  The MHB_2000 code itself was obtained on 9th September<br>
+	 *     2002 from ftp//maia.usno.navy.mil/conv2000/chapter5/IAU2000A.<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *     Wallace, P.T., "Software for Implementing the IAU 2000<br>
+	 *     Resolutions", in IERS Workshop 5.1 (2002)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut00a(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:204</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5177</i>
 	 */
 	public static void iauNut00a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut00a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
 	}
 	protected native static void iauNut00a(double date1, double date2, @Ptr long dpsi, @Ptr long deps);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u t 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Nutation, IAU 2000B model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps     double    nutation, luni-solar + planetary (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The nutation components in longitude and obliquity are in radians<br>
+	 *     and with respect to the equinox and ecliptic of date.  The<br>
+	 *     obliquity at J2000.0 is assumed to be the Lieske et al. (1977)<br>
+	 *     value of 84381.448 arcsec.  (The errors that result from using<br>
+	 *     this function with the IAU 2006 value of 84381.406 arcsec can be<br>
+	 *     neglected.)<br>
+	 * *     The nutation model consists only of luni-solar terms, but<br>
+	 *     includes also a fixed offset which compensates for certain long-<br>
+	 *     period planetary terms (Note 7).<br>
+	 * *  3) This function is an implementation of the IAU 2000B abridged<br>
+	 *     nutation model formally adopted by the IAU General Assembly in<br>
+	 *     2000.  The function computes the MHB_2000_SHORT luni-solar<br>
+	 *     nutation series (Luzum 2001), but without the associated<br>
+	 *     corrections for the precession rate adjustments and the offset<br>
+	 *     between the GCRS and J2000.0 mean poles.<br>
+	 * *  4) The full IAU 2000A (MHB2000) nutation model contains nearly 1400<br>
+	 *     terms.  The IAU 2000B model (McCarthy & Luzum 2003) contains only<br>
+	 *     77 terms, plus additional simplifications, yet still delivers<br>
+	 *     results of 1 mas accuracy at present epochs.  This combination of<br>
+	 *     accuracy and size makes the IAU 2000B abridged nutation model<br>
+	 *     suitable for most practical applications.<br>
+	 * *     The function delivers a pole accurate to 1 mas from 1900 to 2100<br>
+	 *     (usually better than 1 mas, very occasionally just outside<br>
+	 *     1 mas).  The full IAU 2000A model, which is implemented in the<br>
+	 *     function iauNut00a (q.v.), delivers considerably greater accuracy<br>
+	 *     at current dates;  however, to realize this improved accuracy,<br>
+	 *     corrections for the essentially unpredictable free-core-nutation<br>
+	 *     (FCN) must also be included.<br>
+	 * *  5) The present function provides classical nutation.  The<br>
+	 *     MHB_2000_SHORT algorithm, from which it is adapted, deals also<br>
+	 *     with (i) the offsets between the GCRS and mean poles and (ii) the<br>
+	 *     adjustments in longitude and obliquity due to the changed<br>
+	 *     precession rates.  These additional functions, namely frame bias<br>
+	 *     and precession adjustments, are supported by the SOFA functions<br>
+	 *     iauBi00  and iauPr00.<br>
+	 * *  6) The MHB_2000_SHORT algorithm also provides "total" nutations,<br>
+	 *     comprising the arithmetic sum of the frame bias, precession<br>
+	 *     adjustments, and nutation (luni-solar + planetary).  These total<br>
+	 *     nutations can be used in combination with an existing IAU 1976<br>
+	 *     precession implementation, such as iauPmat76,  to deliver GCRS-<br>
+	 *     to-true predictions of mas accuracy at current epochs.  However,<br>
+	 *     for symmetry with the iauNut00a  function (q.v. for the reasons),<br>
+	 *     the SOFA functions do not generate the "total nutations"<br>
+	 *     directly.  Should they be required, they could of course easily<br>
+	 *     be generated by calling iauBi00, iauPr00 and the present function<br>
+	 *     and adding the results.<br>
+	 * *  7) The IAU 2000B model includes "planetary bias" terms that are<br>
+	 *     fixed in size but compensate for long-period nutations.  The<br>
+	 *     amplitudes quoted in McCarthy & Luzum (2003), namely<br>
+	 *     Dpsi = -1.5835 mas and Depsilon = +1.6339 mas, are optimized for<br>
+	 *     the "total nutations" method described in Note 6.  The Luzum<br>
+	 *     (2001) values used in this SOFA implementation, namely -0.135 mas<br>
+	 *     and +0.388 mas, are optimized for the "rigorous" method, where<br>
+	 *     frame bias, precession and nutation are applied separately and in<br>
+	 *     that order.  During the interval 1995-2050, the SOFA<br>
+	 *     implementation delivers a maximum error of 1.001 mas (not<br>
+	 *     including FCN).<br>
+	 * *  References:<br>
+	 * *     Lieske, J.H., Lederle, T., Fricke, W., Morando, B., "Expressions<br>
+	 *     for the precession quantities based upon the IAU /1976/ system of<br>
+	 *     astronomical constants", Astron.Astrophys. 58, 1-2, 1-16. (1977)<br>
+	 * *     Luzum, B., private communication, 2001 (Fortran code<br>
+	 *     MHB_2000_SHORT)<br>
+	 * *     McCarthy, D.D. & Luzum, B.J., "An abridged model of the<br>
+	 *     precession-nutation of the celestial pole", Cel.Mech.Dyn.Astron.<br>
+	 *     85, 37-49 (2003)<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J., Astron.Astrophys. 282, 663-683 (1994)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut00b(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:206</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5279</i>
 	 */
 	public static void iauNut00b(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut00b(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
 	}
 	protected native static void iauNut00b(double date1, double date2, @Ptr long dpsi, @Ptr long deps);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u t 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  IAU 2000A nutation with adjustments to match the IAU 2006<br>
+	 *  precession.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps     double   nutation, luni-solar + planetary (Note 2)<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The nutation components in longitude and obliquity are in radians<br>
+	 *     and with respect to the mean equinox and ecliptic of date,<br>
+	 *     IAU 2006 precession model (Hilton et al. 2006, Capitaine et al.<br>
+	 *     2005).<br>
+	 * *  3) The function first computes the IAU 2000A nutation, then applies<br>
+	 *     adjustments for (i) the consequences of the change in obliquity<br>
+	 *     from the IAU 1980 ecliptic to the IAU 2006 ecliptic and (ii) the<br>
+	 *     secular variation in the Earth's dynamical form factor J2.<br>
+	 * *  4) The present function provides classical nutation, complementing<br>
+	 *     the IAU 2000 frame bias and IAU 2006 precession.  It delivers a<br>
+	 *     pole which is at current epochs accurate to a few tens of<br>
+	 *     microarcseconds, apart from the free core nutation.<br>
+	 * *  Called:<br>
+	 *     iauNut00a    nutation, IAU 2000A<br>
+	 * *  References:<br>
+	 * *     Chapront, J., Chapront-Touze, M. & Francou, G. 2002,<br>
+	 *     Astron.Astrophys. 387, 700<br>
+	 * *     Lieske, J.H., Lederle, T., Fricke, W. & Morando, B. 1977,<br>
+	 *     Astron.Astrophys. 58, 1-16<br>
+	 * *     Mathews, P.M., Herring, T.A., Buffet, B.A. 2002, J.Geophys.Res.<br>
+	 *     107, B4.  The MHB_2000 code itself was obtained on 9th September<br>
+	 *     2002 from ftp//maia.usno.navy.mil/conv2000/chapter5/IAU2000A.<br>
+	 * *     Simon, J.-L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G., Laskar, J. 1994, Astron.Astrophys. 282, 663-683<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M. 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *     Wallace, P.T., "Software for Implementing the IAU 2000<br>
+	 *     Resolutions", in IERS Workshop 5.1 (2002)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut06a(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:208</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5340</i>
 	 */
 	public static void iauNut06a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut06a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
 	}
 	protected native static void iauNut06a(double date1, double date2, @Ptr long dpsi, @Ptr long deps);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u N u t 8 0<br>
+	 *  - - - - - - - - -<br>
+	 * *  Nutation, IAU 1980 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi          double    nutation in longitude (radians)<br>
+	 *     deps          double    nutation in obliquity (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The nutation components are with respect to the ecliptic of<br>
+	 *     date.<br>
+	 * *  Called:<br>
+	 *     iauAnpm      normalize angle into range +/- pi<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.222 (p111).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut80(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:210</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5383</i>
 	 */
 	public static void iauNut80(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut80(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
 	}
 	protected native static void iauNut80(double date1, double date2, @Ptr long dpsi, @Ptr long deps);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u N u t m 8 0<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of nutation for a given date, IAU 1980 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2    double          TDB date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatn          double[3][3]    nutation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(true) = rmatn * V(mean),<br>
+	 *     where the p-vector V(true) is with respect to the true<br>
+	 *     equatorial triad of date and the p-vector V(mean) is with<br>
+	 *     respect to the mean equatorial triad of date.<br>
+	 * *  Called:<br>
+	 *     iauNut80     nutation, IAU 1980<br>
+	 *     iauObl80     mean obliquity, IAU 1980<br>
+	 *     iauNumat     form nutation matrix<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNutm80(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:212</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5425</i>
 	 */
 	public static void iauNutm80(double date1, double date2, Pointer<Double > rmatn) {
 		iauNutm80(date1, date2, Pointer.getPeer(rmatn));
 	}
 	protected native static void iauNutm80(double date1, double date2, @Ptr long rmatn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u O b l 0 6<br>
+	 *  - - - - - - - - -<br>
+	 * *  Mean obliquity of the ecliptic, IAU 2006 precession model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double   obliquity of the ecliptic (radians, Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result is the angle between the ecliptic and mean equator of<br>
+	 *     date date1+date2.<br>
+	 * *  Reference:<br>
+	 * *     Hilton, J. et al., 2006, Celest.Mech.Dyn.Astron. 94, 351<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauObl06(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:214</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5463</i>
 	 */
 	native public static double iauObl06(double date1, double date2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u O b l 8 0<br>
+	 *  - - - - - - - - -<br>
+	 * *  Mean obliquity of the ecliptic, IAU 1980 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                   double    obliquity of the ecliptic (radians, Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result is the angle between the ecliptic and mean equator of<br>
+	 *     date date1+date2.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Expression 3.222-1 (p114).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauObl80(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:216</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5503</i>
 	 */
 	native public static double iauObl80(double date1, double date2);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P 0 6 e<br>
+	 *  - - - - - - - -<br>
+	 * *  Precession angles, IAU 2006, equinox based.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical models.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (see Note 2):<br>
+	 *     eps0          double   epsilon_0<br>
+	 *     psia          double   psi_A<br>
+	 *     oma           double   omega_A<br>
+	 *     bpa           double   P_A<br>
+	 *     bqa           double   Q_A<br>
+	 *     pia           double   pi_A<br>
+	 *     bpia          double   Pi_A<br>
+	 *     epsa          double   obliquity epsilon_A<br>
+	 *     chia          double   chi_A<br>
+	 *     za            double   z_A<br>
+	 *     zetaa         double   zeta_A<br>
+	 *     thetaa        double   theta_A<br>
+	 *     pa            double   p_A<br>
+	 *     gam           double   F-W angle gamma_J2000<br>
+	 *     phi           double   F-W angle phi_J2000<br>
+	 *     psi           double   F-W angle psi_J2000<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) This function returns the set of equinox based angles for the<br>
+	 *     Capitaine et al. "P03" precession theory, adopted by the IAU in<br>
+	 *     2006.  The angles are set out in Table 1 of Hilton et al. (2006):<br>
+	 * *     eps0   epsilon_0   obliquity at J2000.0<br>
+	 *     psia   psi_A       luni-solar precession<br>
+	 *     oma    omega_A     inclination of equator wrt J2000.0 ecliptic<br>
+	 *     bpa    P_A         ecliptic pole x, J2000.0 ecliptic triad<br>
+	 *     bqa    Q_A         ecliptic pole -y, J2000.0 ecliptic triad<br>
+	 *     pia    pi_A        angle between moving and J2000.0 ecliptics<br>
+	 *     bpia   Pi_A        longitude of ascending node of the ecliptic<br>
+	 *     epsa   epsilon_A   obliquity of the ecliptic<br>
+	 *     chia   chi_A       planetary precession<br>
+	 *     za     z_A         equatorial precession: -3rd 323 Euler angle<br>
+	 *     zetaa  zeta_A      equatorial precession: -1st 323 Euler angle<br>
+	 *     thetaa theta_A     equatorial precession: 2nd 323 Euler angle<br>
+	 *     pa     p_A         general precession<br>
+	 *     gam    gamma_J2000 J2000.0 RA difference of ecliptic poles<br>
+	 *     phi    phi_J2000   J2000.0 codeclination of ecliptic pole<br>
+	 *     psi    psi_J2000   longitude difference of equator poles, J2000.0<br>
+	 * *     The returned values are all radians.<br>
+	 * *  3) Hilton et al. (2006) Table 1 also contains angles that depend on<br>
+	 *     models distinct from the P03 precession theory itself, namely the<br>
+	 *     IAU 2000A frame bias and nutation.  The quoted polynomials are<br>
+	 *     used in other SOFA functions:<br>
+	 * *     . iauXy06  contains the polynomial parts of the X and Y series.<br>
+	 * *     . iauS06  contains the polynomial part of the s+XY/2 series.<br>
+	 * *     . iauPfw06  implements the series for the Fukushima-Williams<br>
+	 *       angles that are with respect to the GCRS pole (i.e. the variants<br>
+	 *       that include frame bias).<br>
+	 * *  4) The IAU resolution stipulated that the choice of parameterization<br>
+	 *     was left to the user, and so an IAU compliant precession<br>
+	 *     implementation can be constructed using various combinations of<br>
+	 *     the angles returned by the present function.<br>
+	 * *  5) The parameterization used by SOFA is the version of the Fukushima-<br>
+	 *     Williams angles that refers directly to the GCRS pole.  These<br>
+	 *     angles may be calculated by calling the function iauPfw06.  SOFA<br>
+	 *     also supports the direct computation of the CIP GCRS X,Y by<br>
+	 *     series, available by calling iauXy06.<br>
+	 * *  6) The agreement between the different parameterizations is at the<br>
+	 *     1 microarcsecond level in the present era.<br>
+	 * *  7) When constructing a precession formulation that refers to the GCRS<br>
+	 *     pole rather than the dynamical pole, it may (depending on the<br>
+	 *     choice of angles) be necessary to introduce the frame bias<br>
+	 *     explicitly.<br>
+	 * *  8) It is permissible to re-use the same variable in the returned<br>
+	 *     arguments.  The quantities are stored in the stated order.<br>
+	 * *  Reference:<br>
+	 * *     Hilton, J. et al., 2006, Celest.Mech.Dyn.Astron. 94, 351<br>
+	 * *  Called:<br>
+	 *     iauObl06     mean obliquity, IAU 2006<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP06e(double, double, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:218</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5602</i>
 	 */
 	public static void iauP06e(double date1, double date2, Pointer<Double > eps0, Pointer<Double > psia, Pointer<Double > oma, Pointer<Double > bpa, Pointer<Double > bqa, Pointer<Double > pia, Pointer<Double > bpia, Pointer<Double > epsa, Pointer<Double > chia, Pointer<Double > za, Pointer<Double > zetaa, Pointer<Double > thetaa, Pointer<Double > pa, Pointer<Double > gam, Pointer<Double > phi, Pointer<Double > psi) {
 		iauP06e(date1, date2, Pointer.getPeer(eps0), Pointer.getPeer(psia), Pointer.getPeer(oma), Pointer.getPeer(bpa), Pointer.getPeer(bqa), Pointer.getPeer(pia), Pointer.getPeer(bpia), Pointer.getPeer(epsa), Pointer.getPeer(chia), Pointer.getPeer(za), Pointer.getPeer(zetaa), Pointer.getPeer(thetaa), Pointer.getPeer(pa), Pointer.getPeer(gam), Pointer.getPeer(phi), Pointer.getPeer(psi));
 	}
 	protected native static void iauP06e(double date1, double date2, @Ptr long eps0, @Ptr long psia, @Ptr long oma, @Ptr long bpa, @Ptr long bqa, @Ptr long pia, @Ptr long bpia, @Ptr long epsa, @Ptr long chia, @Ptr long za, @Ptr long zetaa, @Ptr long thetaa, @Ptr long pa, @Ptr long gam, @Ptr long phi, @Ptr long psi);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P b 0 6<br>
+	 *  - - - - - - - -<br>
+	 * *  This function forms three Euler angles which implement general<br>
+	 *  precession from epoch J2000.0, using the IAU 2006 model.  Frame<br>
+	 *  bias (the offset between ICRS and mean J2000.0) is included.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     bzeta        double   1st rotation: radians cw around z<br>
+	 *     bz           double   3rd rotation: radians cw around z<br>
+	 *     btheta       double   2nd rotation: radians ccw around y<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The traditional accumulated precession angles zeta_A, z_A,<br>
+	 *     theta_A cannot be obtained in the usual way, namely through<br>
+	 *     polynomial expressions, because of the frame bias.  The latter<br>
+	 *     means that two of the angles undergo rapid changes near this<br>
+	 *     date.  They are instead the results of decomposing the<br>
+	 *     precession-bias matrix obtained by using the Fukushima-Williams<br>
+	 *     method, which does not suffer from the problem.  The<br>
+	 *     decomposition returns values which can be used in the<br>
+	 *     conventional formulation and which include frame bias.<br>
+	 * *  3) The three angles are returned in the conventional order, which<br>
+	 *     is not the same as the order of the corresponding Euler<br>
+	 *     rotations.  The precession-bias matrix is<br>
+	 *     R_3(-z) x R_2(+theta) x R_3(-zeta).<br>
+	 * *  4) Should zeta_A, z_A, theta_A angles be required that do not<br>
+	 *     contain frame bias, they are available by calling the SOFA<br>
+	 *     function iauP06e.<br>
+	 * *  Called:<br>
+	 *     iauPmat06    PB matrix, IAU 2006<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPb06(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:220</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5659</i>
 	 */
 	public static void iauPb06(double date1, double date2, Pointer<Double > bzeta, Pointer<Double > bz, Pointer<Double > btheta) {
 		iauPb06(date1, date2, Pointer.getPeer(bzeta), Pointer.getPeer(bz), Pointer.getPeer(btheta));
 	}
 	protected native static void iauPb06(double date1, double date2, @Ptr long bzeta, @Ptr long bz, @Ptr long btheta);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P f w 0 6<br>
+	 *  - - - - - - - - -<br>
+	 * *  Precession angles, IAU 2006 (Fukushima-Williams 4-angle formulation).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     gamb         double   F-W angle gamma_bar (radians)<br>
+	 *     phib         double   F-W angle phi_bar (radians)<br>
+	 *     psib         double   F-W angle psi_bar (radians)<br>
+	 *     epsa         double   F-W angle epsilon_A (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) Naming the following points:<br>
+	 * *           e = J2000.0 ecliptic pole,<br>
+	 *           p = GCRS pole,<br>
+	 *           E = mean ecliptic pole of date,<br>
+	 *     and   P = mean pole of date,<br>
+	 * *     the four Fukushima-Williams angles are as follows:<br>
+	 * *        gamb = gamma_bar = epE<br>
+	 *        phib = phi_bar = pE<br>
+	 *        psib = psi_bar = pEP<br>
+	 *        epsa = epsilon_A = EP<br>
+	 * *  3) The matrix representing the combined effects of frame bias and<br>
+	 *     precession is:<br>
+	 * *        PxB = R_1(-epsa).R_3(-psib).R_1(phib).R_3(gamb)<br>
+	 * *  4) The matrix representing the combined effects of frame bias,<br>
+	 *     precession and nutation is simply:<br>
+	 * *        NxPxB = R_1(-epsa-dE).R_3(-psib-dP).R_1(phib).R_3(gamb)<br>
+	 * *     where dP and dE are the nutation components with respect to the<br>
+	 *     ecliptic of date.<br>
+	 * *  Reference:<br>
+	 * *     Hilton, J. et al., 2006, Celest.Mech.Dyn.Astron. 94, 351<br>
+	 * *  Called:<br>
+	 *     iauObl06     mean obliquity, IAU 2006<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPfw06(double, double, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:222</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5718</i>
 	 */
 	public static void iauPfw06(double date1, double date2, Pointer<Double > gamb, Pointer<Double > phib, Pointer<Double > psib, Pointer<Double > epsa) {
 		iauPfw06(date1, date2, Pointer.getPeer(gamb), Pointer.getPeer(phib), Pointer.getPeer(psib), Pointer.getPeer(epsa));
 	}
 	protected native static void iauPfw06(double date1, double date2, @Ptr long gamb, @Ptr long phib, @Ptr long psib, @Ptr long epsa);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P m a t 0 0<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Precession matrix (including frame bias) from GCRS to a specified<br>
+	 *  date, IAU 2000 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rbp * V(GCRS), where<br>
+	 *     the p-vector V(GCRS) is with respect to the Geocentric Celestial<br>
+	 *     Reference System (IAU, 2000) and the p-vector V(date) is with<br>
+	 *     respect to the mean equatorial triad of the given date.<br>
+	 * *  Called:<br>
+	 *     iauBp00      frame bias and precession matrices, IAU 2000<br>
+	 * *  Reference:<br>
+	 * *     IAU: Trans. International Astronomical Union, Vol. XXIVB;  Proc.<br>
+	 *     24th General Assembly, Manchester, UK.  Resolutions B1.3, B1.6.<br>
+	 *     (2000)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat00(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:224</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5763</i>
 	 */
 	public static void iauPmat00(double date1, double date2, Pointer<Double > rbp) {
 		iauPmat00(date1, date2, Pointer.getPeer(rbp));
 	}
 	protected native static void iauPmat00(double date1, double date2, @Ptr long rbp);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P m a t 0 6<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Precession matrix (including frame bias) from GCRS to a specified<br>
+	 *  date, IAU 2006 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rbp * V(GCRS), where<br>
+	 *     the p-vector V(GCRS) is with respect to the Geocentric Celestial<br>
+	 *     Reference System (IAU, 2000) and the p-vector V(date) is with<br>
+	 *     respect to the mean equatorial triad of the given date.<br>
+	 * *  Called:<br>
+	 *     iauPfw06     bias-precession F-W angles, IAU 2006<br>
+	 *     iauFw2m      F-W angles to r-matrix<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat06(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:226</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5808</i>
 	 */
 	public static void iauPmat06(double date1, double date2, Pointer<Double > rbp) {
 		iauPmat06(date1, date2, Pointer.getPeer(rbp));
 	}
 	protected native static void iauPmat06(double date1, double date2, @Ptr long rbp);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P m a t 7 6<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Precession matrix from J2000.0 to a specified date, IAU 1976 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       ending date, TT (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatp       double[3][3] precession matrix, J2000.0 -> date1+date2<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = RMATP * V(J2000),<br>
+	 *     where the p-vector V(J2000) is with respect to the mean<br>
+	 *     equatorial triad of epoch J2000.0 and the p-vector V(date)<br>
+	 *     is with respect to the mean equatorial triad of the given<br>
+	 *     date.<br>
+	 * *  3) Though the matrix method itself is rigorous, the precession<br>
+	 *     angles are expressed through canonical polynomials which are<br>
+	 *     valid only for a limited time span.  In addition, the IAU 1976<br>
+	 *     precession rate is known to be imperfect.  The absolute accuracy<br>
+	 *     of the present formulation is better than 0.1 arcsec from<br>
+	 *     1960AD to 2040AD, better than 1 arcsec from 1640AD to 2360AD,<br>
+	 *     and remains below 3 arcsec for the whole of the period<br>
+	 *     500BC to 3000AD.  The errors exceed 10 arcsec outside the<br>
+	 *     range 1200BC to 3900AD, exceed 100 arcsec outside 4200BC to<br>
+	 *     5600AD and exceed 1000 arcsec outside 6800BC to 8200AD.<br>
+	 * *  Called:<br>
+	 *     iauPrec76    accumulated precession angles, IAU 1976<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRy        rotate around Y-axis<br>
+	 *     iauCr        copy r-matrix<br>
+	 * *  References:<br>
+	 * *     Lieske, J.H., 1979, Astron.Astrophys. 73, 282.<br>
+	 *      equations (6) & (7), p283.<br>
+	 * *     Kaplan,G.H., 1981. USNO circular no. 163, pA2.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat76(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:228</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5867</i>
 	 */
 	public static void iauPmat76(double date1, double date2, Pointer<Double > rmatp) {
 		iauPmat76(date1, date2, Pointer.getPeer(rmatp));
 	}
 	protected native static void iauPmat76(double date1, double date2, @Ptr long rmatp);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P n 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  Precession-nutation, IAU 2000 model:  a multi-purpose function,<br>
+	 *  supporting classical (equinox-based) use directly and CIO-based<br>
+	 *  use indirectly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 *     dpsi,deps    double          nutation (Note 2)<br>
+	 * *  Returned:<br>
+	 *     epsa         double          mean obliquity (Note 3)<br>
+	 *     rb           double[3][3]    frame bias matrix (Note 4)<br>
+	 *     rp           double[3][3]    precession matrix (Note 5)<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 6)<br>
+	 *     rn           double[3][3]    nutation matrix (Note 7)<br>
+	 *     rbpn         double[3][3]    GCRS-to-true matrix (Note 8)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The caller is responsible for providing the nutation components;<br>
+	 *     they are in longitude and obliquity, in radians and are with<br>
+	 *     respect to the equinox and ecliptic of date.  For high-accuracy<br>
+	 *     applications, free core nutation should be included as well as<br>
+	 *     any other relevant corrections to the position of the CIP.<br>
+	 * *  3) The returned mean obliquity is consistent with the IAU 2000<br>
+	 *     precession-nutation models.<br>
+	 * *  4) The matrix rb transforms vectors from GCRS to J2000.0 mean<br>
+	 *     equator and equinox by applying frame bias.<br>
+	 * *  5) The matrix rp transforms vectors from J2000.0 mean equator and<br>
+	 *     equinox to mean equator and equinox of date by applying<br>
+	 *     precession.<br>
+	 * *  6) The matrix rbp transforms vectors from GCRS to mean equator and<br>
+	 *     equinox of date by applying frame bias then precession.  It is<br>
+	 *     the product rp x rb.<br>
+	 * *  7) The matrix rn transforms vectors from mean equator and equinox of<br>
+	 *     date to true equator and equinox of date by applying the nutation<br>
+	 *     (luni-solar + planetary).<br>
+	 * *  8) The matrix rbpn transforms vectors from GCRS to true equator and<br>
+	 *     equinox of date.  It is the product rn x rbp, applying frame<br>
+	 *     bias, precession and nutation in that order.<br>
+	 * *  9) It is permissible to re-use the same array in the returned<br>
+	 *     arguments.  The arrays are filled in the order given.<br>
+	 * *  Called:<br>
+	 *     iauPr00      IAU 2000 precession adjustments<br>
+	 *     iauObl80     mean obliquity, IAU 1980<br>
+	 *     iauBp00      frame bias and precession matrices, IAU 2000<br>
+	 *     iauCr        copy r-matrix<br>
+	 *     iauNumat     form nutation matrix<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00(double, double, double, double, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:230</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5946</i>
 	 */
 	public static void iauPn00(double date1, double date2, double dpsi, double deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00(date1, date2, dpsi, deps, Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPn00(double date1, double date2, double dpsi, double deps, @Ptr long epsa, @Ptr long rb, @Ptr long rp, @Ptr long rbp, @Ptr long rn, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P n 0 0 a<br>
+	 *  - - - - - - - - -<br>
+	 * *  Precession-nutation, IAU 2000A model:  a multi-purpose function,<br>
+	 *  supporting classical (equinox-based) use directly and CIO-based<br>
+	 *  use indirectly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps    double          nutation (Note 2)<br>
+	 *     epsa         double          mean obliquity (Note 3)<br>
+	 *     rb           double[3][3]    frame bias matrix (Note 4)<br>
+	 *     rp           double[3][3]    precession matrix (Note 5)<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 6)<br>
+	 *     rn           double[3][3]    nutation matrix (Note 7)<br>
+	 *     rbpn         double[3][3]    GCRS-to-true matrix (Notes 8,9)<br>
+	 * *  Notes:<br>
+	 * *  1)  The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *      convenient way between the two arguments.  For example,<br>
+	 *      JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *      among others:<br>
+	 * *             date1          date2<br>
+	 * *          2450123.7           0.0       (JD method)<br>
+	 *          2451545.0       -1421.3       (J2000 method)<br>
+	 *          2400000.5       50123.2       (MJD method)<br>
+	 *          2450123.5           0.2       (date & time method)<br>
+	 * *      The JD method is the most natural and convenient to use in<br>
+	 *      cases where the loss of several decimal digits of resolution<br>
+	 *      is acceptable.  The J2000 method is best matched to the way<br>
+	 *      the argument is handled internally and will deliver the<br>
+	 *      optimum resolution.  The MJD method and the date & time methods<br>
+	 *      are both good compromises between resolution and convenience.<br>
+	 * *  2)  The nutation components (luni-solar + planetary, IAU 2000A) in<br>
+	 *      longitude and obliquity are in radians and with respect to the<br>
+	 *      equinox and ecliptic of date.  Free core nutation is omitted;<br>
+	 *      for the utmost accuracy, use the iauPn00  function, where the<br>
+	 *      nutation components are caller-specified.  For faster but<br>
+	 *      slightly less accurate results, use the iauPn00b function.<br>
+	 * *  3)  The mean obliquity is consistent with the IAU 2000 precession.<br>
+	 * *  4)  The matrix rb transforms vectors from GCRS to J2000.0 mean<br>
+	 *      equator and equinox by applying frame bias.<br>
+	 * *  5)  The matrix rp transforms vectors from J2000.0 mean equator and<br>
+	 *      equinox to mean equator and equinox of date by applying<br>
+	 *      precession.<br>
+	 * *  6)  The matrix rbp transforms vectors from GCRS to mean equator and<br>
+	 *      equinox of date by applying frame bias then precession.  It is<br>
+	 *      the product rp x rb.<br>
+	 * *  7)  The matrix rn transforms vectors from mean equator and equinox<br>
+	 *      of date to true equator and equinox of date by applying the<br>
+	 *      nutation (luni-solar + planetary).<br>
+	 * *  8)  The matrix rbpn transforms vectors from GCRS to true equator and<br>
+	 *      equinox of date.  It is the product rn x rbp, applying frame<br>
+	 *      bias, precession and nutation in that order.<br>
+	 * *  9)  The X,Y,Z coordinates of the IAU 2000A Celestial Intermediate<br>
+	 *      Pole are elements (3,1-3) of the GCRS-to-true matrix,<br>
+	 *      i.e. rbpn[2][0-2].<br>
+	 * *  10) It is permissible to re-use the same array in the returned<br>
+	 *      arguments.  The arrays are filled in the order given.<br>
+	 * *  Called:<br>
+	 *     iauNut00a    nutation, IAU 2000A<br>
+	 *     iauPn00      bias/precession/nutation results, IAU 2000<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *  This revision:  2013 November 14<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00a(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:232</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6024</i>
 	 */
 	public static void iauPn00a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPn00a(double date1, double date2, @Ptr long dpsi, @Ptr long deps, @Ptr long epsa, @Ptr long rb, @Ptr long rp, @Ptr long rbp, @Ptr long rn, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P n 0 0 b<br>
+	 *  - - - - - - - - -<br>
+	 * *  Precession-nutation, IAU 2000B model:  a multi-purpose function,<br>
+	 *  supporting classical (equinox-based) use directly and CIO-based<br>
+	 *  use indirectly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps    double          nutation (Note 2)<br>
+	 *     epsa         double          mean obliquity (Note 3)<br>
+	 *     rb           double[3][3]    frame bias matrix (Note 4)<br>
+	 *     rp           double[3][3]    precession matrix (Note 5)<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 6)<br>
+	 *     rn           double[3][3]    nutation matrix (Note 7)<br>
+	 *     rbpn         double[3][3]    GCRS-to-true matrix (Notes 8,9)<br>
+	 * *  Notes:<br>
+	 * *  1)  The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *      convenient way between the two arguments.  For example,<br>
+	 *      JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *      among others:<br>
+	 * *             date1          date2<br>
+	 * *          2450123.7           0.0       (JD method)<br>
+	 *          2451545.0       -1421.3       (J2000 method)<br>
+	 *          2400000.5       50123.2       (MJD method)<br>
+	 *          2450123.5           0.2       (date & time method)<br>
+	 * *      The JD method is the most natural and convenient to use in<br>
+	 *      cases where the loss of several decimal digits of resolution<br>
+	 *      is acceptable.  The J2000 method is best matched to the way<br>
+	 *      the argument is handled internally and will deliver the<br>
+	 *      optimum resolution.  The MJD method and the date & time methods<br>
+	 *      are both good compromises between resolution and convenience.<br>
+	 * *  2)  The nutation components (luni-solar + planetary, IAU 2000B) in<br>
+	 *      longitude and obliquity are in radians and with respect to the<br>
+	 *      equinox and ecliptic of date.  For more accurate results, but<br>
+	 *      at the cost of increased computation, use the iauPn00a function.<br>
+	 *      For the utmost accuracy, use the iauPn00  function, where the<br>
+	 *      nutation components are caller-specified.<br>
+	 * *  3)  The mean obliquity is consistent with the IAU 2000 precession.<br>
+	 * *  4)  The matrix rb transforms vectors from GCRS to J2000.0 mean<br>
+	 *      equator and equinox by applying frame bias.<br>
+	 * *  5)  The matrix rp transforms vectors from J2000.0 mean equator and<br>
+	 *      equinox to mean equator and equinox of date by applying<br>
+	 *      precession.<br>
+	 * *  6)  The matrix rbp transforms vectors from GCRS to mean equator and<br>
+	 *      equinox of date by applying frame bias then precession.  It is<br>
+	 *      the product rp x rb.<br>
+	 * *  7)  The matrix rn transforms vectors from mean equator and equinox<br>
+	 *      of date to true equator and equinox of date by applying the<br>
+	 *      nutation (luni-solar + planetary).<br>
+	 * *  8)  The matrix rbpn transforms vectors from GCRS to true equator and<br>
+	 *      equinox of date.  It is the product rn x rbp, applying frame<br>
+	 *      bias, precession and nutation in that order.<br>
+	 * *  9)  The X,Y,Z coordinates of the IAU 2000B Celestial Intermediate<br>
+	 *      Pole are elements (3,1-3) of the GCRS-to-true matrix,<br>
+	 *      i.e. rbpn[2][0-2].<br>
+	 * *  10) It is permissible to re-use the same array in the returned<br>
+	 *      arguments.  The arrays are filled in the stated order.<br>
+	 * *  Called:<br>
+	 *     iauNut00b    nutation, IAU 2000B<br>
+	 *     iauPn00      bias/precession/nutation results, IAU 2000<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003).<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *  This revision:  2013 November 13<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00b(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:234</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6102</i>
 	 */
 	public static void iauPn00b(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00b(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPn00b(double date1, double date2, @Ptr long dpsi, @Ptr long deps, @Ptr long epsa, @Ptr long rb, @Ptr long rp, @Ptr long rbp, @Ptr long rn, @Ptr long rbpn);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P n 0 6<br>
+	 *  - - - - - - - -<br>
+	 * *  Precession-nutation, IAU 2006 model:  a multi-purpose function,<br>
+	 *  supporting classical (equinox-based) use directly and CIO-based use<br>
+	 *  indirectly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 *     dpsi,deps    double          nutation (Note 2)<br>
+	 * *  Returned:<br>
+	 *     epsa         double          mean obliquity (Note 3)<br>
+	 *     rb           double[3][3]    frame bias matrix (Note 4)<br>
+	 *     rp           double[3][3]    precession matrix (Note 5)<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 6)<br>
+	 *     rn           double[3][3]    nutation matrix (Note 7)<br>
+	 *     rbpn         double[3][3]    GCRS-to-true matrix (Note 8)<br>
+	 * *  Notes:<br>
+	 * *  1)  The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *      convenient way between the two arguments.  For example,<br>
+	 *      JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *      among others:<br>
+	 * *             date1          date2<br>
+	 * *          2450123.7           0.0       (JD method)<br>
+	 *          2451545.0       -1421.3       (J2000 method)<br>
+	 *          2400000.5       50123.2       (MJD method)<br>
+	 *          2450123.5           0.2       (date & time method)<br>
+	 * *      The JD method is the most natural and convenient to use in<br>
+	 *      cases where the loss of several decimal digits of resolution<br>
+	 *      is acceptable.  The J2000 method is best matched to the way<br>
+	 *      the argument is handled internally and will deliver the<br>
+	 *      optimum resolution.  The MJD method and the date & time methods<br>
+	 *      are both good compromises between resolution and convenience.<br>
+	 * *  2)  The caller is responsible for providing the nutation components;<br>
+	 *      they are in longitude and obliquity, in radians and are with<br>
+	 *      respect to the equinox and ecliptic of date.  For high-accuracy<br>
+	 *      applications, free core nutation should be included as well as<br>
+	 *      any other relevant corrections to the position of the CIP.<br>
+	 * *  3)  The returned mean obliquity is consistent with the IAU 2006<br>
+	 *      precession.<br>
+	 * *  4)  The matrix rb transforms vectors from GCRS to J2000.0 mean<br>
+	 *      equator and equinox by applying frame bias.<br>
+	 * *  5)  The matrix rp transforms vectors from J2000.0 mean equator and<br>
+	 *      equinox to mean equator and equinox of date by applying<br>
+	 *      precession.<br>
+	 * *  6)  The matrix rbp transforms vectors from GCRS to mean equator and<br>
+	 *      equinox of date by applying frame bias then precession.  It is<br>
+	 *      the product rp x rb.<br>
+	 * *  7)  The matrix rn transforms vectors from mean equator and equinox<br>
+	 *      of date to true equator and equinox of date by applying the<br>
+	 *      nutation (luni-solar + planetary).<br>
+	 * *  8)  The matrix rbpn transforms vectors from GCRS to true equator and<br>
+	 *      equinox of date.  It is the product rn x rbp, applying frame<br>
+	 *      bias, precession and nutation in that order.<br>
+	 * *  9)  The X,Y,Z coordinates of the Celestial Intermediate Pole are<br>
+	 *      elements (3,1-3) of the GCRS-to-true matrix, i.e. rbpn[2][0-2].<br>
+	 * *  10) It is permissible to re-use the same array in the returned<br>
+	 *      arguments.  The arrays are filled in the stated order.<br>
+	 * *  Called:<br>
+	 *     iauPfw06     bias-precession F-W angles, IAU 2006<br>
+	 *     iauFw2m      F-W angles to r-matrix<br>
+	 *     iauCr        copy r-matrix<br>
+	 *     iauTr        transpose r-matrix<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 November 14<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn06(double, double, double, double, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:236</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6178</i>
 	 */
 	public static void iauPn06(double date1, double date2, double dpsi, double deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn06(date1, date2, dpsi, deps, Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPn06(double date1, double date2, double dpsi, double deps, @Ptr long epsa, @Ptr long rb, @Ptr long rp, @Ptr long rbp, @Ptr long rn, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P n 0 6 a<br>
+	 *  - - - - - - - - -<br>
+	 * *  Precession-nutation, IAU 2006/2000A models:  a multi-purpose function,<br>
+	 *  supporting classical (equinox-based) use directly and CIO-based use<br>
+	 *  indirectly.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double          TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsi,deps    double          nutation (Note 2)<br>
+	 *     epsa         double          mean obliquity (Note 3)<br>
+	 *     rb           double[3][3]    frame bias matrix (Note 4)<br>
+	 *     rp           double[3][3]    precession matrix (Note 5)<br>
+	 *     rbp          double[3][3]    bias-precession matrix (Note 6)<br>
+	 *     rn           double[3][3]    nutation matrix (Note 7)<br>
+	 *     rbpn         double[3][3]    GCRS-to-true matrix (Notes 8,9)<br>
+	 * *  Notes:<br>
+	 * *  1)  The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *      convenient way between the two arguments.  For example,<br>
+	 *      JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *      among others:<br>
+	 * *             date1          date2<br>
+	 * *          2450123.7           0.0       (JD method)<br>
+	 *          2451545.0       -1421.3       (J2000 method)<br>
+	 *          2400000.5       50123.2       (MJD method)<br>
+	 *          2450123.5           0.2       (date & time method)<br>
+	 * *      The JD method is the most natural and convenient to use in<br>
+	 *      cases where the loss of several decimal digits of resolution<br>
+	 *      is acceptable.  The J2000 method is best matched to the way<br>
+	 *      the argument is handled internally and will deliver the<br>
+	 *      optimum resolution.  The MJD method and the date & time methods<br>
+	 *      are both good compromises between resolution and convenience.<br>
+	 * *  2)  The nutation components (luni-solar + planetary, IAU 2000A) in<br>
+	 *      longitude and obliquity are in radians and with respect to the<br>
+	 *      equinox and ecliptic of date.  Free core nutation is omitted;<br>
+	 *      for the utmost accuracy, use the iauPn06 function, where the<br>
+	 *      nutation components are caller-specified.<br>
+	 * *  3)  The mean obliquity is consistent with the IAU 2006 precession.<br>
+	 * *  4)  The matrix rb transforms vectors from GCRS to mean J2000.0 by<br>
+	 *      applying frame bias.<br>
+	 * *  5)  The matrix rp transforms vectors from mean J2000.0 to mean of<br>
+	 *      date by applying precession.<br>
+	 * *  6)  The matrix rbp transforms vectors from GCRS to mean of date by<br>
+	 *      applying frame bias then precession.  It is the product rp x rb.<br>
+	 * *  7)  The matrix rn transforms vectors from mean of date to true of<br>
+	 *      date by applying the nutation (luni-solar + planetary).<br>
+	 * *  8)  The matrix rbpn transforms vectors from GCRS to true of date<br>
+	 *      (CIP/equinox).  It is the product rn x rbp, applying frame bias,<br>
+	 *      precession and nutation in that order.<br>
+	 * *  9)  The X,Y,Z coordinates of the IAU 2006/2000A Celestial<br>
+	 *      Intermediate Pole are elements (3,1-3) of the GCRS-to-true<br>
+	 *      matrix, i.e. rbpn[2][0-2].<br>
+	 * *  10) It is permissible to re-use the same array in the returned<br>
+	 *      arguments.  The arrays are filled in the stated order.<br>
+	 * *  Called:<br>
+	 *     iauNut06a    nutation, IAU 2006/2000A<br>
+	 *     iauPn06      bias/precession/nutation results, IAU 2006<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *  This revision:  2013 November 13<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn06a(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:238</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6247</i>
 	 */
 	public static void iauPn06a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn06a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPn06a(double date1, double date2, @Ptr long dpsi, @Ptr long deps, @Ptr long epsa, @Ptr long rb, @Ptr long rp, @Ptr long rbp, @Ptr long rn, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P n m 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of precession-nutation for a given date (including<br>
+	 *  frame bias), equinox-based, IAU 2000A model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double     TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rbpn         double[3][3]    classical NPB matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rbpn * V(GCRS), where<br>
+	 *     the p-vector V(date) is with respect to the true equatorial triad<br>
+	 *     of date date1+date2 and the p-vector V(GCRS) is with respect to<br>
+	 *     the Geocentric Celestial Reference System (IAU, 2000).<br>
+	 * *  3) A faster, but slightly less accurate result (about 1 mas), can be<br>
+	 *     obtained by using instead the iauPnm00b function.<br>
+	 * *  Called:<br>
+	 *     iauPn00a     bias/precession/nutation, IAU 2000A<br>
+	 * *  Reference:<br>
+	 * *     IAU: Trans. International Astronomical Union, Vol. XXIVB;  Proc.<br>
+	 *     24th General Assembly, Manchester, UK.  Resolutions B1.3, B1.6.<br>
+	 *     (2000)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:240</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6294</i>
 	 */
 	public static void iauPnm00a(double date1, double date2, Pointer<Double > rbpn) {
 		iauPnm00a(date1, date2, Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPnm00a(double date1, double date2, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P n m 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of precession-nutation for a given date (including<br>
+	 *  frame bias), equinox-based, IAU 2000B model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rbpn        double[3][3] bias-precession-nutation matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rbpn * V(GCRS), where<br>
+	 *     the p-vector V(date) is with respect to the true equatorial triad<br>
+	 *     of date date1+date2 and the p-vector V(GCRS) is with respect to<br>
+	 *     the Geocentric Celestial Reference System (IAU, 2000).<br>
+	 * *  3) The present function is faster, but slightly less accurate (about<br>
+	 *     1 mas), than the iauPnm00a function.<br>
+	 * *  Called:<br>
+	 *     iauPn00b     bias/precession/nutation, IAU 2000B<br>
+	 * *  Reference:<br>
+	 * *     IAU: Trans. International Astronomical Union, Vol. XXIVB;  Proc.<br>
+	 *     24th General Assembly, Manchester, UK.  Resolutions B1.3, B1.6.<br>
+	 *     (2000)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:242</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6341</i>
 	 */
 	public static void iauPnm00b(double date1, double date2, Pointer<Double > rbpn) {
 		iauPnm00b(date1, date2, Pointer.getPeer(rbpn));
 	}
 	protected native static void iauPnm00b(double date1, double date2, @Ptr long rbpn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P n m 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of precession-nutation for a given date (including<br>
+	 *  frame bias), IAU 2006 precession and IAU 2000A nutation models.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2 double       TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rnpb        double[3][3] bias-precession-nutation matrix (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rnpb * V(GCRS), where<br>
+	 *     the p-vector V(date) is with respect to the true equatorial triad<br>
+	 *     of date date1+date2 and the p-vector V(GCRS) is with respect to<br>
+	 *     the Geocentric Celestial Reference System (IAU, 2000).<br>
+	 * *  Called:<br>
+	 *     iauPfw06     bias-precession F-W angles, IAU 2006<br>
+	 *     iauNut06a    nutation, IAU 2006/2000A<br>
+	 *     iauFw2m      F-W angles to r-matrix<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:244</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6386</i>
 	 */
 	public static void iauPnm06a(double date1, double date2, Pointer<Double > rnpb) {
 		iauPnm06a(date1, date2, Pointer.getPeer(rnpb));
 	}
 	protected native static void iauPnm06a(double date1, double date2, @Ptr long rnpb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P n m 8 0<br>
+	 *  - - - - - - - - -<br>
+	 * *  Form the matrix of precession/nutation for a given date, IAU 1976<br>
+	 *  precession model, IAU 1980 nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2    double         TDB date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     rmatpn         double[3][3]   combined precession/nutation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) The TDB date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TDB)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The matrix operates in the sense V(date) = rmatpn * V(J2000),<br>
+	 *     where the p-vector V(date) is with respect to the true equatorial<br>
+	 *     triad of date date1+date2 and the p-vector V(J2000) is with<br>
+	 *     respect to the mean equatorial triad of epoch J2000.0.<br>
+	 * *  Called:<br>
+	 *     iauPmat76    precession matrix, IAU 1976<br>
+	 *     iauNutm80    nutation matrix, IAU 1980<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 3.3 (p145).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm80(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:246</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6433</i>
 	 */
 	public static void iauPnm80(double date1, double date2, Pointer<Double > rmatpn) {
 		iauPnm80(date1, date2, Pointer.getPeer(rmatpn));
 	}
 	protected native static void iauPnm80(double date1, double date2, @Ptr long rmatpn);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P o m 0 0<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Form the matrix of polar motion for a given date, IAU 2000.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     xp,yp    double    coordinates of the pole (radians, Note 1)<br>
+	 *     sp       double    the TIO locator s' (radians, Note 2)<br>
+	 * *  Returned:<br>
+	 *     rpom     double[3][3]   polar-motion matrix (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The arguments xp and yp are the coordinates (in radians) of the<br>
+	 *     Celestial Intermediate Pole with respect to the International<br>
+	 *     Terrestrial Reference System (see IERS Conventions 2003),<br>
+	 *     measured along the meridians to 0 and 90 deg west respectively.<br>
+	 * *  2) The argument sp is the TIO locator s', in radians, which<br>
+	 *     positions the Terrestrial Intermediate Origin on the equator.  It<br>
+	 *     is obtained from polar motion observations by numerical<br>
+	 *     integration, and so is in essence unpredictable.  However, it is<br>
+	 *     dominated by a secular drift of about 47 microarcseconds per<br>
+	 *     century, and so can be taken into account by using s' = -47*t,<br>
+	 *     where t is centuries since J2000.0.  The function iauSp00<br>
+	 *     implements this approximation.<br>
+	 * *  3) The matrix operates in the sense V(TRS) = rpom * V(CIP), meaning<br>
+	 *     that it is the final rotation when computing the pointing<br>
+	 *     direction to a celestial source.<br>
+	 * *  Called:<br>
+	 *     iauIr        initialize r-matrix to identity<br>
+	 *     iauRz        rotate around Z-axis<br>
+	 *     iauRy        rotate around Y-axis<br>
+	 *     iauRx        rotate around X-axis<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPom00(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:248</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6476</i>
 	 */
 	public static void iauPom00(double xp, double yp, double sp, Pointer<Double > rpom) {
 		iauPom00(xp, yp, sp, Pointer.getPeer(rpom));
 	}
 	protected native static void iauPom00(double xp, double yp, double sp, @Ptr long rpom);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P r 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  Precession-rate part of the IAU 2000 precession-nutation models<br>
+	 *  (part of MHB2000).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2    double  TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     dpsipr,depspr  double  precession corrections (Notes 2,3)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The precession adjustments are expressed as "nutation<br>
+	 *     components", corrections in longitude and obliquity with respect<br>
+	 *     to the J2000.0 equinox and ecliptic.<br>
+	 * *  3) Although the precession adjustments are stated to be with respect<br>
+	 *     to Lieske et al. (1977), the MHB2000 model does not specify which<br>
+	 *     set of Euler angles are to be used and how the adjustments are to<br>
+	 *     be applied.  The most literal and straightforward procedure is to<br>
+	 *     adopt the 4-rotation epsilon_0, psi_A, omega_A, xi_A option, and<br>
+	 *     to add dpsipr to psi_A and depspr to both omega_A and eps_A.<br>
+	 * *  4) This is an implementation of one aspect of the IAU 2000A nutation<br>
+	 *     model, formally adopted by the IAU General Assembly in 2000,<br>
+	 *     namely MHB2000 (Mathews et al. 2002).<br>
+	 * *  References:<br>
+	 * *     Lieske, J.H., Lederle, T., Fricke, W. & Morando, B., "Expressions<br>
+	 *     for the precession quantities based upon the IAU (1976) System of<br>
+	 *     Astronomical Constants", Astron.Astrophys., 58, 1-16 (1977)<br>
+	 * *     Mathews, P.M., Herring, T.A., Buffet, B.A., "Modeling of nutation<br>
+	 *     and precession   New nutation series for nonrigid Earth and<br>
+	 *     insights into the Earth's interior", J.Geophys.Res., 107, B4,<br>
+	 *     2002.  The MHB2000 code itself was obtained on 9th September 2002<br>
+	 *     from ftp://maia.usno.navy.mil/conv2000/chapter5/IAU2000A.<br>
+	 * *     Wallace, P.T., "Software for Implementing the IAU 2000<br>
+	 *     Resolutions", in IERS Workshop 5.1 (2002).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPr00(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:250</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6534</i>
 	 */
 	public static void iauPr00(double date1, double date2, Pointer<Double > dpsipr, Pointer<Double > depspr) {
 		iauPr00(date1, date2, Pointer.getPeer(dpsipr), Pointer.getPeer(depspr));
 	}
 	protected native static void iauPr00(double date1, double date2, @Ptr long dpsipr, @Ptr long depspr);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P r e c 7 6<br>
+	 *  - - - - - - - - - -<br>
+	 * *  IAU 1976 precession model.<br>
+	 * *  This function forms the three Euler angles which implement general<br>
+	 *  precession between two dates, using the IAU 1976 model (as for the<br>
+	 *  FK5 catalog).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date01,date02   double    TDB starting date (Note 1)<br>
+	 *     date11,date12   double    TDB ending date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     zeta            double    1st rotation: radians cw around z<br>
+	 *     z               double    3rd rotation: radians cw around z<br>
+	 *     theta           double    2nd rotation: radians ccw around y<br>
+	 * *  Notes:<br>
+	 * *  1) The dates date01+date02 and date11+date12 are Julian Dates,<br>
+	 *     apportioned in any convenient way between the arguments daten1<br>
+	 *     and daten2.  For example, JD(TDB)=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *           daten1        daten2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 *     The two dates may be expressed using different methods, but at<br>
+	 *     the risk of losing some resolution.<br>
+	 * *  2) The accumulated precession angles zeta, z, theta are expressed<br>
+	 *     through canonical polynomials which are valid only for a limited<br>
+	 *     time span.  In addition, the IAU 1976 precession rate is known to<br>
+	 *     be imperfect.  The absolute accuracy of the present formulation<br>
+	 *     is better than 0.1 arcsec from 1960AD to 2040AD, better than<br>
+	 *     1 arcsec from 1640AD to 2360AD, and remains below 3 arcsec for<br>
+	 *     the whole of the period 500BC to 3000AD.  The errors exceed<br>
+	 *     10 arcsec outside the range 1200BC to 3900AD, exceed 100 arcsec<br>
+	 *     outside 4200BC to 5600AD and exceed 1000 arcsec outside 6800BC to<br>
+	 *     8200AD.<br>
+	 * *  3) The three angles are returned in the conventional order, which<br>
+	 *     is not the same as the order of the corresponding Euler<br>
+	 *     rotations.  The precession matrix is<br>
+	 *     R_3(-z) x R_2(+theta) x R_3(-zeta).<br>
+	 * *  Reference:<br>
+	 * *     Lieske, J.H., 1979, Astron.Astrophys. 73, 282, equations<br>
+	 *     (6) & (7), p283.<br>
+	 * *  This revision:  2013 November 19<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPrec76(double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:252</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6593</i>
 	 */
-	public static void iauPrec76(double ep01, double ep02, double ep11, double ep12, Pointer<Double > zeta, Pointer<Double > z, Pointer<Double > theta) {
-		iauPrec76(ep01, ep02, ep11, ep12, Pointer.getPeer(zeta), Pointer.getPeer(z), Pointer.getPeer(theta));
+	public static void iauPrec76(double date01, double date02, double date11, double date12, Pointer<Double > zeta, Pointer<Double > z, Pointer<Double > theta) {
+		iauPrec76(date01, date02, date11, date12, Pointer.getPeer(zeta), Pointer.getPeer(z), Pointer.getPeer(theta));
 	}
-	protected native static void iauPrec76(double ep01, double ep02, double ep11, double ep12, @Ptr long zeta, @Ptr long z, @Ptr long theta);
+	protected native static void iauPrec76(double date01, double date02, double date11, double date12, @Ptr long zeta, @Ptr long z, @Ptr long theta);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u S 0 0<br>
+	 *  - - - - - - -<br>
+	 * *  The CIO locator s, positioning the Celestial Intermediate Origin on<br>
+	 *  the equator of the Celestial Intermediate Pole, given the CIP's X,Y<br>
+	 *  coordinates.  Compatible with IAU 2000A precession-nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double    TT as a 2-part Julian Date (Note 1)<br>
+	 *     x,y           double    CIP coordinates (Note 3)<br>
+	 * *  Returned (function value):<br>
+	 *                   double    the CIO locator s in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The CIO locator s is the difference between the right ascensions<br>
+	 *     of the same point in two systems:  the two systems are the GCRS<br>
+	 *     and the CIP,CIO, and the point is the ascending node of the<br>
+	 *     CIP equator.  The quantity s remains below 0.1 arcsecond<br>
+	 *     throughout 1900-2100.<br>
+	 * *  3) The series used to compute s is in fact for s+XY/2, where X and Y<br>
+	 *     are the x and y components of the CIP unit vector;  this series<br>
+	 *     is more compact than a direct series for s would be.  This<br>
+	 *     function requires X,Y to be supplied by the caller, who is<br>
+	 *     responsible for providing values that are consistent with the<br>
+	 *     supplied date.<br>
+	 * *  4) The model is consistent with the IAU 2000A precession-nutation.<br>
+	 * *  Called:<br>
+	 *     iauFal03     mean anomaly of the Moon<br>
+	 *     iauFalp03    mean anomaly of the Sun<br>
+	 *     iauFaf03     mean argument of the latitude of the Moon<br>
+	 *     iauFad03     mean elongation of the Moon from the Sun<br>
+	 *     iauFaom03    mean longitude of the Moon's ascending node<br>
+	 *     iauFave03    mean longitude of Venus<br>
+	 *     iauFae03     mean longitude of Earth<br>
+	 *     iauFapa03    general accumulated precession in longitude<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:254</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6660</i>
 	 */
 	native public static double iauS00(double date1, double date2, double x, double y);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S 0 0 a<br>
+	 *  - - - - - - - -<br>
+	 * *  The CIO locator s, positioning the Celestial Intermediate Origin on<br>
+	 *  the equator of the Celestial Intermediate Pole, using the IAU 2000A<br>
+	 *  precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    the CIO locator s in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The CIO locator s is the difference between the right ascensions<br>
+	 *     of the same point in two systems.  The two systems are the GCRS<br>
+	 *     and the CIP,CIO, and the point is the ascending node of the<br>
+	 *     CIP equator.  The CIO locator s remains a small fraction of<br>
+	 *     1 arcsecond throughout 1900-2100.<br>
+	 * *  3) The series used to compute s is in fact for s+XY/2, where X and Y<br>
+	 *     are the x and y components of the CIP unit vector;  this series<br>
+	 *     is more compact than a direct series for s would be.  The present<br>
+	 *     function uses the full IAU 2000A nutation model when predicting<br>
+	 *     the CIP position.  Faster results, with no significant loss of<br>
+	 *     accuracy, can be obtained via the function iauS00b, which uses<br>
+	 *     instead the IAU 2000B truncated model.<br>
+	 * *  Called:<br>
+	 *     iauPnm00a    classical NPB matrix, IAU 2000A<br>
+	 *     iauBnp2xy    extract CIP X,Y from the BPN matrix<br>
+	 *     iauS00       the CIO locator s, given X,Y, IAU 2000A<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:256</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6721</i>
 	 */
 	native public static double iauS00a(double date1, double date2);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S 0 0 b<br>
+	 *  - - - - - - - -<br>
+	 * *  The CIO locator s, positioning the Celestial Intermediate Origin on<br>
+	 *  the equator of the Celestial Intermediate Pole, using the IAU 2000B<br>
+	 *  precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    the CIO locator s in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The CIO locator s is the difference between the right ascensions<br>
+	 *     of the same point in two systems.  The two systems are the GCRS<br>
+	 *     and the CIP,CIO, and the point is the ascending node of the<br>
+	 *     CIP equator.  The CIO locator s remains a small fraction of<br>
+	 *     1 arcsecond throughout 1900-2100.<br>
+	 * *  3) The series used to compute s is in fact for s+XY/2, where X and Y<br>
+	 *     are the x and y components of the CIP unit vector;  this series<br>
+	 *     is more compact than a direct series for s would be.  The present<br>
+	 *     function uses the IAU 2000B truncated nutation model when<br>
+	 *     predicting the CIP position.  The function iauS00a uses instead<br>
+	 *     the full IAU 2000A model, but with no significant increase in<br>
+	 *     accuracy and at some cost in speed.<br>
+	 * *  Called:<br>
+	 *     iauPnm00b    classical NPB matrix, IAU 2000B<br>
+	 *     iauBnp2xy    extract CIP X,Y from the BPN matrix<br>
+	 *     iauS00       the CIO locator s, given X,Y, IAU 2000A<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:258</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6782</i>
 	 */
 	native public static double iauS00b(double date1, double date2);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u S 0 6<br>
+	 *  - - - - - - -<br>
+	 * *  The CIO locator s, positioning the Celestial Intermediate Origin on<br>
+	 *  the equator of the Celestial Intermediate Pole, given the CIP's X,Y<br>
+	 *  coordinates.  Compatible with IAU 2006/2000A precession-nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double    TT as a 2-part Julian Date (Note 1)<br>
+	 *     x,y           double    CIP coordinates (Note 3)<br>
+	 * *  Returned (function value):<br>
+	 *                   double    the CIO locator s in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The CIO locator s is the difference between the right ascensions<br>
+	 *     of the same point in two systems:  the two systems are the GCRS<br>
+	 *     and the CIP,CIO, and the point is the ascending node of the<br>
+	 *     CIP equator.  The quantity s remains below 0.1 arcsecond<br>
+	 *     throughout 1900-2100.<br>
+	 * *  3) The series used to compute s is in fact for s+XY/2, where X and Y<br>
+	 *     are the x and y components of the CIP unit vector;  this series<br>
+	 *     is more compact than a direct series for s would be.  This<br>
+	 *     function requires X,Y to be supplied by the caller, who is<br>
+	 *     responsible for providing values that are consistent with the<br>
+	 *     supplied date.<br>
+	 * *  4) The model is consistent with the "P03" precession (Capitaine et<br>
+	 *     al. 2003), adopted by IAU 2006 Resolution 1, 2006, and the<br>
+	 *     IAU 2000A nutation (with P03 adjustments).<br>
+	 * *  Called:<br>
+	 *     iauFal03     mean anomaly of the Moon<br>
+	 *     iauFalp03    mean anomaly of the Sun<br>
+	 *     iauFaf03     mean argument of the latitude of the Moon<br>
+	 *     iauFad03     mean elongation of the Moon from the Sun<br>
+	 *     iauFaom03    mean longitude of the Moon's ascending node<br>
+	 *     iauFave03    mean longitude of Venus<br>
+	 *     iauFae03     mean longitude of Earth<br>
+	 *     iauFapa03    general accumulated precession in longitude<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. & Chapront, J., 2003, Astron.<br>
+	 *     Astrophys. 432, 355<br>
+	 * *     McCarthy, D.D., Petit, G. (eds.) 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS06(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:260</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6847</i>
 	 */
 	native public static double iauS06(double date1, double date2, double x, double y);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S 0 6 a<br>
+	 *  - - - - - - - -<br>
+	 * *  The CIO locator s, positioning the Celestial Intermediate Origin on<br>
+	 *  the equator of the Celestial Intermediate Pole, using the IAU 2006<br>
+	 *  precession and IAU 2000A nutation models.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    the CIO locator s in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The CIO locator s is the difference between the right ascensions<br>
+	 *     of the same point in two systems.  The two systems are the GCRS<br>
+	 *     and the CIP,CIO, and the point is the ascending node of the<br>
+	 *     CIP equator.  The CIO locator s remains a small fraction of<br>
+	 *     1 arcsecond throughout 1900-2100.<br>
+	 * *  3) The series used to compute s is in fact for s+XY/2, where X and Y<br>
+	 *     are the x and y components of the CIP unit vector;  this series is<br>
+	 *     more compact than a direct series for s would be.  The present<br>
+	 *     function uses the full IAU 2000A nutation model when predicting<br>
+	 *     the CIP position.<br>
+	 * *  Called:<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Chapront, J., Lambert, S. and Wallace, P.,<br>
+	 *     "Expressions for the Celestial Intermediate Pole and Celestial<br>
+	 *     Ephemeris Origin consistent with the IAU 2000A precession-<br>
+	 *     nutation model", Astron.Astrophys. 400, 1145-1154 (2003)<br>
+	 * *     n.b. The celestial ephemeris origin (CEO) was renamed "celestial<br>
+	 *          intermediate origin" (CIO) by IAU 2006 Resolution 2.<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:262</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6908</i>
 	 */
 	native public static double iauS06a(double date1, double date2);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S p 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  The TIO locator s', positioning the Terrestrial Intermediate Origin<br>
+	 *  on the equator of the Celestial Intermediate Pole.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    the TIO locator s' in radians (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The TIO locator s' is obtained from polar motion observations by<br>
+	 *     numerical integration, and so is in essence unpredictable.<br>
+	 *     However, it is dominated by a secular drift of about<br>
+	 *     47 microarcseconds per century, which is the approximation<br>
+	 *     evaluated by the present function.<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSp00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:264</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6951</i>
 	 */
 	native public static double iauSp00(double date1, double date2);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u X y 0 6<br>
+	 *  - - - - - - - -<br>
+	 * *  X,Y coordinates of celestial intermediate pole from series based<br>
+	 *  on IAU 2006 precession and IAU 2000A nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double     TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     x,y          double     CIP X,Y coordinates (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The X,Y coordinates are those of the unit vector towards the<br>
+	 *     celestial intermediate pole.  They represent the combined effects<br>
+	 *     of frame bias, precession and nutation.<br>
+	 * *  3) The fundamental arguments used are as adopted in IERS Conventions<br>
+	 *     (2003) and are from Simon et al. (1994) and Souchay et al.<br>
+	 *     (1999).<br>
+	 * *  4) This is an alternative to the angles-based method, via the SOFA<br>
+	 *     function iauFw2xy and as used in iauXys06a for example.  The two<br>
+	 *     methods agree at the 1 microarcsecond level (at present), a<br>
+	 *     negligible amount compared with the intrinsic accuracy of the<br>
+	 *     models.  However, it would be unwise to mix the two methods<br>
+	 *     (angles-based and series-based) in a single application.<br>
+	 * *  Called:<br>
+	 *     iauFal03     mean anomaly of the Moon<br>
+	 *     iauFalp03    mean anomaly of the Sun<br>
+	 *     iauFaf03     mean argument of the latitude of the Moon<br>
+	 *     iauFad03     mean elongation of the Moon from the Sun<br>
+	 *     iauFaom03    mean longitude of the Moon's ascending node<br>
+	 *     iauFame03    mean longitude of Mercury<br>
+	 *     iauFave03    mean longitude of Venus<br>
+	 *     iauFae03     mean longitude of Earth<br>
+	 *     iauFama03    mean longitude of Mars<br>
+	 *     iauFaju03    mean longitude of Jupiter<br>
+	 *     iauFasa03    mean longitude of Saturn<br>
+	 *     iauFaur03    mean longitude of Uranus<br>
+	 *     iauFane03    mean longitude of Neptune<br>
+	 *     iauFapa03    general accumulated precession in longitude<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. & Chapront, J., 2003,<br>
+	 *     Astron.Astrophys., 412, 567<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *     Simon, J.L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G. & Laskar, J., Astron.Astrophys., 1994, 282, 663<br>
+	 * *     Souchay, J., Loysel, B., Kinoshita, H., Folgueira, M., 1999,<br>
+	 *     Astron.Astrophys.Supp.Ser. 135, 111<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 August 21<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXy06(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:266</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7024</i>
 	 */
 	public static void iauXy06(double date1, double date2, Pointer<Double > x, Pointer<Double > y) {
 		iauXy06(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y));
 	}
 	protected native static void iauXy06(double date1, double date2, @Ptr long x, @Ptr long y);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u X y s 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a given TT date, compute the X,Y coordinates of the Celestial<br>
+	 *  Intermediate Pole and the CIO locator s, using the IAU 2000A<br>
+	 *  precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     x,y          double   Celestial Intermediate Pole (Note 2)<br>
+	 *     s            double   the CIO locator s (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The Celestial Intermediate Pole coordinates are the x,y<br>
+	 *     components of the unit vector in the Geocentric Celestial<br>
+	 *     Reference System.<br>
+	 * *  3) The CIO locator s (in radians) positions the Celestial<br>
+	 *     Intermediate Origin on the equator of the CIP.<br>
+	 * *  4) A faster, but slightly less accurate result (about 1 mas for<br>
+	 *     X,Y), can be obtained by using instead the iauXys00b function.<br>
+	 * *  Called:<br>
+	 *     iauPnm00a    classical NPB matrix, IAU 2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS00       the CIO locator s, given X,Y, IAU 2000A<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys00a(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:268</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7075</i>
 	 */
 	public static void iauXys00a(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys00a(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
 	}
 	protected native static void iauXys00a(double date1, double date2, @Ptr long x, @Ptr long y, @Ptr long s);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u X y s 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a given TT date, compute the X,Y coordinates of the Celestial<br>
+	 *  Intermediate Pole and the CIO locator s, using the IAU 2000B<br>
+	 *  precession-nutation model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     x,y          double   Celestial Intermediate Pole (Note 2)<br>
+	 *     s            double   the CIO locator s (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The Celestial Intermediate Pole coordinates are the x,y<br>
+	 *     components of the unit vector in the Geocentric Celestial<br>
+	 *     Reference System.<br>
+	 * *  3) The CIO locator s (in radians) positions the Celestial<br>
+	 *     Intermediate Origin on the equator of the CIP.<br>
+	 * *  4) The present function is faster, but slightly less accurate (about<br>
+	 *     1 mas in X,Y), than the iauXys00a function.<br>
+	 * *  Called:<br>
+	 *     iauPnm00b    classical NPB matrix, IAU 2000B<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS00       the CIO locator s, given X,Y, IAU 2000A<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys00b(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:270</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7126</i>
 	 */
 	public static void iauXys00b(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys00b(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
 	}
 	protected native static void iauXys00b(double date1, double date2, @Ptr long x, @Ptr long y, @Ptr long s);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u X y s 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  For a given TT date, compute the X,Y coordinates of the Celestial<br>
+	 *  Intermediate Pole and the CIO locator s, using the IAU 2006<br>
+	 *  precession and IAU 2000A nutation models.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double  TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     x,y          double  Celestial Intermediate Pole (Note 2)<br>
+	 *     s            double  the CIO locator s (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The Celestial Intermediate Pole coordinates are the x,y components<br>
+	 *     of the unit vector in the Geocentric Celestial Reference System.<br>
+	 * *  3) The CIO locator s (in radians) positions the Celestial<br>
+	 *     Intermediate Origin on the equator of the CIP.<br>
+	 * *  4) Series-based solutions for generating X and Y are also available:<br>
+	 *     see Capitaine & Wallace (2006) and iauXy06.<br>
+	 * *  Called:<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Wallace, P.T., 2006, Astron.Astrophys. 450, 855<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys06a(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:272</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7176</i>
 	 */
 	public static void iauXys06a(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys06a(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
 	}
 	protected native static void iauXys06a(double date1, double date2, @Ptr long x, @Ptr long y, @Ptr long s);
 	/**
-	 * Astronomy/RotationAndTime<br>
+	 * - - - - - - - -<br>
+	 *   i a u E e 0 0<br>
+	 *  - - - - - - - -<br>
+	 * *  The equation of the equinoxes, compatible with IAU 2000 resolutions,<br>
+	 *  given the nutation in longitude and the mean obliquity.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 *     epsa         double    mean obliquity (Note 2)<br>
+	 *     dpsi         double    nutation in longitude (Note 3)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    equation of the equinoxes (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The obliquity, in radians, is mean of date.<br>
+	 * *  3) The result, which is in radians, operates in the following sense:<br>
+	 * *        Greenwich apparent ST = GMST + equation of the equinoxes<br>
+	 * *  4) The result is compatible with the IAU 2000 resolutions.  For<br>
+	 *     further details, see IERS Conventions 2003 and Capitaine et al.<br>
+	 *     (2002).<br>
+	 * *  Called:<br>
+	 *     iauEect00    equation of the equinoxes complementary terms<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2008 May 16<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:277</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7227</i>
 	 */
 	native public static double iauEe00(double date1, double date2, double epsa, double dpsi);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u E e 0 0 a<br>
+	 *  - - - - - - - - -<br>
+	 * *  Equation of the equinoxes, compatible with IAU 2000 resolutions.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    equation of the equinoxes (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result, which is in radians, operates in the following sense:<br>
+	 * *        Greenwich apparent ST = GMST + equation of the equinoxes<br>
+	 * *  3) The result is compatible with the IAU 2000 resolutions.  For<br>
+	 *     further details, see IERS Conventions 2003 and Capitaine et al.<br>
+	 *     (2002).<br>
+	 * *  Called:<br>
+	 *     iauPr00      IAU 2000 precession adjustments<br>
+	 *     iauObl80     mean obliquity, IAU 1980<br>
+	 *     iauNut00a    nutation, IAU 2000A<br>
+	 *     iauEe00      equation of the equinoxes, IAU 2000<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003).<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004).<br>
+	 * *  This revision:  2008 May 16<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:279</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7277</i>
 	 */
 	native public static double iauEe00a(double date1, double date2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u E e 0 0 b<br>
+	 *  - - - - - - - - -<br>
+	 * *  Equation of the equinoxes, compatible with IAU 2000 resolutions but<br>
+	 *  using the truncated nutation model IAU 2000B.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    equation of the equinoxes (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result, which is in radians, operates in the following sense:<br>
+	 * *        Greenwich apparent ST = GMST + equation of the equinoxes<br>
+	 * *  3) The result is compatible with the IAU 2000 resolutions except<br>
+	 *     that accuracy has been compromised for the sake of speed.  For<br>
+	 *     further details, see McCarthy & Luzum (2001), IERS Conventions<br>
+	 *     2003 and Capitaine et al. (2003).<br>
+	 * *  Called:<br>
+	 *     iauPr00      IAU 2000 precession adjustments<br>
+	 *     iauObl80     mean obliquity, IAU 1980<br>
+	 *     iauNut00b    nutation, IAU 2000B<br>
+	 *     iauEe00      equation of the equinoxes, IAU 2000<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     McCarthy, D.D. & Luzum, B.J., "An abridged model of the<br>
+	 *     precession-nutation of the celestial pole", Celestial Mechanics &<br>
+	 *     Dynamical Astronomy, 85, 37-49 (2003)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2008 May 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:281</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7332</i>
 	 */
 	native public static double iauEe00b(double date1, double date2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u E e 0 6 a<br>
+	 *  - - - - - - - - -<br>
+	 * *  Equation of the equinoxes, compatible with IAU 2000 resolutions and<br>
+	 *  IAU 2006/2000A precession-nutation.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double    TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double    equation of the equinoxes (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result, which is in radians, operates in the following sense:<br>
+	 * *        Greenwich apparent ST = GMST + equation of the equinoxes<br>
+	 * *  Called:<br>
+	 *     iauAnpm      normalize angle into range +/- pi<br>
+	 *     iauGst06a    Greenwich apparent sidereal time, IAU 2006/2000A<br>
+	 *     iauGmst06    Greenwich mean sidereal time, IAU 2006<br>
+	 * *  Reference:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), 2004, IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG<br>
+	 * *  This revision:  2008 May 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:283</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7376</i>
 	 */
 	native public static double iauEe06a(double date1, double date2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u E e c t 0 0<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Equation of the equinoxes complementary terms, consistent with<br>
+	 *  IAU 2000 resolutions.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2  double   TT as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                  double   complementary terms (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The "complementary terms" are part of the equation of the<br>
+	 *     equinoxes (EE), classically the difference between apparent and<br>
+	 *     mean Sidereal Time:<br>
+	 * *        GAST = GMST + EE<br>
+	 * *     with:<br>
+	 * *        EE = dpsi * cos(eps)<br>
+	 * *     where dpsi is the nutation in longitude and eps is the obliquity<br>
+	 *     of date.  However, if the rotation of the Earth were constant in<br>
+	 *     an inertial frame the classical formulation would lead to<br>
+	 *     apparent irregularities in the UT1 timescale traceable to side-<br>
+	 *     effects of precession-nutation.  In order to eliminate these<br>
+	 *     effects from UT1, "complementary terms" were introduced in 1994<br>
+	 *     (IAU, 1994) and took effect from 1997 (Capitaine and Gontier,<br>
+	 *     1993):<br>
+	 * *        GAST = GMST + CT + EE<br>
+	 * *     By convention, the complementary terms are included as part of<br>
+	 *     the equation of the equinoxes rather than as part of the mean<br>
+	 *     Sidereal Time.  This slightly compromises the "geometrical"<br>
+	 *     interpretation of mean sidereal time but is otherwise<br>
+	 *     inconsequential.<br>
+	 * *     The present function computes CT in the above expression,<br>
+	 *     compatible with IAU 2000 resolutions (Capitaine et al., 2002, and<br>
+	 *     IERS Conventions 2003).<br>
+	 * *  Called:<br>
+	 *     iauFal03     mean anomaly of the Moon<br>
+	 *     iauFalp03    mean anomaly of the Sun<br>
+	 *     iauFaf03     mean argument of the latitude of the Moon<br>
+	 *     iauFad03     mean elongation of the Moon from the Sun<br>
+	 *     iauFaom03    mean longitude of the Moon's ascending node<br>
+	 *     iauFave03    mean longitude of Venus<br>
+	 *     iauFae03     mean longitude of Earth<br>
+	 *     iauFapa03    general accumulated precession in longitude<br>
+	 * *  References:<br>
+	 * *     Capitaine, N. & Gontier, A.-M., Astron. Astrophys., 275,<br>
+	 *     645-650 (1993)<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     IAU Resolution C7, Recommendation 3 (1994)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEect00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:285</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7452</i>
 	 */
 	native public static double iauEect00(double date1, double date2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u E q e q 9 4<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Equation of the equinoxes, IAU 1994 model.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double     TDB date (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *                   double     equation of the equinoxes (Note 2)<br>
+	 * *  Notes:<br>
+	 * *  1) The date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The result, which is in radians, operates in the following sense:<br>
+	 * *        Greenwich apparent ST = GMST + equation of the equinoxes<br>
+	 * *  Called:<br>
+	 *     iauAnpm      normalize angle into range +/- pi<br>
+	 *     iauNut80     nutation, IAU 1980<br>
+	 *     iauObl80     mean obliquity, IAU 1980<br>
+	 * *  References:<br>
+	 * *     IAU Resolution C7, Recommendation 3 (1994).<br>
+	 * *     Capitaine, N. & Gontier, A.-M., 1993, Astron. Astrophys., 275,<br>
+	 *     645-650.<br>
+	 * *  This revision:  2013 August 31<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEqeq94(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:287</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7496</i>
 	 */
 	native public static double iauEqeq94(double date1, double date2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u E r a 0 0<br>
+	 *  - - - - - - - - -<br>
+	 * *  Earth rotation angle (IAU 2000 model).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     dj1,dj2   double    UT1 as a 2-part Julian Date (see note)<br>
+	 * *  Returned (function value):<br>
+	 *               double    Earth rotation angle (radians), range 0-2pi<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 date dj1+dj2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the arguments dj1 and dj2.  For example,<br>
+	 *     JD(UT1)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *             dj1            dj2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  The date & time method is<br>
+	 *     best matched to the algorithm used:  maximum precision is<br>
+	 *     delivered when the dj1 argument is for 0hrs UT1 on the day in<br>
+	 *     question and the dj2 argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) The algorithm is adapted from Expression 22 of Capitaine et al.<br>
+	 *     2000.  The time argument has been expressed in days directly,<br>
+	 *     and, to retain precision, integer contributions have been<br>
+	 *     eliminated.  The same formulation is given in IERS Conventions<br>
+	 *     (2003), Chap. 5, Eq. 14.<br>
+	 * *  Called:<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Capitaine N., Guinot B. and McCarthy D.D, 2000, Astron.<br>
+	 *     Astrophys., 355, 398-405.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEra00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:289</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7544</i>
 	 */
 	native public static double iauEra00(double dj1, double dj2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G m s t 0 0<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Greenwich mean sidereal time (model consistent with IAU 2000<br>
+	 *  resolutions).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 *     tta,ttb    double    TT as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich mean sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 and TT dates uta+utb and tta+ttb respectively, are both<br>
+	 *     Julian Dates, apportioned in any convenient way between the<br>
+	 *     argument pairs.  For example, JD=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *            Part A         Part B<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable (in the case of UT;  the TT is not at all critical<br>
+	 *     in this respect).  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     Rotation Angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) Both UT1 and TT are required, UT1 to predict the Earth rotation<br>
+	 *     and TT to predict the effects of precession.  If UT1 is used for<br>
+	 *     both purposes, errors of order 100 microarcseconds result.<br>
+	 * *  3) This GMST is compatible with the IAU 2000 resolutions and must be<br>
+	 *     used only in conjunction with other IAU 2000 compatible<br>
+	 *     components such as precession-nutation and equation of the<br>
+	 *     equinoxes.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  5) The algorithm is from Capitaine et al. (2003) and IERS<br>
+	 *     Conventions 2003.<br>
+	 * *  Called:<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:291</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7603</i>
 	 */
 	native public static double iauGmst00(double uta, double utb, double tta, double ttb);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G m s t 0 6<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Greenwich mean sidereal time (consistent with IAU 2006 precession).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 *     tta,ttb    double    TT as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich mean sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 and TT dates uta+utb and tta+ttb respectively, are both<br>
+	 *     Julian Dates, apportioned in any convenient way between the<br>
+	 *     argument pairs.  For example, JD=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *            Part A        Part B<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable (in the case of UT;  the TT is not at all critical<br>
+	 *     in this respect).  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     rotation angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) Both UT1 and TT are required, UT1 to predict the Earth rotation<br>
+	 *     and TT to predict the effects of precession.  If UT1 is used for<br>
+	 *     both purposes, errors of order 100 microarcseconds result.<br>
+	 * *  3) This GMST is compatible with the IAU 2006 precession and must not<br>
+	 *     be used with other precession models.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  Called:<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  Reference:<br>
+	 * *     Capitaine, N., Wallace, P.T. & Chapront, J., 2005,<br>
+	 *     Astron.Astrophys. 432, 355<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst06(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:293</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7654</i>
 	 */
 	native public static double iauGmst06(double uta, double utb, double tta, double ttb);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G m s t 8 2<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Universal Time to Greenwich mean sidereal time (IAU 1982 model).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     dj1,dj2    double    UT1 Julian Date (see note)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich mean sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 date dj1+dj2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the arguments dj1 and dj2.  For example,<br>
+	 *     JD(UT1)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *             dj1            dj2<br>
+	 * *         2450123.7          0          (JD method)<br>
+	 *          2451545        -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5         0.2         (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  The date & time method is<br>
+	 *     best matched to the algorithm used:  maximum accuracy (or, at<br>
+	 *     least, minimum noise) is delivered when the dj1 argument is for<br>
+	 *     0hrs UT1 on the day in question and the dj2 argument lies in the<br>
+	 *     range 0 to 1, or vice versa.<br>
+	 * *  2) The algorithm is based on the IAU 1982 expression.  This is<br>
+	 *     always described as giving the GMST at 0 hours UT1.  In fact, it<br>
+	 *     gives the difference between the GMST and the UT, the steady<br>
+	 *     4-minutes-per-day drawing-ahead of ST with respect to UT.  When<br>
+	 *     whole days are ignored, the expression happens to equal the GMST<br>
+	 *     at 0 hours UT1 each day.<br>
+	 * *  3) In this function, the entire UT1 (the sum of the two arguments<br>
+	 *     dj1 and dj2) is used directly as the argument for the standard<br>
+	 *     formula, the constant term of which is adjusted by 12 hours to<br>
+	 *     take account of the noon phasing of Julian Date.  The UT1 is then<br>
+	 *     added, but omitting whole days to conserve accuracy.<br>
+	 * *  Called:<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Transactions of the International Astronomical Union,<br>
+	 *     XVIII B, 67 (1983).<br>
+	 * *     Aoki et al., Astron. Astrophys. 105, 359-361 (1982).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst82(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:295</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7707</i>
 	 */
 	native public static double iauGmst82(double dj1, double dj2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G s t 0 0 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Greenwich apparent sidereal time (consistent with IAU 2000<br>
+	 *  resolutions).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 *     tta,ttb    double    TT as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich apparent sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 and TT dates uta+utb and tta+ttb respectively, are both<br>
+	 *     Julian Dates, apportioned in any convenient way between the<br>
+	 *     argument pairs.  For example, JD=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *            Part A        Part B<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable (in the case of UT;  the TT is not at all critical<br>
+	 *     in this respect).  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     Rotation Angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) Both UT1 and TT are required, UT1 to predict the Earth rotation<br>
+	 *     and TT to predict the effects of precession-nutation.  If UT1 is<br>
+	 *     used for both purposes, errors of order 100 microarcseconds<br>
+	 *     result.<br>
+	 * *  3) This GAST is compatible with the IAU 2000 resolutions and must be<br>
+	 *     used only in conjunction with other IAU 2000 compatible<br>
+	 *     components such as precession-nutation.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  5) The algorithm is from Capitaine et al. (2003) and IERS<br>
+	 *     Conventions 2003.<br>
+	 * *  Called:<br>
+	 *     iauGmst00    Greenwich mean sidereal time, IAU 2000<br>
+	 *     iauEe00a     equation of the equinoxes, IAU 2000A<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst00a(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:297</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7767</i>
 	 */
 	native public static double iauGst00a(double uta, double utb, double tta, double ttb);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G s t 0 0 b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Greenwich apparent sidereal time (consistent with IAU 2000<br>
+	 *  resolutions but using the truncated nutation model IAU 2000B).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich apparent sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 date uta+utb is a Julian Date, apportioned in any<br>
+	 *     convenient way between the argument pair.  For example,<br>
+	 *     JD=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     Rotation Angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) The result is compatible with the IAU 2000 resolutions, except<br>
+	 *     that accuracy has been compromised for the sake of speed and<br>
+	 *     convenience in two respects:<br>
+	 * *     . UT is used instead of TDB (or TT) to compute the precession<br>
+	 *       component of GMST and the equation of the equinoxes.  This<br>
+	 *       results in errors of order 0.1 mas at present.<br>
+	 * *     . The IAU 2000B abridged nutation model (McCarthy & Luzum, 2001)<br>
+	 *       is used, introducing errors of up to 1 mas.<br>
+	 * *  3) This GAST is compatible with the IAU 2000 resolutions and must be<br>
+	 *     used only in conjunction with other IAU 2000 compatible<br>
+	 *     components such as precession-nutation.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  5) The algorithm is from Capitaine et al. (2003) and IERS<br>
+	 *     Conventions 2003.<br>
+	 * *  Called:<br>
+	 *     iauGmst00    Greenwich mean sidereal time, IAU 2000<br>
+	 *     iauEe00b     equation of the equinoxes, IAU 2000B<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Capitaine, N., Wallace, P.T. and McCarthy, D.D., "Expressions to<br>
+	 *     implement the IAU 2000 definition of UT1", Astronomy &<br>
+	 *     Astrophysics, 406, 1135-1149 (2003)<br>
+	 * *     McCarthy, D.D. & Luzum, B.J., "An abridged model of the<br>
+	 *     precession-nutation of the celestial pole", Celestial Mechanics &<br>
+	 *     Dynamical Astronomy, 85, 37-49 (2003)<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:299</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7832</i>
 	 */
 	native public static double iauGst00b(double uta, double utb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u G s t 0 6<br>
+	 *  - - - - - - - - -<br>
+	 * *  Greenwich apparent sidereal time, IAU 2006, given the NPB matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     uta,utb  double        UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 *     tta,ttb  double        TT as a 2-part Julian Date (Notes 1,2)<br>
+	 *     rnpb     double[3][3]  nutation x precession x bias matrix<br>
+	 * *  Returned (function value):<br>
+	 *              double        Greenwich apparent sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 and TT dates uta+utb and tta+ttb respectively, are both<br>
+	 *     Julian Dates, apportioned in any convenient way between the<br>
+	 *     argument pairs.  For example, JD=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *            Part A        Part B<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable (in the case of UT;  the TT is not at all critical<br>
+	 *     in this respect).  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     rotation angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) Both UT1 and TT are required, UT1 to predict the Earth rotation<br>
+	 *     and TT to predict the effects of precession-nutation.  If UT1 is<br>
+	 *     used for both purposes, errors of order 100 microarcseconds<br>
+	 *     result.<br>
+	 * *  3) Although the function uses the IAU 2006 series for s+XY/2, it is<br>
+	 *     otherwise independent of the precession-nutation model and can in<br>
+	 *     practice be used with any equinox-based NPB matrix.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  Called:<br>
+	 *     iauBpn2xy    extract CIP X,Y coordinates from NPB matrix<br>
+	 *     iauS06       the CIO locator s, given X,Y, IAU 2006<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 *     iauEra00     Earth rotation angle, IAU 2000<br>
+	 *     iauEors      equation of the origins, given NPB matrix and s<br>
+	 * *  Reference:<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst06(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:301</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7888</i>
 	 */
 	public static double iauGst06(double uta, double utb, double tta, double ttb, Pointer<Double > rnpb) {
 		return iauGst06(uta, utb, tta, ttb, Pointer.getPeer(rnpb));
 	}
 	protected native static double iauGst06(double uta, double utb, double tta, double ttb, @Ptr long rnpb);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G s t 0 6 a<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Greenwich apparent sidereal time (consistent with IAU 2000 and 2006<br>
+	 *  resolutions).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical model.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 *     tta,ttb    double    TT as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich apparent sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 and TT dates uta+utb and tta+ttb respectively, are both<br>
+	 *     Julian Dates, apportioned in any convenient way between the<br>
+	 *     argument pairs.  For example, JD=2450123.7 could be expressed in<br>
+	 *     any of these ways, among others:<br>
+	 * *            Part A        Part B<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable (in the case of UT;  the TT is not at all critical<br>
+	 *     in this respect).  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     rotation angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) Both UT1 and TT are required, UT1 to predict the Earth rotation<br>
+	 *     and TT to predict the effects of precession-nutation.  If UT1 is<br>
+	 *     used for both purposes, errors of order 100 microarcseconds<br>
+	 *     result.<br>
+	 * *  3) This GAST is compatible with the IAU 2000/2006 resolutions and<br>
+	 *     must be used only in conjunction with IAU 2006 precession and<br>
+	 *     IAU 2000A nutation.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  Called:<br>
+	 *     iauPnm06a    classical NPB matrix, IAU 2006/2000A<br>
+	 *     iauGst06     Greenwich apparent ST, IAU 2006, given NPB matrix<br>
+	 * *  Reference:<br>
+	 * *     Wallace, P.T. & Capitaine, N., 2006, Astron.Astrophys. 459, 981<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst06a(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:303</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7941</i>
 	 */
 	native public static double iauGst06a(double uta, double utb, double tta, double ttb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u G s t 9 4<br>
+	 *  - - - - - - - - -<br>
+	 * *  Greenwich apparent sidereal time (consistent with IAU 1982/94<br>
+	 *  resolutions).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     uta,utb    double    UT1 as a 2-part Julian Date (Notes 1,2)<br>
+	 * *  Returned (function value):<br>
+	 *                double    Greenwich apparent sidereal time (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The UT1 date uta+utb is a Julian Date, apportioned in any<br>
+	 *     convenient way between the argument pair.  For example,<br>
+	 *     JD=2450123.7 could be expressed in any of these ways, among<br>
+	 *     others:<br>
+	 * *             uta            utb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 and MJD methods are good compromises<br>
+	 *     between resolution and convenience.  For UT, the date & time<br>
+	 *     method is best matched to the algorithm that is used by the Earth<br>
+	 *     Rotation Angle function, called internally:  maximum precision is<br>
+	 *     delivered when the uta argument is for 0hrs UT1 on the day in<br>
+	 *     question and the utb argument lies in the range 0 to 1, or vice<br>
+	 *     versa.<br>
+	 * *  2) The result is compatible with the IAU 1982 and 1994 resolutions,<br>
+	 *     except that accuracy has been compromised for the sake of<br>
+	 *     convenience in that UT is used instead of TDB (or TT) to compute<br>
+	 *     the equation of the equinoxes.<br>
+	 * *  3) This GAST must be used only in conjunction with contemporaneous<br>
+	 *     IAU standards such as 1976 precession, 1980 obliquity and 1982<br>
+	 *     nutation.  It is not compatible with the IAU 2000 resolutions.<br>
+	 * *  4) The result is returned in the range 0 to 2pi.<br>
+	 * *  Called:<br>
+	 *     iauGmst82    Greenwich mean sidereal time, IAU 1982<br>
+	 *     iauEqeq94    equation of the equinoxes, IAU 1994<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  References:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *     IAU Resolution C7, Recommendation 3 (1994)<br>
+	 * *  This revision:  2008 May 16<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst94(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:305</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7995</i>
 	 */
 	native public static double iauGst94(double uta, double utb);
 	/**
-	 * Astronomy/SpaceMotion<br>
+	 * - - - - - - - - - -<br>
+	 *   i a u P m s a f e<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Star proper motion:  update star catalog data for space motion, with<br>
+	 *  special handling to handle the zero parallax case.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ra1    double      right ascension (radians), before<br>
+	 *     dec1   double      declination (radians), before<br>
+	 *     pmr1   double      RA proper motion (radians/year), before<br>
+	 *     pmd1   double      Dec proper motion (radians/year), before<br>
+	 *     px1    double      parallax (arcseconds), before<br>
+	 *     rv1    double      radial velocity (km/s, +ve = receding), before<br>
+	 *     ep1a   double      "before" epoch, part A (Note 1)<br>
+	 *     ep1b   double      "before" epoch, part B (Note 1)<br>
+	 *     ep2a   double      "after" epoch, part A (Note 1)<br>
+	 *     ep2b   double      "after" epoch, part B (Note 1)<br>
+	 * *  Returned:<br>
+	 *     ra2    double      right ascension (radians), after<br>
+	 *     dec2   double      declination (radians), after<br>
+	 *     pmr2   double      RA proper motion (radians/year), after<br>
+	 *     pmd2   double      Dec proper motion (radians/year), after<br>
+	 *     px2    double      parallax (arcseconds), after<br>
+	 *     rv2    double      radial velocity (km/s, +ve = receding), after<br>
+	 * *  Returned (function value):<br>
+	 *            int         status:<br>
+	 *                         -1 = system error (should not occur)<br>
+	 *                          0 = no warnings or errors<br>
+	 *                          1 = distance overridden (Note 6)<br>
+	 *                          2 = excessive velocity (Note 7)<br>
+	 *                          4 = solution didn't converge (Note 8)<br>
+	 *                       else = binary logical OR of the above warnings<br>
+	 * *  Notes:<br>
+	 * *  1) The starting and ending TDB epochs ep1a+ep1b and ep2a+ep2b are<br>
+	 *     Julian Dates, apportioned in any convenient way between the two<br>
+	 *     parts (A and B).  For example, JD(TDB)=2450123.7 could be<br>
+	 *     expressed in any of these ways, among others:<br>
+	 * *            epNa            epNb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in cases<br>
+	 *     where the loss of several decimal digits of resolution is<br>
+	 *     acceptable.  The J2000 method is best matched to the way the<br>
+	 *     argument is handled internally and will deliver the optimum<br>
+	 *     resolution.  The MJD method and the date & time methods are both<br>
+	 *     good compromises between resolution and convenience.<br>
+	 * *  2) In accordance with normal star-catalog conventions, the object's<br>
+	 *     right ascension and declination are freed from the effects of<br>
+	 *     secular aberration.  The frame, which is aligned to the catalog<br>
+	 *     equator and equinox, is Lorentzian and centered on the SSB.<br>
+	 * *     The proper motions are the rate of change of the right ascension<br>
+	 *     and declination at the catalog epoch and are in radians per TDB<br>
+	 *     Julian year.<br>
+	 * *     The parallax and radial velocity are in the same frame.<br>
+	 * *  3) Care is needed with units.  The star coordinates are in radians<br>
+	 *     and the proper motions in radians per Julian year, but the<br>
+	 *     parallax is in arcseconds.<br>
+	 * *  4) The RA proper motion is in terms of coordinate angle, not true<br>
+	 *     angle.  If the catalog uses arcseconds for both RA and Dec proper<br>
+	 *     motions, the RA proper motion will need to be divided by cos(Dec)<br>
+	 *     before use.<br>
+	 * *  5) Straight-line motion at constant speed, in the inertial frame, is<br>
+	 *     assumed.<br>
+	 * *  6) An extremely small (or zero or negative) parallax is overridden<br>
+	 *     to ensure that the object is at a finite but very large distance,<br>
+	 *     but not so large that the proper motion is equivalent to a large<br>
+	 *     but safe speed (about 0.1c using the chosen constant).  A warning<br>
+	 *     status of 1 is added to the status if this action has been taken.<br>
+	 * *  7) If the space velocity is a significant fraction of c (see the<br>
+	 *     constant VMAX in the function iauStarpv), it is arbitrarily set<br>
+	 *     to zero.  When this action occurs, 2 is added to the status.<br>
+	 * *  8) The relativistic adjustment carried out in the iauStarpv function<br>
+	 *     involves an iterative calculation.  If the process fails to<br>
+	 *     converge within a set number of iterations, 4 is added to the<br>
+	 *     status.<br>
+	 * *  Called:<br>
+	 *     iauSeps      angle between two points<br>
+	 *     iauStarpm    update star catalog data for space motion<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPmsafe(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:310</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8084</i>
 	 */
 	@Name("iauPmsafe") 
 	public static int iauPmsafe$2(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
@@ -1027,712 +8551,3519 @@ public class SofaLibrary {
 	@Name("iauPmsafe") 
 	protected native static int iauPmsafe$2(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, @Ptr long ra2, @Ptr long dec2, @Ptr long pmr2, @Ptr long pmd2, @Ptr long px2, @Ptr long rv2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u P v s t a r<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Convert star position+velocity vector to catalog coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given (Note 1):<br>
+	 *     pv     double[2][3]   pv-vector (AU, AU/day)<br>
+	 * *  Returned (Note 2):<br>
+	 *     ra     double         right ascension (radians)<br>
+	 *     dec    double         declination (radians)<br>
+	 *     pmr    double         RA proper motion (radians/year)<br>
+	 *     pmd    double         Dec proper motion (radians/year)<br>
+	 *     px     double         parallax (arcsec)<br>
+	 *     rv     double         radial velocity (km/s, positive = receding)<br>
+	 * *  Returned (function value):<br>
+	 *            int            status:<br>
+	 *                              0 = OK<br>
+	 *                             -1 = superluminal speed (Note 5)<br>
+	 *                             -2 = null position vector<br>
+	 * *  Notes:<br>
+	 * *  1) The specified pv-vector is the coordinate direction (and its rate<br>
+	 *     of change) for the date at which the light leaving the star<br>
+	 *     reached the solar-system barycenter.<br>
+	 * *  2) The star data returned by this function are "observables" for an<br>
+	 *     imaginary observer at the solar-system barycenter.  Proper motion<br>
+	 *     and radial velocity are, strictly, in terms of barycentric<br>
+	 *     coordinate time, TCB.  For most practical applications, it is<br>
+	 *     permissible to neglect the distinction between TCB and ordinary<br>
+	 *     "proper" time on Earth (TT/TAI).  The result will, as a rule, be<br>
+	 *     limited by the intrinsic accuracy of the proper-motion and<br>
+	 *     radial-velocity data;  moreover, the supplied pv-vector is likely<br>
+	 *     to be merely an intermediate result (for example generated by the<br>
+	 *     function iauStarpv), so that a change of time unit will cancel<br>
+	 *     out overall.<br>
+	 * *     In accordance with normal star-catalog conventions, the object's<br>
+	 *     right ascension and declination are freed from the effects of<br>
+	 *     secular aberration.  The frame, which is aligned to the catalog<br>
+	 *     equator and equinox, is Lorentzian and centered on the SSB.<br>
+	 * *     Summarizing, the specified pv-vector is for most stars almost<br>
+	 *     identical to the result of applying the standard geometrical<br>
+	 *     "space motion" transformation to the catalog data.  The<br>
+	 *     differences, which are the subject of the Stumpff paper cited<br>
+	 *     below, are:<br>
+	 * *     (i) In stars with significant radial velocity and proper motion,<br>
+	 *     the constantly changing light-time distorts the apparent proper<br>
+	 *     motion.  Note that this is a classical, not a relativistic,<br>
+	 *     effect.<br>
+	 * *     (ii) The transformation complies with special relativity.<br>
+	 * *  3) Care is needed with units.  The star coordinates are in radians<br>
+	 *     and the proper motions in radians per Julian year, but the<br>
+	 *     parallax is in arcseconds; the radial velocity is in km/s, but<br>
+	 *     the pv-vector result is in AU and AU/day.<br>
+	 * *  4) The proper motions are the rate of change of the right ascension<br>
+	 *     and declination at the catalog epoch and are in radians per Julian<br>
+	 *     year.  The RA proper motion is in terms of coordinate angle, not<br>
+	 *     true angle, and will thus be numerically larger at high<br>
+	 *     declinations.<br>
+	 * *  5) Straight-line motion at constant speed in the inertial frame is<br>
+	 *     assumed.  If the speed is greater than or equal to the speed of<br>
+	 *     light, the function aborts with an error status.<br>
+	 * *  6) The inverse transformation is performed by the function iauStarpv.<br>
+	 * *  Called:<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 *     iauPv2s      pv-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  Reference:<br>
+	 * *     Stumpff, P., 1985, Astron.Astrophys. 144, 232-240.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPvstar(double[2][3], double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:312</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8165</i>
 	 */
 	public static int iauPvstar(Pointer<Double > pv, Pointer<Double > ra, Pointer<Double > dec, Pointer<Double > pmr, Pointer<Double > pmd, Pointer<Double > px, Pointer<Double > rv) {
 		return iauPvstar(Pointer.getPeer(pv), Pointer.getPeer(ra), Pointer.getPeer(dec), Pointer.getPeer(pmr), Pointer.getPeer(pmd), Pointer.getPeer(px), Pointer.getPeer(rv));
 	}
 	protected native static int iauPvstar(@Ptr long pv, @Ptr long ra, @Ptr long dec, @Ptr long pmr, @Ptr long pmd, @Ptr long px, @Ptr long rv);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u S t a r p v<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Convert star catalog coordinates to position+velocity vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given (Note 1):<br>
+	 *     ra     double        right ascension (radians)<br>
+	 *     dec    double        declination (radians)<br>
+	 *     pmr    double        RA proper motion (radians/year)<br>
+	 *     pmd    double        Dec proper motion (radians/year)<br>
+	 *     px     double        parallax (arcseconds)<br>
+	 *     rv     double        radial velocity (km/s, positive = receding)<br>
+	 * *  Returned (Note 2):<br>
+	 *     pv     double[2][3]  pv-vector (AU, AU/day)<br>
+	 * *  Returned (function value):<br>
+	 *            int           status:<br>
+	 *                              0 = no warnings<br>
+	 *                              1 = distance overridden (Note 6)<br>
+	 *                              2 = excessive speed (Note 7)<br>
+	 *                              4 = solution didn't converge (Note 8)<br>
+	 *                           else = binary logical OR of the above<br>
+	 * *  Notes:<br>
+	 * *  1) The star data accepted by this function are "observables" for an<br>
+	 *     imaginary observer at the solar-system barycenter.  Proper motion<br>
+	 *     and radial velocity are, strictly, in terms of barycentric<br>
+	 *     coordinate time, TCB.  For most practical applications, it is<br>
+	 *     permissible to neglect the distinction between TCB and ordinary<br>
+	 *     "proper" time on Earth (TT/TAI).  The result will, as a rule, be<br>
+	 *     limited by the intrinsic accuracy of the proper-motion and<br>
+	 *     radial-velocity data;  moreover, the pv-vector is likely to be<br>
+	 *     merely an intermediate result, so that a change of time unit<br>
+	 *     would cancel out overall.<br>
+	 * *     In accordance with normal star-catalog conventions, the object's<br>
+	 *     right ascension and declination are freed from the effects of<br>
+	 *     secular aberration.  The frame, which is aligned to the catalog<br>
+	 *     equator and equinox, is Lorentzian and centered on the SSB.<br>
+	 * *  2) The resulting position and velocity pv-vector is with respect to<br>
+	 *     the same frame and, like the catalog coordinates, is freed from<br>
+	 *     the effects of secular aberration.  Should the "coordinate<br>
+	 *     direction", where the object was located at the catalog epoch, be<br>
+	 *     required, it may be obtained by calculating the magnitude of the<br>
+	 *     position vector pv[0][0-2] dividing by the speed of light in<br>
+	 *     AU/day to give the light-time, and then multiplying the space<br>
+	 *     velocity pv[1][0-2] by this light-time and adding the result to<br>
+	 *     pv[0][0-2].<br>
+	 * *     Summarizing, the pv-vector returned is for most stars almost<br>
+	 *     identical to the result of applying the standard geometrical<br>
+	 *     "space motion" transformation.  The differences, which are the<br>
+	 *     subject of the Stumpff paper referenced below, are:<br>
+	 * *     (i) In stars with significant radial velocity and proper motion,<br>
+	 *     the constantly changing light-time distorts the apparent proper<br>
+	 *     motion.  Note that this is a classical, not a relativistic,<br>
+	 *     effect.<br>
+	 * *     (ii) The transformation complies with special relativity.<br>
+	 * *  3) Care is needed with units.  The star coordinates are in radians<br>
+	 *     and the proper motions in radians per Julian year, but the<br>
+	 *     parallax is in arcseconds; the radial velocity is in km/s, but<br>
+	 *     the pv-vector result is in AU and AU/day.<br>
+	 * *  4) The RA proper motion is in terms of coordinate angle, not true<br>
+	 *     angle.  If the catalog uses arcseconds for both RA and Dec proper<br>
+	 *     motions, the RA proper motion will need to be divided by cos(Dec)<br>
+	 *     before use.<br>
+	 * *  5) Straight-line motion at constant speed, in the inertial frame,<br>
+	 *     is assumed.<br>
+	 * *  6) An extremely small (or zero or negative) parallax is interpreted<br>
+	 *     to mean that the object is on the "celestial sphere", the radius<br>
+	 *     of which is an arbitrary (large) value (see the constant PXMIN).<br>
+	 *     When the distance is overridden in this way, the status,<br>
+	 *     initially zero, has 1 added to it.<br>
+	 * *  7) If the space velocity is a significant fraction of c (see the<br>
+	 *     constant VMAX), it is arbitrarily set to zero.  When this action<br>
+	 *     occurs, 2 is added to the status.<br>
+	 * *  8) The relativistic adjustment involves an iterative calculation.<br>
+	 *     If the process fails to converge within a set number (IMAX) of<br>
+	 *     iterations, 4 is added to the status.<br>
+	 * *  9) The inverse transformation is performed by the function<br>
+	 *     iauPvstar.<br>
+	 * *  Called:<br>
+	 *     iauS2pv      spherical coordinates to pv-vector<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauZp        zero p-vector<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 * *  Reference:<br>
+	 * *     Stumpff, P., 1985, Astron.Astrophys. 144, 232-240.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauStarpv(double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:314</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8262</i>
 	 */
 	public static int iauStarpv(double ra, double dec, double pmr, double pmd, double px, double rv, Pointer<Double > pv) {
 		return iauStarpv(ra, dec, pmr, pmd, px, rv, Pointer.getPeer(pv));
 	}
 	protected native static int iauStarpv(double ra, double dec, double pmr, double pmd, double px, double rv, @Ptr long pv);
 	/**
-	 * Astronomy/StarCatalogs<br>
+	 * - - - - - - - - -<br>
+	 *   i a u F k 5 2 h<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform FK5 (J2000.0) star data into the Hipparcos system.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given (all FK5, equinox J2000.0, epoch J2000.0):<br>
+	 *     r5      double    RA (radians)<br>
+	 *     d5      double    Dec (radians)<br>
+	 *     dr5     double    proper motion in RA (dRA/dt, rad/Jyear)<br>
+	 *     dd5     double    proper motion in Dec (dDec/dt, rad/Jyear)<br>
+	 *     px5     double    parallax (arcsec)<br>
+	 *     rv5     double    radial velocity (km/s, positive = receding)<br>
+	 * *  Returned (all Hipparcos, epoch J2000.0):<br>
+	 *     rh      double    RA (radians)<br>
+	 *     dh      double    Dec (radians)<br>
+	 *     drh     double    proper motion in RA (dRA/dt, rad/Jyear)<br>
+	 *     ddh     double    proper motion in Dec (dDec/dt, rad/Jyear)<br>
+	 *     pxh     double    parallax (arcsec)<br>
+	 *     rvh     double    radial velocity (km/s, positive = receding)<br>
+	 * *  Notes:<br>
+	 * *  1) This function transforms FK5 star positions and proper motions<br>
+	 *     into the system of the Hipparcos catalog.<br>
+	 * *  2) The proper motions in RA are dRA/dt rather than<br>
+	 *     cos(Dec)*dRA/dt, and are per year rather than per century.<br>
+	 * *  3) The FK5 to Hipparcos transformation is modeled as a pure<br>
+	 *     rotation and spin;  zonal errors in the FK5 catalog are not<br>
+	 *     taken into account.<br>
+	 * *  4) See also iauH2fk5, iauFk5hz, iauHfk5z.<br>
+	 * *  Called:<br>
+	 *     iauStarpv    star catalog data to space motion pv-vector<br>
+	 *     iauFk5hip    FK5 to Hipparcos rotation and spin<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 *     iauPvstar    space motion pv-vector to star catalog data<br>
+	 * *  Reference:<br>
+	 * *     F.Mignard & M.Froeschle, Astron. Astrophys. 354, 732-739 (2000).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk52h(double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:319</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8308</i>
 	 */
 	public static void iauFk52h(double r5, double d5, double dr5, double dd5, double px5, double rv5, Pointer<Double > rh, Pointer<Double > dh, Pointer<Double > drh, Pointer<Double > ddh, Pointer<Double > pxh, Pointer<Double > rvh) {
 		iauFk52h(r5, d5, dr5, dd5, px5, rv5, Pointer.getPeer(rh), Pointer.getPeer(dh), Pointer.getPeer(drh), Pointer.getPeer(ddh), Pointer.getPeer(pxh), Pointer.getPeer(rvh));
 	}
 	protected native static void iauFk52h(double r5, double d5, double dr5, double dd5, double px5, double rv5, @Ptr long rh, @Ptr long dh, @Ptr long drh, @Ptr long ddh, @Ptr long pxh, @Ptr long rvh);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u F k 5 h i p<br>
+	 *  - - - - - - - - - -<br>
+	 * *  FK5 to Hipparcos rotation and spin.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Returned:<br>
+	 *     r5h   double[3][3]  r-matrix: FK5 rotation wrt Hipparcos (Note 2)<br>
+	 *     s5h   double[3]     r-vector: FK5 spin wrt Hipparcos (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) This function models the FK5 to Hipparcos transformation as a<br>
+	 *     pure rotation and spin;  zonal errors in the FK5 catalogue are<br>
+	 *     not taken into account.<br>
+	 * *  2) The r-matrix r5h operates in the sense:<br>
+	 * *           P_Hipparcos = r5h x P_FK5<br>
+	 * *     where P_FK5 is a p-vector in the FK5 frame, and P_Hipparcos is<br>
+	 *     the equivalent Hipparcos p-vector.<br>
+	 * *  3) The r-vector s5h represents the time derivative of the FK5 to<br>
+	 *     Hipparcos rotation.  The units are radians per year (Julian,<br>
+	 *     TDB).<br>
+	 * *  Called:<br>
+	 *     iauRv2m      r-vector to r-matrix<br>
+	 * *  Reference:<br>
+	 * *     F.Mignard & M.Froeschle, Astron. Astrophys. 354, 732-739 (2000).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk5hip(double[3][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:321</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8340</i>
 	 */
 	public static void iauFk5hip(Pointer<Double > r5h, Pointer<Double > s5h) {
 		iauFk5hip(Pointer.getPeer(r5h), Pointer.getPeer(s5h));
 	}
 	protected native static void iauFk5hip(@Ptr long r5h, @Ptr long s5h);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u F k 5 h z<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform an FK5 (J2000.0) star position into the system of the<br>
+	 *  Hipparcos catalogue, assuming zero Hipparcos proper motion.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     r5           double   FK5 RA (radians), equinox J2000.0, at date<br>
+	 *     d5           double   FK5 Dec (radians), equinox J2000.0, at date<br>
+	 *     date1,date2  double   TDB date (Notes 1,2)<br>
+	 * *  Returned:<br>
+	 *     rh           double   Hipparcos RA (radians)<br>
+	 *     dh           double   Hipparcos Dec (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) This function converts a star position from the FK5 system to<br>
+	 *     the Hipparcos system, in such a way that the Hipparcos proper<br>
+	 *     motion is zero.  Because such a star has, in general, a non-zero<br>
+	 *     proper motion in the FK5 system, the function requires the date<br>
+	 *     at which the position in the FK5 system was determined.<br>
+	 * *  2) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  3) The FK5 to Hipparcos transformation is modeled as a pure<br>
+	 *     rotation and spin;  zonal errors in the FK5 catalogue are not<br>
+	 *     taken into account.<br>
+	 * *  4) The position returned by this function is in the Hipparcos<br>
+	 *     reference system but at date date1+date2.<br>
+	 * *  5) See also iauFk52h, iauH2fk5, iauHfk5z.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauFk5hip    FK5 to Hipparcos rotation and spin<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 *     iauRv2m      r-vector to r-matrix<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  Reference:<br>
+	 * *     F.Mignard & M.Froeschle, 2000, Astron.Astrophys. 354, 732-739.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk5hz(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:323</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8400</i>
 	 */
 	public static void iauFk5hz(double r5, double d5, double date1, double date2, Pointer<Double > rh, Pointer<Double > dh) {
 		iauFk5hz(r5, d5, date1, date2, Pointer.getPeer(rh), Pointer.getPeer(dh));
 	}
 	protected native static void iauFk5hz(double r5, double d5, double date1, double date2, @Ptr long rh, @Ptr long dh);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u H 2 f k 5<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform Hipparcos star data into the FK5 (J2000.0) system.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given (all Hipparcos, epoch J2000.0):<br>
+	 *     rh      double    RA (radians)<br>
+	 *     dh      double    Dec (radians)<br>
+	 *     drh     double    proper motion in RA (dRA/dt, rad/Jyear)<br>
+	 *     ddh     double    proper motion in Dec (dDec/dt, rad/Jyear)<br>
+	 *     pxh     double    parallax (arcsec)<br>
+	 *     rvh     double    radial velocity (km/s, positive = receding)<br>
+	 * *  Returned (all FK5, equinox J2000.0, epoch J2000.0):<br>
+	 *     r5      double    RA (radians)<br>
+	 *     d5      double    Dec (radians)<br>
+	 *     dr5     double    proper motion in RA (dRA/dt, rad/Jyear)<br>
+	 *     dd5     double    proper motion in Dec (dDec/dt, rad/Jyear)<br>
+	 *     px5     double    parallax (arcsec)<br>
+	 *     rv5     double    radial velocity (km/s, positive = receding)<br>
+	 * *  Notes:<br>
+	 * *  1) This function transforms Hipparcos star positions and proper<br>
+	 *     motions into FK5 J2000.0.<br>
+	 * *  2) The proper motions in RA are dRA/dt rather than<br>
+	 *     cos(Dec)*dRA/dt, and are per year rather than per century.<br>
+	 * *  3) The FK5 to Hipparcos transformation is modeled as a pure<br>
+	 *     rotation and spin;  zonal errors in the FK5 catalog are not<br>
+	 *     taken into account.<br>
+	 * *  4) See also iauFk52h, iauFk5hz, iauHfk5z.<br>
+	 * *  Called:<br>
+	 *     iauStarpv    star catalog data to space motion pv-vector<br>
+	 *     iauFk5hip    FK5 to Hipparcos rotation and spin<br>
+	 *     iauRv2m      r-vector to r-matrix<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 *     iauPvstar    space motion pv-vector to star catalog data<br>
+	 * *  Reference:<br>
+	 * *     F.Mignard & M.Froeschle, Astron. Astrophys. 354, 732-739 (2000).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauH2fk5(double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:325</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8448</i>
 	 */
 	public static void iauH2fk5(double rh, double dh, double drh, double ddh, double pxh, double rvh, Pointer<Double > r5, Pointer<Double > d5, Pointer<Double > dr5, Pointer<Double > dd5, Pointer<Double > px5, Pointer<Double > rv5) {
 		iauH2fk5(rh, dh, drh, ddh, pxh, rvh, Pointer.getPeer(r5), Pointer.getPeer(d5), Pointer.getPeer(dr5), Pointer.getPeer(dd5), Pointer.getPeer(px5), Pointer.getPeer(rv5));
 	}
 	protected native static void iauH2fk5(double rh, double dh, double drh, double ddh, double pxh, double rvh, @Ptr long r5, @Ptr long d5, @Ptr long dr5, @Ptr long dd5, @Ptr long px5, @Ptr long rv5);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u H f k 5 z<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform a Hipparcos star position into FK5 J2000.0, assuming<br>
+	 *  zero Hipparcos proper motion.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     rh            double    Hipparcos RA (radians)<br>
+	 *     dh            double    Hipparcos Dec (radians)<br>
+	 *     date1,date2   double    TDB date (Note 1)<br>
+	 * *  Returned (all FK5, equinox J2000.0, date date1+date2):<br>
+	 *     r5            double    RA (radians)<br>
+	 *     d5            double    Dec (radians)<br>
+	 *     dr5           double    FK5 RA proper motion (rad/year, Note 4)<br>
+	 *     dd5           double    Dec proper motion (rad/year, Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) The TT date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) The proper motion in RA is dRA/dt rather than cos(Dec)*dRA/dt.<br>
+	 * *  3) The FK5 to Hipparcos transformation is modeled as a pure rotation<br>
+	 *     and spin;  zonal errors in the FK5 catalogue are not taken into<br>
+	 *     account.<br>
+	 * *  4) It was the intention that Hipparcos should be a close<br>
+	 *     approximation to an inertial frame, so that distant objects have<br>
+	 *     zero proper motion;  such objects have (in general) non-zero<br>
+	 *     proper motion in FK5, and this function returns those fictitious<br>
+	 *     proper motions.<br>
+	 * *  5) The position returned by this function is in the FK5 J2000.0<br>
+	 *     reference system but at date date1+date2.<br>
+	 * *  6) See also iauFk52h, iauH2fk5, iauFk5zhz.<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauFk5hip    FK5 to Hipparcos rotation and spin<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 *     iauRxr       product of two r-matrices<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPv2s      pv-vector to spherical<br>
+	 *     iauAnp       normalize angle into range 0 to 2pi<br>
+	 * *  Reference:<br>
+	 * *     F.Mignard & M.Froeschle, 2000, Astron.Astrophys. 354, 732-739.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauHfk5z(double, double, double, double, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:327</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8512</i>
 	 */
 	public static void iauHfk5z(double rh, double dh, double date1, double date2, Pointer<Double > r5, Pointer<Double > d5, Pointer<Double > dr5, Pointer<Double > dd5) {
 		iauHfk5z(rh, dh, date1, date2, Pointer.getPeer(r5), Pointer.getPeer(d5), Pointer.getPeer(dr5), Pointer.getPeer(dd5));
 	}
 	protected native static void iauHfk5z(double rh, double dh, double date1, double date2, @Ptr long r5, @Ptr long d5, @Ptr long dr5, @Ptr long dd5);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u S t a r p m<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Star proper motion:  update star catalog data for space motion.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     ra1    double     right ascension (radians), before<br>
+	 *     dec1   double     declination (radians), before<br>
+	 *     pmr1   double     RA proper motion (radians/year), before<br>
+	 *     pmd1   double     Dec proper motion (radians/year), before<br>
+	 *     px1    double     parallax (arcseconds), before<br>
+	 *     rv1    double     radial velocity (km/s, +ve = receding), before<br>
+	 *     ep1a   double     "before" epoch, part A (Note 1)<br>
+	 *     ep1b   double     "before" epoch, part B (Note 1)<br>
+	 *     ep2a   double     "after" epoch, part A (Note 1)<br>
+	 *     ep2b   double     "after" epoch, part B (Note 1)<br>
+	 * *  Returned:<br>
+	 *     ra2    double     right ascension (radians), after<br>
+	 *     dec2   double     declination (radians), after<br>
+	 *     pmr2   double     RA proper motion (radians/year), after<br>
+	 *     pmd2   double     Dec proper motion (radians/year), after<br>
+	 *     px2    double     parallax (arcseconds), after<br>
+	 *     rv2    double     radial velocity (km/s, +ve = receding), after<br>
+	 * *  Returned (function value):<br>
+	 *            int        status:<br>
+	 *                          -1 = system error (should not occur)<br>
+	 *                           0 = no warnings or errors<br>
+	 *                           1 = distance overridden (Note 6)<br>
+	 *                           2 = excessive velocity (Note 7)<br>
+	 *                           4 = solution didn't converge (Note 8)<br>
+	 *                        else = binary logical OR of the above warnings<br>
+	 * *  Notes:<br>
+	 * *  1) The starting and ending TDB dates ep1a+ep1b and ep2a+ep2b are<br>
+	 *     Julian Dates, apportioned in any convenient way between the two<br>
+	 *     parts (A and B).  For example, JD(TDB)=2450123.7 could be<br>
+	 *     expressed in any of these ways, among others:<br>
+	 * *             epna          epnb<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *  2) In accordance with normal star-catalog conventions, the object's<br>
+	 *     right ascension and declination are freed from the effects of<br>
+	 *     secular aberration.  The frame, which is aligned to the catalog<br>
+	 *     equator and equinox, is Lorentzian and centered on the SSB.<br>
+	 * *     The proper motions are the rate of change of the right ascension<br>
+	 *     and declination at the catalog epoch and are in radians per TDB<br>
+	 *     Julian year.<br>
+	 * *     The parallax and radial velocity are in the same frame.<br>
+	 * *  3) Care is needed with units.  The star coordinates are in radians<br>
+	 *     and the proper motions in radians per Julian year, but the<br>
+	 *     parallax is in arcseconds.<br>
+	 * *  4) The RA proper motion is in terms of coordinate angle, not true<br>
+	 *     angle.  If the catalog uses arcseconds for both RA and Dec proper<br>
+	 *     motions, the RA proper motion will need to be divided by cos(Dec)<br>
+	 *     before use.<br>
+	 * *  5) Straight-line motion at constant speed, in the inertial frame,<br>
+	 *     is assumed.<br>
+	 * *  6) An extremely small (or zero or negative) parallax is interpreted<br>
+	 *     to mean that the object is on the "celestial sphere", the radius<br>
+	 *     of which is an arbitrary (large) value (see the iauStarpv<br>
+	 *     function for the value used).  When the distance is overridden in<br>
+	 *     this way, the status, initially zero, has 1 added to it.<br>
+	 * *  7) If the space velocity is a significant fraction of c (see the<br>
+	 *     constant VMAX in the function iauStarpv), it is arbitrarily set<br>
+	 *     to zero.  When this action occurs, 2 is added to the status.<br>
+	 * *  8) The relativistic adjustment carried out in the iauStarpv function<br>
+	 *     involves an iterative calculation.  If the process fails to<br>
+	 *     converge within a set number of iterations, 4 is added to the<br>
+	 *     status.<br>
+	 * *  Called:<br>
+	 *     iauStarpv    star catalog data to space motion pv-vector<br>
+	 *     iauPvu       update a pv-vector<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 *     iauPvstar    space motion pv-vector to star catalog data<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauStarpm(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:329</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8602</i>
 	 */
 	public static int iauStarpm(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
 		return iauStarpm(ra1, dec1, pmr1, pmd1, px1, rv1, ep1a, ep1b, ep2a, ep2b, Pointer.getPeer(ra2), Pointer.getPeer(dec2), Pointer.getPeer(pmr2), Pointer.getPeer(pmd2), Pointer.getPeer(px2), Pointer.getPeer(rv2));
 	}
 	protected native static int iauStarpm(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, @Ptr long ra2, @Ptr long dec2, @Ptr long pmr2, @Ptr long pmd2, @Ptr long px2, @Ptr long rv2);
 	/**
-	 * Astronomy/GeodeticGeocentric<br>
+	 * - - - - - - - - -<br>
+	 *   i a u E f o r m<br>
+	 *  - - - - - - - - -<br>
+	 * *  Earth reference ellipsoids.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     n    int         ellipsoid identifier (Note 1)<br>
+	 * *  Returned:<br>
+	 *     a    double      equatorial radius (meters, Note 2)<br>
+	 *     f    double      flattening (Note 2)<br>
+	 * *  Returned (function value):<br>
+	 *          int         status:  0 = OK<br>
+	 *                              -1 = illegal identifier (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The identifier n is a number that specifies the choice of<br>
+	 *     reference ellipsoid.  The following are supported:<br>
+	 * *        n    ellipsoid<br>
+	 * *        1     WGS84<br>
+	 *        2     GRS80<br>
+	 *        3     WGS72<br>
+	 * *     The n value has no significance outside the SOFA software.  For<br>
+	 *     convenience, symbols WGS84 etc. are defined in sofam.h.<br>
+	 * *  2) The ellipsoid parameters are returned in the form of equatorial<br>
+	 *     radius in meters (a) and flattening (f).  The latter is a number<br>
+	 *     around 0.00335, i.e. around 1/298.<br>
+	 * *  3) For the case where an unsupported n value is supplied, zero a and<br>
+	 *     f are returned, as well as error status.<br>
+	 * *  References:<br>
+	 * *     Department of Defense World Geodetic System 1984, National<br>
+	 *     Imagery and Mapping Agency Technical Report 8350.2, Third<br>
+	 *     Edition, p3-2.<br>
+	 * *     Moritz, H., Bull. Geodesique 66-2, 187 (1992).<br>
+	 * *     The Department of Defense World Geodetic System 1972, World<br>
+	 *     Geodetic System Committee, May 1974.<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     p220.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauEform(int, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:334</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8648</i>
 	 */
 	public static int iauEform(int n, Pointer<Double > a, Pointer<Double > f) {
 		return iauEform(n, Pointer.getPeer(a), Pointer.getPeer(f));
 	}
 	protected native static int iauEform(int n, @Ptr long a, @Ptr long f);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u G c 2 g d<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform geocentric coordinates to geodetic using the specified<br>
+	 *  reference ellipsoid.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical transformation.<br>
+	 * *  Given:<br>
+	 *     n       int        ellipsoid identifier (Note 1)<br>
+	 *     xyz     double[3]  geocentric vector (Note 2)<br>
+	 * *  Returned:<br>
+	 *     elong   double     longitude (radians, east +ve, Note 3)<br>
+	 *     phi     double     latitude (geodetic, radians, Note 3)<br>
+	 *     height  double     height above ellipsoid (geodetic, Notes 2,3)<br>
+	 * *  Returned (function value):<br>
+	 *            int         status:  0 = OK<br>
+	 *                                -1 = illegal identifier (Note 3)<br>
+	 *                                -2 = internal error (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The identifier n is a number that specifies the choice of<br>
+	 *     reference ellipsoid.  The following are supported:<br>
+	 * *        n    ellipsoid<br>
+	 * *        1     WGS84<br>
+	 *        2     GRS80<br>
+	 *        3     WGS72<br>
+	 * *     The n value has no significance outside the SOFA software.  For<br>
+	 *     convenience, symbols WGS84 etc. are defined in sofam.h.<br>
+	 * *  2) The geocentric vector (xyz, given) and height (height, returned)<br>
+	 *     are in meters.<br>
+	 * *  3) An error status -1 means that the identifier n is illegal.  An<br>
+	 *     error status -2 is theoretically impossible.  In all error cases,<br>
+	 *     all three results are set to -1e9.<br>
+	 * *  4) The inverse transformation is performed in the function iauGd2gc.<br>
+	 * *  Called:<br>
+	 *     iauEform     Earth reference ellipsoids<br>
+	 *     iauGc2gde    geocentric to geodetic transformation, general<br>
+	 * *  This revision:  2013 September 1<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGc2gd(int, double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:336</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8692</i>
 	 */
 	public static int iauGc2gd(int n, Pointer<Double > xyz, Pointer<Double > elong, Pointer<Double > phi, Pointer<Double > height) {
 		return iauGc2gd(n, Pointer.getPeer(xyz), Pointer.getPeer(elong), Pointer.getPeer(phi), Pointer.getPeer(height));
 	}
 	protected native static int iauGc2gd(int n, @Ptr long xyz, @Ptr long elong, @Ptr long phi, @Ptr long height);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G c 2 g d e<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Transform geocentric coordinates to geodetic for a reference<br>
+	 *  ellipsoid of specified form.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     a       double     equatorial radius (Notes 2,4)<br>
+	 *     f       double     flattening (Note 3)<br>
+	 *     xyz     double[3]  geocentric vector (Note 4)<br>
+	 * *  Returned:<br>
+	 *     elong   double     longitude (radians, east +ve)<br>
+	 *     phi     double     latitude (geodetic, radians)<br>
+	 *     height  double     height above ellipsoid (geodetic, Note 4)<br>
+	 * *  Returned (function value):<br>
+	 *             int        status:  0 = OK<br>
+	 *                                -1 = illegal f<br>
+	 *                                -2 = illegal a<br>
+	 * *  Notes:<br>
+	 * *  1) This function is based on the GCONV2H Fortran subroutine by<br>
+	 *     Toshio Fukushima (see reference).<br>
+	 * *  2) The equatorial radius, a, can be in any units, but meters is<br>
+	 *     the conventional choice.<br>
+	 * *  3) The flattening, f, is (for the Earth) a value around 0.00335,<br>
+	 *     i.e. around 1/298.<br>
+	 * *  4) The equatorial radius, a, and the geocentric vector, xyz,<br>
+	 *     must be given in the same units, and determine the units of<br>
+	 *     the returned height, height.<br>
+	 * *  5) If an error occurs (status < 0), elong, phi and height are<br>
+	 *     unchanged.<br>
+	 * *  6) The inverse transformation is performed in the function<br>
+	 *     iauGd2gce.<br>
+	 * *  7) The transformation for a standard ellipsoid (such as WGS84) can<br>
+	 *     more conveniently be performed by calling iauGc2gd, which uses a<br>
+	 *     numerical code to identify the required A and F values.<br>
+	 * *  Reference:<br>
+	 * *     Fukushima, T., "Transformation from Cartesian to geodetic<br>
+	 *     coordinates accelerated by Halley's method", J.Geodesy (2006)<br>
+	 *     79: 689-693<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGc2gde(double, double, double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:338</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8740</i>
 	 */
 	public static int iauGc2gde(double a, double f, Pointer<Double > xyz, Pointer<Double > elong, Pointer<Double > phi, Pointer<Double > height) {
 		return iauGc2gde(a, f, Pointer.getPeer(xyz), Pointer.getPeer(elong), Pointer.getPeer(phi), Pointer.getPeer(height));
 	}
 	protected native static int iauGc2gde(double a, double f, @Ptr long xyz, @Ptr long elong, @Ptr long phi, @Ptr long height);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u G d 2 g c<br>
+	 *  - - - - - - - - -<br>
+	 * *  Transform geodetic coordinates to geocentric using the specified<br>
+	 *  reference ellipsoid.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical transformation.<br>
+	 * *  Given:<br>
+	 *     n       int        ellipsoid identifier (Note 1)<br>
+	 *     elong   double     longitude (radians, east +ve)<br>
+	 *     phi     double     latitude (geodetic, radians, Note 3)<br>
+	 *     height  double     height above ellipsoid (geodetic, Notes 2,3)<br>
+	 * *  Returned:<br>
+	 *     xyz     double[3]  geocentric vector (Note 2)<br>
+	 * *  Returned (function value):<br>
+	 *             int        status:  0 = OK<br>
+	 *                                -1 = illegal identifier (Note 3)<br>
+	 *                                -2 = illegal case (Note 3)<br>
+	 * *  Notes:<br>
+	 * *  1) The identifier n is a number that specifies the choice of<br>
+	 *     reference ellipsoid.  The following are supported:<br>
+	 * *        n    ellipsoid<br>
+	 * *        1     WGS84<br>
+	 *        2     GRS80<br>
+	 *        3     WGS72<br>
+	 * *     The n value has no significance outside the SOFA software.  For<br>
+	 *     convenience, symbols WGS84 etc. are defined in sofam.h.<br>
+	 * *  2) The height (height, given) and the geocentric vector (xyz,<br>
+	 *     returned) are in meters.<br>
+	 * *  3) No validation is performed on the arguments elong, phi and<br>
+	 *     height.  An error status -1 means that the identifier n is<br>
+	 *     illegal.  An error status -2 protects against cases that would<br>
+	 *     lead to arithmetic exceptions.  In all error cases, xyz is set<br>
+	 *     to zeros.<br>
+	 * *  4) The inverse transformation is performed in the function iauGc2gd.<br>
+	 * *  Called:<br>
+	 *     iauEform     Earth reference ellipsoids<br>
+	 *     iauGd2gce    geodetic to geocentric transformation, general<br>
+	 *     iauZp        zero p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGd2gc(int, double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:340</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8787</i>
 	 */
 	public static int iauGd2gc(int n, double elong, double phi, double height, Pointer<Double > xyz) {
 		return iauGd2gc(n, elong, phi, height, Pointer.getPeer(xyz));
 	}
 	protected native static int iauGd2gc(int n, double elong, double phi, double height, @Ptr long xyz);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u G d 2 g c e<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Transform geodetic coordinates to geocentric for a reference<br>
+	 *  ellipsoid of specified form.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     a       double     equatorial radius (Notes 1,4)<br>
+	 *     f       double     flattening (Notes 2,4)<br>
+	 *     elong   double     longitude (radians, east +ve)<br>
+	 *     phi     double     latitude (geodetic, radians, Note 4)<br>
+	 *     height  double     height above ellipsoid (geodetic, Notes 3,4)<br>
+	 * *  Returned:<br>
+	 *     xyz     double[3]  geocentric vector (Note 3)<br>
+	 * *  Returned (function value):<br>
+	 *             int        status:  0 = OK<br>
+	 *                                -1 = illegal case (Note 4)<br>
+	 *  Notes:<br>
+	 * *  1) The equatorial radius, a, can be in any units, but meters is<br>
+	 *     the conventional choice.<br>
+	 * *  2) The flattening, f, is (for the Earth) a value around 0.00335,<br>
+	 *     i.e. around 1/298.<br>
+	 * *  3) The equatorial radius, a, and the height, height, must be<br>
+	 *     given in the same units, and determine the units of the<br>
+	 *     returned geocentric vector, xyz.<br>
+	 * *  4) No validation is performed on individual arguments.  The error<br>
+	 *     status -1 protects against (unrealistic) cases that would lead<br>
+	 *     to arithmetic exceptions.  If an error occurs, xyz is unchanged.<br>
+	 * *  5) The inverse transformation is performed in the function<br>
+	 *     iauGc2gde.<br>
+	 * *  6) The transformation for a standard ellipsoid (such as WGS84) can<br>
+	 *     more conveniently be performed by calling iauGd2gc,  which uses a<br>
+	 *     numerical code to identify the required a and f values.<br>
+	 * *  References:<br>
+	 * *     Green, R.M., Spherical Astronomy, Cambridge University Press,<br>
+	 *     (1985) Section 4.5, p96.<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992),<br>
+	 *     Section 4.22, p202.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGd2gce(double, double, double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:342</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8835</i>
 	 */
 	public static int iauGd2gce(double a, double f, double elong, double phi, double height, Pointer<Double > xyz) {
 		return iauGd2gce(a, f, elong, phi, height, Pointer.getPeer(xyz));
 	}
 	protected native static int iauGd2gce(double a, double f, double elong, double phi, double height, @Ptr long xyz);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v t o b<br>
+	 *  - - - - - - - - -<br>
+	 * *  Position and velocity of a terrestrial observing station.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     elong   double       longitude (radians, east +ve, Note 1)<br>
+	 *     phi     double       latitude (geodetic, radians, Note 1)<br>
+	 *     hm      double       height above ref. ellipsoid (geodetic, m)<br>
+	 *     xp,yp   double       coordinates of the pole (radians, Note 2)<br>
+	 *     sp      double       the TIO locator s' (radians, Note 2)<br>
+	 *     theta   double       Earth rotation angle (radians, Note 3)<br>
+	 * *  Returned:<br>
+	 *     pv      double[2][3] position/velocity vector (m, m/s, CIRS)<br>
+	 * *  Notes:<br>
+	 * *  1) The terrestrial coordinates are with respect to the WGS84<br>
+	 *     reference ellipsoid.<br>
+	 * *  2) xp and yp are the coordinates (in radians) of the Celestial<br>
+	 *     Intermediate Pole with respect to the International Terrestrial<br>
+	 *     Reference System (see IERS Conventions), measured along the<br>
+	 *     meridians 0 and 90 deg west respectively.  sp is the TIO locator<br>
+	 *     s', in radians, which positions the Terrestrial Intermediate<br>
+	 *     Origin on the equator.  For many applications, xp, yp and<br>
+	 *     (especially) sp can be set to zero.<br>
+	 * *  3) If theta is Greenwich apparent sidereal time instead of Earth<br>
+	 *     rotation angle, the result is with respect to the true equator<br>
+	 *     and equinox of date, i.e. with the x-axis at the equinox rather<br>
+	 *     than the celestial intermediate origin.<br>
+	 * *  4) The velocity units are meters per UT1 second, not per SI second.<br>
+	 *     This is unlikely to have any practical consequences in the modern<br>
+	 *     era.<br>
+	 * *  5) No validation is performed on the arguments.  Error cases that<br>
+	 *     could lead to arithmetic exceptions are trapped by the iauGd2gc<br>
+	 *     function, and the result set to zeros.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Urban, S. & Seidelmann, P. K. (eds), Explanatory Supplement to<br>
+	 *     the Astronomical Almanac, 3rd ed., University Science Books<br>
+	 *     (2013), Section 7.4.3.3.<br>
+	 * *  Called:<br>
+	 *     iauGd2gc     geodetic to geocentric transformation<br>
+	 *     iauPom00     polar motion matrix<br>
+	 *     iauTrxp      product of transpose of r-matrix and p-vector<br>
+	 * *  This revision:   2013 October 9<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvtob(double, double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:344</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8888</i>
 	 */
 	@Name("iauPvtob") 
-	public static void iauPvtob$2(double elong, double phi, double height, double xp, double yp, double sp, double theta, Pointer<Double > pv) {
-		iauPvtob$2(elong, phi, height, xp, yp, sp, theta, Pointer.getPeer(pv));
+	public static void iauPvtob$2(double elong, double phi, double hm, double xp, double yp, double sp, double theta, Pointer<Double > pv) {
+		iauPvtob$2(elong, phi, hm, xp, yp, sp, theta, Pointer.getPeer(pv));
 	}
 	@Name("iauPvtob") 
-	protected native static void iauPvtob$2(double elong, double phi, double height, double xp, double yp, double sp, double theta, @Ptr long pv);
+	protected native static void iauPvtob$2(double elong, double phi, double hm, double xp, double yp, double sp, double theta, @Ptr long pv);
 	/**
-	 * Astronomy/Timescales<br>
+	 * - - - - - - - - -<br>
+	 *   i a u D 2 d t f<br>
+	 *  - - - - - - - - -<br>
+	 * *  Format for output a 2-part Julian Date (or in the case of UTC a<br>
+	 *  quasi-JD form that includes special provision for leap seconds).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     scale     char[]  time scale ID (Note 1)<br>
+	 *     ndp       int     resolution (Note 2)<br>
+	 *     d1,d2     double  time as a 2-part Julian Date (Notes 3,4)<br>
+	 * *  Returned:<br>
+	 *     iy,im,id  int     year, month, day in Gregorian calendar (Note 5)<br>
+	 *     ihmsf     int[4]  hours, minutes, seconds, fraction (Note 1)<br>
+	 * *  Returned (function value):<br>
+	 *               int     status: +1 = dubious year (Note 5)<br>
+	 *                                0 = OK<br>
+	 *                               -1 = unacceptable date (Note 6)<br>
+	 * *  Notes:<br>
+	 * *  1) scale identifies the time scale.  Only the value "UTC" (in upper<br>
+	 *     case) is significant, and enables handling of leap seconds (see<br>
+	 *     Note 4).<br>
+	 * *  2) ndp is the number of decimal places in the seconds field, and can<br>
+	 *     have negative as well as positive values, such as:<br>
+	 * *     ndp         resolution<br>
+	 *     -4            1 00 00<br>
+	 *     -3            0 10 00<br>
+	 *     -2            0 01 00<br>
+	 *     -1            0 00 10<br>
+	 *      0            0 00 01<br>
+	 *      1            0 00 00.1<br>
+	 *      2            0 00 00.01<br>
+	 *      3            0 00 00.001<br>
+	 * *     The limits are platform dependent, but a safe range is -5 to +9.<br>
+	 * *  3) d1+d2 is Julian Date, apportioned in any convenient way between<br>
+	 *     the two arguments, for example where d1 is the Julian Day Number<br>
+	 *     and d2 is the fraction of a day.  In the case of UTC, where the<br>
+	 *     use of JD is problematical, special conventions apply:  see the<br>
+	 *     next note.<br>
+	 * *  4) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The SOFA internal convention is that<br>
+	 *     the quasi-JD day represents UTC days whether the length is 86399,<br>
+	 *     86400 or 86401 SI seconds.  In the 1960-1972 era there were<br>
+	 *     smaller jumps (in either direction) each time the linear UTC(TAI)<br>
+	 *     expression was changed, and these "mini-leaps" are also included<br>
+	 *     in the SOFA convention.<br>
+	 * *  5) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  6) For calendar conventions and limitations, see iauCal2jd.<br>
+	 * *  Called:<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 *     iauD2tf      decompose days to hms<br>
+	 *     iauDat       delta(AT) = TAI-UTC<br>
+	 * *  This revision:  2014 February 15<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauD2dtf(const char*, int, double, double, int*, int*, int*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:349</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8950</i>
 	 */
 	public static int iauD2dtf(Pointer<Byte > scale, int ndp, double d1, double d2, Pointer<Integer > iy, Pointer<Integer > im, Pointer<Integer > id, Pointer<Integer > ihmsf) {
 		return iauD2dtf(Pointer.getPeer(scale), ndp, d1, d2, Pointer.getPeer(iy), Pointer.getPeer(im), Pointer.getPeer(id), Pointer.getPeer(ihmsf));
 	}
 	protected native static int iauD2dtf(@Ptr long scale, int ndp, double d1, double d2, @Ptr long iy, @Ptr long im, @Ptr long id, @Ptr long ihmsf);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u D a t<br>
+	 *  - - - - - - -<br>
+	 * *  For a given UTC date, calculate delta(AT) = TAI-UTC.<br>
+	 * *     :------------------------------------------:<br>
+	 *     :                                          :<br>
+	 *     :                 IMPORTANT                :<br>
+	 *     :                                          :<br>
+	 *     :  A new version of this function must be  :<br>
+	 *     :  produced whenever a new leap second is  :<br>
+	 *     :  announced.  There are four items to     :<br>
+	 *     :  change on each such occasion:           :<br>
+	 *     :                                          :<br>
+	 *     :  1) A new line must be added to the set  :<br>
+	 *     :     of statements that initialize the    :<br>
+	 *     :     array "changes".                     :<br>
+	 *     :                                          :<br>
+	 *     :  2) The constant IYV must be set to the  :<br>
+	 *     :     current year.                        :<br>
+	 *     :                                          :<br>
+	 *     :  3) The "Latest leap second" comment     :<br>
+	 *     :     below must be set to the new leap    :<br>
+	 *     :     second date.                         :<br>
+	 *     :                                          :<br>
+	 *     :  4) The "This revision" comment, later,  :<br>
+	 *     :     must be set to the current date.     :<br>
+	 *     :                                          :<br>
+	 *     :  Change (2) must also be carried out     :<br>
+	 *     :  whenever the function is re-issued,     :<br>
+	 *     :  even if no leap seconds have been       :<br>
+	 *     :  added.                                  :<br>
+	 *     :                                          :<br>
+	 *     :  Latest leap second:  2012 June 30       :<br>
+	 *     :                                          :<br>
+	 *     :__________________________________________:<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     iy     int      UTC:  year (Notes 1 and 2)<br>
+	 *     im     int            month (Note 2)<br>
+	 *     id     int            day (Notes 2 and 3)<br>
+	 *     fd     double         fraction of day (Note 4)<br>
+	 * *  Returned:<br>
+	 *     deltat double   TAI minus UTC, seconds<br>
+	 * *  Returned (function value):<br>
+	 *            int      status (Note 5):<br>
+	 *                       1 = dubious year (Note 1)<br>
+	 *                       0 = OK<br>
+	 *                      -1 = bad year<br>
+	 *                      -2 = bad month<br>
+	 *                      -3 = bad day (Note 3)<br>
+	 *                      -4 = bad fraction (Note 4)<br>
+	 * *  Notes:<br>
+	 * *  1) UTC began at 1960 January 1.0 (JD 2436934.5) and it is improper<br>
+	 *     to call the function with an earlier date.  If this is attempted,<br>
+	 *     zero is returned together with a warning status.<br>
+	 * *     Because leap seconds cannot, in principle, be predicted in<br>
+	 *     advance, a reliable check for dates beyond the valid range is<br>
+	 *     impossible.  To guard against gross errors, a year five or more<br>
+	 *     after the release year of the present function (see the constant<br>
+	 *     IYV) is considered dubious.  In this case a warning status is<br>
+	 *     returned but the result is computed in the normal way.<br>
+	 * *     For both too-early and too-late years, the warning status is +1.<br>
+	 *     This is distinct from the error status -1, which signifies a year<br>
+	 *     so early that JD could not be computed.<br>
+	 * *  2) If the specified date is for a day which ends with a leap second,<br>
+	 *     the UTC-TAI value returned is for the period leading up to the<br>
+	 *     leap second.  If the date is for a day which begins as a leap<br>
+	 *     second ends, the UTC-TAI returned is for the period following the<br>
+	 *     leap second.<br>
+	 * *  3) The day number must be in the normal calendar range, for example<br>
+	 *     1 through 30 for April.  The "almanac" convention of allowing<br>
+	 *     such dates as January 0 and December 32 is not supported in this<br>
+	 *     function, in order to avoid confusion near leap seconds.<br>
+	 * *  4) The fraction of day is used only for dates before the<br>
+	 *     introduction of leap seconds, the first of which occurred at the<br>
+	 *     end of 1971.  It is tested for validity (0 to 1 is the valid<br>
+	 *     range) even if not used;  if invalid, zero is used and status -4<br>
+	 *     is returned.  For many applications, setting fd to zero is<br>
+	 *     acceptable;  the resulting error is always less than 3 ms (and<br>
+	 *     occurs only pre-1972).<br>
+	 * *  5) The status value returned in the case where there are multiple<br>
+	 *     errors refers to the first error detected.  For example, if the<br>
+	 *     month and day are 13 and 32 respectively, status -2 (bad month)<br>
+	 *     will be returned.<br>
+	 * *  6) In cases where a valid result is not available, zero is returned.<br>
+	 * *  References:<br>
+	 * *  1) For dates from 1961 January 1 onwards, the expressions from the<br>
+	 *     file ftp://maia.usno.navy.mil/ser7/tai-utc.dat are used.<br>
+	 * *  2) The 5ms timestep at 1961 January 1 is taken from 2.58.1 (p87) of<br>
+	 *     the 1992 Explanatory Supplement.<br>
+	 * *  Called:<br>
+	 *     iauCal2jd    Gregorian calendar to JD<br>
+	 * *  This revision:  2013 August 21<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauDat(int, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:351</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9051</i>
 	 */
 	public static int iauDat(int iy, int im, int id, double fd, Pointer<Double > deltat) {
 		return iauDat(iy, im, id, fd, Pointer.getPeer(deltat));
 	}
 	protected native static int iauDat(int iy, int im, int id, double fd, @Ptr long deltat);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u D t d b<br>
+	 *  - - - - - - - -<br>
+	 * *  An approximation to TDB-TT, the difference between barycentric<br>
+	 *  dynamical time and terrestrial time, for an observer on the Earth.<br>
+	 * *  The different time scales - proper, coordinate and realized - are<br>
+	 *  related to each other:<br>
+	 * *            TAI             <-  physically realized<br>
+	 *             :<br>
+	 *          offset            <-  observed (nominally +32.184s)<br>
+	 *             :<br>
+	 *            TT              <-  terrestrial time<br>
+	 *             :<br>
+	 *    rate adjustment (L_G)   <-  definition of TT<br>
+	 *             :<br>
+	 *            TCG             <-  time scale for GCRS<br>
+	 *             :<br>
+	 *      "periodic" terms      <-  iauDtdb  is an implementation<br>
+	 *             :<br>
+	 *    rate adjustment (L_C)   <-  function of solar-system ephemeris<br>
+	 *             :<br>
+	 *            TCB             <-  time scale for BCRS<br>
+	 *             :<br>
+	 *    rate adjustment (-L_B)  <-  definition of TDB<br>
+	 *             :<br>
+	 *            TDB             <-  TCB scaled to track TT<br>
+	 *             :<br>
+	 *      "periodic" terms      <-  -iauDtdb is an approximation<br>
+	 *             :<br>
+	 *            TT              <-  terrestrial time<br>
+	 * *  Adopted values for the various constants can be found in the IERS<br>
+	 *  Conventions (McCarthy & Petit 2003).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support routine.<br>
+	 * *  Given:<br>
+	 *     date1,date2   double  date, TDB (Notes 1-3)<br>
+	 *     ut            double  universal time (UT1, fraction of one day)<br>
+	 *     elong         double  longitude (east positive, radians)<br>
+	 *     u             double  distance from Earth spin axis (km)<br>
+	 *     v             double  distance north of equatorial plane (km)<br>
+	 * *  Returned (function value):<br>
+	 *                   double  TDB-TT (seconds)<br>
+	 * *  Notes:<br>
+	 * *  1) The date date1+date2 is a Julian Date, apportioned in any<br>
+	 *     convenient way between the two arguments.  For example,<br>
+	 *     JD(TT)=2450123.7 could be expressed in any of these ways,<br>
+	 *     among others:<br>
+	 * *            date1          date2<br>
+	 * *         2450123.7           0.0       (JD method)<br>
+	 *         2451545.0       -1421.3       (J2000 method)<br>
+	 *         2400000.5       50123.2       (MJD method)<br>
+	 *         2450123.5           0.2       (date & time method)<br>
+	 * *     The JD method is the most natural and convenient to use in<br>
+	 *     cases where the loss of several decimal digits of resolution<br>
+	 *     is acceptable.  The J2000 method is best matched to the way<br>
+	 *     the argument is handled internally and will deliver the<br>
+	 *     optimum resolution.  The MJD method and the date & time methods<br>
+	 *     are both good compromises between resolution and convenience.<br>
+	 * *     Although the date is, formally, barycentric dynamical time (TDB),<br>
+	 *     the terrestrial dynamical time (TT) can be used with no practical<br>
+	 *     effect on the accuracy of the prediction.<br>
+	 * *  2) TT can be regarded as a coordinate time that is realized as an<br>
+	 *     offset of 32.184s from International Atomic Time, TAI.  TT is a<br>
+	 *     specific linear transformation of geocentric coordinate time TCG,<br>
+	 *     which is the time scale for the Geocentric Celestial Reference<br>
+	 *     System, GCRS.<br>
+	 * *  3) TDB is a coordinate time, and is a specific linear transformation<br>
+	 *     of barycentric coordinate time TCB, which is the time scale for<br>
+	 *     the Barycentric Celestial Reference System, BCRS.<br>
+	 * *  4) The difference TCG-TCB depends on the masses and positions of the<br>
+	 *     bodies of the solar system and the velocity of the Earth.  It is<br>
+	 *     dominated by a rate difference, the residual being of a periodic<br>
+	 *     character.  The latter, which is modeled by the present function,<br>
+	 *     comprises a main (annual) sinusoidal term of amplitude<br>
+	 *     approximately 0.00166 seconds, plus planetary terms up to about<br>
+	 *     20 microseconds, and lunar and diurnal terms up to 2 microseconds.<br>
+	 *     These effects come from the changing transverse Doppler effect<br>
+	 *     and gravitational red-shift as the observer (on the Earth's<br>
+	 *     surface) experiences variations in speed (with respect to the<br>
+	 *     BCRS) and gravitational potential.<br>
+	 * *  5) TDB can be regarded as the same as TCB but with a rate adjustment<br>
+	 *     to keep it close to TT, which is convenient for many applications.<br>
+	 *     The history of successive attempts to define TDB is set out in<br>
+	 *     Resolution 3 adopted by the IAU General Assembly in 2006, which<br>
+	 *     defines a fixed TDB(TCB) transformation that is consistent with<br>
+	 *     contemporary solar-system ephemerides.  Future ephemerides will<br>
+	 *     imply slightly changed transformations between TCG and TCB, which<br>
+	 *     could introduce a linear drift between TDB and TT;  however, any<br>
+	 *     such drift is unlikely to exceed 1 nanosecond per century.<br>
+	 * *  6) The geocentric TDB-TT model used in the present function is that of<br>
+	 *     Fairhead & Bretagnon (1990), in its full form.  It was originally<br>
+	 *     supplied by Fairhead (private communications with P.T.Wallace,<br>
+	 *     1990) as a Fortran subroutine.  The present C function contains an<br>
+	 *     adaptation of the Fairhead code.  The numerical results are<br>
+	 *     essentially unaffected by the changes, the differences with<br>
+	 *     respect to the Fairhead & Bretagnon original being at the 1e-20 s<br>
+	 *     level.<br>
+	 * *     The topocentric part of the model is from Moyer (1981) and<br>
+	 *     Murray (1983), with fundamental arguments adapted from<br>
+	 *     Simon et al. 1994.  It is an approximation to the expression<br>
+	 *     ( v / c ) . ( r / c ), where v is the barycentric velocity of<br>
+	 *     the Earth, r is the geocentric position of the observer and<br>
+	 *     c is the speed of light.<br>
+	 * *     By supplying zeroes for u and v, the topocentric part of the<br>
+	 *     model can be nullified, and the function will return the Fairhead<br>
+	 *     & Bretagnon result alone.<br>
+	 * *  7) During the interval 1950-2050, the absolute accuracy is better<br>
+	 *     than +/- 3 nanoseconds relative to time ephemerides obtained by<br>
+	 *     direct numerical integrations based on the JPL DE405 solar system<br>
+	 *     ephemeris.<br>
+	 * *  8) It must be stressed that the present function is merely a model,<br>
+	 *     and that numerical integration of solar-system ephemerides is the<br>
+	 *     definitive method for predicting the relationship between TCG and<br>
+	 *     TCB and hence between TT and TDB.<br>
+	 * *  References:<br>
+	 * *     Fairhead, L., & Bretagnon, P., Astron.Astrophys., 229, 240-247<br>
+	 *     (1990).<br>
+	 * *     IAU 2006 Resolution 3.<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Moyer, T.D., Cel.Mech., 23, 33 (1981).<br>
+	 * *     Murray, C.A., Vectorial Astrometry, Adam Hilger (1983).<br>
+	 * *     Seidelmann, P.K. et al., Explanatory Supplement to the<br>
+	 *     Astronomical Almanac, Chapter 2, University Science Books (1992).<br>
+	 * *     Simon, J.L., Bretagnon, P., Chapront, J., Chapront-Touze, M.,<br>
+	 *     Francou, G. & Laskar, J., Astron.Astrophys., 282, 663-683 (1994).<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauDtdb(double, double, double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:353</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9185</i>
 	 */
 	native public static double iauDtdb(double date1, double date2, double ut, double elong, double u, double v);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u D t f 2 d<br>
+	 *  - - - - - - - - -<br>
+	 * *  Encode date and time fields into 2-part Julian Date (or in the case<br>
+	 *  of UTC a quasi-JD form that includes special provision for leap<br>
+	 *  seconds).<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     scale     char[]  time scale ID (Note 1)<br>
+	 *     iy,im,id  int     year, month, day in Gregorian calendar (Note 2)<br>
+	 *     ihr,imn   int     hour, minute<br>
+	 *     sec       double  seconds<br>
+	 * *  Returned:<br>
+	 *     d1,d2     double  2-part Julian Date (Notes 3,4)<br>
+	 * *  Returned (function value):<br>
+	 *               int     status: +3 = both of next two<br>
+	 *                               +2 = time is after end of day (Note 5)<br>
+	 *                               +1 = dubious year (Note 6)<br>
+	 *                                0 = OK<br>
+	 *                               -1 = bad year<br>
+	 *                               -2 = bad month<br>
+	 *                               -3 = bad day<br>
+	 *                               -4 = bad hour<br>
+	 *                               -5 = bad minute<br>
+	 *                               -6 = bad second (<0)<br>
+	 * *  Notes:<br>
+	 * *  1) scale identifies the time scale.  Only the value "UTC" (in upper<br>
+	 *     case) is significant, and enables handling of leap seconds (see<br>
+	 *     Note 4).<br>
+	 * *  2) For calendar conventions and limitations, see iauCal2jd.<br>
+	 * *  3) The sum of the results, d1+d2, is Julian Date, where normally d1<br>
+	 *     is the Julian Day Number and d2 is the fraction of a day.  In the<br>
+	 *     case of UTC, where the use of JD is problematical, special<br>
+	 *     conventions apply:  see the next note.<br>
+	 * *  4) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The SOFA internal convention is that<br>
+	 *     the quasi-JD day represents UTC days whether the length is 86399,<br>
+	 *     86400 or 86401 SI seconds.  In the 1960-1972 era there were<br>
+	 *     smaller jumps (in either direction) each time the linear UTC(TAI)<br>
+	 *     expression was changed, and these "mini-leaps" are also included<br>
+	 *     in the SOFA convention.<br>
+	 * *  5) The warning status "time is after end of day" usually means that<br>
+	 *     the sec argument is greater than 60.0.  However, in a day ending<br>
+	 *     in a leap second the limit changes to 61.0 (or 59.0 in the case<br>
+	 *     of a negative leap second).<br>
+	 * *  6) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  7) Only in the case of continuous and regular time scales (TAI, TT,<br>
+	 *     TCG, TCB and TDB) is the result d1+d2 a Julian Date, strictly<br>
+	 *     speaking.  In the other cases (UT1 and UTC) the result must be<br>
+	 *     used with circumspection;  in particular the difference between<br>
+	 *     two such results cannot be interpreted as a precise time<br>
+	 *     interval.<br>
+	 * *  Called:<br>
+	 *     iauCal2jd    Gregorian calendar to JD<br>
+	 *     iauDat       delta(AT) = TAI-UTC<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 * *  This revision:  2013 July 26<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauDtf2d(const char*, int, int, int, int, int, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:355</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9252</i>
 	 */
 	public static int iauDtf2d(Pointer<Byte > scale, int iy, int im, int id, int ihr, int imn, double sec, Pointer<Double > d1, Pointer<Double > d2) {
 		return iauDtf2d(Pointer.getPeer(scale), iy, im, id, ihr, imn, sec, Pointer.getPeer(d1), Pointer.getPeer(d2));
 	}
 	protected native static int iauDtf2d(@Ptr long scale, int iy, int im, int id, int ihr, int imn, double sec, @Ptr long d1, @Ptr long d2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T a i t t<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  International Atomic Time, TAI, to<br>
+	 *  Terrestrial Time, TT.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tai1,tai2  double    TAI as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Note:<br>
+	 * *     tai1+tai2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tai1 is the Julian<br>
+	 *     Day Number and tai2 is the fraction of a day.  The returned<br>
+	 *     tt1,tt2 follow suit.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaitt(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:357</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9283</i>
 	 */
 	public static int iauTaitt(double tai1, double tai2, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTaitt(tai1, tai2, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
 	}
 	protected native static int iauTaitt(double tai1, double tai2, @Ptr long tt1, @Ptr long tt2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u T a i u t 1<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  International Atomic Time, TAI, to<br>
+	 *  Universal Time, UT1.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tai1,tai2  double    TAI as a 2-part Julian Date<br>
+	 *     dta        double    UT1-TAI in seconds<br>
+	 * *  Returned:<br>
+	 *     ut11,ut12  double    UT1 as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tai1+tai2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tai1 is the Julian<br>
+	 *     Day Number and tai2 is the fraction of a day.  The returned<br>
+	 *     UT11,UT12 follow suit.<br>
+	 * *  2) The argument dta, i.e. UT1-TAI, is an observed quantity, and is<br>
+	 *     available from IERS tabulations.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaiut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:359</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9315</i>
 	 */
 	public static int iauTaiut1(double tai1, double tai2, double dta, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauTaiut1(tai1, tai2, dta, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
 	}
 	protected native static int iauTaiut1(double tai1, double tai2, double dta, @Ptr long ut11, @Ptr long ut12);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u T a i u t c<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  International Atomic Time, TAI, to<br>
+	 *  Coordinated Universal Time, UTC.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tai1,tai2  double   TAI as a 2-part Julian Date (Note 1)<br>
+	 * *  Returned:<br>
+	 *     utc1,utc2  double   UTC as a 2-part quasi Julian Date (Notes 1-3)<br>
+	 * *  Returned (function value):<br>
+	 *                int      status: +1 = dubious year (Note 4)<br>
+	 *                                  0 = OK<br>
+	 *                                 -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1) tai1+tai2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tai1 is the Julian<br>
+	 *     Day Number and tai2 is the fraction of a day.  The returned utc1<br>
+	 *     and utc2 form an analogous pair, except that a special convention<br>
+	 *     is used, to deal with the problem of leap seconds - see the next<br>
+	 *     note.<br>
+	 * *  2) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The convention in the present<br>
+	 *     function is that the JD day represents UTC days whether the<br>
+	 *     length is 86399, 86400 or 86401 SI seconds.  In the 1960-1972 era<br>
+	 *     there were smaller jumps (in either direction) each time the<br>
+	 *     linear UTC(TAI) expression was changed, and these "mini-leaps"<br>
+	 *     are also included in the SOFA convention.<br>
+	 * *  3) The function iauD2dtf can be used to transform the UTC quasi-JD<br>
+	 *     into calendar date and clock time, including UTC leap second<br>
+	 *     handling.<br>
+	 * *  4) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  Called:<br>
+	 *     iauUtctai    UTC to TAI<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 September 12<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaiutc(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:361</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9365</i>
 	 */
 	public static int iauTaiutc(double tai1, double tai2, Pointer<Double > utc1, Pointer<Double > utc2) {
 		return iauTaiutc(tai1, tai2, Pointer.getPeer(utc1), Pointer.getPeer(utc2));
 	}
 	protected native static int iauTaiutc(double tai1, double tai2, @Ptr long utc1, @Ptr long utc2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u T c b t d b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Barycentric Coordinate Time, TCB, to<br>
+	 *  Barycentric Dynamical Time, TDB.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tcb1,tcb2  double    TCB as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tdb1,tdb2  double    TDB as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tcb1+tcb2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tcb1 is the Julian<br>
+	 *     Day Number and tcb2 is the fraction of a day.  The returned<br>
+	 *     tdb1,tdb2 follow suit.<br>
+	 * *  2) The 2006 IAU General Assembly introduced a conventional linear<br>
+	 *     transformation between TDB and TCB.  This transformation<br>
+	 *     compensates for the drift between TCB and terrestrial time TT,<br>
+	 *     and keeps TDB approximately centered on TT.  Because the<br>
+	 *     relationship between TT and TCB depends on the adopted solar<br>
+	 *     system ephemeris, the degree of alignment between TDB and TT over<br>
+	 *     long intervals will vary according to which ephemeris is used.<br>
+	 *     Former definitions of TDB attempted to avoid this problem by<br>
+	 *     stipulating that TDB and TT should differ only by periodic<br>
+	 *     effects.  This is a good description of the nature of the<br>
+	 *     relationship but eluded precise mathematical formulation.  The<br>
+	 *     conventional linear relationship adopted in 2006 sidestepped<br>
+	 *     these difficulties whilst delivering a TDB that in practice was<br>
+	 *     consistent with values before that date.<br>
+	 * *  3) TDB is essentially the same as Teph, the time argument for the<br>
+	 *     JPL solar system ephemerides.<br>
+	 * *  Reference:<br>
+	 * *     IAU 2006 Resolution B3<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTcbtdb(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:363</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9409</i>
 	 */
 	public static int iauTcbtdb(double tcb1, double tcb2, Pointer<Double > tdb1, Pointer<Double > tdb2) {
 		return iauTcbtdb(tcb1, tcb2, Pointer.getPeer(tdb1), Pointer.getPeer(tdb2));
 	}
 	protected native static int iauTcbtdb(double tcb1, double tcb2, @Ptr long tdb1, @Ptr long tdb2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T c g t t<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Geocentric Coordinate Time, TCG, to<br>
+	 *  Terrestrial Time, TT.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tcg1,tcg2  double    TCG as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Note:<br>
+	 * *     tcg1+tcg2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tcg1 is the Julian<br>
+	 *     Day Number and tcg22 is the fraction of a day.  The returned<br>
+	 *     tt1,tt2 follow suit.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),.<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     IAU 2000 Resolution B1.9<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTcgtt(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:365</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9439</i>
 	 */
 	public static int iauTcgtt(double tcg1, double tcg2, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTcgtt(tcg1, tcg2, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
 	}
 	protected native static int iauTcgtt(double tcg1, double tcg2, @Ptr long tt1, @Ptr long tt2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u T d b t c b<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Barycentric Dynamical Time, TDB, to<br>
+	 *  Barycentric Coordinate Time, TCB.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tdb1,tdb2  double    TDB as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tcb1,tcb2  double    TCB as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tdb1+tdb2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tdb1 is the Julian<br>
+	 *     Day Number and tdb2 is the fraction of a day.  The returned<br>
+	 *     tcb1,tcb2 follow suit.<br>
+	 * *  2) The 2006 IAU General Assembly introduced a conventional linear<br>
+	 *     transformation between TDB and TCB.  This transformation<br>
+	 *     compensates for the drift between TCB and terrestrial time TT,<br>
+	 *     and keeps TDB approximately centered on TT.  Because the<br>
+	 *     relationship between TT and TCB depends on the adopted solar<br>
+	 *     system ephemeris, the degree of alignment between TDB and TT over<br>
+	 *     long intervals will vary according to which ephemeris is used.<br>
+	 *     Former definitions of TDB attempted to avoid this problem by<br>
+	 *     stipulating that TDB and TT should differ only by periodic<br>
+	 *     effects.  This is a good description of the nature of the<br>
+	 *     relationship but eluded precise mathematical formulation.  The<br>
+	 *     conventional linear relationship adopted in 2006 sidestepped<br>
+	 *     these difficulties whilst delivering a TDB that in practice was<br>
+	 *     consistent with values before that date.<br>
+	 * *  3) TDB is essentially the same as Teph, the time argument for the<br>
+	 *     JPL solar system ephemerides.<br>
+	 * *  Reference:<br>
+	 * *     IAU 2006 Resolution B3<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTdbtcb(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:367</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9483</i>
 	 */
 	public static int iauTdbtcb(double tdb1, double tdb2, Pointer<Double > tcb1, Pointer<Double > tcb2) {
 		return iauTdbtcb(tdb1, tdb2, Pointer.getPeer(tcb1), Pointer.getPeer(tcb2));
 	}
 	protected native static int iauTdbtcb(double tdb1, double tdb2, @Ptr long tcb1, @Ptr long tcb2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T d b t t<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Barycentric Dynamical Time, TDB, to<br>
+	 *  Terrestrial Time, TT.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tdb1,tdb2  double    TDB as a 2-part Julian Date<br>
+	 *     dtr        double    TDB-TT in seconds<br>
+	 * *  Returned:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tdb1+tdb2 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where tdb1 is the Julian<br>
+	 *     Day Number and tdb2 is the fraction of a day.  The returned<br>
+	 *     tt1,tt2 follow suit.<br>
+	 * *  2) The argument dtr represents the quasi-periodic component of the<br>
+	 *     GR transformation between TT and TCB.  It is dependent upon the<br>
+	 *     adopted solar-system ephemeris, and can be obtained by numerical<br>
+	 *     integration, by interrogating a precomputed time ephemeris or by<br>
+	 *     evaluating a model such as that implemented in the SOFA function<br>
+	 *     iauDtdb.   The quantity is dominated by an annual term of 1.7 ms<br>
+	 *     amplitude.<br>
+	 * *  3) TDB is essentially the same as Teph, the time argument for the<br>
+	 *     JPL solar system ephemerides.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     IAU 2006 Resolution 3<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTdbtt(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:369</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9523</i>
 	 */
 	public static int iauTdbtt(double tdb1, double tdb2, double dtr, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTdbtt(tdb1, tdb2, dtr, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
 	}
 	protected native static int iauTdbtt(double tdb1, double tdb2, double dtr, @Ptr long tt1, @Ptr long tt2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T t t a i<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Terrestrial Time, TT, to International<br>
+	 *  Atomic Time, TAI.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tai1,tai2  double    TAI as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Note:<br>
+	 * *     tt1+tt2 is Julian Date, apportioned in any convenient way between<br>
+	 *     the two arguments, for example where tt1 is the Julian Day Number<br>
+	 *     and tt2 is the fraction of a day.  The returned tai1,tai2 follow<br>
+	 *     suit.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttai(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:371</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9554</i>
 	 */
 	public static int iauTttai(double tt1, double tt2, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauTttai(tt1, tt2, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
 	}
 	protected native static int iauTttai(double tt1, double tt2, @Ptr long tai1, @Ptr long tai2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T t t c g<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Terrestrial Time, TT, to Geocentric<br>
+	 *  Coordinate Time, TCG.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned:<br>
+	 *     tcg1,tcg2  double    TCG as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Note:<br>
+	 * *     tt1+tt2 is Julian Date, apportioned in any convenient way between<br>
+	 *     the two arguments, for example where tt1 is the Julian Day Number<br>
+	 *     and tt2 is the fraction of a day.  The returned tcg1,tcg2 follow<br>
+	 *     suit.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     IAU 2000 Resolution B1.9<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttcg(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:373</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9584</i>
 	 */
 	public static int iauTttcg(double tt1, double tt2, Pointer<Double > tcg1, Pointer<Double > tcg2) {
 		return iauTttcg(tt1, tt2, Pointer.getPeer(tcg1), Pointer.getPeer(tcg2));
 	}
 	protected native static int iauTttcg(double tt1, double tt2, @Ptr long tcg1, @Ptr long tcg2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T t t d b<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Terrestrial Time, TT, to Barycentric<br>
+	 *  Dynamical Time, TDB.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 *     dtr        double    TDB-TT in seconds<br>
+	 * *  Returned:<br>
+	 *     tdb1,tdb2  double    TDB as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tt1+tt2 is Julian Date, apportioned in any convenient way between<br>
+	 *     the two arguments, for example where tt1 is the Julian Day Number<br>
+	 *     and tt2 is the fraction of a day.  The returned tdb1,tdb2 follow<br>
+	 *     suit.<br>
+	 * *  2) The argument dtr represents the quasi-periodic component of the<br>
+	 *     GR transformation between TT and TCB.  It is dependent upon the<br>
+	 *     adopted solar-system ephemeris, and can be obtained by numerical<br>
+	 *     integration, by interrogating a precomputed time ephemeris or by<br>
+	 *     evaluating a model such as that implemented in the SOFA function<br>
+	 *     iauDtdb.   The quantity is dominated by an annual term of 1.7 ms<br>
+	 *     amplitude.<br>
+	 * *  3) TDB is essentially the same as Teph, the time argument for the JPL<br>
+	 *     solar system ephemerides.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     IAU 2006 Resolution 3<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttdb(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:375</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9624</i>
 	 */
 	public static int iauTttdb(double tt1, double tt2, double dtr, Pointer<Double > tdb1, Pointer<Double > tdb2) {
 		return iauTttdb(tt1, tt2, dtr, Pointer.getPeer(tdb1), Pointer.getPeer(tdb2));
 	}
 	protected native static int iauTttdb(double tt1, double tt2, double dtr, @Ptr long tdb1, @Ptr long tdb2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T t u t 1<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Terrestrial Time, TT, to Universal Time,<br>
+	 *  UT1.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 *     dt         double    TT-UT1 in seconds<br>
+	 * *  Returned:<br>
+	 *     ut11,ut12  double    UT1 as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) tt1+tt2 is Julian Date, apportioned in any convenient way between<br>
+	 *     the two arguments, for example where tt1 is the Julian Day Number<br>
+	 *     and tt2 is the fraction of a day.  The returned ut11,ut12 follow<br>
+	 *     suit.<br>
+	 * *  2) The argument dt is classical Delta T.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTtut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:377</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9655</i>
 	 */
 	public static int iauTtut1(double tt1, double tt2, double dt, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauTtut1(tt1, tt2, dt, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
 	}
 	protected native static int iauTtut1(double tt1, double tt2, double dt, @Ptr long ut11, @Ptr long ut12);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u U t 1 t a i<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Universal Time, UT1, to International<br>
+	 *  Atomic Time, TAI.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     ut11,ut12  double    UT1 as a 2-part Julian Date<br>
+	 *     dta        double    UT1-TAI in seconds<br>
+	 * *  Returned:<br>
+	 *     tai1,tai2  double    TAI as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) ut11+ut12 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where ut11 is the Julian<br>
+	 *     Day Number and ut12 is the fraction of a day.  The returned<br>
+	 *     tai1,tai2 follow suit.<br>
+	 * *  2) The argument dta, i.e. UT1-TAI, is an observed quantity, and is<br>
+	 *     available from IERS tabulations.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1tai(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:379</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9687</i>
 	 */
 	public static int iauUt1tai(double ut11, double ut12, double dta, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauUt1tai(ut11, ut12, dta, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
 	}
 	protected native static int iauUt1tai(double ut11, double ut12, double dta, @Ptr long tai1, @Ptr long tai2);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u U t 1 t t<br>
+	 *  - - - - - - - - -<br>
+	 * *  Time scale transformation:  Universal Time, UT1, to Terrestrial<br>
+	 *  Time, TT.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     ut11,ut12  double    UT1 as a 2-part Julian Date<br>
+	 *     dt         double    TT-UT1 in seconds<br>
+	 * *  Returned:<br>
+	 *     tt1,tt2    double    TT as a 2-part Julian Date<br>
+	 * *  Returned (function value):<br>
+	 *                int       status:  0 = OK<br>
+	 * *  Notes:<br>
+	 * *  1) ut11+ut12 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where ut11 is the Julian<br>
+	 *     Day Number and ut12 is the fraction of a day.  The returned<br>
+	 *     tt1,tt2 follow suit.<br>
+	 * *  2) The argument dt is classical Delta T.<br>
+	 * *  Reference:<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1tt(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:381</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9718</i>
 	 */
 	public static int iauUt1tt(double ut11, double ut12, double dt, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauUt1tt(ut11, ut12, dt, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
 	}
 	protected native static int iauUt1tt(double ut11, double ut12, double dt, @Ptr long tt1, @Ptr long tt2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u U t 1 u t c<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Universal Time, UT1, to Coordinated<br>
+	 *  Universal Time, UTC.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     ut11,ut12  double   UT1 as a 2-part Julian Date (Note 1)<br>
+	 *     dut1       double   Delta UT1: UT1-UTC in seconds (Note 2)<br>
+	 * *  Returned:<br>
+	 *     utc1,utc2  double   UTC as a 2-part quasi Julian Date (Notes 3,4)<br>
+	 * *  Returned (function value):<br>
+	 *                int      status: +1 = dubious year (Note 5)<br>
+	 *                                  0 = OK<br>
+	 *                                 -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1) ut11+ut12 is Julian Date, apportioned in any convenient way<br>
+	 *     between the two arguments, for example where ut11 is the Julian<br>
+	 *     Day Number and ut12 is the fraction of a day.  The returned utc1<br>
+	 *     and utc2 form an analogous pair, except that a special convention<br>
+	 *     is used, to deal with the problem of leap seconds - see Note 3.<br>
+	 * *  2) Delta UT1 can be obtained from tabulations provided by the<br>
+	 *     International Earth Rotation and Reference Systems Service.  The<br>
+	 *     value changes abruptly by 1s at a leap second;  however, close to<br>
+	 *     a leap second the algorithm used here is tolerant of the "wrong"<br>
+	 *     choice of value being made.<br>
+	 * *  3) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The convention in the present<br>
+	 *     function is that the returned quasi JD day UTC1+UTC2 represents<br>
+	 *     UTC days whether the length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *  4) The function iauD2dtf can be used to transform the UTC quasi-JD<br>
+	 *     into calendar date and clock time, including UTC leap second<br>
+	 *     handling.<br>
+	 * *  5) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  Called:<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 *     iauDat       delta(AT) = TAI-UTC<br>
+	 *     iauCal2jd    Gregorian calendar to JD<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1utc(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:383</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9772</i>
 	 */
 	public static int iauUt1utc(double ut11, double ut12, double dut1, Pointer<Double > utc1, Pointer<Double > utc2) {
 		return iauUt1utc(ut11, ut12, dut1, Pointer.getPeer(utc1), Pointer.getPeer(utc2));
 	}
 	protected native static int iauUt1utc(double ut11, double ut12, double dut1, @Ptr long utc1, @Ptr long utc2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u U t c t a i<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Coordinated Universal Time, UTC, to<br>
+	 *  International Atomic Time, TAI.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     utc1,utc2  double   UTC as a 2-part quasi Julian Date (Notes 1-4)<br>
+	 * *  Returned:<br>
+	 *     tai1,tai2  double   TAI as a 2-part Julian Date (Note 5)<br>
+	 * *  Returned (function value):<br>
+	 *                int      status: +1 = dubious year (Note 3)<br>
+	 *                                  0 = OK<br>
+	 *                                 -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1) utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *     convenient way between the two arguments, for example where utc1<br>
+	 *     is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *  2) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The convention in the present<br>
+	 *     function is that the JD day represents UTC days whether the<br>
+	 *     length is 86399, 86400 or 86401 SI seconds.  In the 1960-1972 era<br>
+	 *     there were smaller jumps (in either direction) each time the<br>
+	 *     linear UTC(TAI) expression was changed, and these "mini-leaps"<br>
+	 *     are also included in the SOFA convention.<br>
+	 * *  3) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  4) The function iauDtf2d converts from calendar date and time of day<br>
+	 *     into 2-part Julian Date, and in the case of UTC implements the<br>
+	 *     leap-second-ambiguity convention described above.<br>
+	 * *  5) The returned TAI1,TAI2 are such that their sum is the TAI Julian<br>
+	 *     Date.<br>
+	 * *  Called:<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 *     iauDat       delta(AT) = TAI-UTC<br>
+	 *     iauCal2jd    Gregorian calendar to JD<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  This revision:  2013 July 26<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUtctai(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:385</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9823</i>
 	 */
 	public static int iauUtctai(double utc1, double utc2, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauUtctai(utc1, utc2, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
 	}
 	protected native static int iauUtctai(double utc1, double utc2, @Ptr long tai1, @Ptr long tai2);
 	/**
+	 * - - - - - - - - - -<br>
+	 *   i a u U t c u t 1<br>
+	 *  - - - - - - - - - -<br>
+	 * *  Time scale transformation:  Coordinated Universal Time, UTC, to<br>
+	 *  Universal Time, UT1.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  canonical.<br>
+	 * *  Given:<br>
+	 *     utc1,utc2  double   UTC as a 2-part quasi Julian Date (Notes 1-4)<br>
+	 *     dut1       double   Delta UT1 = UT1-UTC in seconds (Note 5)<br>
+	 * *  Returned:<br>
+	 *     ut11,ut12  double   UT1 as a 2-part Julian Date (Note 6)<br>
+	 * *  Returned (function value):<br>
+	 *                int      status: +1 = dubious year (Note 3)<br>
+	 *                                  0 = OK<br>
+	 *                                 -1 = unacceptable date<br>
+	 * *  Notes:<br>
+	 * *  1) utc1+utc2 is quasi Julian Date (see Note 2), apportioned in any<br>
+	 *     convenient way between the two arguments, for example where utc1<br>
+	 *     is the Julian Day Number and utc2 is the fraction of a day.<br>
+	 * *  2) JD cannot unambiguously represent UTC during a leap second unless<br>
+	 *     special measures are taken.  The convention in the present<br>
+	 *     function is that the JD day represents UTC days whether the<br>
+	 *     length is 86399, 86400 or 86401 SI seconds.<br>
+	 * *  3) The warning status "dubious year" flags UTCs that predate the<br>
+	 *     introduction of the time scale or that are too far in the future<br>
+	 *     to be trusted.  See iauDat for further details.<br>
+	 * *  4) The function iauDtf2d converts from calendar date and time of<br>
+	 *     day into 2-part Julian Date, and in the case of UTC implements<br>
+	 *     the leap-second-ambiguity convention described above.<br>
+	 * *  5) Delta UT1 can be obtained from tabulations provided by the<br>
+	 *     International Earth Rotation and Reference Systems Service.<br>
+	 *     It is the caller's responsibility to supply a dut1 argument<br>
+	 *     containing the UT1-UTC value that matches the given UTC.<br>
+	 * *  6) The returned ut11,ut12 are such that their sum is the UT1 Julian<br>
+	 *     Date.<br>
+	 * *  References:<br>
+	 * *     McCarthy, D. D., Petit, G. (eds.), IERS Conventions (2003),<br>
+	 *     IERS Technical Note No. 32, BKG (2004)<br>
+	 * *     Explanatory Supplement to the Astronomical Almanac,<br>
+	 *     P. Kenneth Seidelmann (ed), University Science Books (1992)<br>
+	 * *  Called:<br>
+	 *     iauJd2cal    JD to Gregorian calendar<br>
+	 *     iauDat       delta(AT) = TAI-UTC<br>
+	 *     iauUtctai    UTC to TAI<br>
+	 *     iauTaiut1    TAI to UT1<br>
+	 * *  This revision:  2013 August 12<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUtcut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:387</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9877</i>
 	 */
 	public static int iauUtcut1(double utc1, double utc2, double dut1, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauUtcut1(utc1, utc2, dut1, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
 	}
 	protected native static int iauUtcut1(double utc1, double utc2, double dut1, @Ptr long ut11, @Ptr long ut12);
 	/**
-	 * VectorMatrix/AngleOps<br>
+	 * - - - - - - - -<br>
+	 *   i a u A 2 a f<br>
+	 *  - - - - - - - -<br>
+	 * *  Decompose radians into degrees, arcminutes, arcseconds, fraction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     ndp     int     resolution (Note 1)<br>
+	 *     angle   double  angle in radians<br>
+	 * *  Returned:<br>
+	 *     sign    char    '+' or '-'<br>
+	 *     idmsf   int[4]  degrees, arcminutes, arcseconds, fraction<br>
+	 * *  Called:<br>
+	 *     iauD2tf      decompose days to hms<br>
+	 * *  Notes:<br>
+	 * *  1) The argument ndp is interpreted as follows:<br>
+	 * *     ndp         resolution<br>
+	 *      :      ...0000 00 00<br>
+	 *     -7         1000 00 00<br>
+	 *     -6          100 00 00<br>
+	 *     -5           10 00 00<br>
+	 *     -4            1 00 00<br>
+	 *     -3            0 10 00<br>
+	 *     -2            0 01 00<br>
+	 *     -1            0 00 10<br>
+	 *      0            0 00 01<br>
+	 *      1            0 00 00.1<br>
+	 *      2            0 00 00.01<br>
+	 *      3            0 00 00.001<br>
+	 *      :            0 00 00.000...<br>
+	 * *  2) The largest positive useful value for ndp is determined by the<br>
+	 *     size of angle, the format of doubles on the target platform, and<br>
+	 *     the risk of overflowing idmsf[3].  On a typical platform, for<br>
+	 *     angle up to 2pi, the available floating-point precision might<br>
+	 *     correspond to ndp=12.  However, the practical limit is typically<br>
+	 *     ndp=9, set by the capacity of a 32-bit int, or ndp=4 if int is<br>
+	 *     only 16 bits.<br>
+	 * *  3) The absolute value of angle may exceed 2pi.  In cases where it<br>
+	 *     does not, it is up to the caller to test for and handle the<br>
+	 *     case where angle is very nearly 2pi and rounds up to 360 degrees,<br>
+	 *     by testing for idmsf[0]=360 and setting idmsf[0-3] to zero.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauA2af(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:392</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9926</i>
 	 */
 	public static void iauA2af(int ndp, double angle, Pointer<Byte > sign, Pointer<Integer > idmsf) {
 		iauA2af(ndp, angle, Pointer.getPeer(sign), Pointer.getPeer(idmsf));
 	}
 	protected native static void iauA2af(int ndp, double angle, @Ptr long sign, @Ptr long idmsf);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A 2 t f<br>
+	 *  - - - - - - - -<br>
+	 * *  Decompose radians into hours, minutes, seconds, fraction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     ndp     int     resolution (Note 1)<br>
+	 *     angle   double  angle in radians<br>
+	 * *  Returned:<br>
+	 *     sign    char    '+' or '-'<br>
+	 *     ihmsf   int[4]  hours, minutes, seconds, fraction<br>
+	 * *  Called:<br>
+	 *     iauD2tf      decompose days to hms<br>
+	 * *  Notes:<br>
+	 * *  1) The argument ndp is interpreted as follows:<br>
+	 * *     ndp         resolution<br>
+	 *      :      ...0000 00 00<br>
+	 *     -7         1000 00 00<br>
+	 *     -6          100 00 00<br>
+	 *     -5           10 00 00<br>
+	 *     -4            1 00 00<br>
+	 *     -3            0 10 00<br>
+	 *     -2            0 01 00<br>
+	 *     -1            0 00 10<br>
+	 *      0            0 00 01<br>
+	 *      1            0 00 00.1<br>
+	 *      2            0 00 00.01<br>
+	 *      3            0 00 00.001<br>
+	 *      :            0 00 00.000...<br>
+	 * *  2) The largest positive useful value for ndp is determined by the<br>
+	 *     size of angle, the format of doubles on the target platform, and<br>
+	 *     the risk of overflowing ihmsf[3].  On a typical platform, for<br>
+	 *     angle up to 2pi, the available floating-point precision might<br>
+	 *     correspond to ndp=12.  However, the practical limit is typically<br>
+	 *     ndp=9, set by the capacity of a 32-bit int, or ndp=4 if int is<br>
+	 *     only 16 bits.<br>
+	 * *  3) The absolute value of angle may exceed 2pi.  In cases where it<br>
+	 *     does not, it is up to the caller to test for and handle the<br>
+	 *     case where angle is very nearly 2pi and rounds up to 24 hours,<br>
+	 *     by testing for ihmsf[0]=24 and setting ihmsf[0-3] to zero.<br>
+	 * *  This revision:  2013 July 31<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauA2tf(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:394</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9975</i>
 	 */
 	public static void iauA2tf(int ndp, double angle, Pointer<Byte > sign, Pointer<Integer > ihmsf) {
 		iauA2tf(ndp, angle, Pointer.getPeer(sign), Pointer.getPeer(ihmsf));
 	}
 	protected native static void iauA2tf(int ndp, double angle, @Ptr long sign, @Ptr long ihmsf);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A f 2 a<br>
+	 *  - - - - - - - -<br>
+	 * *  Convert degrees, arcminutes, arcseconds to radians.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     s         char    sign:  '-' = negative, otherwise positive<br>
+	 *     ideg      int     degrees<br>
+	 *     iamin     int     arcminutes<br>
+	 *     asec      double  arcseconds<br>
+	 * *  Returned:<br>
+	 *     rad       double  angle in radians<br>
+	 * *  Returned (function value):<br>
+	 *               int     status:  0 = OK<br>
+	 *                                1 = ideg outside range 0-359<br>
+	 *                                2 = iamin outside range 0-59<br>
+	 *                                3 = asec outside range 0-59.999...<br>
+	 * *  Notes:<br>
+	 * *  1)  The result is computed even if any of the range checks fail.<br>
+	 * *  2)  Negative ideg, iamin and/or asec produce a warning status, but<br>
+	 *      the absolute value is used in the conversion.<br>
+	 * *  3)  If there are multiple errors, the status value reflects only the<br>
+	 *      first, the smallest taking precedence.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAf2a(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:396</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10007</i>
 	 */
 	public static int iauAf2a(byte s, int ideg, int iamin, double asec, Pointer<Double > rad) {
 		return iauAf2a(s, ideg, iamin, asec, Pointer.getPeer(rad));
 	}
 	protected native static int iauAf2a(byte s, int ideg, int iamin, double asec, @Ptr long rad);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u A n p<br>
+	 *  - - - - - - -<br>
+	 * *  Normalize angle into the range 0 <= a < 2pi.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double     angle (radians)<br>
+	 * *  Returned (function value):<br>
+	 *              double     angle in range 0-2pi<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauAnp(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:398</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10025</i>
 	 */
 	native public static double iauAnp(double a);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u A n p m<br>
+	 *  - - - - - - - -<br>
+	 * *  Normalize angle into the range -pi <= a < +pi.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double     angle (radians)<br>
+	 * *  Returned (function value):<br>
+	 *              double     angle in range +/-pi<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauAnpm(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:400</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10043</i>
 	 */
 	native public static double iauAnpm(double a);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u D 2 t f<br>
+	 *  - - - - - - - -<br>
+	 * *  Decompose days to hours, minutes, seconds, fraction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     ndp     int     resolution (Note 1)<br>
+	 *     days    double  interval in days<br>
+	 * *  Returned:<br>
+	 *     sign    char    '+' or '-'<br>
+	 *     ihmsf   int[4]  hours, minutes, seconds, fraction<br>
+	 * *  Notes:<br>
+	 * *  1) The argument ndp is interpreted as follows:<br>
+	 * *     ndp         resolution<br>
+	 *      :      ...0000 00 00<br>
+	 *     -7         1000 00 00<br>
+	 *     -6          100 00 00<br>
+	 *     -5           10 00 00<br>
+	 *     -4            1 00 00<br>
+	 *     -3            0 10 00<br>
+	 *     -2            0 01 00<br>
+	 *     -1            0 00 10<br>
+	 *      0            0 00 01<br>
+	 *      1            0 00 00.1<br>
+	 *      2            0 00 00.01<br>
+	 *      3            0 00 00.001<br>
+	 *      :            0 00 00.000...<br>
+	 * *  2) The largest positive useful value for ndp is determined by the<br>
+	 *     size of days, the format of double on the target platform, and<br>
+	 *     the risk of overflowing ihmsf[3].  On a typical platform, for<br>
+	 *     days up to 1.0, the available floating-point precision might<br>
+	 *     correspond to ndp=12.  However, the practical limit is typically<br>
+	 *     ndp=9, set by the capacity of a 32-bit int, or ndp=4 if int is<br>
+	 *     only 16 bits.<br>
+	 * *  3) The absolute value of days may exceed 1.0.  In cases where it<br>
+	 *     does not, it is up to the caller to test for and handle the<br>
+	 *     case where days is very nearly 1.0 and rounds up to 24 hours,<br>
+	 *     by testing for ihmsf[0]=24 and setting ihmsf[0-3] to zero.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauD2tf(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:402</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10090</i>
 	 */
 	public static void iauD2tf(int ndp, double days, Pointer<Byte > sign, Pointer<Integer > ihmsf) {
 		iauD2tf(ndp, days, Pointer.getPeer(sign), Pointer.getPeer(ihmsf));
 	}
 	protected native static void iauD2tf(int ndp, double days, @Ptr long sign, @Ptr long ihmsf);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u T f 2 a<br>
+	 *  - - - - - - - -<br>
+	 * *  Convert hours, minutes, seconds to radians.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     s         char    sign:  '-' = negative, otherwise positive<br>
+	 *     ihour     int     hours<br>
+	 *     imin      int     minutes<br>
+	 *     sec       double  seconds<br>
+	 * *  Returned:<br>
+	 *     rad       double  angle in radians<br>
+	 * *  Returned (function value):<br>
+	 *               int     status:  0 = OK<br>
+	 *                                1 = ihour outside range 0-23<br>
+	 *                                2 = imin outside range 0-59<br>
+	 *                                3 = sec outside range 0-59.999...<br>
+	 * *  Notes:<br>
+	 * *  1)  The result is computed even if any of the range checks fail.<br>
+	 * *  2)  Negative ihour, imin and/or sec produce a warning status, but<br>
+	 *      the absolute value is used in the conversion.<br>
+	 * *  3)  If there are multiple errors, the status value reflects only the<br>
+	 *      first, the smallest taking precedence.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTf2a(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:404</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10122</i>
 	 */
 	public static int iauTf2a(byte s, int ihour, int imin, double sec, Pointer<Double > rad) {
 		return iauTf2a(s, ihour, imin, sec, Pointer.getPeer(rad));
 	}
 	protected native static int iauTf2a(byte s, int ihour, int imin, double sec, @Ptr long rad);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u T f 2 d<br>
+	 *  - - - - - - - -<br>
+	 * *  Convert hours, minutes, seconds to days.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  support function.<br>
+	 * *  Given:<br>
+	 *     s         char    sign:  '-' = negative, otherwise positive<br>
+	 *     ihour     int     hours<br>
+	 *     imin      int     minutes<br>
+	 *     sec       double  seconds<br>
+	 * *  Returned:<br>
+	 *     days      double  interval in days<br>
+	 * *  Returned (function value):<br>
+	 *               int     status:  0 = OK<br>
+	 *                                1 = ihour outside range 0-23<br>
+	 *                                2 = imin outside range 0-59<br>
+	 *                                3 = sec outside range 0-59.999...<br>
+	 * *  Notes:<br>
+	 * *  1)  The result is computed even if any of the range checks fail.<br>
+	 * *  2)  Negative ihour, imin and/or sec produce a warning status, but<br>
+	 *      the absolute value is used in the conversion.<br>
+	 * *  3)  If there are multiple errors, the status value reflects only the<br>
+	 *      first, the smallest taking precedence.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTf2d(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:406</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10154</i>
 	 */
 	public static int iauTf2d(byte s, int ihour, int imin, double sec, Pointer<Double > days) {
 		return iauTf2d(s, ihour, imin, sec, Pointer.getPeer(days));
 	}
 	protected native static int iauTf2d(byte s, int ihour, int imin, double sec, @Ptr long days);
 	/**
-	 * VectorMatrix/BuildRotations<br>
+	 * - - - - - -<br>
+	 *   i a u R x<br>
+	 *  - - - - - -<br>
+	 * *  Rotate an r-matrix about the x-axis.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     phi    double          angle (radians)<br>
+	 * *  Given and returned:<br>
+	 *     r      double[3][3]    r-matrix, rotated<br>
+	 * *  Notes:<br>
+	 * *  1) Calling this function with positive phi incorporates in the<br>
+	 *     supplied r-matrix r an additional rotation, about the x-axis,<br>
+	 *     anticlockwise as seen looking towards the origin from positive x.<br>
+	 * *  2) The additional rotation can be represented by this matrix:<br>
+	 * *         (  1        0            0      )<br>
+	 *         (                               )<br>
+	 *         (  0   + cos(phi)   + sin(phi)  )<br>
+	 *         (                               )<br>
+	 *         (  0   - sin(phi)   + cos(phi)  )<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRx(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:411</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10182</i>
 	 */
 	public static void iauRx(double phi, Pointer<Double > r) {
 		iauRx(phi, Pointer.getPeer(r));
 	}
 	protected native static void iauRx(double phi, @Ptr long r);
 	/**
+	 * - - - - - -<br>
+	 *   i a u R y<br>
+	 *  - - - - - -<br>
+	 * *  Rotate an r-matrix about the y-axis.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     theta  double          angle (radians)<br>
+	 * *  Given and returned:<br>
+	 *     r      double[3][3]    r-matrix, rotated<br>
+	 * *  Notes:<br>
+	 * *  1) Calling this function with positive theta incorporates in the<br>
+	 *     supplied r-matrix r an additional rotation, about the y-axis,<br>
+	 *     anticlockwise as seen looking towards the origin from positive y.<br>
+	 * *  2) The additional rotation can be represented by this matrix:<br>
+	 * *         (  + cos(theta)     0      - sin(theta)  )<br>
+	 *         (                                        )<br>
+	 *         (       0           1           0        )<br>
+	 *         (                                        )<br>
+	 *         (  + sin(theta)     0      + cos(theta)  )<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRy(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:413</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10210</i>
 	 */
 	public static void iauRy(double theta, Pointer<Double > r) {
 		iauRy(theta, Pointer.getPeer(r));
 	}
 	protected native static void iauRy(double theta, @Ptr long r);
 	/**
+	 * - - - - - -<br>
+	 *   i a u R z<br>
+	 *  - - - - - -<br>
+	 * *  Rotate an r-matrix about the z-axis.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     psi    double          angle (radians)<br>
+	 * *  Given and returned:<br>
+	 *     r      double[3][3]    r-matrix, rotated<br>
+	 * *  Notes:<br>
+	 * *  1) Calling this function with positive psi incorporates in the<br>
+	 *     supplied r-matrix r an additional rotation, about the z-axis,<br>
+	 *     anticlockwise as seen looking towards the origin from positive z.<br>
+	 * *  2) The additional rotation can be represented by this matrix:<br>
+	 * *         (  + cos(psi)   + sin(psi)     0  )<br>
+	 *         (                                 )<br>
+	 *         (  - sin(psi)   + cos(psi)     0  )<br>
+	 *         (                                 )<br>
+	 *         (       0            0         1  )<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRz(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:415</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10238</i>
 	 */
 	public static void iauRz(double psi, Pointer<Double > r) {
 		iauRz(psi, Pointer.getPeer(r));
 	}
 	protected native static void iauRz(double psi, @Ptr long r);
 	/**
-	 * VectorMatrix/CopyExtendExtract<br>
+	 * - - - - - -<br>
+	 *   i a u C p<br>
+	 *  - - - - - -<br>
+	 * *  Copy a p-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p        double[3]     p-vector to be copied<br>
+	 * *  Returned:<br>
+	 *     c        double[3]     copy<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:420</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10256</i>
 	 */
 	public static void iauCp(Pointer<Double > p, Pointer<Double > c) {
 		iauCp(Pointer.getPeer(p), Pointer.getPeer(c));
 	}
 	protected native static void iauCp(@Ptr long p, @Ptr long c);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u C p v<br>
+	 *  - - - - - - -<br>
+	 * *  Copy a position/velocity vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     pv     double[2][3]    position/velocity vector to be copied<br>
+	 * *  Returned:<br>
+	 *     c      double[2][3]    copy<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCpv(double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:422</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10276</i>
 	 */
 	public static void iauCpv(Pointer<Double > pv, Pointer<Double > c) {
 		iauCpv(Pointer.getPeer(pv), Pointer.getPeer(c));
 	}
 	protected native static void iauCpv(@Ptr long pv, @Ptr long c);
 	/**
+	 * - - - - - -<br>
+	 *   i a u C r<br>
+	 *  - - - - - -<br>
+	 * *  Copy an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    r-matrix to be copied<br>
+	 * *  Returned:<br>
+	 *   char[]     double[3][3]    copy<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCr(double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:424</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10296</i>
 	 */
 	public static void iauCr(Pointer<Double > r, Pointer<Double > c) {
 		iauCr(Pointer.getPeer(r), Pointer.getPeer(c));
 	}
 	protected native static void iauCr(@Ptr long r, @Ptr long c);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P 2 p v<br>
+	 *  - - - - - - - -<br>
+	 * *  Extend a p-vector to a pv-vector by appending a zero velocity.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p        double[3]       p-vector<br>
+	 * *  Returned:<br>
+	 *     pv       double[2][3]    pv-vector<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 *     iauZp        zero p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP2pv(double[3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:426</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10317</i>
 	 */
 	public static void iauP2pv(Pointer<Double > p, Pointer<Double > pv) {
 		iauP2pv(Pointer.getPeer(p), Pointer.getPeer(pv));
 	}
 	protected native static void iauP2pv(@Ptr long p, @Ptr long pv);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P v 2 p<br>
+	 *  - - - - - - - -<br>
+	 * *  Discard velocity component of a pv-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     pv      double[2][3]     pv-vector<br>
+	 * *  Returned:<br>
+	 *     p       double[3]        p-vector<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPv2p(double[2][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:428</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10337</i>
 	 */
 	public static void iauPv2p(Pointer<Double > pv, Pointer<Double > p) {
 		iauPv2p(Pointer.getPeer(pv), Pointer.getPeer(p));
 	}
 	protected native static void iauPv2p(@Ptr long pv, @Ptr long p);
 	/**
-	 * VectorMatrix/Initialization<br>
+	 * - - - - - -<br>
+	 *   i a u I r<br>
+	 *  - - - - - -<br>
+	 * *  Initialize an r-matrix to the identity matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Returned:<br>
+	 *     r       double[3][3]    r-matrix<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauIr(double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:433</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10353</i>
 	 */
 	public static void iauIr(Pointer<Double > r) {
 		iauIr(Pointer.getPeer(r));
 	}
 	protected native static void iauIr(@Ptr long r);
 	/**
+	 * - - - - - -<br>
+	 *   i a u Z p<br>
+	 *  - - - - - -<br>
+	 * *  Zero a p-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Returned:<br>
+	 *     p        double[3]      p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZp(double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:435</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10369</i>
 	 */
 	public static void iauZp(Pointer<Double > p) {
 		iauZp(Pointer.getPeer(p));
 	}
 	protected native static void iauZp(@Ptr long p);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u Z p v<br>
+	 *  - - - - - - -<br>
+	 * *  Zero a pv-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Returned:<br>
+	 *     pv       double[2][3]      pv-vector<br>
+	 * *  Called:<br>
+	 *     iauZp        zero p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZpv(double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:437</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10387</i>
 	 */
 	public static void iauZpv(Pointer<Double > pv) {
 		iauZpv(Pointer.getPeer(pv));
 	}
 	protected native static void iauZpv(@Ptr long pv);
 	/**
+	 * - - - - - -<br>
+	 *   i a u Z r<br>
+	 *  - - - - - -<br>
+	 * *  Initialize an r-matrix to the null matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Returned:<br>
+	 *     r        double[3][3]    r-matrix<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZr(double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:439</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10403</i>
 	 */
 	public static void iauZr(Pointer<Double > r) {
 		iauZr(Pointer.getPeer(r));
 	}
 	protected native static void iauZr(@Ptr long r);
 	/**
-	 * VectorMatrix/MatrixOps<br>
+	 * - - - - - - -<br>
+	 *   i a u R x r<br>
+	 *  - - - - - - -<br>
+	 * *  Multiply two r-matrices.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[3][3]    first r-matrix<br>
+	 *     b        double[3][3]    second r-matrix<br>
+	 * *  Returned:<br>
+	 *     atb      double[3][3]    a * b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  Called:<br>
+	 *     iauCr        copy r-matrix<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxr(double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:444</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10427</i>
 	 */
 	public static void iauRxr(Pointer<Double > a, Pointer<Double > b, Pointer<Double > atb) {
 		iauRxr(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(atb));
 	}
 	protected native static void iauRxr(@Ptr long a, @Ptr long b, @Ptr long atb);
 	/**
+	 * - - - - - -<br>
+	 *   i a u T r<br>
+	 *  - - - - - -<br>
+	 * *  Transpose an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    r-matrix<br>
+	 * *  Returned:<br>
+	 *     rt       double[3][3]    transpose<br>
+	 * *  Note:<br>
+	 *     It is permissible for r and rt to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauCr        copy r-matrix<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTr(double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:446</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10449</i>
 	 */
 	public static void iauTr(Pointer<Double > r, Pointer<Double > rt) {
 		iauTr(Pointer.getPeer(r), Pointer.getPeer(rt));
 	}
 	protected native static void iauTr(@Ptr long r, @Ptr long rt);
 	/**
-	 * VectorMatrix/MatrixVectorProducts<br>
+	 * - - - - - - -<br>
+	 *   i a u R x p<br>
+	 *  - - - - - - -<br>
+	 * *  Multiply a p-vector by an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    r-matrix<br>
+	 *     p        double[3]       p-vector<br>
+	 * *  Returned:<br>
+	 *     rp       double[3]       r * p<br>
+	 * *  Note:<br>
+	 *     It is permissible for p and rp to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauCp        copy p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxp(double[3][3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:451</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10472</i>
 	 */
 	public static void iauRxp(Pointer<Double > r, Pointer<Double > p, Pointer<Double > rp) {
 		iauRxp(Pointer.getPeer(r), Pointer.getPeer(p), Pointer.getPeer(rp));
 	}
 	protected native static void iauRxp(@Ptr long r, @Ptr long p, @Ptr long rp);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u R x p v<br>
+	 *  - - - - - - - -<br>
+	 * *  Multiply a pv-vector by an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    r-matrix<br>
+	 *     pv       double[2][3]    pv-vector<br>
+	 * *  Returned:<br>
+	 *     rpv      double[2][3]    r * pv<br>
+	 * *  Note:<br>
+	 *     It is permissible for pv and rpv to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxpv(double[3][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:453</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10495</i>
 	 */
 	public static void iauRxpv(Pointer<Double > r, Pointer<Double > pv, Pointer<Double > rpv) {
 		iauRxpv(Pointer.getPeer(r), Pointer.getPeer(pv), Pointer.getPeer(rpv));
 	}
 	protected native static void iauRxpv(@Ptr long r, @Ptr long pv, @Ptr long rpv);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u T r x p<br>
+	 *  - - - - - - - -<br>
+	 * *  Multiply a p-vector by the transpose of an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]   r-matrix<br>
+	 *     p        double[3]      p-vector<br>
+	 * *  Returned:<br>
+	 *     trp      double[3]      r * p<br>
+	 * *  Note:<br>
+	 *     It is permissible for p and trp to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauTr        transpose r-matrix<br>
+	 *     iauRxp       product of r-matrix and p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTrxp(double[3][3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:455</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10519</i>
 	 */
 	public static void iauTrxp(Pointer<Double > r, Pointer<Double > p, Pointer<Double > trp) {
 		iauTrxp(Pointer.getPeer(r), Pointer.getPeer(p), Pointer.getPeer(trp));
 	}
 	protected native static void iauTrxp(@Ptr long r, @Ptr long p, @Ptr long trp);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u T r x p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Multiply a pv-vector by the transpose of an r-matrix.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    r-matrix<br>
+	 *     pv       double[2][3]    pv-vector<br>
+	 * *  Returned:<br>
+	 *     trpv     double[2][3]    r * pv<br>
+	 * *  Note:<br>
+	 *     It is permissible for pv and trpv to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauTr        transpose r-matrix<br>
+	 *     iauRxpv      product of r-matrix and pv-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTrxpv(double[3][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:457</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10543</i>
 	 */
 	public static void iauTrxpv(Pointer<Double > r, Pointer<Double > pv, Pointer<Double > trpv) {
 		iauTrxpv(Pointer.getPeer(r), Pointer.getPeer(pv), Pointer.getPeer(trpv));
 	}
 	protected native static void iauTrxpv(@Ptr long r, @Ptr long pv, @Ptr long trpv);
 	/**
-	 * VectorMatrix/RotationVectors<br>
+	 * - - - - - - - -<br>
+	 *   i a u R m 2 v<br>
+	 *  - - - - - - - -<br>
+	 * *  Express an r-matrix as an r-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     r        double[3][3]    rotation matrix<br>
+	 * *  Returned:<br>
+	 *     w        double[3]       rotation vector (Note 1)<br>
+	 * *  Notes:<br>
+	 * *  1) A rotation matrix describes a rotation through some angle about<br>
+	 *     some arbitrary axis called the Euler axis.  The "rotation vector"<br>
+	 *     returned by this function has the same direction as the Euler axis,<br>
+	 *     and its magnitude is the angle in radians.  (The magnitude and<br>
+	 *     direction can be separated by means of the function iauPn.)<br>
+	 * *  2) If r is null, so is the result.  If r is not a rotation matrix<br>
+	 *     the result is undefined;  r must be proper (i.e. have a positive<br>
+	 *     determinant) and real orthogonal (inverse = transpose).<br>
+	 * *  3) The reference frame rotates clockwise as seen looking along<br>
+	 *     the rotation vector from the origin.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRm2v(double[3][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:462</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10572</i>
 	 */
 	public static void iauRm2v(Pointer<Double > r, Pointer<Double > w) {
 		iauRm2v(Pointer.getPeer(r), Pointer.getPeer(w));
 	}
 	protected native static void iauRm2v(@Ptr long r, @Ptr long w);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u R v 2 m<br>
+	 *  - - - - - - - -<br>
+	 * *  Form the r-matrix corresponding to a given r-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     w        double[3]      rotation vector (Note 1)<br>
+	 * *  Returned:<br>
+	 *     r        double[3][3]    rotation matrix<br>
+	 * *  Notes:<br>
+	 * *  1) A rotation matrix describes a rotation through some angle about<br>
+	 *     some arbitrary axis called the Euler axis.  The "rotation vector"<br>
+	 *     supplied to This function has the same direction as the Euler<br>
+	 *     axis, and its magnitude is the angle in radians.<br>
+	 * *  2) If w is null, the unit matrix is returned.<br>
+	 * *  3) The reference frame rotates clockwise as seen looking along the<br>
+	 *     rotation vector from the origin.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRv2m(double[3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:464</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10598</i>
 	 */
 	public static void iauRv2m(Pointer<Double > w, Pointer<Double > r) {
 		iauRv2m(Pointer.getPeer(w), Pointer.getPeer(r));
 	}
 	protected native static void iauRv2m(@Ptr long w, @Ptr long r);
 	/**
-	 * VectorMatrix/SeparationAndAngle<br>
+	 * - - - - - - -<br>
+	 *   i a u P a p<br>
+	 *  - - - - - - -<br>
+	 * *  Position-angle from two p-vectors.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a      double[3]  direction of reference point<br>
+	 *     b      double[3]  direction of point whose PA is required<br>
+	 * *  Returned (function value):<br>
+	 *            double     position angle of b with respect to a (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The result is the position angle, in radians, of direction b with<br>
+	 *     respect to direction a.  It is in the range -pi to +pi.  The<br>
+	 *     sense is such that if b is a small distance "north" of a the<br>
+	 *     position angle is approximately zero, and if b is a small<br>
+	 *     distance "east" of a the position angle is approximately +pi/2.<br>
+	 * *  2) The vectors a and b need not be of unit length.<br>
+	 * *  3) Zero is returned if the two directions are the same or if either<br>
+	 *     vector is null.<br>
+	 * *  4) If vector a is at a pole, the result is ill-defined.<br>
+	 * *  Called:<br>
+	 *     iauPn        decompose p-vector into modulus and direction<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPap(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:469</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10633</i>
 	 */
 	public static double iauPap(Pointer<Double > a, Pointer<Double > b) {
 		return iauPap(Pointer.getPeer(a), Pointer.getPeer(b));
 	}
 	protected native static double iauPap(@Ptr long a, @Ptr long b);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P a s<br>
+	 *  - - - - - - -<br>
+	 * *  Position-angle from spherical coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     al     double     longitude of point A (e.g. RA) in radians<br>
+	 *     ap     double     latitude of point A (e.g. Dec) in radians<br>
+	 *     bl     double     longitude of point B<br>
+	 *     bp     double     latitude of point B<br>
+	 * *  Returned (function value):<br>
+	 *            double     position angle of B with respect to A<br>
+	 * *  Notes:<br>
+	 * *  1) The result is the bearing (position angle), in radians, of point<br>
+	 *     B with respect to point A.  It is in the range -pi to +pi.  The<br>
+	 *     sense is such that if B is a small distance "east" of point A,<br>
+	 *     the bearing is approximately +pi/2.<br>
+	 * *  2) Zero is returned if the two points are coincident.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPas(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:471</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10660</i>
 	 */
 	native public static double iauPas(double al, double ap, double bl, double bp);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S e p p<br>
+	 *  - - - - - - - -<br>
+	 * *  Angular separation between two p-vectors.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a      double[3]    first p-vector (not necessarily unit length)<br>
+	 *     b      double[3]    second p-vector (not necessarily unit length)<br>
+	 * *  Returned (function value):<br>
+	 *            double       angular separation (radians, always positive)<br>
+	 * *  Notes:<br>
+	 * *  1) If either vector is null, a zero result is returned.<br>
+	 * *  2) The angular separation is most simply formulated in terms of<br>
+	 *     scalar product.  However, this gives poor accuracy for angles<br>
+	 *     near zero and pi.  The present algorithm uses both cross product<br>
+	 *     and dot product, to deliver full accuracy whatever the size of<br>
+	 *     the angle.<br>
+	 * *  Called:<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSepp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:473</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10690</i>
 	 */
 	public static double iauSepp(Pointer<Double > a, Pointer<Double > b) {
 		return iauSepp(Pointer.getPeer(a), Pointer.getPeer(b));
 	}
 	protected native static double iauSepp(@Ptr long a, @Ptr long b);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S e p s<br>
+	 *  - - - - - - - -<br>
+	 * *  Angular separation between two sets of spherical coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     al     double       first longitude (radians)<br>
+	 *     ap     double       first latitude (radians)<br>
+	 *     bl     double       second longitude (radians)<br>
+	 *     bp     double       second latitude (radians)<br>
+	 * *  Returned (function value):<br>
+	 *            double       angular separation (radians)<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauSepp      angular separation between two p-vectors<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSeps(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:475</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10714</i>
 	 */
 	native public static double iauSeps(double al, double ap, double bl, double bp);
 	/**
-	 * VectorMatrix/SphericalCartesian<br>
+	 * - - - - - - -<br>
+	 *   i a u C 2 s<br>
+	 *  - - - - - - -<br>
+	 * *  P-vector to spherical coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p      double[3]    p-vector<br>
+	 * *  Returned:<br>
+	 *     theta  double       longitude angle (radians)<br>
+	 *     phi    double       latitude angle (radians)<br>
+	 * *  Notes:<br>
+	 * *  1) The vector p can have any magnitude; only its direction is used.<br>
+	 * *  2) If p is null, zero theta and phi are returned.<br>
+	 * *  3) At either pole, zero theta is returned.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2s(double[3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:480</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10737</i>
 	 */
 	public static void iauC2s(Pointer<Double > p, Pointer<Double > theta, Pointer<Double > phi) {
 		iauC2s(Pointer.getPeer(p), Pointer.getPeer(theta), Pointer.getPeer(phi));
 	}
 	protected native static void iauC2s(@Ptr long p, @Ptr long theta, @Ptr long phi);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P 2 s<br>
+	 *  - - - - - - -<br>
+	 * *  P-vector to spherical polar coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p        double[3]    p-vector<br>
+	 * *  Returned:<br>
+	 *     theta    double       longitude angle (radians)<br>
+	 *     phi      double       latitude angle (radians)<br>
+	 *     r        double       radial distance<br>
+	 * *  Notes:<br>
+	 * *  1) If P is null, zero theta, phi and r are returned.<br>
+	 * *  2) At either pole, zero theta is returned.<br>
+	 * *  Called:<br>
+	 *     iauC2s       p-vector to spherical<br>
+	 *     iauPm        modulus of p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP2s(double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:482</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10763</i>
 	 */
 	public static void iauP2s(Pointer<Double > p, Pointer<Double > theta, Pointer<Double > phi, Pointer<Double > r) {
 		iauP2s(Pointer.getPeer(p), Pointer.getPeer(theta), Pointer.getPeer(phi), Pointer.getPeer(r));
 	}
 	protected native static void iauP2s(@Ptr long p, @Ptr long theta, @Ptr long phi, @Ptr long r);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P v 2 s<br>
+	 *  - - - - - - - -<br>
+	 * *  Convert position/velocity from Cartesian to spherical coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     pv       double[2][3]  pv-vector<br>
+	 * *  Returned:<br>
+	 *     theta    double        longitude angle (radians)<br>
+	 *     phi      double        latitude angle (radians)<br>
+	 *     r        double        radial distance<br>
+	 *     td       double        rate of change of theta<br>
+	 *     pd       double        rate of change of phi<br>
+	 *     rd       double        rate of change of r<br>
+	 * *  Notes:<br>
+	 * *  1) If the position part of pv is null, theta, phi, td and pd<br>
+	 *     are indeterminate.  This is handled by extrapolating the<br>
+	 *     position through unit time by using the velocity part of<br>
+	 *     pv.  This moves the origin without changing the direction<br>
+	 *     of the velocity component.  If the position and velocity<br>
+	 *     components of pv are both null, zeroes are returned for all<br>
+	 *     six results.<br>
+	 * *  2) If the position is a pole, theta, td and pd are indeterminate.<br>
+	 *     In such cases zeroes are returned for all three.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPv2s(double[2][3], double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:484</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10796</i>
 	 */
 	public static void iauPv2s(Pointer<Double > pv, Pointer<Double > theta, Pointer<Double > phi, Pointer<Double > r, Pointer<Double > td, Pointer<Double > pd, Pointer<Double > rd) {
 		iauPv2s(Pointer.getPeer(pv), Pointer.getPeer(theta), Pointer.getPeer(phi), Pointer.getPeer(r), Pointer.getPeer(td), Pointer.getPeer(pd), Pointer.getPeer(rd));
 	}
 	protected native static void iauPv2s(@Ptr long pv, @Ptr long theta, @Ptr long phi, @Ptr long r, @Ptr long td, @Ptr long pd, @Ptr long rd);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u S 2 c<br>
+	 *  - - - - - - -<br>
+	 * *  Convert spherical coordinates to Cartesian.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     theta    double       longitude angle (radians)<br>
+	 *     phi      double       latitude angle (radians)<br>
+	 * *  Returned:<br>
+	 *     c        double[3]    direction cosines<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2c(double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:486</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10815</i>
 	 */
 	public static void iauS2c(double theta, double phi, Pointer<Double > c) {
 		iauS2c(theta, phi, Pointer.getPeer(c));
 	}
 	protected native static void iauS2c(double theta, double phi, @Ptr long c);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u S 2 p<br>
+	 *  - - - - - - -<br>
+	 * *  Convert spherical polar coordinates to p-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     theta   double       longitude angle (radians)<br>
+	 *     phi     double       latitude angle (radians)<br>
+	 *     r       double       radial distance<br>
+	 * *  Returned:<br>
+	 *     p       double[3]    Cartesian coordinates<br>
+	 * *  Called:<br>
+	 *     iauS2c       spherical coordinates to unit vector<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2p(double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:488</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10838</i>
 	 */
 	public static void iauS2p(double theta, double phi, double r, Pointer<Double > p) {
 		iauS2p(theta, phi, r, Pointer.getPeer(p));
 	}
 	protected native static void iauS2p(double theta, double phi, double r, @Ptr long p);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S 2 p v<br>
+	 *  - - - - - - - -<br>
+	 * *  Convert position/velocity from spherical to Cartesian coordinates.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     theta    double          longitude angle (radians)<br>
+	 *     phi      double          latitude angle (radians)<br>
+	 *     r        double          radial distance<br>
+	 *     td       double          rate of change of theta<br>
+	 *     pd       double          rate of change of phi<br>
+	 *     rd       double          rate of change of r<br>
+	 * *  Returned:<br>
+	 *     pv       double[2][3]    pv-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2pv(double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:490</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10861</i>
 	 */
 	public static void iauS2pv(double theta, double phi, double r, double td, double pd, double rd, Pointer<Double > pv) {
 		iauS2pv(theta, phi, r, td, pd, rd, Pointer.getPeer(pv));
 	}
 	protected native static void iauS2pv(double theta, double phi, double r, double td, double pd, double rd, @Ptr long pv);
 	/**
-	 * VectorMatrix/VectorOps<br>
+	 * - - - - - - -<br>
+	 *   i a u P d p<br>
+	 *  - - - - - - -<br>
+	 * *  p-vector inner (=scalar=dot) product.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a      double[3]     first p-vector<br>
+	 *     b      double[3]     second p-vector<br>
+	 * *  Returned (function value):<br>
+	 *            double        a . b<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPdp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:495</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10880</i>
 	 */
 	public static double iauPdp(Pointer<Double > a, Pointer<Double > b) {
 		return iauPdp(Pointer.getPeer(a), Pointer.getPeer(b));
 	}
 	protected native static double iauPdp(@Ptr long a, @Ptr long b);
 	/**
+	 * - - - - - -<br>
+	 *   i a u P m<br>
+	 *  - - - - - -<br>
+	 * *  Modulus of p-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p      double[3]     p-vector<br>
+	 * *  Returned (function value):<br>
+	 *            double        modulus<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPm(double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:497</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10898</i>
 	 */
 	public static double iauPm(Pointer<Double > p) {
 		return iauPm(Pointer.getPeer(p));
 	}
 	protected native static double iauPm(@Ptr long p);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P m p<br>
+	 *  - - - - - - -<br>
+	 * *  P-vector subtraction.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[3]      first p-vector<br>
+	 *     b        double[3]      second p-vector<br>
+	 * *  Returned:<br>
+	 *     amb      double[3]      a - b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:499</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10920</i>
 	 */
 	public static void iauPmp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > amb) {
 		iauPmp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(amb));
 	}
 	protected native static void iauPmp(@Ptr long a, @Ptr long b, @Ptr long amb);
 	/**
+	 * - - - - - -<br>
+	 *   i a u P n<br>
+	 *  - - - - - -<br>
+	 * *  Convert a p-vector into modulus and unit vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     p        double[3]      p-vector<br>
+	 * *  Returned:<br>
+	 *     r        double         modulus<br>
+	 *     u        double[3]      unit vector<br>
+	 * *  Notes:<br>
+	 * *  1) If p is null, the result is null.  Otherwise the result is a unit<br>
+	 *     vector.<br>
+	 * *  2) It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  Called:<br>
+	 *     iauPm        modulus of p-vector<br>
+	 *     iauZp        zero p-vector<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn(double[3], double*, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:501</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10948</i>
 	 */
 	public static void iauPn(Pointer<Double > p, Pointer<Double > r, Pointer<Double > u) {
 		iauPn(Pointer.getPeer(p), Pointer.getPeer(r), Pointer.getPeer(u));
 	}
 	protected native static void iauPn(@Ptr long p, @Ptr long r, @Ptr long u);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P p p<br>
+	 *  - - - - - - -<br>
+	 * *  P-vector addition.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[3]      first p-vector<br>
+	 *     b        double[3]      second p-vector<br>
+	 * *  Returned:<br>
+	 *     apb      double[3]      a + b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPpp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:503</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10970</i>
 	 */
 	public static void iauPpp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > apb) {
 		iauPpp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(apb));
 	}
 	protected native static void iauPpp(@Ptr long a, @Ptr long b, @Ptr long apb);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P p s p<br>
+	 *  - - - - - - - -<br>
+	 * *  P-vector plus scaled p-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a      double[3]     first p-vector<br>
+	 *     s      double        scalar (multiplier for b)<br>
+	 *     b      double[3]     second p-vector<br>
+	 * *  Returned:<br>
+	 *     apsb   double[3]     a + s*b<br>
+	 * *  Note:<br>
+	 *     It is permissible for any of a, b and apsb to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPpsp(double[3], double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:505</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10995</i>
 	 */
 	public static void iauPpsp(Pointer<Double > a, double s, Pointer<Double > b, Pointer<Double > apsb) {
 		iauPpsp(Pointer.getPeer(a), s, Pointer.getPeer(b), Pointer.getPeer(apsb));
 	}
 	protected native static void iauPpsp(@Ptr long a, double s, @Ptr long b, @Ptr long apsb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v d p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Inner (=scalar=dot) product of two pv-vectors.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[2][3]      first pv-vector<br>
+	 *     b        double[2][3]      second pv-vector<br>
+	 * *  Returned:<br>
+	 *     adb      double[2]         a . b (see note)<br>
+	 * *  Note:<br>
+	 * *     If the position and velocity components of the two pv-vectors are<br>
+	 *     ( ap, av ) and ( bp, bv ), the result, a . b, is the pair of<br>
+	 *     numbers ( ap . bp , ap . bv + av . bp ).  The two numbers are the<br>
+	 *     dot-product of the two p-vectors and its derivative.<br>
+	 * *  Called:<br>
+	 *     iauPdp       scalar product of two p-vectors<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvdpv(double[2][3], double[2][3], double[2])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:507</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11021</i>
 	 */
 	public static void iauPvdpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > adb) {
 		iauPvdpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(adb));
 	}
 	protected native static void iauPvdpv(@Ptr long a, @Ptr long b, @Ptr long adb);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P v m<br>
+	 *  - - - - - - -<br>
+	 * *  Modulus of pv-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     pv     double[2][3]   pv-vector<br>
+	 * *  Returned:<br>
+	 *     r      double         modulus of position component<br>
+	 *     s      double         modulus of velocity component<br>
+	 * *  Called:<br>
+	 *     iauPm        modulus of p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvm(double[2][3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:509</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11042</i>
 	 */
 	public static void iauPvm(Pointer<Double > pv, Pointer<Double > r, Pointer<Double > s) {
 		iauPvm(Pointer.getPeer(pv), Pointer.getPeer(r), Pointer.getPeer(s));
 	}
 	protected native static void iauPvm(@Ptr long pv, @Ptr long r, @Ptr long s);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v m p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Subtract one pv-vector from another.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a       double[2][3]      first pv-vector<br>
+	 *     b       double[2][3]      second pv-vector<br>
+	 * *  Returned:<br>
+	 *     amb     double[2][3]      a - b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  Called:<br>
+	 *     iauPmp       p-vector minus p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvmpv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:511</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11066</i>
 	 */
 	public static void iauPvmpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > amb) {
 		iauPvmpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(amb));
 	}
 	protected native static void iauPvmpv(@Ptr long a, @Ptr long b, @Ptr long amb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v p p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Add one pv-vector to another.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[2][3]      first pv-vector<br>
+	 *     b        double[2][3]      second pv-vector<br>
+	 * *  Returned:<br>
+	 *     apb      double[2][3]      a + b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  Called:<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvppv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:513</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11090</i>
 	 */
 	public static void iauPvppv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > apb) {
 		iauPvppv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(apb));
 	}
 	protected native static void iauPvppv(@Ptr long a, @Ptr long b, @Ptr long apb);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P v u<br>
+	 *  - - - - - - -<br>
+	 * *  Update a pv-vector.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     dt       double           time interval<br>
+	 *     pv       double[2][3]     pv-vector<br>
+	 * *  Returned:<br>
+	 *     upv      double[2][3]     p updated, v unchanged<br>
+	 * *  Notes:<br>
+	 * *  1) "Update" means "refer the position component of the vector<br>
+	 *     to a new date dt time units from the existing date".<br>
+	 * *  2) The time units of dt must match those of the velocity.<br>
+	 * *  3) It is permissible for pv and upv to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauPpsp      p-vector plus scaled p-vector<br>
+	 *     iauCp        copy p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvu(double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:515</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11117</i>
 	 */
 	public static void iauPvu(double dt, Pointer<Double > pv, Pointer<Double > upv) {
 		iauPvu(dt, Pointer.getPeer(pv), Pointer.getPeer(upv));
 	}
 	protected native static void iauPvu(double dt, @Ptr long pv, @Ptr long upv);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u P v u p<br>
+	 *  - - - - - - - -<br>
+	 * *  Update a pv-vector, discarding the velocity component.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     dt       double            time interval<br>
+	 *     pv       double[2][3]      pv-vector<br>
+	 * *  Returned:<br>
+	 *     p        double[3]         p-vector<br>
+	 * *  Notes:<br>
+	 * *  1) "Update" means "refer the position component of the vector to a<br>
+	 *     new date dt time units from the existing date".<br>
+	 * *  2) The time units of dt must match those of the velocity.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvup(double, double[2][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:517</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11140</i>
 	 */
 	public static void iauPvup(double dt, Pointer<Double > pv, Pointer<Double > p) {
 		iauPvup(dt, Pointer.getPeer(pv), Pointer.getPeer(p));
 	}
 	protected native static void iauPvup(double dt, @Ptr long pv, @Ptr long p);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u P v x p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Outer (=vector=cross) product of two pv-vectors.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[2][3]      first pv-vector<br>
+	 *     b        double[2][3]      second pv-vector<br>
+	 * *  Returned:<br>
+	 *     axb      double[2][3]      a x b<br>
+	 * *  Notes:<br>
+	 * *  1) If the position and velocity components of the two pv-vectors are<br>
+	 *     ( ap, av ) and ( bp, bv ), the result, a x b, is the pair of<br>
+	 *     vectors ( ap x bp, ap x bv + av x bp ).  The two vectors are the<br>
+	 *     cross-product of the two p-vectors and its derivative.<br>
+	 * *  2) It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  Called:<br>
+	 *     iauCpv       copy pv-vector<br>
+	 *     iauPxp       vector product of two p-vectors<br>
+	 *     iauPpp       p-vector plus p-vector<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvxpv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:519</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11170</i>
 	 */
 	public static void iauPvxpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > axb) {
 		iauPvxpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(axb));
 	}
 	protected native static void iauPvxpv(@Ptr long a, @Ptr long b, @Ptr long axb);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u P x p<br>
+	 *  - - - - - - -<br>
+	 * *  p-vector outer (=vector=cross) product.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     a        double[3]      first p-vector<br>
+	 *     b        double[3]      second p-vector<br>
+	 * *  Returned:<br>
+	 *     axb      double[3]      a x b<br>
+	 * *  Note:<br>
+	 *     It is permissible to re-use the same array for any of the<br>
+	 *     arguments.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPxp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:521</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11192</i>
 	 */
 	public static void iauPxp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > axb) {
 		iauPxp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(axb));
 	}
 	protected native static void iauPxp(@Ptr long a, @Ptr long b, @Ptr long axb);
 	/**
+	 * - - - - - - - - -<br>
+	 *   i a u S 2 x p v<br>
+	 *  - - - - - - - - -<br>
+	 * *  Multiply a pv-vector by two scalars.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     s1     double         scalar to multiply position component by<br>
+	 *     s2     double         scalar to multiply velocity component by<br>
+	 *     pv     double[2][3]   pv-vector<br>
+	 * *  Returned:<br>
+	 *     spv    double[2][3]   pv-vector: p scaled by s1, v scaled by s2<br>
+	 * *  Note:<br>
+	 *     It is permissible for pv and spv to be the same array.<br>
+	 * *  Called:<br>
+	 *     iauSxp       multiply p-vector by scalar<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2xpv(double, double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:523</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11216</i>
 	 */
 	public static void iauS2xpv(double s1, double s2, Pointer<Double > pv, Pointer<Double > spv) {
 		iauS2xpv(s1, s2, Pointer.getPeer(pv), Pointer.getPeer(spv));
 	}
 	protected native static void iauS2xpv(double s1, double s2, @Ptr long pv, @Ptr long spv);
 	/**
+	 * - - - - - - -<br>
+	 *   i a u S x p<br>
+	 *  - - - - - - -<br>
+	 * *  Multiply a p-vector by a scalar.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     s      double        scalar<br>
+	 *     p      double[3]     p-vector<br>
+	 * *  Returned:<br>
+	 *     sp     double[3]     s * p<br>
+	 * *  Note:<br>
+	 *     It is permissible for p and sp to be the same array.<br>
+	 * *  This revision:  2013 June 18<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauSxp(double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:525</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11237</i>
 	 */
 	public static void iauSxp(double s, Pointer<Double > p, Pointer<Double > sp) {
 		iauSxp(s, Pointer.getPeer(p), Pointer.getPeer(sp));
 	}
 	protected native static void iauSxp(double s, @Ptr long p, @Ptr long sp);
 	/**
+	 * - - - - - - - -<br>
+	 *   i a u S x p v<br>
+	 *  - - - - - - - -<br>
+	 * *  Multiply a pv-vector by a scalar.<br>
+	 * *  This function is part of the International Astronomical Union's<br>
+	 *  SOFA (Standards Of Fundamental Astronomy) software collection.<br>
+	 * *  Status:  vector/matrix support function.<br>
+	 * *  Given:<br>
+	 *     s       double          scalar<br>
+	 *     pv      double[2][3]    pv-vector<br>
+	 * *  Returned:<br>
+	 *     spv     double[2][3]    s * pv<br>
+	 * *  Note:<br>
+	 *     It is permissible for pv and spv to be the same array<br>
+	 * *  Called:<br>
+	 *     iauS2xpv     multiply pv-vector by two scalars<br>
+	 * *  This revision:  2013 August 7<br>
+	 * *  SOFA release 2013-12-02<br>
+	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauSxpv(double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:527</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11260</i>
 	 */
 	public static void iauSxpv(double s, Pointer<Double > pv, Pointer<Double > spv) {
 		iauSxpv(s, Pointer.getPeer(pv), Pointer.getPeer(spv));
