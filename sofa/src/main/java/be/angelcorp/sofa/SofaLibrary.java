@@ -116,7 +116,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauCal2jd(int, int, int, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:65</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:65</i>
 	 */
 	public static int iauCal2jd(int iy, int im, int id, Pointer<Double > djm0, Pointer<Double > djm) {
 		return iauCal2jd(iy, im, id, Pointer.getPeer(djm0), Pointer.getPeer(djm));
@@ -146,7 +146,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEpb(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:91</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:91</i>
 	 */
 	native public static double iauEpb(double dj1, double dj2);
 	/**
@@ -173,7 +173,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauEpb2jd(double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:117</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:117</i>
 	 */
 	public static void iauEpb2jd(double epb, Pointer<Double > djm0, Pointer<Double > djm) {
 		iauEpb2jd(epb, Pointer.getPeer(djm0), Pointer.getPeer(djm));
@@ -203,7 +203,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEpj(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:143</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:143</i>
 	 */
 	native public static double iauEpj(double dj1, double dj2);
 	/**
@@ -230,7 +230,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauEpj2jd(double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:169</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:169</i>
 	 */
 	public static void iauEpj2jd(double epj, Pointer<Double > djm0, Pointer<Double > djm) {
 		iauEpj2jd(epj, Pointer.getPeer(djm0), Pointer.getPeer(djm));
@@ -278,7 +278,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauJd2cal(double, double, int*, int*, int*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:213</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:213</i>
 	 */
 	public static int iauJd2cal(double dj1, double dj2, Pointer<Integer > iy, Pointer<Integer > im, Pointer<Integer > id, Pointer<Double > fd) {
 		return iauJd2cal(dj1, dj2, Pointer.getPeer(iy), Pointer.getPeer(im), Pointer.getPeer(id), Pointer.getPeer(fd));
@@ -330,7 +330,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauJdcalf(int, double, double, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:261</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:261</i>
 	 */
 	public static int iauJdcalf(int ndp, double dj1, double dj2, Pointer<Integer > iymdf) {
 		return iauJdcalf(ndp, dj1, dj2, Pointer.getPeer(iymdf));
@@ -376,7 +376,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAb(double[3], double[3], double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:303</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:303</i>
 	 */
 	public static void iauAb(Pointer<Double > pnat, Pointer<Double > v, double s, double bm1, Pointer<Double > ppr) {
 		iauAb(Pointer.getPeer(pnat), Pointer.getPeer(v), s, bm1, Pointer.getPeer(ppr));
@@ -468,7 +468,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcg(double, double, double[2][3], double[3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:391</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:391</i>
 	 */
 	public static void iauApcg(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, Pointer<iauASTROM > astrom) {
 		iauApcg(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), Pointer.getPeer(astrom));
@@ -563,7 +563,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcg13(double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:482</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:482</i>
 	 */
 	public static void iauApcg13(double date1, double date2, Pointer<iauASTROM > astrom) {
 		iauApcg13(date1, date2, Pointer.getPeer(astrom));
@@ -663,7 +663,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApci(double, double, double[2][3], double[3], double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:578</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:578</i>
 	 */
 	public static void iauApci(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, double x, double y, double s, Pointer<iauASTROM > astrom) {
 		iauApci(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), x, y, s, Pointer.getPeer(astrom));
@@ -763,7 +763,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApci13(double, double, iauASTROM*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:674</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:674</i>
 	 */
 	public static void iauApci13(double date1, double date2, Pointer<iauASTROM > astrom, Pointer<Double > eo) {
 		iauApci13(date1, date2, Pointer.getPeer(astrom), Pointer.getPeer(eo));
@@ -896,7 +896,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApco(double, double, double[2][3], double[3], double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:803</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:803</i>
 	 */
 	public static void iauApco(double date1, double date2, Pointer<Double > ebpv, Pointer<Double > ehp, double x, double y, double s, double theta, double elong, double phi, double hm, double xp, double yp, double sp, double refa, double refb, Pointer<iauASTROM > astrom) {
 		iauApco(date1, date2, Pointer.getPeer(ebpv), Pointer.getPeer(ehp), x, y, s, theta, elong, phi, hm, xp, yp, sp, refa, refb, Pointer.getPeer(astrom));
@@ -1047,7 +1047,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauApco13(double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:950</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:950</i>
 	 */
 	public static int iauApco13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<iauASTROM > astrom, Pointer<Double > eo) {
 		return iauApco13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(astrom), Pointer.getPeer(eo));
@@ -1157,7 +1157,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcs(double, double, double[2][3], double[2][3], double[3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1056</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1056</i>
 	 */
 	public static void iauApcs(double date1, double date2, Pointer<Double > pv, Pointer<Double > ebpv, Pointer<Double > ehp, Pointer<iauASTROM > astrom) {
 		iauApcs(date1, date2, Pointer.getPeer(pv), Pointer.getPeer(ebpv), Pointer.getPeer(ehp), Pointer.getPeer(astrom));
@@ -1257,7 +1257,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApcs13(double, double, double[2][3], iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1152</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1152</i>
 	 */
 	public static void iauApcs13(double date1, double date2, Pointer<Double > pv, Pointer<iauASTROM > astrom) {
 		iauApcs13(date1, date2, Pointer.getPeer(pv), Pointer.getPeer(astrom));
@@ -1344,7 +1344,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAper(double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1235</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1235</i>
 	 */
 	public static void iauAper(double theta, Pointer<iauASTROM > astrom) {
 		iauAper(theta, Pointer.getPeer(astrom));
@@ -1447,7 +1447,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAper13(double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1334</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1334</i>
 	 */
 	public static void iauAper13(double ut11, double ut12, Pointer<iauASTROM > astrom) {
 		iauAper13(ut11, ut12, Pointer.getPeer(astrom));
@@ -1549,7 +1549,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauApio(double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1432</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1432</i>
 	 */
 	public static void iauApio(double sp, double theta, double elong, double phi, double hm, double xp, double yp, double refa, double refb, Pointer<iauASTROM > astrom) {
 		iauApio(sp, theta, elong, phi, hm, xp, yp, refa, refb, Pointer.getPeer(astrom));
@@ -1690,7 +1690,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauApio13(double, double, double, double, double, double, double, double, double, double, double, double, iauASTROM*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1569</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1569</i>
 	 */
 	public static int iauApio13(double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<iauASTROM > astrom) {
 		return iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(astrom));
@@ -1762,7 +1762,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtci13(double, double, double, double, double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1637</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1637</i>
 	 */
 	public static void iauAtci13(double rc, double dc, double pr, double pd, double px, double rv, double date1, double date2, Pointer<Double > ri, Pointer<Double > di, Pointer<Double > eo) {
 		iauAtci13(rc, dc, pr, pd, px, rv, date1, date2, Pointer.getPeer(ri), Pointer.getPeer(di), Pointer.getPeer(eo));
@@ -1825,7 +1825,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciq(double, double, double, double, double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1696</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1696</i>
 	 */
 	public static void iauAtciq(double rc, double dc, double pr, double pd, double px, double rv, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciq(rc, dc, pr, pd, px, rv, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
@@ -1919,7 +1919,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciqn(double, double, double, double, double, double, iauASTROM*, int, iauLDBODY[], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1786</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1786</i>
 	 */
 	public static void iauAtciqn(double rc, double dc, double pr, double pd, double px, double rv, Pointer<iauASTROM > astrom, int n, Pointer<iauLDBODY > b, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciqn(rc, dc, pr, pd, px, rv, Pointer.getPeer(astrom), n, Pointer.getPeer(b), Pointer.getPeer(ri), Pointer.getPeer(di));
@@ -1981,7 +1981,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtciqz(double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1844</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1844</i>
 	 */
 	public static void iauAtciqz(double rc, double dc, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtciqz(rc, dc, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
@@ -2111,7 +2111,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtco13(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:1970</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:1970</i>
 	 */
 	public static int iauAtco13(double rc, double dc, double pr, double pd, double px, double rv, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob, Pointer<Double > eo) {
 		return iauAtco13(rc, dc, pr, pd, px, rv, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob), Pointer.getPeer(eo));
@@ -2179,7 +2179,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtic13(double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2034</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2034</i>
 	 */
 	public static void iauAtic13(double ri, double di, double date1, double date2, Pointer<Double > rc, Pointer<Double > dc, Pointer<Double > eo) {
 		iauAtic13(ri, di, date1, date2, Pointer.getPeer(rc), Pointer.getPeer(dc), Pointer.getPeer(eo));
@@ -2240,7 +2240,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAticq(double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2091</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2091</i>
 	 */
 	public static void iauAticq(double ri, double di, Pointer<iauASTROM > astrom, Pointer<Double > rc, Pointer<Double > dc) {
 		iauAticq(ri, di, Pointer.getPeer(astrom), Pointer.getPeer(rc), Pointer.getPeer(dc));
@@ -2331,7 +2331,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAticqn(double, double, iauASTROM*, int, iauLDBODY[], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2178</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2178</i>
 	 */
 	public static void iauAticqn(double ri, double di, Pointer<iauASTROM > astrom, int n, Pointer<iauLDBODY > b, Pointer<Double > rc, Pointer<Double > dc) {
 		iauAticqn(ri, di, Pointer.getPeer(astrom), n, Pointer.getPeer(b), Pointer.getPeer(rc), Pointer.getPeer(dc));
@@ -2448,7 +2448,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtio13(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2291</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2291</i>
 	 */
 	public static int iauAtio13(double ri, double di, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob) {
 		return iauAtio13(ri, di, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob));
@@ -2539,7 +2539,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtioq(double, double, iauASTROM*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2378</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2378</i>
 	 */
 	public static void iauAtioq(double ri, double di, Pointer<iauASTROM > astrom, Pointer<Double > aob, Pointer<Double > zob, Pointer<Double > hob, Pointer<Double > dob, Pointer<Double > rob) {
 		iauAtioq(ri, di, Pointer.getPeer(astrom), Pointer.getPeer(aob), Pointer.getPeer(zob), Pointer.getPeer(hob), Pointer.getPeer(dob), Pointer.getPeer(rob));
@@ -2663,7 +2663,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtoc13(const char*, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2498</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2498</i>
 	 */
 	public static int iauAtoc13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > rc, Pointer<Double > dc) {
 		return iauAtoc13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(rc), Pointer.getPeer(dc));
@@ -2786,7 +2786,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAtoi13(const char*, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2617</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2617</i>
 	 */
 	public static int iauAtoi13(Pointer<Byte > type, double ob1, double ob2, double utc1, double utc2, double dut1, double elong, double phi, double hm, double xp, double yp, double phpa, double tc, double rh, double wl, Pointer<Double > ri, Pointer<Double > di) {
 		return iauAtoi13(Pointer.getPeer(type), ob1, ob2, utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl, Pointer.getPeer(ri), Pointer.getPeer(di));
@@ -2870,7 +2870,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauAtoiq(const char*, double, double, iauASTROM*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2697</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2697</i>
 	 */
 	public static void iauAtoiq(Pointer<Byte > type, double ob1, double ob2, Pointer<iauASTROM > astrom, Pointer<Double > ri, Pointer<Double > di) {
 		iauAtoiq(Pointer.getPeer(type), ob1, ob2, Pointer.getPeer(astrom), Pointer.getPeer(ri), Pointer.getPeer(di));
@@ -2932,7 +2932,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLd(double, double[3], double[3], double[3], double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2755</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2755</i>
 	 */
 	public static void iauLd(double bm, Pointer<Double > p, Pointer<Double > q, Pointer<Double > e, double em, double dlim, Pointer<Double > p1) {
 		iauLd(bm, Pointer.getPeer(p), Pointer.getPeer(q), Pointer.getPeer(e), em, dlim, Pointer.getPeer(p1));
@@ -3005,7 +3005,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLdn(int, iauLDBODY[], double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2824</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2824</i>
 	 */
 	public static void iauLdn(int n, Pointer<iauLDBODY > b, Pointer<Double > ob, Pointer<Double > sc, Pointer<Double > sn) {
 		iauLdn(n, Pointer.getPeer(b), Pointer.getPeer(ob), Pointer.getPeer(sc), Pointer.getPeer(sn));
@@ -3040,7 +3040,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauLdsun(double[3], double[3], double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2855</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2855</i>
 	 */
 	public static void iauLdsun(Pointer<Double > p, Pointer<Double > e, double em, Pointer<Double > p1) {
 		iauLdsun(Pointer.getPeer(p), Pointer.getPeer(e), em, Pointer.getPeer(p1));
@@ -3084,7 +3084,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmpx(double, double, double, double, double, double, double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2895</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2895</i>
 	 */
 	public static void iauPmpx(double rc, double dc, double pr, double pd, double px, double rv, double pmt, Pointer<Double > pob, Pointer<Double > pco) {
 		iauPmpx(rc, dc, pr, pd, px, rv, pmt, Pointer.getPeer(pob), Pointer.getPeer(pco));
@@ -3177,7 +3177,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPmsafe(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:2984</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:2984</i>
 	 */
 	public static int iauPmsafe(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
 		return iauPmsafe(ra1, dec1, pmr1, pmd1, px1, rv1, ep1a, ep1b, ep2a, ep2b, Pointer.getPeer(ra2), Pointer.getPeer(dec2), Pointer.getPeer(pmr2), Pointer.getPeer(pmd2), Pointer.getPeer(px2), Pointer.getPeer(rv2));
@@ -3234,7 +3234,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvtob(double, double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3037</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3037</i>
 	 */
 	public static void iauPvtob(double elong, double phi, double hm, double xp, double yp, double sp, double theta, Pointer<Double > pv) {
 		iauPvtob(elong, phi, hm, xp, yp, sp, theta, Pointer.getPeer(pv));
@@ -3355,7 +3355,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRefco(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3154</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3154</i>
 	 */
 	public static void iauRefco(double phpa, double tc, double rh, double wl, Pointer<Double > refa, Pointer<Double > refb) {
 		iauRefco(phpa, tc, rh, wl, Pointer.getPeer(refa), Pointer.getPeer(refb));
@@ -3437,7 +3437,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauEpv00(double, double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3232</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3232</i>
 	 */
 	public static int iauEpv00(double date1, double date2, Pointer<Double > pvh, Pointer<Double > pvb) {
 		return iauEpv00(date1, date2, Pointer.getPeer(pvh), Pointer.getPeer(pvb));
@@ -3566,7 +3566,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPlan94(double, double, int, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3357</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3357</i>
 	 */
 	public static int iauPlan94(double date1, double date2, int np, Pointer<Double > pv) {
 		return iauPlan94(date1, date2, np, Pointer.getPeer(pv));
@@ -3599,7 +3599,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFad03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3386</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3386</i>
 	 */
 	native public static double iauFad03(double t);
 	/**
@@ -3631,7 +3631,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFae03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3417</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3417</i>
 	 */
 	native public static double iauFae03(double t);
 	/**
@@ -3662,7 +3662,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaf03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3447</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3447</i>
 	 */
 	native public static double iauFaf03(double t);
 	/**
@@ -3694,7 +3694,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaju03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3478</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3478</i>
 	 */
 	native public static double iauFaju03(double t);
 	/**
@@ -3724,7 +3724,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFal03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3507</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3507</i>
 	 */
 	native public static double iauFal03(double t);
 	/**
@@ -3754,7 +3754,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFalp03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3536</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3536</i>
 	 */
 	native public static double iauFalp03(double t);
 	/**
@@ -3786,7 +3786,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFama03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3567</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3567</i>
 	 */
 	native public static double iauFama03(double t);
 	/**
@@ -3818,7 +3818,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFame03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3598</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3598</i>
 	 */
 	native public static double iauFame03(double t);
 	/**
@@ -3848,7 +3848,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFane03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3627</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3627</i>
 	 */
 	native public static double iauFane03(double t);
 	/**
@@ -3878,7 +3878,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaom03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3656</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3656</i>
 	 */
 	native public static double iauFaom03(double t);
 	/**
@@ -3911,7 +3911,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFapa03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3688</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3688</i>
 	 */
 	native public static double iauFapa03(double t);
 	/**
@@ -3943,7 +3943,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFasa03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3719</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3719</i>
 	 */
 	native public static double iauFasa03(double t);
 	/**
@@ -3973,7 +3973,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFaur03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3748</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3748</i>
 	 */
 	native public static double iauFaur03(double t);
 	/**
@@ -4005,7 +4005,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauFave03(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3779</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3779</i>
 	 */
 	native public static double iauFave03(double t);
 	/**
@@ -4045,7 +4045,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBi00(double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3818</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3818</i>
 	 */
 	public static void iauBi00(Pointer<Double > dpsibi, Pointer<Double > depsbi, Pointer<Double > dra) {
 		iauBi00(Pointer.getPeer(dpsibi), Pointer.getPeer(depsbi), Pointer.getPeer(dra));
@@ -4110,7 +4110,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBp00(double, double, double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3879</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3879</i>
 	 */
 	public static void iauBp00(double date1, double date2, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp) {
 		iauBp00(date1, date2, Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp));
@@ -4168,7 +4168,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBp06(double, double, double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3933</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3933</i>
 	 */
 	public static void iauBp06(double date1, double date2, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp) {
 		iauBp06(date1, date2, Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp));
@@ -4204,7 +4204,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauBpn2xy(double[3][3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:3965</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:3965</i>
 	 */
 	public static void iauBpn2xy(Pointer<Double > rbpn, Pointer<Double > x, Pointer<Double > y) {
 		iauBpn2xy(Pointer.getPeer(rbpn), Pointer.getPeer(x), Pointer.getPeer(y));
@@ -4265,7 +4265,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4022</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4022</i>
 	 */
 	public static void iauC2i00a(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i00a(date1, date2, Pointer.getPeer(rc2i));
@@ -4326,7 +4326,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4079</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4079</i>
 	 */
 	public static void iauC2i00b(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i00b(date1, date2, Pointer.getPeer(rc2i));
@@ -4381,7 +4381,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2i06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4130</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4130</i>
 	 */
 	public static void iauC2i06a(double date1, double date2, Pointer<Double > rc2i) {
 		iauC2i06a(date1, date2, Pointer.getPeer(rc2i));
@@ -4444,7 +4444,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ibpn(double, double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4189</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4189</i>
 	 */
 	public static void iauC2ibpn(double date1, double date2, Pointer<Double > rbpn, Pointer<Double > rc2i) {
 		iauC2ibpn(date1, date2, Pointer.getPeer(rbpn), Pointer.getPeer(rc2i));
@@ -4502,7 +4502,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ixy(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4243</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4243</i>
 	 */
 	public static void iauC2ixy(double date1, double date2, double x, double y, Pointer<Double > rc2i) {
 		iauC2ixy(date1, date2, x, y, Pointer.getPeer(rc2i));
@@ -4547,7 +4547,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2ixys(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4284</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4284</i>
 	 */
 	public static void iauC2ixys(double x, double y, double s, Pointer<Double > rc2i) {
 		iauC2ixys(x, y, s, Pointer.getPeer(rc2i));
@@ -4614,7 +4614,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t00a(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4347</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4347</i>
 	 */
 	public static void iauC2t00a(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t00a(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
@@ -4680,7 +4680,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t00b(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4409</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4409</i>
 	 */
 	public static void iauC2t00b(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t00b(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
@@ -4746,7 +4746,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2t06a(double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4471</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4471</i>
 	 */
 	public static void iauC2t06a(double tta, double ttb, double uta, double utb, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2t06a(tta, ttb, uta, utb, xp, yp, Pointer.getPeer(rc2t));
@@ -4796,7 +4796,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2tcio(double[3][3], double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4517</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4517</i>
 	 */
 	public static void iauC2tcio(Pointer<Double > rc2i, double era, Pointer<Double > rpom, Pointer<Double > rc2t) {
 		iauC2tcio(Pointer.getPeer(rc2i), era, Pointer.getPeer(rpom), Pointer.getPeer(rc2t));
@@ -4846,7 +4846,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2teqx(double[3][3], double, double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4563</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4563</i>
 	 */
 	public static void iauC2teqx(Pointer<Double > rbpn, double gst, Pointer<Double > rpom, Pointer<Double > rc2t) {
 		iauC2teqx(Pointer.getPeer(rbpn), gst, Pointer.getPeer(rpom), Pointer.getPeer(rc2t));
@@ -4920,7 +4920,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2tpe(double, double, double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4633</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4633</i>
 	 */
 	public static void iauC2tpe(double tta, double ttb, double uta, double utb, double dpsi, double deps, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2tpe(tta, ttb, uta, utb, dpsi, deps, xp, yp, Pointer.getPeer(rc2t));
@@ -4990,7 +4990,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2txy(double, double, double, double, double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4699</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4699</i>
 	 */
 	public static void iauC2txy(double tta, double ttb, double uta, double utb, double x, double y, double xp, double yp, Pointer<Double > rc2t) {
 		iauC2txy(tta, ttb, uta, utb, x, y, xp, yp, Pointer.getPeer(rc2t));
@@ -5042,7 +5042,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEo06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4747</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4747</i>
 	 */
 	native public static double iauEo06a(double date1, double date2);
 	/**
@@ -5074,7 +5074,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEors(double[3][3], double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4778</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4778</i>
 	 */
 	public static double iauEors(Pointer<Double > rnpb, double s) {
 		return iauEors(Pointer.getPeer(rnpb), s);
@@ -5131,7 +5131,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFw2m(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4831</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4831</i>
 	 */
 	public static void iauFw2m(double gamb, double phib, double psi, double eps, Pointer<Double > r) {
 		iauFw2m(gamb, phib, psi, eps, Pointer.getPeer(r));
@@ -5177,7 +5177,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFw2xy(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4873</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4873</i>
 	 */
 	public static void iauFw2xy(double gamb, double phib, double psi, double eps, Pointer<Double > x, Pointer<Double > y) {
 		iauFw2xy(gamb, phib, psi, eps, Pointer.getPeer(x), Pointer.getPeer(y));
@@ -5227,7 +5227,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4919</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4919</i>
 	 */
 	public static void iauNum00a(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum00a(date1, date2, Pointer.getPeer(rmatn));
@@ -5277,7 +5277,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:4965</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:4965</i>
 	 */
 	public static void iauNum00b(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum00b(date1, date2, Pointer.getPeer(rmatn));
@@ -5327,7 +5327,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNum06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5011</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5011</i>
 	 */
 	public static void iauNum06a(double date1, double date2, Pointer<Double > rmatn) {
 		iauNum06a(date1, date2, Pointer.getPeer(rmatn));
@@ -5369,7 +5369,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNumat(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5049</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5049</i>
 	 */
 	public static void iauNumat(double epsa, double dpsi, double deps, Pointer<Double > rmatn) {
 		iauNumat(epsa, dpsi, deps, Pointer.getPeer(rmatn));
@@ -5501,7 +5501,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut00a(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5177</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5177</i>
 	 */
 	public static void iauNut00a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut00a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
@@ -5607,7 +5607,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut00b(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5279</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5279</i>
 	 */
 	public static void iauNut00b(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut00b(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
@@ -5672,7 +5672,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut06a(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5340</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5340</i>
 	 */
 	public static void iauNut06a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut06a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
@@ -5719,7 +5719,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNut80(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5383</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5383</i>
 	 */
 	public static void iauNut80(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps) {
 		iauNut80(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps));
@@ -5765,7 +5765,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauNutm80(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5425</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5425</i>
 	 */
 	public static void iauNutm80(double date1, double date2, Pointer<Double > rmatn) {
 		iauNutm80(date1, date2, Pointer.getPeer(rmatn));
@@ -5807,7 +5807,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauObl06(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5463</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5463</i>
 	 */
 	native public static double iauObl06(double date1, double date2);
 	/**
@@ -5848,7 +5848,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauObl80(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5503</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5503</i>
 	 */
 	native public static double iauObl80(double date1, double date2);
 	/**
@@ -5948,7 +5948,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP06e(double, double, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5602</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5602</i>
 	 */
 	public static void iauP06e(double date1, double date2, Pointer<Double > eps0, Pointer<Double > psia, Pointer<Double > oma, Pointer<Double > bpa, Pointer<Double > bqa, Pointer<Double > pia, Pointer<Double > bpia, Pointer<Double > epsa, Pointer<Double > chia, Pointer<Double > za, Pointer<Double > zetaa, Pointer<Double > thetaa, Pointer<Double > pa, Pointer<Double > gam, Pointer<Double > phi, Pointer<Double > psi) {
 		iauP06e(date1, date2, Pointer.getPeer(eps0), Pointer.getPeer(psia), Pointer.getPeer(oma), Pointer.getPeer(bpa), Pointer.getPeer(bqa), Pointer.getPeer(pia), Pointer.getPeer(bpia), Pointer.getPeer(epsa), Pointer.getPeer(chia), Pointer.getPeer(za), Pointer.getPeer(zetaa), Pointer.getPeer(thetaa), Pointer.getPeer(pa), Pointer.getPeer(gam), Pointer.getPeer(phi), Pointer.getPeer(psi));
@@ -6009,7 +6009,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPb06(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5659</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5659</i>
 	 */
 	public static void iauPb06(double date1, double date2, Pointer<Double > bzeta, Pointer<Double > bz, Pointer<Double > btheta) {
 		iauPb06(date1, date2, Pointer.getPeer(bzeta), Pointer.getPeer(bz), Pointer.getPeer(btheta));
@@ -6072,7 +6072,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPfw06(double, double, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5718</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5718</i>
 	 */
 	public static void iauPfw06(double date1, double date2, Pointer<Double > gamb, Pointer<Double > phib, Pointer<Double > psib, Pointer<Double > epsa) {
 		iauPfw06(date1, date2, Pointer.getPeer(gamb), Pointer.getPeer(phib), Pointer.getPeer(psib), Pointer.getPeer(epsa));
@@ -6121,7 +6121,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat00(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5763</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5763</i>
 	 */
 	public static void iauPmat00(double date1, double date2, Pointer<Double > rbp) {
 		iauPmat00(date1, date2, Pointer.getPeer(rbp));
@@ -6170,7 +6170,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat06(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5808</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5808</i>
 	 */
 	public static void iauPmat06(double date1, double date2, Pointer<Double > rbp) {
 		iauPmat06(date1, date2, Pointer.getPeer(rbp));
@@ -6233,7 +6233,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmat76(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5867</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5867</i>
 	 */
 	public static void iauPmat76(double date1, double date2, Pointer<Double > rmatp) {
 		iauPmat76(date1, date2, Pointer.getPeer(rmatp));
@@ -6316,7 +6316,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00(double, double, double, double, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:5946</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:5946</i>
 	 */
 	public static void iauPn00(double date1, double date2, double dpsi, double deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00(date1, date2, dpsi, deps, Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
@@ -6398,7 +6398,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00a(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6024</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6024</i>
 	 */
 	public static void iauPn00a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
@@ -6480,7 +6480,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn00b(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6102</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6102</i>
 	 */
 	public static void iauPn00b(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn00b(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
@@ -6560,7 +6560,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn06(double, double, double, double, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6178</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6178</i>
 	 */
 	public static void iauPn06(double date1, double date2, double dpsi, double deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn06(date1, date2, dpsi, deps, Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
@@ -6633,7 +6633,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn06a(double, double, double*, double*, double*, double[3][3], double[3][3], double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6247</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6247</i>
 	 */
 	public static void iauPn06a(double date1, double date2, Pointer<Double > dpsi, Pointer<Double > deps, Pointer<Double > epsa, Pointer<Double > rb, Pointer<Double > rp, Pointer<Double > rbp, Pointer<Double > rn, Pointer<Double > rbpn) {
 		iauPn06a(date1, date2, Pointer.getPeer(dpsi), Pointer.getPeer(deps), Pointer.getPeer(epsa), Pointer.getPeer(rb), Pointer.getPeer(rp), Pointer.getPeer(rbp), Pointer.getPeer(rn), Pointer.getPeer(rbpn));
@@ -6684,7 +6684,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm00a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6294</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6294</i>
 	 */
 	public static void iauPnm00a(double date1, double date2, Pointer<Double > rbpn) {
 		iauPnm00a(date1, date2, Pointer.getPeer(rbpn));
@@ -6735,7 +6735,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm00b(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6341</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6341</i>
 	 */
 	public static void iauPnm00b(double date1, double date2, Pointer<Double > rbpn) {
 		iauPnm00b(date1, date2, Pointer.getPeer(rbpn));
@@ -6784,7 +6784,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm06a(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6386</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6386</i>
 	 */
 	public static void iauPnm06a(double date1, double date2, Pointer<Double > rnpb) {
 		iauPnm06a(date1, date2, Pointer.getPeer(rnpb));
@@ -6835,7 +6835,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPnm80(double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6433</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6433</i>
 	 */
 	public static void iauPnm80(double date1, double date2, Pointer<Double > rmatpn) {
 		iauPnm80(date1, date2, Pointer.getPeer(rmatpn));
@@ -6882,7 +6882,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPom00(double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6476</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6476</i>
 	 */
 	public static void iauPom00(double xp, double yp, double sp, Pointer<Double > rpom) {
 		iauPom00(xp, yp, sp, Pointer.getPeer(rpom));
@@ -6944,7 +6944,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPr00(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6534</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6534</i>
 	 */
 	public static void iauPr00(double date1, double date2, Pointer<Double > dpsipr, Pointer<Double > depspr) {
 		iauPr00(date1, date2, Pointer.getPeer(dpsipr), Pointer.getPeer(depspr));
@@ -7007,7 +7007,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPrec76(double, double, double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6593</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6593</i>
 	 */
 	public static void iauPrec76(double date01, double date02, double date11, double date12, Pointer<Double > zeta, Pointer<Double > z, Pointer<Double > theta) {
 		iauPrec76(date01, date02, date11, date12, Pointer.getPeer(zeta), Pointer.getPeer(z), Pointer.getPeer(theta));
@@ -7078,7 +7078,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6660</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6660</i>
 	 */
 	native public static double iauS00(double date1, double date2, double x, double y);
 	/**
@@ -7140,7 +7140,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6721</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6721</i>
 	 */
 	native public static double iauS00a(double date1, double date2);
 	/**
@@ -7202,7 +7202,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6782</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6782</i>
 	 */
 	native public static double iauS00b(double date1, double date2);
 	/**
@@ -7268,7 +7268,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS06(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6847</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6847</i>
 	 */
 	native public static double iauS06(double date1, double date2, double x, double y);
 	/**
@@ -7330,7 +7330,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauS06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6908</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6908</i>
 	 */
 	native public static double iauS06a(double date1, double date2);
 	/**
@@ -7374,7 +7374,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSp00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:6951</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:6951</i>
 	 */
 	native public static double iauSp00(double date1, double date2);
 	/**
@@ -7448,7 +7448,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXy06(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7024</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7024</i>
 	 */
 	public static void iauXy06(double date1, double date2, Pointer<Double > x, Pointer<Double > y) {
 		iauXy06(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y));
@@ -7503,7 +7503,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys00a(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7075</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7075</i>
 	 */
 	public static void iauXys00a(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys00a(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
@@ -7558,7 +7558,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys00b(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7126</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7126</i>
 	 */
 	public static void iauXys00b(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys00b(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
@@ -7612,7 +7612,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauXys06a(double, double, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7176</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7176</i>
 	 */
 	public static void iauXys06a(double date1, double date2, Pointer<Double > x, Pointer<Double > y, Pointer<Double > s) {
 		iauXys06a(date1, date2, Pointer.getPeer(x), Pointer.getPeer(y), Pointer.getPeer(s));
@@ -7667,7 +7667,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7227</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7227</i>
 	 */
 	native public static double iauEe00(double date1, double date2, double epsa, double dpsi);
 	/**
@@ -7718,7 +7718,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7277</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7277</i>
 	 */
 	native public static double iauEe00a(double date1, double date2);
 	/**
@@ -7774,7 +7774,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7332</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7332</i>
 	 */
 	native public static double iauEe00b(double date1, double date2);
 	/**
@@ -7819,7 +7819,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEe06a(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7376</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7376</i>
 	 */
 	native public static double iauEe06a(double date1, double date2);
 	/**
@@ -7896,7 +7896,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEect00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7452</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7452</i>
 	 */
 	native public static double iauEect00(double date1, double date2);
 	/**
@@ -7941,7 +7941,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEqeq94(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7496</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7496</i>
 	 */
 	native public static double iauEqeq94(double date1, double date2);
 	/**
@@ -7990,7 +7990,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauEra00(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7544</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7544</i>
 	 */
 	native public static double iauEra00(double dj1, double dj2);
 	/**
@@ -8050,7 +8050,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst00(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7603</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7603</i>
 	 */
 	native public static double iauGmst00(double uta, double utb, double tta, double ttb);
 	/**
@@ -8102,7 +8102,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst06(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7654</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7654</i>
 	 */
 	native public static double iauGmst06(double uta, double utb, double tta, double ttb);
 	/**
@@ -8156,7 +8156,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGmst82(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7707</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7707</i>
 	 */
 	native public static double iauGmst82(double dj1, double dj2);
 	/**
@@ -8217,7 +8217,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst00a(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7767</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7767</i>
 	 */
 	native public static double iauGst00a(double uta, double utb, double tta, double ttb);
 	/**
@@ -8283,7 +8283,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst00b(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7832</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7832</i>
 	 */
 	native public static double iauGst00b(double uta, double utb);
 	/**
@@ -8340,7 +8340,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst06(double, double, double, double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7888</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7888</i>
 	 */
 	public static double iauGst06(double uta, double utb, double tta, double ttb, Pointer<Double > rnpb) {
 		return iauGst06(uta, utb, tta, ttb, Pointer.getPeer(rnpb));
@@ -8397,7 +8397,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst06a(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7941</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7941</i>
 	 */
 	native public static double iauGst06a(double uta, double utb, double tta, double ttb);
 	/**
@@ -8452,7 +8452,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauGst94(double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:7995</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:7995</i>
 	 */
 	native public static double iauGst94(double uta, double utb);
 	/**
@@ -8542,7 +8542,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPmsafe(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8084</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8084</i>
 	 */
 	@Name("iauPmsafe") 
 	public static int iauPmsafe$2(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
@@ -8629,7 +8629,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauPvstar(double[2][3], double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8165</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8165</i>
 	 */
 	public static int iauPvstar(Pointer<Double > pv, Pointer<Double > ra, Pointer<Double > dec, Pointer<Double > pmr, Pointer<Double > pmd, Pointer<Double > px, Pointer<Double > rv) {
 		return iauPvstar(Pointer.getPeer(pv), Pointer.getPeer(ra), Pointer.getPeer(dec), Pointer.getPeer(pmr), Pointer.getPeer(pmd), Pointer.getPeer(px), Pointer.getPeer(rv));
@@ -8730,7 +8730,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauStarpv(double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8262</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8262</i>
 	 */
 	public static int iauStarpv(double ra, double dec, double pmr, double pmd, double px, double rv, Pointer<Double > pv) {
 		return iauStarpv(ra, dec, pmr, pmd, px, rv, Pointer.getPeer(pv));
@@ -8780,7 +8780,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk52h(double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8308</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8308</i>
 	 */
 	public static void iauFk52h(double r5, double d5, double dr5, double dd5, double px5, double rv5, Pointer<Double > rh, Pointer<Double > dh, Pointer<Double > drh, Pointer<Double > ddh, Pointer<Double > pxh, Pointer<Double > rvh) {
 		iauFk52h(r5, d5, dr5, dd5, px5, rv5, Pointer.getPeer(rh), Pointer.getPeer(dh), Pointer.getPeer(drh), Pointer.getPeer(ddh), Pointer.getPeer(pxh), Pointer.getPeer(rvh));
@@ -8816,7 +8816,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk5hip(double[3][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8340</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8340</i>
 	 */
 	public static void iauFk5hip(Pointer<Double > r5h, Pointer<Double > s5h) {
 		iauFk5hip(Pointer.getPeer(r5h), Pointer.getPeer(s5h));
@@ -8880,7 +8880,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauFk5hz(double, double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8400</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8400</i>
 	 */
 	public static void iauFk5hz(double r5, double d5, double date1, double date2, Pointer<Double > rh, Pointer<Double > dh) {
 		iauFk5hz(r5, d5, date1, date2, Pointer.getPeer(rh), Pointer.getPeer(dh));
@@ -8932,7 +8932,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauH2fk5(double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8448</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8448</i>
 	 */
 	public static void iauH2fk5(double rh, double dh, double drh, double ddh, double pxh, double rvh, Pointer<Double > r5, Pointer<Double > d5, Pointer<Double > dr5, Pointer<Double > dd5, Pointer<Double > px5, Pointer<Double > rv5) {
 		iauH2fk5(rh, dh, drh, ddh, pxh, rvh, Pointer.getPeer(r5), Pointer.getPeer(d5), Pointer.getPeer(dr5), Pointer.getPeer(dd5), Pointer.getPeer(px5), Pointer.getPeer(rv5));
@@ -9000,7 +9000,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauHfk5z(double, double, double, double, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8512</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8512</i>
 	 */
 	public static void iauHfk5z(double rh, double dh, double date1, double date2, Pointer<Double > r5, Pointer<Double > d5, Pointer<Double > dr5, Pointer<Double > dd5) {
 		iauHfk5z(rh, dh, date1, date2, Pointer.getPeer(r5), Pointer.getPeer(d5), Pointer.getPeer(dr5), Pointer.getPeer(dd5));
@@ -9094,7 +9094,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauStarpm(double, double, double, double, double, double, double, double, double, double, double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8602</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8602</i>
 	 */
 	public static int iauStarpm(double ra1, double dec1, double pmr1, double pmd1, double px1, double rv1, double ep1a, double ep1b, double ep2a, double ep2b, Pointer<Double > ra2, Pointer<Double > dec2, Pointer<Double > pmr2, Pointer<Double > pmd2, Pointer<Double > px2, Pointer<Double > rv2) {
 		return iauStarpm(ra1, dec1, pmr1, pmd1, px1, rv1, ep1a, ep1b, ep2a, ep2b, Pointer.getPeer(ra2), Pointer.getPeer(dec2), Pointer.getPeer(pmr2), Pointer.getPeer(pmd2), Pointer.getPeer(px2), Pointer.getPeer(rv2));
@@ -9144,7 +9144,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauEform(int, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8648</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8648</i>
 	 */
 	public static int iauEform(int n, Pointer<Double > a, Pointer<Double > f) {
 		return iauEform(n, Pointer.getPeer(a), Pointer.getPeer(f));
@@ -9192,7 +9192,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGc2gd(int, double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8692</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8692</i>
 	 */
 	public static int iauGc2gd(int n, Pointer<Double > xyz, Pointer<Double > elong, Pointer<Double > phi, Pointer<Double > height) {
 		return iauGc2gd(n, Pointer.getPeer(xyz), Pointer.getPeer(elong), Pointer.getPeer(phi), Pointer.getPeer(height));
@@ -9244,7 +9244,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGc2gde(double, double, double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8740</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8740</i>
 	 */
 	public static int iauGc2gde(double a, double f, Pointer<Double > xyz, Pointer<Double > elong, Pointer<Double > phi, Pointer<Double > height) {
 		return iauGc2gde(a, f, Pointer.getPeer(xyz), Pointer.getPeer(elong), Pointer.getPeer(phi), Pointer.getPeer(height));
@@ -9295,7 +9295,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGd2gc(int, double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8787</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8787</i>
 	 */
 	public static int iauGd2gc(int n, double elong, double phi, double height, Pointer<Double > xyz) {
 		return iauGd2gc(n, elong, phi, height, Pointer.getPeer(xyz));
@@ -9347,7 +9347,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauGd2gce(double, double, double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8835</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8835</i>
 	 */
 	public static int iauGd2gce(double a, double f, double elong, double phi, double height, Pointer<Double > xyz) {
 		return iauGd2gce(a, f, elong, phi, height, Pointer.getPeer(xyz));
@@ -9404,7 +9404,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvtob(double, double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8888</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8888</i>
 	 */
 	@Name("iauPvtob") 
 	public static void iauPvtob$2(double elong, double phi, double hm, double xp, double yp, double sp, double theta, Pointer<Double > pv) {
@@ -9472,7 +9472,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauD2dtf(const char*, int, double, double, int*, int*, int*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:8950</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:8950</i>
 	 */
 	public static int iauD2dtf(Pointer<Byte > scale, int ndp, double d1, double d2, Pointer<Integer > iy, Pointer<Integer > im, Pointer<Integer > id, Pointer<Integer > ihmsf) {
 		return iauD2dtf(Pointer.getPeer(scale), ndp, d1, d2, Pointer.getPeer(iy), Pointer.getPeer(im), Pointer.getPeer(id), Pointer.getPeer(ihmsf));
@@ -9577,7 +9577,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauDat(int, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9051</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9051</i>
 	 */
 	public static int iauDat(int iy, int im, int id, double fd, Pointer<Double > deltat) {
 		return iauDat(iy, im, id, fd, Pointer.getPeer(deltat));
@@ -9715,7 +9715,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauDtdb(double, double, double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9185</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9185</i>
 	 */
 	native public static double iauDtdb(double date1, double date2, double ut, double elong, double u, double v);
 	/**
@@ -9783,7 +9783,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauDtf2d(const char*, int, int, int, int, int, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9252</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9252</i>
 	 */
 	public static int iauDtf2d(Pointer<Byte > scale, int iy, int im, int id, int ihr, int imn, double sec, Pointer<Double > d1, Pointer<Double > d2) {
 		return iauDtf2d(Pointer.getPeer(scale), iy, im, id, ihr, imn, sec, Pointer.getPeer(d1), Pointer.getPeer(d2));
@@ -9818,7 +9818,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaitt(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9283</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9283</i>
 	 */
 	public static int iauTaitt(double tai1, double tai2, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTaitt(tai1, tai2, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
@@ -9854,7 +9854,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaiut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9315</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9315</i>
 	 */
 	public static int iauTaiut1(double tai1, double tai2, double dta, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauTaiut1(tai1, tai2, dta, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
@@ -9908,7 +9908,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTaiutc(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9365</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9365</i>
 	 */
 	public static int iauTaiutc(double tai1, double tai2, Pointer<Double > utc1, Pointer<Double > utc2) {
 		return iauTaiutc(tai1, tai2, Pointer.getPeer(utc1), Pointer.getPeer(utc2));
@@ -9956,7 +9956,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTcbtdb(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9409</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9409</i>
 	 */
 	public static int iauTcbtdb(double tcb1, double tcb2, Pointer<Double > tdb1, Pointer<Double > tdb2) {
 		return iauTcbtdb(tcb1, tcb2, Pointer.getPeer(tdb1), Pointer.getPeer(tdb2));
@@ -9990,7 +9990,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTcgtt(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9439</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9439</i>
 	 */
 	public static int iauTcgtt(double tcg1, double tcg2, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTcgtt(tcg1, tcg2, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
@@ -10038,7 +10038,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTdbtcb(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9483</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9483</i>
 	 */
 	public static int iauTdbtcb(double tdb1, double tdb2, Pointer<Double > tcb1, Pointer<Double > tcb2) {
 		return iauTdbtcb(tdb1, tdb2, Pointer.getPeer(tcb1), Pointer.getPeer(tcb2));
@@ -10082,7 +10082,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTdbtt(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9523</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9523</i>
 	 */
 	public static int iauTdbtt(double tdb1, double tdb2, double dtr, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauTdbtt(tdb1, tdb2, dtr, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
@@ -10117,7 +10117,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttai(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9554</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9554</i>
 	 */
 	public static int iauTttai(double tt1, double tt2, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauTttai(tt1, tt2, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
@@ -10151,7 +10151,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttcg(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9584</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9584</i>
 	 */
 	public static int iauTttcg(double tt1, double tt2, Pointer<Double > tcg1, Pointer<Double > tcg2) {
 		return iauTttcg(tt1, tt2, Pointer.getPeer(tcg1), Pointer.getPeer(tcg2));
@@ -10195,7 +10195,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTttdb(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9624</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9624</i>
 	 */
 	public static int iauTttdb(double tt1, double tt2, double dtr, Pointer<Double > tdb1, Pointer<Double > tdb2) {
 		return iauTttdb(tt1, tt2, dtr, Pointer.getPeer(tdb1), Pointer.getPeer(tdb2));
@@ -10230,7 +10230,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTtut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9655</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9655</i>
 	 */
 	public static int iauTtut1(double tt1, double tt2, double dt, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauTtut1(tt1, tt2, dt, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
@@ -10266,7 +10266,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1tai(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9687</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9687</i>
 	 */
 	public static int iauUt1tai(double ut11, double ut12, double dta, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauUt1tai(ut11, ut12, dta, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
@@ -10301,7 +10301,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1tt(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9718</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9718</i>
 	 */
 	public static int iauUt1tt(double ut11, double ut12, double dt, Pointer<Double > tt1, Pointer<Double > tt2) {
 		return iauUt1tt(ut11, ut12, dt, Pointer.getPeer(tt1), Pointer.getPeer(tt2));
@@ -10359,7 +10359,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUt1utc(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9772</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9772</i>
 	 */
 	public static int iauUt1utc(double ut11, double ut12, double dut1, Pointer<Double > utc1, Pointer<Double > utc2) {
 		return iauUt1utc(ut11, ut12, dut1, Pointer.getPeer(utc1), Pointer.getPeer(utc2));
@@ -10414,7 +10414,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUtctai(double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9823</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9823</i>
 	 */
 	public static int iauUtctai(double utc1, double utc2, Pointer<Double > tai1, Pointer<Double > tai2) {
 		return iauUtctai(utc1, utc2, Pointer.getPeer(tai1), Pointer.getPeer(tai2));
@@ -10472,7 +10472,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauUtcut1(double, double, double, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9877</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9877</i>
 	 */
 	public static int iauUtcut1(double utc1, double utc2, double dut1, Pointer<Double > ut11, Pointer<Double > ut12) {
 		return iauUtcut1(utc1, utc2, dut1, Pointer.getPeer(ut11), Pointer.getPeer(ut12));
@@ -10525,7 +10525,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauA2af(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9926</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9926</i>
 	 */
 	public static void iauA2af(int ndp, double angle, Pointer<Byte > sign, Pointer<Integer > idmsf) {
 		iauA2af(ndp, angle, Pointer.getPeer(sign), Pointer.getPeer(idmsf));
@@ -10578,7 +10578,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauA2tf(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:9975</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:9975</i>
 	 */
 	public static void iauA2tf(int ndp, double angle, Pointer<Byte > sign, Pointer<Integer > ihmsf) {
 		iauA2tf(ndp, angle, Pointer.getPeer(sign), Pointer.getPeer(ihmsf));
@@ -10614,7 +10614,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauAf2a(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10007</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10007</i>
 	 */
 	public static int iauAf2a(byte s, int ideg, int iamin, double asec, Pointer<Double > rad) {
 		return iauAf2a(s, ideg, iamin, asec, Pointer.getPeer(rad));
@@ -10636,7 +10636,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauAnp(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10025</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10025</i>
 	 */
 	native public static double iauAnp(double a);
 	/**
@@ -10655,7 +10655,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauAnpm(double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10043</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10043</i>
 	 */
 	native public static double iauAnpm(double a);
 	/**
@@ -10703,7 +10703,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauD2tf(int, double, char*, int[4])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10090</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10090</i>
 	 */
 	public static void iauD2tf(int ndp, double days, Pointer<Byte > sign, Pointer<Integer > ihmsf) {
 		iauD2tf(ndp, days, Pointer.getPeer(sign), Pointer.getPeer(ihmsf));
@@ -10739,7 +10739,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTf2a(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10122</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10122</i>
 	 */
 	public static int iauTf2a(byte s, int ihour, int imin, double sec, Pointer<Double > rad) {
 		return iauTf2a(s, ihour, imin, sec, Pointer.getPeer(rad));
@@ -10775,7 +10775,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>int iauTf2d(char, int, int, double, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10154</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10154</i>
 	 */
 	public static int iauTf2d(byte s, int ihour, int imin, double sec, Pointer<Double > days) {
 		return iauTf2d(s, ihour, imin, sec, Pointer.getPeer(days));
@@ -10807,7 +10807,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRx(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10182</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10182</i>
 	 */
 	public static void iauRx(double phi, Pointer<Double > r) {
 		iauRx(phi, Pointer.getPeer(r));
@@ -10839,7 +10839,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRy(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10210</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10210</i>
 	 */
 	public static void iauRy(double theta, Pointer<Double > r) {
 		iauRy(theta, Pointer.getPeer(r));
@@ -10871,7 +10871,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRz(double, double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10238</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10238</i>
 	 */
 	public static void iauRz(double psi, Pointer<Double > r) {
 		iauRz(psi, Pointer.getPeer(r));
@@ -10893,7 +10893,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10256</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10256</i>
 	 */
 	public static void iauCp(Pointer<Double > p, Pointer<Double > c) {
 		iauCp(Pointer.getPeer(p), Pointer.getPeer(c));
@@ -10917,7 +10917,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCpv(double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10276</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10276</i>
 	 */
 	public static void iauCpv(Pointer<Double > pv, Pointer<Double > c) {
 		iauCpv(Pointer.getPeer(pv), Pointer.getPeer(c));
@@ -10941,7 +10941,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauCr(double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10296</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10296</i>
 	 */
 	public static void iauCr(Pointer<Double > r, Pointer<Double > c) {
 		iauCr(Pointer.getPeer(r), Pointer.getPeer(c));
@@ -10966,7 +10966,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP2pv(double[3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10317</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10317</i>
 	 */
 	public static void iauP2pv(Pointer<Double > p, Pointer<Double > pv) {
 		iauP2pv(Pointer.getPeer(p), Pointer.getPeer(pv));
@@ -10990,7 +10990,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPv2p(double[2][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10337</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10337</i>
 	 */
 	public static void iauPv2p(Pointer<Double > pv, Pointer<Double > p) {
 		iauPv2p(Pointer.getPeer(pv), Pointer.getPeer(p));
@@ -11010,7 +11010,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauIr(double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10353</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10353</i>
 	 */
 	public static void iauIr(Pointer<Double > r) {
 		iauIr(Pointer.getPeer(r));
@@ -11030,7 +11030,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZp(double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10369</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10369</i>
 	 */
 	public static void iauZp(Pointer<Double > p) {
 		iauZp(Pointer.getPeer(p));
@@ -11052,7 +11052,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZpv(double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10387</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10387</i>
 	 */
 	public static void iauZpv(Pointer<Double > pv) {
 		iauZpv(Pointer.getPeer(pv));
@@ -11072,7 +11072,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauZr(double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10403</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10403</i>
 	 */
 	public static void iauZr(Pointer<Double > r) {
 		iauZr(Pointer.getPeer(r));
@@ -11100,7 +11100,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxr(double[3][3], double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10427</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10427</i>
 	 */
 	public static void iauRxr(Pointer<Double > a, Pointer<Double > b, Pointer<Double > atb) {
 		iauRxr(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(atb));
@@ -11126,7 +11126,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTr(double[3][3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10449</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10449</i>
 	 */
 	public static void iauTr(Pointer<Double > r, Pointer<Double > rt) {
 		iauTr(Pointer.getPeer(r), Pointer.getPeer(rt));
@@ -11153,7 +11153,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxp(double[3][3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10472</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10472</i>
 	 */
 	public static void iauRxp(Pointer<Double > r, Pointer<Double > p, Pointer<Double > rp) {
 		iauRxp(Pointer.getPeer(r), Pointer.getPeer(p), Pointer.getPeer(rp));
@@ -11180,7 +11180,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRxpv(double[3][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10495</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10495</i>
 	 */
 	public static void iauRxpv(Pointer<Double > r, Pointer<Double > pv, Pointer<Double > rpv) {
 		iauRxpv(Pointer.getPeer(r), Pointer.getPeer(pv), Pointer.getPeer(rpv));
@@ -11208,7 +11208,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTrxp(double[3][3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10519</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10519</i>
 	 */
 	public static void iauTrxp(Pointer<Double > r, Pointer<Double > p, Pointer<Double > trp) {
 		iauTrxp(Pointer.getPeer(r), Pointer.getPeer(p), Pointer.getPeer(trp));
@@ -11236,7 +11236,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauTrxpv(double[3][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10543</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10543</i>
 	 */
 	public static void iauTrxpv(Pointer<Double > r, Pointer<Double > pv, Pointer<Double > trpv) {
 		iauTrxpv(Pointer.getPeer(r), Pointer.getPeer(pv), Pointer.getPeer(trpv));
@@ -11269,7 +11269,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRm2v(double[3][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10572</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10572</i>
 	 */
 	public static void iauRm2v(Pointer<Double > r, Pointer<Double > w) {
 		iauRm2v(Pointer.getPeer(r), Pointer.getPeer(w));
@@ -11299,7 +11299,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauRv2m(double[3], double[3][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10598</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10598</i>
 	 */
 	public static void iauRv2m(Pointer<Double > w, Pointer<Double > r) {
 		iauRv2m(Pointer.getPeer(w), Pointer.getPeer(r));
@@ -11338,7 +11338,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPap(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10633</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10633</i>
 	 */
 	public static double iauPap(Pointer<Double > a, Pointer<Double > b) {
 		return iauPap(Pointer.getPeer(a), Pointer.getPeer(b));
@@ -11369,7 +11369,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPas(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10660</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10660</i>
 	 */
 	native public static double iauPas(double al, double ap, double bl, double bp);
 	/**
@@ -11400,7 +11400,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSepp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10690</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10690</i>
 	 */
 	public static double iauSepp(Pointer<Double > a, Pointer<Double > b) {
 		return iauSepp(Pointer.getPeer(a), Pointer.getPeer(b));
@@ -11428,7 +11428,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauSeps(double, double, double, double)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10714</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10714</i>
 	 */
 	native public static double iauSeps(double al, double ap, double bl, double bp);
 	/**
@@ -11452,7 +11452,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauC2s(double[3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10737</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10737</i>
 	 */
 	public static void iauC2s(Pointer<Double > p, Pointer<Double > theta, Pointer<Double > phi) {
 		iauC2s(Pointer.getPeer(p), Pointer.getPeer(theta), Pointer.getPeer(phi));
@@ -11482,7 +11482,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauP2s(double[3], double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10763</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10763</i>
 	 */
 	public static void iauP2s(Pointer<Double > p, Pointer<Double > theta, Pointer<Double > phi, Pointer<Double > r) {
 		iauP2s(Pointer.getPeer(p), Pointer.getPeer(theta), Pointer.getPeer(phi), Pointer.getPeer(r));
@@ -11519,7 +11519,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPv2s(double[2][3], double*, double*, double*, double*, double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10796</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10796</i>
 	 */
 	public static void iauPv2s(Pointer<Double > pv, Pointer<Double > theta, Pointer<Double > phi, Pointer<Double > r, Pointer<Double > td, Pointer<Double > pd, Pointer<Double > rd) {
 		iauPv2s(Pointer.getPeer(pv), Pointer.getPeer(theta), Pointer.getPeer(phi), Pointer.getPeer(r), Pointer.getPeer(td), Pointer.getPeer(pd), Pointer.getPeer(rd));
@@ -11542,7 +11542,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2c(double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10815</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10815</i>
 	 */
 	public static void iauS2c(double theta, double phi, Pointer<Double > c) {
 		iauS2c(theta, phi, Pointer.getPeer(c));
@@ -11569,7 +11569,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2p(double, double, double, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10838</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10838</i>
 	 */
 	public static void iauS2p(double theta, double phi, double r, Pointer<Double > p) {
 		iauS2p(theta, phi, r, Pointer.getPeer(p));
@@ -11596,7 +11596,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2pv(double, double, double, double, double, double, double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10861</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10861</i>
 	 */
 	public static void iauS2pv(double theta, double phi, double r, double td, double pd, double rd, Pointer<Double > pv) {
 		iauS2pv(theta, phi, r, td, pd, rd, Pointer.getPeer(pv));
@@ -11619,7 +11619,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPdp(double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10880</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10880</i>
 	 */
 	public static double iauPdp(Pointer<Double > a, Pointer<Double > b) {
 		return iauPdp(Pointer.getPeer(a), Pointer.getPeer(b));
@@ -11641,7 +11641,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>double iauPm(double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10898</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10898</i>
 	 */
 	public static double iauPm(Pointer<Double > p) {
 		return iauPm(Pointer.getPeer(p));
@@ -11667,7 +11667,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPmp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10920</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10920</i>
 	 */
 	public static void iauPmp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > amb) {
 		iauPmp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(amb));
@@ -11699,7 +11699,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPn(double[3], double*, double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10948</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10948</i>
 	 */
 	public static void iauPn(Pointer<Double > p, Pointer<Double > r, Pointer<Double > u) {
 		iauPn(Pointer.getPeer(p), Pointer.getPeer(r), Pointer.getPeer(u));
@@ -11725,7 +11725,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPpp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10970</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10970</i>
 	 */
 	public static void iauPpp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > apb) {
 		iauPpp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(apb));
@@ -11754,7 +11754,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPpsp(double[3], double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:10995</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:10995</i>
 	 */
 	public static void iauPpsp(Pointer<Double > a, double s, Pointer<Double > b, Pointer<Double > apsb) {
 		iauPpsp(Pointer.getPeer(a), s, Pointer.getPeer(b), Pointer.getPeer(apsb));
@@ -11784,7 +11784,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvdpv(double[2][3], double[2][3], double[2])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11021</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11021</i>
 	 */
 	public static void iauPvdpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > adb) {
 		iauPvdpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(adb));
@@ -11809,7 +11809,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvm(double[2][3], double*, double*)</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11042</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11042</i>
 	 */
 	public static void iauPvm(Pointer<Double > pv, Pointer<Double > r, Pointer<Double > s) {
 		iauPvm(Pointer.getPeer(pv), Pointer.getPeer(r), Pointer.getPeer(s));
@@ -11837,7 +11837,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvmpv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11066</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11066</i>
 	 */
 	public static void iauPvmpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > amb) {
 		iauPvmpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(amb));
@@ -11865,7 +11865,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvppv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11090</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11090</i>
 	 */
 	public static void iauPvppv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > apb) {
 		iauPvppv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(apb));
@@ -11896,7 +11896,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvu(double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11117</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11117</i>
 	 */
 	public static void iauPvu(double dt, Pointer<Double > pv, Pointer<Double > upv) {
 		iauPvu(dt, Pointer.getPeer(pv), Pointer.getPeer(upv));
@@ -11923,7 +11923,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvup(double, double[2][3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11140</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11140</i>
 	 */
 	public static void iauPvup(double dt, Pointer<Double > pv, Pointer<Double > p) {
 		iauPvup(dt, Pointer.getPeer(pv), Pointer.getPeer(p));
@@ -11957,7 +11957,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPvxpv(double[2][3], double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11170</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11170</i>
 	 */
 	public static void iauPvxpv(Pointer<Double > a, Pointer<Double > b, Pointer<Double > axb) {
 		iauPvxpv(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(axb));
@@ -11983,7 +11983,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauPxp(double[3], double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11192</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11192</i>
 	 */
 	public static void iauPxp(Pointer<Double > a, Pointer<Double > b, Pointer<Double > axb) {
 		iauPxp(Pointer.getPeer(a), Pointer.getPeer(b), Pointer.getPeer(axb));
@@ -12011,7 +12011,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauS2xpv(double, double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11216</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11216</i>
 	 */
 	public static void iauS2xpv(double s1, double s2, Pointer<Double > pv, Pointer<Double > spv) {
 		iauS2xpv(s1, s2, Pointer.getPeer(pv), Pointer.getPeer(spv));
@@ -12036,7 +12036,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauSxp(double, double[3], double[3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11237</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11237</i>
 	 */
 	public static void iauSxp(double s, Pointer<Double > p, Pointer<Double > sp) {
 		iauSxp(s, Pointer.getPeer(p), Pointer.getPeer(sp));
@@ -12063,7 +12063,7 @@ public class SofaLibrary {
 	 * *  SOFA release 2013-12-02<br>
 	 * *  Copyright (C) 2013 IAU SOFA Board.  See notes at end.<br>
 	 * Original signature : <code>void iauSxpv(double, double[2][3], double[2][3])</code><br>
-	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa_bridj.h:11260</i>
+	 * <i>native declaration : sofa-platform\src\main\cpp\src\sofa.h:11260</i>
 	 */
 	public static void iauSxpv(double s, Pointer<Double > pv, Pointer<Double > spv) {
 		iauSxpv(s, Pointer.getPeer(pv), Pointer.getPeer(spv));
