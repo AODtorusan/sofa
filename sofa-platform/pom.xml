@@ -5,11 +5,10 @@
 	<parent>
 		<groupId>be.angelcorp</groupId>
 		<artifactId>sofa-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>sofa-platform</artifactId>
-    <version>1.0</version>
     <name>Sofa dynamic library</name>
 	
     <properties>
