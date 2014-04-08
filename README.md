@@ -6,6 +6,12 @@ This library only provides a thin wrapper layer via BridJ and JNI the C-implemen
 
 > http://www.iausofa.org
 
+## Runtime requirements
+
+In order to use the build shared library on windows, the make sure you have the following installed:
+
+- Visual C++ Redistributable for Visual Studio 2012
+
 ## Basic usage
 
 Using this library in a maven project requires the following dependency:
