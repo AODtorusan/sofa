@@ -11,7 +11,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules" ${CMAKE_MODULE_PATH})
 
-include( "BuildTarget" )
+include( "BuildTarget"     )
+include( "UseDebugSymbols" )
 
 # Set binairy output directory to what bridj expects:
 # src/main/resources/lib/xyz where xyz is win32, win64, linux_x86, linux_x64, etc ...
@@ -39,3 +40,4 @@ endif()
 
 include_directories(${SOFA_SRC})
 add_library( sofa SHARED ${SOFA_HEADERS} ${SOFA_SOURCES})
+strip_debug_symbols( sofa )

@@ -11,7 +11,9 @@ if [[ $(pwd) =~ /target/cmake$ ]]; then
 else
     SOURCE_DIR="../"
 fi
+
 VC_PATH='C:/Program Files (x86)/Microsoft Visual Studio 11.0'
+WINKIT_PATH='C:/Program Files (x86)/Windows Kits/8.1/Debuggers/x64/srcsrv'
 
 IS_WIN=$( echo "$(uname -s)" | grep -i "CYGWIN"  )
 USE_MSVC_OVER_GCC=1
@@ -44,15 +46,35 @@ function buildLibrary() {
         
         if [[ $USE_MSVC_OVER_GCC ]]; then
             # MSVC
-            if [[ $arch == "x64" ]]; then vc_arch=amd64; else vc_arch=x86; fi
+            SOURCE_SERVER='C:/Program Files (x86)/Windows Kits/8.1/Debuggers/x64/srcsrv'
+            if [[ $arch == "x64" ]]; then 
+                vc_arch=amd64;
+                LIBRARY_DIR=${SOURCE_DIR}/../resources/lib/win64
+            else 
+                vc_arch=x86; 
+                LIBRARY_DIR=${SOURCE_DIR}/../resources/lib/win32
+            fi
             read -d '' load_compiler <<EOF
-echo Adjusting PATH enviromental variable ...
-echo %PATH% | sed -e "s|[^;]*cygwin[^;]*||g" -e "s|[^;]*MinGW64[^;]*||g" > path
-set /p PATH=<path
-del path
+REM echo Adjusting PATH enviromental variable ...
+REM echo %PATH% | sed -e "s|[^;]*cygwin[^;]*||g" -e "s|[^;]*MinGW64[^;]*||g" > path
+REM set /p PATH=<path
+REM del path
 echo Loading msvc $vc_arch binaries ...
 CALL "${VC_PATH}/VC/vcvarsall.bat" $vc_arch
 EOF
+            
+            # Complain if the Git Source Server command is not present
+            export PATH=$PATH:"$(cygpath -au "$WINKIT_PATH")"
+            if hash gitindex.cmd 2>/dev/null; then
+                read -d '' finish_build <<EOF
+gitindex.cmd /debug /source=${SOURCE_DIR} /symbols=${LIBRARY_DIR}
+echo Build finished
+EOF
+            else
+                echo "Missing gitindex.cmd on path, this is required to embed Source information into the PDB."
+                echo "For setting up the Git Source Server, see http://github.com/joliver/SourceServer-GitExtensions"
+                finish_build="echo Build finished"
+            fi
         else
             # MingGW
             if [[ $arch == x64 ]]; then BUILDFLAG="-m64"; else BUILDFLAG="-m32"; fi
@@ -60,6 +82,7 @@ EOF
             cmake_args+=("-D CMAKE_C_FLAGS=$BUILDFLAG ");
             cmake_args+=("-D CMAKE_LD_FLAGS=$BUILDFLAG ");
             load_compiler="echo Using cmake/gcc in  $BUILDFLAG mode ($arch) ..."
+            finish_build="echo Build finished"
         fi
         
         rm -f bld.exec.bat
@@ -70,6 +93,7 @@ echo Running CMake ...
 cmake -G "$cmake_generator" ${cmake_args[@]}  $SOURCE_DIR
 echo Building sources with $make_exec ...
 $make_exec
+${finish_build}
 EOF
         chmod +x bld.exec.bat
         ./bld.exec.bat
